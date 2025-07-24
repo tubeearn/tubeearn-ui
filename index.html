@@ -1,121 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TubeEarn Monetization Panel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubeEarn</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      padding: 20px;
+      background: #f9f9f9;
     }
-    .monetization-box {
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 25px;
-      border-radius: 10px;
-      max-width: 600px;
-      margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .section {
-      margin-bottom: 20px;
-    }
-    .status {
-      font-weight: bold;
-      color: green;
-    }
-    .status.fail {
-      color: red;
-    }
-    button {
-      padding: 10px 20px;
-      background: #007bff;
+    header {
+      background: #202020;
       color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
     }
-    button:disabled {
-      background: #aaa;
-      cursor: not-allowed;
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .nav-icons i {
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .monetization-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      width: 90%;
+      max-width: 400px;
+      z-index: 1000;
+    }
+    .modal-header {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .modal-content {
+      font-size: 15px;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    .close-btn {
+      float: right;
+      cursor: pointer;
+      font-size: 18px;
+      margin-top: -10px;
     }
   </style>
 </head>
 <body>
+  <header>
+    <div><strong>TubeEarn</strong></div>
+    <div class="nav-icons">
+      <i class="fas fa-video"></i>
+      <i class="fas fa-bolt"></i>
+      <i class="fas fa-wallet"></i>
+      <i class="fas fa-gift"></i>
+      <i class="fas fa-music"></i>
+      <i class="fas fa-user"></i>
+      <i class="fas fa-coins" id="monetizationBtn" title="Monetization"></i>
+    </div>
+  </header>  <!-- Monetization Modal -->  <div class="overlay" id="overlay"></div>
+  <div class="monetization-modal" id="monetizationModal">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <div class="modal-header">💰 Monetization Eligibility</div>
+    <div class="modal-content">
+      <p><strong>Short Videos:</strong></p>
+      <ul>
+        <li>✅ Minimum 500 Subscribers</li>
+        <li>✅ 90,000 Views in 3 Months</li>
+      </ul>
+      <p><strong>Long Videos:</strong></p>
+      <ul>
+        <li>✅ Minimum 500 Subscribers</li>
+        <li>✅ 2,500 Watch Hours</li>
+      </ul>
+      <p>You can apply for monetization once above criteria is fulfilled. Revenue will be split 55% to creator, 45% to platform.</p>
+    </div>
+  </div>  <script>
+    const monetizationBtn = document.getElementById('monetizationBtn');
+    const modal = document.getElementById('monetizationModal');
+    const overlay = document.getElementById('overlay');
+    const closeModal = document.getElementById('closeModal');
 
-<div class="monetization-box">
-  <h2>🎯 TubeEarn Monetization Panel</h2>
+    monetizationBtn.addEventListener('click', () => {
+      modal.style.display = 'block';
+      overlay.style.display = 'block';
+    });
 
-  <div class="section">
-    <h3>Shorts Monetization Eligibility</h3>
-    <p>✅ Minimum Subscribers: <strong>500</strong><br>
-       ✅ Last 3 months Short Views: <strong>90,000</strong></p>
-    <p class="status" id="short-status">Checking...</p>
-    <button id="short-apply" disabled>Apply for Shorts Monetization</button>
-  </div>
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    });
 
-  <hr>
-
-  <div class="section">
-    <h3>Long Video Monetization Eligibility</h3>
-    <p>✅ Minimum Subscribers: <strong>500</strong><br>
-       ✅ Watch Time: <strong>2500 Hours</strong></p>
-    <p class="status" id="long-status">Checking...</p>
-    <button id="long-apply" disabled>Apply for Long Video Monetization</button>
-  </div>
-</div>
-
-<script>
-  // Dummy user stats (replace with real backend data)
-  const userData = {
-    subscribers: 520,
-    shortViewsLast3Months: 92000,
-    longWatchHours: 2600
-  };
-
-  const shortApplyBtn = document.getElementById('short-apply');
-  const longApplyBtn = document.getElementById('long-apply');
-  const shortStatus = document.getElementById('short-status');
-  const longStatus = document.getElementById('long-status');
-
-  function checkEligibility() {
-    // Shorts
-    if (userData.subscribers >= 500 && userData.shortViewsLast3Months >= 90000) {
-      shortStatus.textContent = "✅ Eligible for Shorts Monetization";
-      shortApplyBtn.disabled = false;
-    } else {
-      shortStatus.textContent = "❌ Not Eligible Yet for Shorts Monetization";
-      shortStatus.classList.add("fail");
-    }
-
-    // Long Videos
-    if (userData.subscribers >= 500 && userData.longWatchHours >= 2500) {
-      longStatus.textContent = "✅ Eligible for Long Video Monetization";
-      longApplyBtn.disabled = false;
-    } else {
-      longStatus.textContent = "❌ Not Eligible Yet for Long Video Monetization";
-      longStatus.classList.add("fail");
-    }
-  }
-
-  shortApplyBtn.onclick = () => {
-    alert("🎉 Shorts Monetization Applied Successfully!");
-    // Backend request to apply can go here
-  };
-
-  longApplyBtn.onclick = () => {
-    alert("🎉 Long Video Monetization Applied Successfully!");
-    // Backend request to apply can go here
-  };
-
-  // Run check on load
-  checkEligibility();
-</script>
-
-</body>
+    overlay.addEventListener('click', () => {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+    });
+  </script></body>
 </html>
