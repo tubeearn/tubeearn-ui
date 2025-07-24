@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Monetization Eligibility</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    .monetize-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+    .status {
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .status.green {
+      background: #d4edda;
+      color: #155724;
+    }
+    .status.red {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    .apply-btn {
+      background: #28a745;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .apply-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="monetize-box">
+    <h2>🎯 Monetization Status</h2>
+    <div id="status" class="status">Checking eligibility...</div>
+    <button id="applyBtn" class="apply-btn" disabled>Apply for Monetization</button>
+  </div>
+
+  <script>
+    // Dummy creator data — इसे backend से replace कर देना बाद में
+    const creatorData = Object.freeze({
+      short: {
+        subscribers: 520,
+        viewsLast3Months: 91000
+      },
+      long: {
+        subscribers: 510,
+        watchHoursLast12Months: 2700
+      }
+    });
+
+    const statusDiv = document.getElementById('status');
+    const applyBtn = document.getElementById('applyBtn');
+
+    function checkEligibility() {
+      const isShortEligible =
+        creatorData.short.subscribers >= 500 &&
+        creatorData.short.viewsLast3Months >= 90000;
+
+      const isLongEligible =
+        creatorData.long.subscribers >= 500 &&
+        creatorData.long.watchHoursLast12Months >= 2500;
+
+      const isEligible = isShortEligible || isLongEligible;
+
+      if (isEligible) {
+        statusDiv.textContent = "✅ You are eligible for monetization.";
+        statusDiv.className = "status green";
+        applyBtn.disabled = false;
+      } else {
+        statusDiv.textContent = "❌ You are not eligible. Requirements not met.";
+        statusDiv.className = "status red";
+        applyBtn.disabled = true;
+      }
+
+      return isEligible;
+    }
+
+    // Simulate form submission to admin
+    applyBtn.addEventListener("click", () => {
+      alert("📩 Your request for monetization has been sent to admin.");
+      // बाद में यहां backend को request भेजना (Firebase या Node API)
+    });
+
+    checkEligibility();
+  </script>
+</body>
+</html>
