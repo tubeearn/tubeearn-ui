@@ -1,3 +1,4 @@
+<!-- ✅ UPDATED TUBEEARN CODE WITH MONETIZATION BUTTON -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +26,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    .monetize-btn {
+      margin-left: 15px;
+      background: #ffd700;
+      color: #000;
+      padding: 6px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
     }
     .search-icon {
       font-size: 20px;
@@ -143,8 +157,11 @@
 <body>
 
   <header>
-    <div>TubeEarn - World's Fastest Multi-System Platform</div>
-    <div class="search-icon" onclick="window.location.href='search.html'">🔍</div>
+    <div class="header-left">
+      TubeEarn - World's Fastest Multi-System Platform
+      <div class="monetize-btn" onclick="goTo('monetization.html')">💰 Monetize</div>
+    </div>
+    <div class="search-icon" onclick="goTo('search.html')">🔍</div>
   </header>
 
   <div class="nav-bar">
