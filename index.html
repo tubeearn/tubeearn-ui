@@ -3,40 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn UI</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>TubeEarn</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+    }
+    .menu {
+      margin-top: 30px;
+    }
+    .menu a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 24px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s;
+    }
+    .menu a:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
+  <h1>Welcome to TubeEarn</h1>
 
-  <div class="header">
-    <h1>TubeEarn</h1>
-  </div>
-
-  <div class="main-content">
-    <div class="button" onclick="navClicked('Wallet')">
-      <img src="images/wallet.png" alt="Wallet Icon">
-      <p>Wallet</p>
-    </div>
-    <div class="button" onclick="navClicked('Account')">
-      <img src="images/account.png" alt="Account Icon">
-      <p>Account</p>
-    </div>
-    <div class="button" onclick="navClicked('Settings')">
-      <img src="images/settings.png" alt="Settings Icon">
-      <p>Settings</p>
-    </div>
-    <div class="button" onclick="navClicked('Support')">
-      <img src="images/support.png" alt="Support Icon">
-      <p>Support</p>
-    </div>
+  <div class="menu">
+    <a href="login/index.html">Login</a>
+    <a href="signup/index.html">Signup</a>
+    <a href="shorts/index.html">Shorts</a>
+    <a href="wallet/index.html">Wallet</a>
+    <a href="upload/index.html">Upload</a>
+    <a href="dashboard/index.html">Dashboard</a>
+    <a href="settings/index.html">Settings</a>
+    <a href="profile/index.html">Profile</a>
+    <a href="notifications/index.html">Notifications</a>
+    <a href="videos/index.html">Videos</a>
   </div>
 
   <script>
-    function navClicked(name) {
-      const fileName = name.toLowerCase().replace(/\s+/g, '') + ".html";
-      window.location.href = fileName;
-    }
+    // Optional JS - currently not required for <a> based navigation
+    console.log("Page loaded and ready.");
   </script>
-
 </body>
 </html>
