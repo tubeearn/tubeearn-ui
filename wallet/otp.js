@@ -1,33 +1,44 @@
-window.onload = () => {
+// Your Firebase configuration must be initialized before this
+// Make sure firebase-app.js and firebase-auth.js are included
+
+window.onload = function () {
   render();
 };
 
 function render() {
-  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+    'size': 'normal',
+    'callback': function (response) {
+      // reCAPTCHA solved, allow signInWithPhoneNumber.
+      console.log("reCAPTCHA Verified");
+    },
+    'expired-callback': function () {
+      console.log("reCAPTCHA expired");
+    }
+  });
   recaptchaVerifier.render();
 }
 
-function sendOTP() {
-  const phoneNumber = document.getElementById('phone').value;
-  firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
+function phoneAuth() {
+  var number = "+918409012982"; // Static test number from Firebase
+  // Firebase method to send OTP
+  firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier)
     .then(function (confirmationResult) {
       window.confirmationResult = confirmationResult;
-      alert("OTP sent");
+      alert("OTP Sent Successfully!");
     }).catch(function (error) {
       alert(error.message);
     });
 }
 
 function verifyOTP() {
-  const otpInput = document.getElementById('otp').value;
-  confirmationResult.confirm(otpInput).then(function (result) {
-    document.getElementById('wallet-section').style.display = 'block';
-    alert("OTP Verified");
-  }).catch(function (error) {
-    alert("Invalid OTP");
-  });
-}
-
-function withdraw() {
-  alert("Withdraw process started...");
+  var code = "880409"; // Static OTP for test number
+  confirmationResult.confirm(code)
+    .then(function (result) {
+      var user = result.user;
+      alert("User Verified Successfully!");
+      // Optionally redirect or show wallet here
+    }).catch(function (error) {
+      alert("OTP Invalid: " + error.message);
+    });
 }
