@@ -1,68 +1,108 @@
-<!-- home.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeEarn - Home</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="auth.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    .navbar {
+      background-color: #111;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      font-weight: bold;
+    }
+    .features {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+      padding: 10px;
+      justify-content: center;
+    }
+    .feature {
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+    #loginModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 400px;
+    }
+    .modal-content button {
+      padding: 10px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-<body onload="checkLoginLock()">  <!-- Header -->  <header>
-    <h1>Welcome to TubeEarn</h1>
-    <nav>
-      <ul>
-        <li><a href="#" onclick="redirectIfNotLoggedIn('upload.html')">Upload</a></li>
-        <li><a href="#" onclick="redirectIfNotLoggedIn('shorts.html')">Shorts</a></li>
-        <li><a href="#" onclick="redirectIfNotLoggedIn('education.html')">Education</a></li>
-        <li><a href="#" onclick="redirectIfNotLoggedIn('wallet.html')">Wallet</a></li>
-        <li><a href="#" onclick="redirectIfNotLoggedIn('career.html')">Career</a></li>
-      </ul>
-    </nav>
-    <div id="user-control">
-      <button onclick="loginRedirect()">Login</button>
+<body>
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <div>
+      <a href="#">TubeEarn</a>
     </div>
-  </header>  <!-- Main Content -->  <main>
-    <section>
-      <h2>Trending Videos</h2>
-      <div class="video-grid">
-        <!-- Sample Video Card -->
-        <div class="video-card">
-          <video controls>
-            <source src="videos/sample1.mp4" type="video/mp4">
-          </video>
-          <h3>Sample Video 1</h3>
-          <button onclick="redirectIfNotLoggedIn()">Like</button>
-          <button onclick="redirectIfNotLoggedIn()">Comment</button>
-        </div><!-- Repeat for more videos -->
-  </div>
-</section>
-
-  </main>  <!-- Login Warning Popup -->  <div id="login-popup" style="display:none">
-    <p>Please login to access this feature.</p>
-    <button onclick="loginRedirect()">Login Now</button>
+    <div>
+      <a href="#" onclick="redirectTo('home')">Home</a>
+      <a href="#" onclick="protectedFeature('shorts')">Shorts</a>
+      <a href="#" onclick="protectedFeature('upload')">Upload</a>
+      <a href="#" onclick="protectedFeature('live')">Live</a>
+      <a href="#" onclick="protectedFeature('education')">Education</a>
+      <a href="#" onclick="protectedFeature('dating')">Dating</a>
+    </div>
+  </div>  <!-- Main Features -->  <div class="features">
+    <div class="feature" onclick="protectedFeature('like')">👍 Like</div>
+    <div class="feature" onclick="protectedFeature('comment')">💬 Comment</div>
+    <div class="feature" onclick="protectedFeature('subscribe')">🔔 Subscribe</div>
+  </div>  <!-- Login Required Modal -->  <div id="loginModal">
+    <div class="modal-content">
+      <h3>Login Required</h3>
+      <p>You must be logged in to use this feature.</p>
+      <button onclick="redirectToLogin()">Login Now</button>
+    </div>
   </div>  <script>
-    function checkLoginLock() {
-      const isLoggedIn = localStorage.getItem("user_logged_in") === "true";
-      if (isLoggedIn) {
-        document.getElementById("user-control").innerHTML = '<button onclick="logout()">Logout</button>';
-      }
-    }
+    // Simulated login status
+    const isLoggedIn = false; // Change to true after login
 
-    function redirectIfNotLoggedIn(target = null) {
-      const isLoggedIn = localStorage.getItem("user_logged_in") === "true";
+    function protectedFeature(action) {
       if (!isLoggedIn) {
-        document.getElementById("login-popup").style.display = "block";
-      } else if (target) {
-        window.location.href = target;
+        document.getElementById("loginModal").style.display = "flex";
+      } else {
+        alert("Accessing: " + action);
       }
     }
 
-    function loginRedirect() {
+    function redirectToLogin() {
+      // Example redirect to login.html
       window.location.href = "login.html";
     }
 
-    function logout() {
-      localStorage.removeItem("user_logged_in");
-      location.reload();
+    function redirectTo(page) {
+      // Always allow home
+      window.location.href = page + ".html";
     }
   </script></body>
 </html>
