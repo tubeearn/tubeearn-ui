@@ -1,17 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- home.html --><!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 100px; background-color: #f9f9f9; }
-    h1 { color: #333; }
-    p { color: #666; }
-  </style>
+  <title>TubeEarn - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="auth.js"></script>
 </head>
-<body>
-  <h1>Home Page</h1>
-  <p>This is a placeholder for the Home page.</p>
-</body>
+<body onload="checkLoginLock()">  <!-- Header -->  <header>
+    <h1>Welcome to TubeEarn</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="redirectIfNotLoggedIn('upload.html')">Upload</a></li>
+        <li><a href="#" onclick="redirectIfNotLoggedIn('shorts.html')">Shorts</a></li>
+        <li><a href="#" onclick="redirectIfNotLoggedIn('education.html')">Education</a></li>
+        <li><a href="#" onclick="redirectIfNotLoggedIn('wallet.html')">Wallet</a></li>
+        <li><a href="#" onclick="redirectIfNotLoggedIn('career.html')">Career</a></li>
+      </ul>
+    </nav>
+    <div id="user-control">
+      <button onclick="loginRedirect()">Login</button>
+    </div>
+  </header>  <!-- Main Content -->  <main>
+    <section>
+      <h2>Trending Videos</h2>
+      <div class="video-grid">
+        <!-- Sample Video Card -->
+        <div class="video-card">
+          <video controls>
+            <source src="videos/sample1.mp4" type="video/mp4">
+          </video>
+          <h3>Sample Video 1</h3>
+          <button onclick="redirectIfNotLoggedIn()">Like</button>
+          <button onclick="redirectIfNotLoggedIn()">Comment</button>
+        </div><!-- Repeat for more videos -->
+  </div>
+</section>
+
+  </main>  <!-- Login Warning Popup -->  <div id="login-popup" style="display:none">
+    <p>Please login to access this feature.</p>
+    <button onclick="loginRedirect()">Login Now</button>
+  </div>  <script>
+    function checkLoginLock() {
+      const isLoggedIn = localStorage.getItem("user_logged_in") === "true";
+      if (isLoggedIn) {
+        document.getElementById("user-control").innerHTML = '<button onclick="logout()">Logout</button>';
+      }
+    }
+
+    function redirectIfNotLoggedIn(target = null) {
+      const isLoggedIn = localStorage.getItem("user_logged_in") === "true";
+      if (!isLoggedIn) {
+        document.getElementById("login-popup").style.display = "block";
+      } else if (target) {
+        window.location.href = target;
+      }
+    }
+
+    function loginRedirect() {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("user_logged_in");
+      location.reload();
+    }
+  </script></body>
 </html>
