@@ -6,24 +6,26 @@
   <title>TubeEarn Wallet</title>
   <link rel="stylesheet" href="style.css" />
 
-  <!-- Firebase CDN SDKs -->
+  <!-- ✅ Firebase CDN SDKs -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
 
-  <!-- Firebase Configuration -->
+  <!-- ✅ Firebase Configuration (From Modular Firebase Converted to Compatible v8 Style) -->
   <script>
-    // Firebase config (from your project)
     var firebaseConfig = {
-      apiKey: "AIzaSyAteIZuLEWcdOgZQv_XPJvPhu7ruJb4N7c",
-      authDomain: "tubeearn-4bb41.firebaseapp.com",
-      projectId: "tubeearn-4bb41",
-      storageBucket: "tubeearn-4bb41.appspot.com",
-      messagingSenderId: "516486803841",
-      appId: "1:516486803841:web:798acc21452c0065a0b880"
+      apiKey: "AIzaSyBmfS0jFTts1awHDXekuWrvDhd4h5MfwT0",
+      authDomain: "tubeearnwallet.firebaseapp.com",
+      projectId: "tubeearnwallet",
+      storageBucket: "tubeearnwallet.firebasestorage.app",
+      messagingSenderId: "779969565205",
+      appId: "1:779969565205:web:2b93be3f427b997a51f41c",
+      measurementId: "G-67QXQQ8Y50"
     };
 
-    // Initialize Firebase
+    // ✅ Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
   </script>
 </head>
 <body>
