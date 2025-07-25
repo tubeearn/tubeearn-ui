@@ -1,4 +1,0 @@
-body { font-family: Arial; padding: 20px; }
-#gift-options { display: flex; gap: 10px; flex-wrap: wrap; }
-.gift { border: 1px solid #ccc; padding: 10px; cursor: pointer; }
-.gift.active { border-color: green; background: #eaffea; }
