@@ -3,70 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login with OTP</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>TubeEarn Wallet - OTP Login</title>
+</head>
+<body>
+  <h2>OTP Login</h2>
 
-  <!-- Firebase SDKs -->
+  <input type="text" id="phone" value="+918409012982" readonly />
+  <div id="recaptcha-container"></div>
+  <button onclick="phoneAuth()">Send OTP</button>
+
+  <br><br>
+
+  <input type="text" id="otp" value="880409" readonly />
+  <button onclick="verifyOTP()">Verify OTP</button>
+
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
 
   <script>
-    // Firebase config
+    // ✅ Firebase Config
     var firebaseConfig = {
-      apiKey: "AIzaSyAteIZuLEWcdOgZQv_XPJvPhu7ruJb4N7c",
-      authDomain: "tubeearn-4bb41.firebaseapp.com",
-      projectId: "tubeearn-4bb41",
-      storageBucket: "tubeearn-4bb41.appspot.com",
-      messagingSenderId: "516486803841",
-      appId: "1:516486803841:web:798acc21452c0065a0b880"
+      apiKey: "AIzaSyBmfS0jFTts1awHDXekuWrvDhd4h5MfwT0",
+      authDomain: "tubeearnwallet.firebaseapp.com",
+      projectId: "tubeearnwallet",
+      storageBucket: "tubeearnwallet.appspot.com",
+      messagingSenderId: "779969565205",
+      appId: "1:779969565205:web:2b93be3f427b997a51f41c",
     };
+
+    // ✅ Initialize Firebase
     firebase.initializeApp(firebaseConfig);
   </script>
-</head>
-<body>
-  <div class="wallet-container">
-    <h2>Login with OTP</h2>
-    
-    <input type="text" id="phoneNumber" placeholder="+91XXXXXXXXXX" />
-    <div id="recaptcha-container"></div>
-    <button onclick="sendOTP()">Send OTP</button>
-
-    <br><br>
-    <input type="text" id="otpCode" placeholder="Enter OTP" />
-    <button onclick="verifyOTP()">Verify OTP</button>
-
-    <p id="message"></p>
-  </div>
 
   <script>
-    // reCAPTCHA & OTP sending
-    function sendOTP() {
-      var phoneNumber = document.getElementById("phoneNumber").value;
+    // ✅ Global variable
+    let confirmationResult;
+
+    // ✅ Set up reCAPTCHA
+    window.onload = function () {
+      render();
+    };
+
+    function render() {
       window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-        size: 'normal',
-        callback: function(response) {
+        'size': 'normal',
+        'callback': function (response) {
           // reCAPTCHA solved
+          console.log("reCAPTCHA verified");
         }
       });
+      recaptchaVerifier.render();
+    }
 
-      firebase.auth().signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier)
-        .then(function(confirmationResult) {
-          window.confirmationResult = confirmationResult;
-          document.getElementById("message").innerText = "OTP sent!";
-        }).catch(function(error) {
-          document.getElementById("message").innerText = error.message;
+    // ✅ Send OTP
+    function phoneAuth() {
+      var number = document.getElementById('phone').value;
+      firebase.auth().signInWithPhoneNumber(number, window.recaptchaVerifier)
+        .then(function (result) {
+          confirmationResult = result;
+          alert("OTP sent successfully!");
+        })
+        .catch(function (error) {
+          alert(error.message);
         });
     }
 
-    // OTP verify
+    // ✅ Verify OTP
     function verifyOTP() {
-      var otp = document.getElementById("otpCode").value;
-      window.confirmationResult.confirm(otp).then(function(result) {
-        var user = result.user;
-        document.getElementById("message").innerText = "Login Successful!";
-      }).catch(function(error) {
-        document.getElementById("message").innerText = "Invalid OTP!";
-      });
+      var code = document.getElementById('otp').value;
+      confirmationResult.confirm(code)
+        .then(function (result) {
+          alert("Phone number verified successfully!");
+          // You can redirect to wallet/dashboard here
+        })
+        .catch(function (error) {
+          alert("Invalid OTP");
+        });
     }
   </script>
 </body>
