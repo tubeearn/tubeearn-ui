@@ -19,35 +19,43 @@
       justify-content: space-between;
     }
     .logo {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: bold;
       display: flex;
       align-items: center;
     }
     .logo-icon {
-      width: 28px;
-      height: 28px;
+      width: 22px;
+      height: 22px;
       background: red;
       border-radius: 50%;
-      margin-right: 8px;
+      margin-right: 6px;
     }
     .marquee {
-      background: #f00;
-      color: #fff;
+      background: red;
+      color: white;
       font-weight: bold;
-      padding: 5px 0;
+      padding: 6px;
+      font-size: 14px;
     }
-    nav {
+    /* Scrollable Navigation Bar */
+    .nav-scroll {
       display: flex;
-      justify-content: space-around;
+      overflow-x: auto;
       background: #222;
-      padding: 10px 0;
+      white-space: nowrap;
     }
-    nav a {
+    .nav-scroll a {
+      display: inline-block;
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      padding: 10px 12px;
+      font-size: 14px;
     }
+    .nav-scroll a:hover {
+      background: #444;
+    }
+
     .story-section {
       padding: 10px;
       display: flex;
@@ -57,13 +65,14 @@
     }
     .story {
       min-width: 80px;
-      height: 120px;
+      height: 100px;
       background: #ddd;
       border-radius: 10px;
       text-align: center;
       font-size: 12px;
       padding: 5px;
     }
+
     .ad-section {
       margin: 10px;
       padding: 10px;
@@ -71,6 +80,7 @@
       text-align: center;
       font-weight: bold;
     }
+
     .shorts-section {
       display: flex;
       overflow-x: auto;
@@ -97,6 +107,7 @@
       border: none;
       cursor: pointer;
     }
+
     footer {
       background: #111;
       color: white;
@@ -104,11 +115,20 @@
       padding: 10px;
       font-size: 14px;
     }
+
+    /* Hide scrollbar */
+    ::-webkit-scrollbar {
+      height: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header with Logo & Title -->
+  <!-- Header -->
   <header>
     <div class="logo">
       <div class="logo-icon"></div>
@@ -122,26 +142,22 @@
     <marquee>India’s No.1 Earning + Dating + Video Platform — TubeEarn T1</marquee>
   </div>
 
-  <!-- Navigation Bar -->
-  <nav>
+  <!-- Scrollable Navigation Bar -->
+  <div class="nav-scroll">
     <a href="home.html">Home</a>
-    
-    <a href="upload.html">Creator</a>
-    
-    <a href="upload.html">Gameing</a>
-    
-    <a href="upload.html">Live</a>
-    <a href="upload.html">Reels</a>
-    <a href="upload.html">Markeplace</a>
-    <a href="upload.html">Dating</a>
-    <a href="upload.html">Upload</a>
-    <a href="shorts.html">Singing</a>
-    <a href="upload.html">Face Swaip</a>
-    <a href="live.html">Marketplace</a>
-    <a href="upload.html">Video Editor</a>
+    <a href="creator.html">Creator</a>
+    <a href="gaming.html">Gaming</a>
+    <a href="reels.html">Reels</a>
+    <a href="marketplace.html">Marketplace</a>
+    <a href="dating.html">Dating</a>
+    <a href="education.html">Education</a>
+    <a href="videoeditor.html">Video Editor</a>
+    <a href="faceswipe.html">Face Swipe</a>
+    <a href="shop.html">Shopping Mall</a>
+    <a href="live.html">Live</a>
     <a href="wallet.html">Wallet</a>
     <a href="settings.html">Settings</a>
-  </nav>
+  </div>
 
   <!-- Story Section -->
   <div class="story-section">
@@ -170,10 +186,6 @@
     <div class="short-video">
       Short 3
       <button onclick="location.href='short3.html'">Play</button>
-    </div>
-    <div class="short-video">
-      Short 4
-      <button onclick="location.href='short4.html'">Play</button>
     </div>
   </div>
 
