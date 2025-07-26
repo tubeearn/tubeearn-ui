@@ -3,97 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Multi-Earning Platform</title>
+  <title>TubeEarn - World's Fastest Multi-System Platform</title>
   <style>
-    body { margin: 0; font-family: sans-serif; background: #f5f5f5; }
-    .header, .marquee, .bottom-bar, .subscription-cta {
-      width: 100%; text-align: center;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #eaf8fc;
     }
-    .header { background: #193659; color: white; padding: 15px; font-size: 20px; font-weight: bold; }
-    .marquee { background: black; color: yellow; padding: 10px; font-size: 14px; overflow: hidden; white-space: nowrap; }
-    .marquee span { display: inline-block; animation: scroll 20s linear infinite; }
-    @keyframes scroll { 0% {transform: translateX(100%);} 100% {transform: translateX(-100%);} }
-    .stories { display: flex; overflow-x: auto; padding: 10px; background: #fff; }
-    .story { flex: 0 0 auto; margin-right: 10px; text-align: center; cursor: pointer; }
-    .story img { border-radius: 50%; border: 2px solid red; width: 60px; height: 60px; }
-    .shorts { display: flex; flex-direction: column; gap: 15px; padding: 10px; }
-    .short-video { background: #000; height: 300px; color: white; position: relative; cursor: pointer; }
-    .short-video span { position: absolute; bottom: 10px; left: 10px; }
-    .grid-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 10px; }
-    .grid-buttons a {
-      background: #d6f3ff; padding: 10px 15px; border-radius: 6px; text-decoration: none;
-      color: black; font-weight: 600; cursor: pointer;
+
+    .top-bar {
+      background-color: #193659;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .bottom-bar {
-      position: fixed; bottom: 0; background: #ffffff; border-top: 1px solid #ccc;
-      display: flex; justify-content: space-around; padding: 10px 0;
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
     }
-    .bottom-bar a { text-decoration: none; color: #444; font-size: 14px; }
-    .subscription-cta { margin-top: 15px; padding: 15px; background: #f0f0f0; }
-    .subscription-cta a {
-      text-decoration: none; padding: 10px 20px; background: #ff5e5e; color: white; border-radius: 5px;
+
+    .auth-buttons a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 14px;
+    }
+
+    .marquee {
+      background: black;
+      color: yellow;
+      padding: 10px;
+      font-weight: bold;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 15px;
+      background-color: #f5f5f5;
+    }
+
+    .story {
+      flex: 0 0 auto;
+      width: 70px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff4d4d;
+    }
+
+    .story span {
+      font-size: 12px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .button-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      background-color: #b2e1e6;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 15px;
+      min-width: 140px;
+      transition: transform 0.2s ease;
+    }
+
+    .button-grid a:hover {
+      transform: scale(1.05);
+      background-color: #a0d8df;
+    }
+
+    .shorts {
+      padding: 15px;
+      background-color: #fff;
+    }
+
+    .short-video {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .short-video img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background-color: #193659;
+      padding: 10px 0;
+    }
+
+    .bottom-nav a {
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .button-grid a {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="header">TubeEarn - Multi-Earning Platform</div>
+  <!-- Top Navigation -->
+  <div class="top-bar">
+    <div class="logo">TubeEarn</div>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </div>
+  </div>
 
-<div class="marquee"><span>🎉 India's No.1 Earning Platform — Earn by Shopping, Singing, Gaming, Live & More!</span></div>
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+  </div>
 
-<!-- Story Section -->
-<div class="stories">
-  <div class="story" onclick="openStory('user1')"><img src="https://via.placeholder.com/60" /><div>Raj</div></div>
-  <div class="story" onclick="openStory('user2')"><img src="https://via.placeholder.com/60" /><div>Anjali</div></div>
-  <div class="story" onclick="openStory('user3')"><img src="https://via.placeholder.com/60" /><div>Rohit</div></div>
-</div>
+  <!-- Stories -->
+  <div class="stories">
+    <div class="story" onclick="location.href='story-user1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story-user2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story-user3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>
 
-<!-- Short Video Section -->
-<div class="shorts">
-  <div class="short-video" onclick="playVideo('short1.html')"><span>🎥 Telugu Short - Tap to Play</span></div>
-  <div class="short-video" onclick="playVideo('short2.html')"><span>🎥 Comedy Clip - Tap to Play</span></div>
-  <div class="short-video" onclick="playVideo('short3.html')"><span>🎥 Music Short - Tap to Play</span></div>
-</div>
+  <!-- Feature Buttons -->
+  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html" onclick="return confirmCreate('Creator')">🎬 Creator</a>
+    <a href="shop.html" onclick="return confirmCreate('Shopping')">🛒 Shopping Mall</a>
+    <a href="education.html" onclick="return confirmCreate('Education')">📚 Education</a>
+    <a href="singing.html" onclick="return confirmCreate('Singing')">🎤 Singing</a>
+    <a href="dating.html">💖 Dating</a>
+    <a href="videoeditor.html">🎞️ Video Editor</a>
+    <a href="audioeditor.html">🎧 Audio Editor</a>
+    <a href="marketplace.html">🏪 Marketplace</a>
+    <a href="faceswipe.html">😊 Face Swipe</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="live.html" onclick="return confirmCreate('Live')">📺 Live</a>
+    <a href="career.html">💼 Career</a>
+    <a href="account.html">👤 Account</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="monetize.html">$ Monetize</a>
+  </div>
 
-<!-- Navigation Grid Buttons -->
-<div class="grid-buttons">
-  <a onclick="checkAccount('creator')">🎬 Creator</a>
-  <a onclick="checkAccount('shop')">🛍 Shopping Mall</a>
-  <a onclick="checkAccount('live')">📺 Live</a>
-  <a onclick="checkAccount('education')">📘 Education</a>
-  <a onclick="checkAccount('singing')">🎤 Singing</a>
-  <a onclick="checkAccount('videoeditor')">✂ Video Editor</a>
-  <a onclick="checkAccount('faceswipe')">😊 Face Swipe</a>
-  <a onclick="checkAccount('marketplace')">🏪 Marketplace</a>
-</div>
+  <!-- Shorts Section -->
+  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+    <div class="short-video" onclick="location.href='video3.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+3" />
+    </div>
+  </div>
 
-<!-- Subscription Prompt -->
-<div class="subscription-cta">
-  <p>To Like, Comment, or Use Features — Please Subscribe & Login</p>
-  <a href="login.html">Login</a> | <a href="signup.html">Sign Up</a>
-</div>
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
+    <a href="home.html">🏠<br/>Home</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
+    <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="notifications.html">🔔<br/>Alerts</a>
+    <a href="account.html">👤<br/>You</a>
+  </div>
 
-<!-- Bottom Navigation Bar -->
-<div class="bottom-bar">
-  <a href="home.html">🏠 Home</a>
-  <a href="shorts.html">🎞 Shorts</a>
-  <a href="account.html">👤 Account</a>
-</div>
-
-<script>
-  function playVideo(page) {
-    window.location.href = page;
-  }
-
-  function openStory(userId) {
-    alert("Opening story for " + userId); // Replace with real story system
-  }
-
-  function checkAccount(type) {
-    alert("Please create a " + type + " account after login!");
-    // Optional: redirect to create account form if needed
-  }
-</script>
+  <!-- Prompt for Create Account -->
+  <script>
+    function confirmCreate(section) {
+      const confirmMsg = `To access ${section}, you need to create a ${section} account. Proceed?`;
+      return confirm(confirmMsg);
+    }
+  </script>
 
 </body>
 </html>
