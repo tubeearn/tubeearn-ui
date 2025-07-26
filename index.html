@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn</title>
+  <title>TubeEarn - World's Fastest Multi-System Platform</title>
   <style>
     body {
       margin: 0;
@@ -14,28 +14,44 @@
     .top-bar {
       background-color: #193659;
       color: white;
-      padding: 10px;
+      padding: 10px 20px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      justify-content: space-between;
     }
 
-    .logo {
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-left img {
+      height: 30px;
+    }
+
+    .top-left span {
       font-size: 20px;
       font-weight: bold;
     }
 
-    .search-box {
+    .search-bar {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 10px;
     }
 
     #searchInput {
-      padding: 6px;
-      border-radius: 4px;
-      border: none;
+      display: none;
+      padding: 5px;
+      font-size: 14px;
+    }
+
+    .auth-buttons a {
+      color: white;
+      text-decoration: none;
+      margin-left: 15px;
+      font-size: 14px;
     }
 
     .marquee {
@@ -44,6 +60,7 @@
       padding: 10px;
       font-weight: bold;
       overflow: hidden;
+      position: relative;
     }
 
     .marquee-content {
@@ -55,50 +72,6 @@
     @keyframes scroll-left {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
-    }
-
-    .stories {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 10px;
-      background-color: #f5f5f5;
-    }
-
-    .story {
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid red;
-    }
-
-    .story span {
-      display: block;
-      font-size: 12px;
-      margin-top: 5px;
-    }
-
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px;
-    }
-
-    .button-grid a {
-      background-color: #b2e1e6;
-      color: black;
-      text-decoration: none;
-      padding: 10px;
-      border-radius: 6px;
-      min-width: 120px;
-      text-align: center;
     }
 
     .bottom-nav {
@@ -114,28 +87,28 @@
 
     .bottom-nav a {
       color: white;
-      text-decoration: none;
       font-size: 14px;
+      text-decoration: none;
       text-align: center;
-    }
-
-    @media (max-width: 768px) {
-      .button-grid {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar -->
+  <!-- Top Navigation with Logo + Search -->
   <div class="top-bar">
-    <div class="logo">TubeEarn</div>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search..."/>
-      <button onclick="startVoice()">🎤</button>
-      <button onclick="performSearch()">🔍</button>
+    <div class="top-left">
+      <img src="https://i.postimg.cc/SR8t6YQt/tubeearn-logo.png" alt="TubeEarn Logo">
+      <span>TubeEarn</span>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search...">
+      <button onclick="toggleSearch()">🔍</button>
+      <button onclick="startVoiceSearch()">🎤</button>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
     </div>
   </div>
 
@@ -144,81 +117,40 @@
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>
 
-  <!-- Stories Section -->
-  <div class="stories">
-    <div class="story" onclick="alert('Opening Raj story')">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="alert('Opening Anjali story')">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="alert('Opening Rohit story')">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
-  </div>
-
-  <!-- Navigation Grid -->
-  <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="creator.html">🎬 Creator</a>
-    <a href="shop.html">🛒 Shop</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="video.html">📺 Video</a>
-    <a href="shorts.html">▶️ Shorts</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="account.html">👤 Account</a>
-  </div>
-
-  <!-- Bottom Navigation -->
+  <!-- Bottom Nav with Video Icon -->
   <div class="bottom-nav">
-    <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">🎞<br/>Reels</a>
-    <a href="video.html">📺<br/>Video</a>
-    <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="subscribers.html">👥<br/>Subs</a>
-    <a href="account.html">👤<br/>You</a>
+    <a href="home.html">🏠<br>Home</a>
+    <a href="shorts.html">▶️<br>Reels</a>
+    <a href="video.html">🎥<br>Videos</a>
+    <a href="upload.html">⬆️<br>Upload</a>
+    <a href="subscribers.html">👥<br>Subscribers</a>
+    <a href="account.html">👤<br>Account</a>
   </div>
 
-  <!-- JavaScript -->
+  <!-- JS for search and voice -->
   <script>
-    function performSearch() {
-      const input = document.getElementById("searchInput").value.trim();
-      if (input) {
-        alert("Searching for: " + input);
-      }
+    function toggleSearch() {
+      const input = document.getElementById("searchInput");
+      input.style.display = input.style.display === "block" ? "none" : "block";
+      if (input.style.display === "block") input.focus();
     }
 
-    function startVoice() {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert("Speech recognition not supported.");
-        return;
-      }
-
-      const recognition = new webkitSpeechRecognition();
+    function startVoiceSearch() {
+      const recognition = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
       recognition.lang = "en-IN";
-      recognition.continuous = false;
-      recognition.interimResults = false;
-
-      recognition.onstart = function() {
-        alert("Mic listening... speak now.");
-      };
+      recognition.start();
 
       recognition.onresult = function(event) {
         const transcript = event.results[0][0].transcript;
         document.getElementById("searchInput").value = transcript;
-        performSearch();
+        alert("You searched: " + transcript);
       };
 
       recognition.onerror = function(event) {
-        alert("Error: " + event.error);
+        alert("Voice recognition failed: " + event.error);
       };
-
-      recognition.start();
     }
   </script>
+
 </body>
 </html>
