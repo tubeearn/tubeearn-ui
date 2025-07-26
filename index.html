@@ -25,6 +25,7 @@
       font-weight: bold;
       display: flex;
       align-items: center;
+      cursor: pointer;
     }
 
     .logo-icon {
@@ -33,6 +34,18 @@
       background: red;
       border-radius: 50%;
       margin-right: 6px;
+      position: relative;
+    }
+
+    .logo-icon::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 5px;
+      width: 6px;
+      height: 10px;
+      background: white;
+      clip-path: polygon(0 0, 100% 50%, 0 100%);
     }
 
     .marquee {
@@ -78,6 +91,12 @@
       text-align: center;
       font-size: 12px;
       padding: 5px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .story:hover {
+      transform: scale(1.05);
     }
 
     .ad-section {
@@ -144,7 +163,7 @@
 
   <!-- Header -->
   <header>
-    <div class="logo">
+    <div class="logo" onclick="location.href='home.html'">
       <div class="logo-icon"></div>
       TubeEarn
     </div>
@@ -177,11 +196,12 @@
 
   <!-- Story Section -->
   <div class="story-section">
-    <div class="story">Story 1</div>
-    <div class="story">Story 2</div>
-    <div class="story">Story 3</div>
-    <div class="story">Story 4</div>
-    <div class="story">Story 5</div>
+    <div class="story" onclick="location.href='story-raj.html'">Story Raj</div>
+    <div class="story" onclick="location.href='story-anjali.html'">Story Anjali</div>
+    <div class="story" onclick="location.href='story-rohit.html'">Story Rohit</div>
+    <div class="story" onclick="location.href='story-neha.html'">Story Neha</div>
+    <div class="story" onclick="location.href='story-aman.html'">Story Aman</div>
+    <div class="story" onclick="location.href='story-sana.html'">Story Sana</div>
   </div>
 
   <!-- Advertisement -->
@@ -199,7 +219,7 @@
     <div class="short-video" onclick="location.href='short6.html'">Short 6</div>
   </div>
 
-  <!-- Bottom Icons like YouTube -->
+  <!-- Bottom Navigation -->
   <div class="footer-nav">
     <div onclick="location.href='shorts.html'">Shorts</div>
     <div onclick="location.href='upload.html'">Upload</div>
