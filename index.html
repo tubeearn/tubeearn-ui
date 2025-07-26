@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Multi-System Platform</title>
+  <title>TubeEarn - World's Fastest Multi-System Platform</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: #eaf8fc;
     }
 
     .top-bar {
@@ -18,37 +18,38 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
     }
 
-    .logo {
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    .top-actions {
+    .logo-container {
       display: flex;
       align-items: center;
-      gap: 15px;
     }
 
-    .top-actions a {
+    .logo-container img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .auth-buttons a {
       color: white;
       text-decoration: none;
+      margin-left: 10px;
       font-size: 14px;
-      background: #3366cc;
-      padding: 5px 10px;
-      border-radius: 5px;
     }
 
-    #searchInput {
-      display: none;
-      padding: 8px;
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #fff;
+    }
+
+    .search-bar input {
       width: 80%;
-      margin: 10px auto;
-      display: block;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
     }
 
     .stories {
@@ -56,11 +57,12 @@
       overflow-x: auto;
       gap: 10px;
       padding: 10px;
-      background: #fff;
+      background-color: #f5f5f5;
     }
 
     .story {
       flex: 0 0 auto;
+      width: 70px;
       text-align: center;
     }
 
@@ -68,42 +70,43 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      border: 2px solid red;
+      border: 2px solid #ff4d4d;
     }
 
-    .nav-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    .story span {
+      font-size: 12px;
+    }
+
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
-      padding: 10px;
-      background: #fff;
+      padding: 20px;
     }
 
-    .nav-grid a {
-      text-align: center;
-      background: #dff2fa;
-      padding: 10px;
-      border-radius: 8px;
+    .button-grid a {
+      background-color: #b2e1e6;
+      color: black;
       text-decoration: none;
-      color: #000;
-      font-weight: bold;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 14px;
+      min-width: 120px;
+      text-align: center;
     }
 
-    .video-section {
-      padding: 10px;
+    .shorts {
+      padding: 15px;
     }
 
-    .video-card {
-      background: white;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-      cursor: pointer;
+    .short-video {
+      margin-bottom: 20px;
     }
 
-    .video-card img {
+    .short-video img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
     .bottom-nav {
@@ -113,155 +116,146 @@
       right: 0;
       display: flex;
       justify-content: space-around;
-      background: #193659;
-      padding: 8px 0;
+      background-color: #193659;
+      padding: 10px 0;
+      z-index: 1000;
     }
 
     .bottom-nav a {
       color: white;
+      font-size: 14px;
       text-align: center;
       text-decoration: none;
-      font-size: 14px;
     }
 
-    /* APK popup */
-    .popup {
+    #apk-popup {
+      display: none;
       position: fixed;
       bottom: 20px;
-      right: 20px;
-      background: #ffffff;
-      border: 2px solid #193659;
+      left: 20px;
+      background: #ffdb4d;
       padding: 15px;
-      z-index: 1000;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
-    .popup button {
-      background: #193659;
-      color: white;
+    #apk-popup button {
+      margin-left: 10px;
+      background-color: #ff4d4d;
       border: none;
+      color: white;
       padding: 5px 10px;
       border-radius: 5px;
-      cursor: pointer;
-      margin-top: 10px;
     }
 
-    @media (max-width: 768px) {
-      .nav-grid {
-        display: flex;
-        overflow-x: auto;
-        gap: 10px;
-        white-space: nowrap;
-      }
-
-      .nav-grid a {
-        flex: 0 0 auto;
-        min-width: 120px;
+    @media (max-width: 600px) {
+      .button-grid {
+        flex-direction: column;
+        align-items: center;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top bar -->
+  <!-- APK Download Prompt -->
+  <div id="apk-popup">
+    📲 Download the TubeEarn App Now!
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <!-- Top Bar with Logo + Auth -->
   <div class="top-bar">
-    <div class="logo">TubeEarn</div>
-    <div class="top-actions">
-      <a href="#" onclick="toggleSearch()">🔍</a>
+    <div class="logo-container">
+      <img src="https://i.postimg.cc/52HHPD2f/Screenshot-2025-07-26-15-48-32-946-com-android-chrome.jpg" alt="TubeEarn Logo" />
+      <div>TubeEarn</div>
+    </div>
+    <div class="auth-buttons">
       <a href="login.html">Login</a>
       <a href="signup.html">Signup</a>
     </div>
   </div>
 
-  <!-- Search Input -->
-  <input type="text" id="searchInput" placeholder="Search videos..." onkeydown="handleSearchKey(event)"/>
-
-  <!-- Stories -->
-  <div class="stories">
-    <div class="story"><img src="https://via.placeholder.com/60"><br/>Raj</div>
-    <div class="story"><img src="https://via.placeholder.com/60"><br/>Anjali</div>
-    <div class="story"><img src="https://via.placeholder.com/60"><br/>Aman</div>
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input type="text" placeholder="Search anything..." onkeypress="handleSearch(event)">
   </div>
 
-  <!-- Nav buttons -->
-  <div class="nav-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="shorts.html">▶️ Shorts</a>
-    <a href="videos.html">🎞️ Videos</a>
-    <a href="upload.html">⬆️ Upload</a>
-    <a href="subscribers.html">👥 Subscribers</a>
-    <a href="account.html">👤 Account</a>
+  <!-- Stories Section -->
+  <div class="stories">
+    <div class="story" onclick="location.href='story1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Amit</span>
+    </div>
+  </div>
+
+  <!-- Feature Buttons -->
+  <div class="button-grid">
     <a href="creator.html">🎬 Creator</a>
-    <a href="shop.html">🛍️ Shop</a>
+    <a href="shopping.html">🛒 Shopping</a>
     <a href="education.html">📚 Education</a>
     <a href="singing.html">🎤 Singing</a>
-    <a href="dating.html">💘 Dating</a>
-    <a href="live.html">📺 Live</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="movies.html">🎥 Movies</a>
     <a href="career.html">💼 Career</a>
+    <a href="marketplace.html">🏪 Marketplace</a>
+    <a href="live.html">📺 Live</a>
     <a href="wallet.html">💰 Wallet</a>
   </div>
 
-  <!-- Video Section -->
-  <div class="video-section">
-    <div class="video-card" onclick="location.href='video1.html'">
-      <img src="https://via.placeholder.com/300x200?text=Video+1">
-      <p>🎥 Trending Video 1</p>
+  <!-- Shorts & Videos -->
+  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
     </div>
-    <div class="video-card" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x200?text=Game+Highlight">
-      <p>🎮 Game Highlight</p>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Music+Short" />
     </div>
-    <div class="video-card" onclick="location.href='video3.html'">
-      <img src="https://via.placeholder.com/300x200?text=Music+Mix">
-      <p>🎵 Music Mix</p>
+    <div class="short-video" onclick="location.href='video3.html'">
+      <img src="https://via.placeholder.com/300x500?text=Game+Clip" />
     </div>
   </div>
 
-  <!-- Bottom Nav -->
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">▶️<br/>Shorts</a>
-    <a href="videos.html">🎞️<br/>Video</a>
+    <a href="shorts.html">🎞️<br/>Shorts</a>
+    <a href="video.html">🎬<br/>Videos</a>
     <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="account.html">👤<br/>Account</a>
+    <a href="account.html">👤<br/>You</a>
   </div>
 
-  <!-- APK Download Popup -->
-  <div class="popup" id="apkPopup" style="display: none;">
-    <strong>📱 Download the TubeEarn App!</strong><br/>
-    For faster experience, install our mobile app.<br/>
-    <a href="https://example.com/TubeEarn.apk" target="_blank">👉 Download APK</a><br/>
-    <button onclick="closePopup()">Close</button>
-  </div>
-
-  <!-- JS -->
   <script>
-    function toggleSearch() {
-      const input = document.getElementById("searchInput");
-      input.style.display = input.style.display === "block" ? "none" : "block";
-      if (input.style.display === "block") {
-        input.focus();
-      }
-    }
-
-    function handleSearchKey(e) {
-      if (e.key === "Enter") {
-        alert("Searching for: " + e.target.value);
-        // You can redirect to a search result page
-      }
-    }
-
     function closePopup() {
-      document.getElementById("apkPopup").style.display = "none";
-      localStorage.setItem("hideApkPopup", "true");
+      document.getElementById("apk-popup").style.display = "none";
+      localStorage.setItem("apkDismissed", "true");
     }
 
     window.onload = function() {
-      if (!localStorage.getItem("hideApkPopup")) {
-        document.getElementById("apkPopup").style.display = "block";
+      if (!localStorage.getItem("apkDismissed")) {
+        document.getElementById("apk-popup").style.display = "block";
       }
     };
+
+    function handleSearch(e) {
+      if (e.key === "Enter") {
+        const query = e.target.value.trim();
+        if (query) {
+          alert("Searching for: " + query);
+          // Optionally redirect or perform fetch
+          // location.href = `search.html?q=${encodeURIComponent(query)}`;
+        }
+      }
+    }
   </script>
 
 </body>
