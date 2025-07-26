@@ -3,170 +3,167 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - World's Fastest Multi-System Platform</title>
+  <title>TubeEarn</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #eaf8fc;
+      background-color: #fff;
     }
 
-    .header {
-      background-color: #193659;
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #202020;
+      padding: 10px 20px;
       color: white;
-      text-align: center;
-      padding: 20px;
-      font-size: 24px;
-      font-weight: bold;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: red;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 8px;
+      position: relative;
+    }
+
+    .navbar .logo-icon::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 10px;
+      border: solid white;
+      border-width: 6px 0 6px 10px;
+      border-color: transparent transparent transparent white;
+    }
+
+    .navbar nav a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
     }
 
     /* Marquee */
     .marquee {
-      background: black;
-      color: yellow;
-      padding: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      white-space: nowrap;
+      background-color: #fdd835;
+      color: #000;
+      padding: 6px 0;
       overflow: hidden;
+      white-space: nowrap;
       position: relative;
     }
+
     .marquee-content {
       display: inline-block;
-      position: absolute;
-      animation: scroll-left 20s linear infinite;
+      padding-left: 100%;
+      animation: scroll-left 12s linear infinite;
     }
+
     @keyframes scroll-left {
-      0% { left: 100%; }
-      100% { left: -100%; }
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     /* Story Section */
     .stories {
+      padding: 10px;
+      background-color: #f2f2f2;
       display: flex;
       overflow-x: auto;
-      gap: 10px;
-      padding: 15px;
-      background-color: #f5f5f5;
     }
 
     .story {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-    }
-
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
-
-    .story span {
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
-
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 20px;
-    }
-
-    .button-grid a {
+      min-width: 80px;
+      height: 100px;
+      background: linear-gradient(to bottom right, #ff4081, #ff80ab);
+      border-radius: 10px;
+      margin-right: 10px;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: row;
-      background-color: #b2e1e6;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-size: 16px;
-      min-width: 140px;
-      transition: transform 0.2s ease;
+      color: white;
+      font-weight: bold;
     }
 
-    .button-grid a:hover {
-      transform: scale(1.05);
-      background-color: #a0d8df;
+    /* Ad Placeholder */
+    .ad-section {
+      margin: 20px;
+      padding: 40px;
+      text-align: center;
+      border: 2px dashed #aaa;
+      background-color: #fafafa;
+      font-size: 18px;
+      color: #555;
     }
 
-    .button-grid a span {
-      margin-left: 8px;
-    }
-
-    @media (max-width: 600px) {
-      .button-grid a {
-        width: 100%;
-        justify-content: flex-start;
+    /* Responsive */
+    @media (max-width: 768px) {
+      .navbar nav a {
+        font-size: 14px;
+      }
+      .story {
+        min-width: 70px;
+        height: 90px;
+        font-size: 12px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <div class="header">TubeEarn - World's Fastest Multi-earning System Platform</div>
+  <!-- Navigation -->
+  <div class="navbar">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <strong>TubeEarn</strong>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Shorts</a>
+      <a href="#">Live</a>
+      <a href="#">Gaming</a>
+      <a href="#">Story</a>
+      <a href="#">Wallet</a>
+      <a href="#">Upload</a>
+    </nav>
+  </div>
 
-  <!-- Marquee BELOW header -->
+  <!-- Marquee Text -->
   <div class="marquee">
-    <div class="marquee-content">🎉 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+    <div class="marquee-content">
+      🔴 Join T1, India’s No.1 Earning Site | Create, Upload, Earn with TubeEarn | Safe, Trusted & Global 🌍
+    </div>
   </div>
 
-  <!-- Story Section -->
+  <!-- Stories -->
   <div class="stories">
-    <div class="story">
-      <img src="https://via.placeholder.com/60" alt="User1"/>
-      <span>Raj</span>
-    </div>
-    <div class="story">
-      <img src="https://via.placeholder.com/60" alt="User2"/>
-      <span>Anjali</span>
-    </div>
-    <div class="story">
-      <img src="https://via.placeholder.com/60" alt="User3"/>
-      <span>Rohit</span>
-    </div>
-    <div class="story">
-      <img src="https://via.placeholder.com/60" alt="User4"/>
-      <span>Neha</span>
-    </div>
-    <div class="story">
-      <img src="https://via.placeholder.com/60" alt="User5"/>
-      <span>Aman</span>
-    </div>
-    <div class="story">
-      <img src="https://via.placeholder.com/60" alt="User6"/>
-      <span>Sana</span>
-    </div>
-    <!-- और स्टोरी add कर सकते हैं -->
+    <div class="story">Story 1</div>
+    <div class="story">Story 2</div>
+    <div class="story">Story 3</div>
+    <div class="story">Story 4</div>
+    <div class="story">Story 5</div>
+    <div class="story">Story 6</div>
   </div>
 
-  <!-- Navigation Grid -->
-  <div class="button-grid">
-    <a href="home.html">🏠<span>Home</span></a>
-    <a href="create.html">🎬<span>Creator</span></a>
-    <a href="shop.html">🛒<span>Shopping Mall</span></a>
-    <a href="education.html">📚<span>Education</span></a>
-    <a href="singing.html">🎤<span>Singing</span></a>
-    <a href="dating.html">💖<span>Dating</span></a>
-    <a href="videoeditor.html">🎞️<span>Video Editor</span></a>
-    <a href="audioeditor.html">🎧<span>Audio Editor</span></a>
-    <a href="marketplace.html">🏪<span>Marketplace</span></a>
-    <a href="faceswipe.html">😊<span>Face Swipe</span></a>
-    <a href="gaming.html">🎮<span>Gaming</span></a>
-    <a href="live.html">📺<span>Live Performance</span></a>
-    <a href="career.html">💼<span>Career</span></a>
-    <a href="upcoming.html">🔔<span>Upcoming</span></a>
-    <a href="account.html">👤<span>Account</span></a>
-    <a href="wallet.html">💰<span>Wallet</span></a>
-    <a href="wallet.html">$<span>Monetize</span></a>
+  <!-- Ad Placeholder -->
+  <div class="ad-section">
+    Advertisement Area – Your Ad Will Appear Here<br>
+    (Auto Ads will load when no video is uploaded)
   </div>
 
 </body>
