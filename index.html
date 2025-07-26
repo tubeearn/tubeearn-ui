@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Multi-System Platform</title>
+  <title>TubeEarn - Platform</title>
   <style>
     body {
       margin: 0;
@@ -14,10 +14,11 @@
     .top-bar {
       background-color: #193659;
       color: white;
-      padding: 10px 20px;
+      padding: 10px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -28,12 +29,11 @@
     .search-box {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 5px;
     }
 
-    .search-input {
+    #searchInput {
       padding: 5px;
-      font-size: 14px;
       display: none;
     }
 
@@ -57,75 +57,27 @@
       100% { transform: translateX(-100%); }
     }
 
-    .stories {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 15px;
-      background-color: #f5f5f5;
-    }
-
-    .story {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
-
-    .story span {
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
-
     .button-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
-      padding: 20px;
+      padding: 15px;
     }
 
     .button-grid a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row;
       background-color: #b2e1e6;
       color: black;
       text-decoration: none;
-      border-radius: 8px;
       padding: 10px 15px;
-      font-size: 15px;
-      min-width: 140px;
-      transition: transform 0.2s ease;
+      border-radius: 8px;
+      font-size: 14px;
+      min-width: 120px;
+      text-align: center;
     }
 
     .button-grid a:hover {
-      transform: scale(1.05);
-      background-color: #a0d8df;
-    }
-
-    .shorts {
-      padding: 15px;
-      background-color: #fff;
-    }
-
-    .short-video {
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-
-    .short-video img {
-      width: 100%;
-      border-radius: 8px;
+      background-color: #9bd7e1;
     }
 
     .bottom-nav {
@@ -141,9 +93,9 @@
 
     .bottom-nav a {
       color: white;
-      font-size: 14px;
-      text-decoration: none;
       text-align: center;
+      text-decoration: none;
+      font-size: 14px;
     }
 
     @media (max-width: 768px) {
@@ -160,7 +112,7 @@
   <div class="top-bar">
     <div class="logo">TubeEarn</div>
     <div class="search-box">
-      <input type="text" id="searchInput" class="search-input" placeholder="Search..." />
+      <input type="text" id="searchInput" placeholder="Search..." />
       <button onclick="startVoice()">🎤</button>
       <button onclick="performSearch()">🔍</button>
     </div>
@@ -171,92 +123,67 @@
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>
 
-  <!-- Stories -->
-  <div class="stories">
-    <div class="story" onclick="location.href='story-user1.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="location.href='story-user2.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="location.href='story-user3.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
-  </div>
-
   <!-- Feature Buttons -->
   <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="create.html">🎬 Creator</a>
-    <a href="shop.html">🛒 Shop</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="dating.html">💖 Dating</a>
-    <a href="gaming.html">🎮 Games</a>
-    <a href="movies.html">🎬 Movies</a>
-    <a href="videos.html">📺 Videos</a>
-    <a href="shorts.html">▶️ Shorts</a>
-    <a href="ads.html">📢 Ads</a>
-  </div>
-
-  <!-- Shorts Section -->
-  <div class="shorts">
-    <div class="short-video" onclick="location.href='video1.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
-    </div>
-    <div class="short-video" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
-    </div>
-    <div class="short-video" onclick="location.href='video3.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+3" />
-    </div>
+    <a href="#">🏠 Home</a>
+    <a href="#">🎬 Creator</a>
+    <a href="#">🛒 Shop</a>
+    <a href="#">📚 Education</a>
+    <a href="#">🎤 Singing</a>
+    <a href="#">💖 Dating</a>
+    <a href="#">🎮 Games</a>
+    <a href="#">📺 Videos</a>
+    <a href="#">▶️ Shorts</a>
+    <a href="#">💼 Career</a>
+    <a href="#">💰 Wallet</a>
+    <a href="#">🔔 Alerts</a>
   </div>
 
   <!-- Bottom Nav -->
   <div class="bottom-nav">
-    <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">🎞<br/>Reels</a>
-    <a href="videos.html">🎥<br/>Video</a>
-    <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="account.html">👤<br/>Account</a>
+    <a href="#">🏠<br/>Home</a>
+    <a href="#">🎞<br/>Reels</a>
+    <a href="#">🎥<br/>Video</a>
+    <a href="#">⬆️<br/>Upload</a>
+    <a href="#">👥<br/>Subscribers</a>
+    <a href="#">👤<br/>Account</a>
   </div>
 
-  <!-- JavaScript for Voice Search -->
+  <!-- JavaScript -->
   <script>
     function performSearch() {
-      const query = document.getElementById("searchInput").value.trim();
-      if (query !== "") {
-        alert("Searching for: " + query);
-        // Add actual search logic here
+      const input = document.getElementById("searchInput").value.trim();
+      if (input) {
+        alert("Search: " + input);
       }
     }
 
     function startVoice() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      const inputBox = document.getElementById("searchInput");
+      inputBox.style.display = "inline-block";
+
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Speech recognition not supported.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
       recognition.lang = "en-IN";
+      recognition.continuous = false;
       recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
 
-      recognition.start();
-
-      recognition.onresult = function (event) {
+      recognition.onresult = function(event) {
         const transcript = event.results[0][0].transcript;
-        document.getElementById("searchInput").value = transcript;
+        inputBox.value = transcript;
         performSearch();
       };
 
-      recognition.onerror = function (event) {
-        alert("Mic Error: " + event.error);
+      recognition.onerror = function(event) {
+        alert("Mic error: " + event.error);
       };
-    }
 
-    // Show search input on first click
-    document.querySelector(".search-box button:nth-child(2)").addEventListener("click", function () {
-      document.getElementById("searchInput").style.display = "inline-block";
-    });
+      recognition.start();
+    }
   </script>
 
 </body>
