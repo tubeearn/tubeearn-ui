@@ -3,97 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Game Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-<body>
-  <header>
-    <h1>🎮 TubeEarn Games</h1>
-  </header>
-
-  <main>
-    <div class="game-list">
-      <a href="jcb.html" class="game-button">🚜 JCB Game</a>
-      <a href="bike.html" class="game-button">🏍️ Bike Racing</a>
-      <a href="car.html" class="game-button">🚗 Car Parking</a>
-      <a href="snake.html" class="game-button">🐍 Snake Game</a>
-      <a href="fruit.html" class="game-button">🍉 Fruit Cutter</a>
-      <a href="templerun.html" class="game-button">🏃 Temple Run</a>
-      <a href="rummy.html" class="game-button">🃏 Rummy</a>
-      <a href="ludo.html" class="game-button">🎲 Ludo</a>
-      <a href="chess.html" class="game-button">♟️ Chess</a>
-    </div>
-  </main>
-
-  <!-- नीचे वाला बटन बार -->
-  <nav class="bottom-nav">
-    <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
-    <a href="shorts.html"><i class="fa fa-video"></i><span>Shorts</span></a>
-    <a href="game.html"><i class="fa fa-gamepad"></i><span>Games</span></a>
-    <a href="wallet.html"><i class="fa fa-wallet"></i><span>Wallet</span></a>
-    <a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a>
-  </nav>
-
+  <title>TubeEarn - World's Fastest Multi-System Platform</title>
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+      background-color: #eaf8fc;
     }
-    header {
-      background: #222;
-      color: #fff;
-      padding: 15px;
+    .header {
+      background-color: #193659;
+      color: white;
       text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
     }
-    .game-list {
+    .button-grid {
       display: flex;
-      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 10px;
       padding: 20px;
     }
-    .game-button {
-      background: #007bff;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 10px;
-      font-size: 18px;
-    }
-    .game-button:hover {
-      background: #0056b3;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #222;
+    .button-grid a {
       display: flex;
-      justify-content: space-around;
       align-items: center;
-      padding: 10px 0;
-    }
-
-    .bottom-nav a {
-      color: white;
-      text-align: center;
-      font-size: 14px;
+      justify-content: center;
+      flex-direction: row;
+      background-color: #b2e1e6;
+      color: black;
       text-decoration: none;
-      flex: 1;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 16px;
+      min-width: 140px;
+      transition: transform 0.2s ease;
     }
-
-    .bottom-nav i {
-      font-size: 20px;
-      display: block;
+    .button-grid a:hover {
+      transform: scale(1.05);
+      background-color: #a0d8df;
     }
-
-    .bottom-nav span {
-      font-size: 12px;
+    .button-grid a span {
+      margin-left: 8px;
+    }
+    @media (max-width: 600px) {
+      .button-grid a {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
   </style>
+</head>
+<body>
+  <div class="header">TubeEarn - World's Fastest Multi-System Platform</div>
+
+  <div class="button-grid">
+    <a href="home.html">🏠<span>Home</span></a>
+    <a href="create.html">🎬<span>Create</span></a>
+    <a href="shop.html">🛒<span>Shopping Mall</span></a>
+    <a href="education.html">📚<span>Education</span></a>
+    <a href="singing.html">🎤<span>Singing</span></a>
+    <a href="dating.html">💖<span>Dating</span></a>
+    <a href="videoeditor.html">🎞️<span>Video Editor</span></a>
+    <a href="audioeditor.html">🎧<span>Audio Editor</span></a>
+    <a href="marketplace.html">🏪<span>Marketplace</span></a>
+    <a href="faceswipe.html">😊<span>Face Swipe</span></a>
+    <a href="career.html">💼<span>Career</span></a>
+    <a href="upcoming.html">🔔<span>Upcoming</span></a>
+    <a href="account.html">👤<span>Account</span></a>
+    <a href="wallet.html">💰<span>Wallet</span></a>
+  </div>
 </body>
 </html>
