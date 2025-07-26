@@ -8,198 +8,246 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #eaf8fc;
-    }
-    .top-bar {
-      background-color: #193659;
-      color: white;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .auth-buttons a {
-      color: white;
-      text-decoration: none;
-      margin-left: 10px;
-      font-size: 14px;
-    }
-    .search-bar {
-      display: flex;
-      align-items: center;
-      background-color: white;
-      padding: 5px;
-      border-radius: 5px;
-      margin: 10px;
-    }
-    .search-bar input {
-      flex: 1;
-      padding: 5px;
-      border: none;
-      outline: none;
-    }
-    .search-bar button {
-      background-color: #193659;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    .marquee {
-      background: black;
-      color: yellow;
-      padding: 10px;
-      font-weight: bold;
-      overflow: hidden;
-      position: relative;
-    }
-    .marquee-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: scroll-left 15s linear infinite;
-    }
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-    .stories {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 10px;
-      background-color: #f5f5f5;
-    }
-    .story {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
-    .story span {
-      font-size: 12px;
-    }
-    .button-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-      padding: 20px;
-    }
-    .button-grid a {
-      background-color: #b2e1e6;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 10px;
-      text-align: center;
-      display: block;
-    }
-    .media-section {
-      padding: 15px;
-    }
-    .media-section .item {
-      margin-bottom: 10px;
-    }
-    .media-section img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background-color: #193659;
-      padding: 10px 0;
-    }
-    .bottom-nav a {
-      color: white;
-      text-align: center;
-      font-size: 14px;
-      text-decoration: none;
-    }
-    @media (max-width: 768px) {
-      .button-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    }.top-bar {
+  background-color: #193659;
+  color: white;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.search-box {
+  flex: 1;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+}
+
+.search-icons {
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.auth-buttons a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.marquee {
+  background: black;
+  color: yellow;
+  padding: 10px;
+  font-weight: bold;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.stories {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.story {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.story img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ff4d4d;
+}
+
+.story span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+  padding: 20px;
+}
+
+.button-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #b2e1e6;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  transition: transform 0.2s ease;
+}
+
+.button-grid a:hover {
+  transform: scale(1.05);
+  background-color: #a0d8df;
+}
+
+.shorts {
+  padding: 15px;
+  background-color: #fff;
+}
+
+.short-video {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.short-video img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: #193659;
+  padding: 10px 0;
+  z-index: 999;
+}
+
+.bottom-nav a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .button-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
   </style>
 </head>
-<body>  <!-- Top Bar -->  <div class="top-bar">
+<body>  <!-- Top Navigation -->  <div class="top-bar">
     <div class="logo">TubeEarn</div>
+    <div class="search-box">
+      <input id="searchInput" type="text" placeholder="Search...">
+      <span class="search-icons" onclick="searchNow()">🔍</span>
+      <span class="search-icons" onclick="startDictation()">🎤</span>
+    </div>
     <div class="auth-buttons">
       <a href="login.html">Login</a>
       <a href="signup.html">Signup</a>
     </div>
-  </div>  <!-- Search Bar with Mic -->  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search...">
-    <button onclick="performSearch()">🔍</button>
-    <button onclick="startVoiceSearch()">🎤</button>
   </div>  <!-- Marquee -->  <div class="marquee">
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>  <!-- Stories -->  <div class="stories">
     <div class="story" onclick="location.href='story-user1.html'">
-      <img src="https://via.placeholder.com/60">
+      <img src="https://via.placeholder.com/60" />
       <span>Raj</span>
     </div>
     <div class="story" onclick="location.href='story-user2.html'">
-      <img src="https://via.placeholder.com/60">
+      <img src="https://via.placeholder.com/60" />
       <span>Anjali</span>
     </div>
-  </div>  <!-- Button Grid (Feature Navigation) -->  <div class="button-grid">
+    <div class="story" onclick="location.href='story-user3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>  <!-- Feature Buttons -->  <div class="button-grid">
     <a href="home.html">🏠 Home</a>
+    <a href="shorts.html">▶️ Shorts</a>
+    <a href="videos.html">🎥 Videos</a>
+    <a href="upload.html">⬆️ Upload</a>
     <a href="create.html">🎬 Creator</a>
-    <a href="shop.html">🛒 Shopping</a>
+    <a href="shop.html">🛒 Shop</a>
     <a href="education.html">📚 Education</a>
     <a href="singing.html">🎤 Singing</a>
     <a href="dating.html">💖 Dating</a>
-    <a href="videoeditor.html">🎞️ Video Editor</a>
-    <a href="audioeditor.html">🎧 Audio Editor</a>
-    <a href="marketplace.html">🏪 Marketplace</a>
     <a href="gaming.html">🎮 Gaming</a>
+    <a href="marketplace.html">🏪 Market</a>
     <a href="live.html">📺 Live</a>
-    <a href="career.html">💼 Career</a>
     <a href="account.html">👤 Account</a>
     <a href="wallet.html">💰 Wallet</a>
     <a href="monetize.html">💸 Monetize</a>
-  </div>  <!-- Media Section Below Grid -->  <div class="media-section">
-    <div class="item"><img src="https://via.placeholder.com/300x150?text=Game+1"></div>
-    <div class="item"><img src="https://via.placeholder.com/300x150?text=Song+1"></div>
-    <div class="item"><img src="https://via.placeholder.com/300x150?text=Movie+1"></div>
-    <div class="item"><img src="https://via.placeholder.com/300x150?text=Ad+1"></div>
+  </div>  <!-- Shorts Section -->  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+    <div class="short-video" onclick="location.href='video3.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+3" />
+    </div>
   </div>  <!-- Bottom Nav -->  <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">🎞<br/>Reels</a>
-    <a href="videos.html">📺<br/>Videos</a>
+    <a href="shorts.html">🎬<br/>Reels</a>
+    <a href="videos.html">🎥<br/>Videos</a>
     <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="account.html">👤<br/>You</a>
-  </div>  <script>
-    function performSearch() {
-      const query = document.getElementById('searchInput').value;
-      alert("Searching for: " + query);
-      // You can implement redirect logic here
+    <a href="account.html">👤<br/>Account</a>
+  </div>  <!-- JS Voice Search & Navigation -->  <script>
+    function searchNow() {
+      const input = document.getElementById("searchInput").value;
+      if (input.trim() !== "") {
+        window.location.href = `search.html?query=${encodeURIComponent(input)}`;
+      }
     }
-    function startVoiceSearch() {
-      if ('webkitSpeechRecognition' in window) {
+
+    function startDictation() {
+      if (window.hasOwnProperty('webkitSpeechRecognition')) {
         const recognition = new webkitSpeechRecognition();
-        recognition.lang = 'en-US';
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-IN';
         recognition.start();
-        recognition.onresult = function(event) {
-          const transcript = event.results[0][0].transcript;
-          document.getElementById('searchInput').value = transcript;
-          performSearch();
+
+        recognition.onresult = function(e) {
+          document.getElementById('searchInput').value = e.results[0][0].transcript;
+          searchNow();
+        };
+
+        recognition.onerror = function(e) {
+          alert('Mic permission error or not supported!');
         };
       } else {
-        alert("Voice search not supported");
+        alert('Speech Recognition not supported!');
       }
     }
   </script></body>
