@@ -1,183 +1,178 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - World's Fastest Multi-System Platform</title>
+  <title>TubeEarn - Multi-System Platform</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #eaf8fc;
-    }.top-bar {
-  background-color: #193659;
-  color: white;
-  padding: 10px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+    }
 
-.logo {
-  font-size: 20px;
-  font-weight: bold;
-}
+    .top-bar {
+      background-color: #193659;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-.search-box {
-  flex: 1;
-  margin: 0 10px;
-  display: flex;
-  align-items: center;
-}
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
 
-.search-box input {
-  flex: 1;
-  padding: 6px 10px;
-  border: none;
-  border-radius: 4px;
-}
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-.search-icons {
-  margin-left: 8px;
-  cursor: pointer;
-  font-size: 18px;
-}
+    .search-input {
+      padding: 5px;
+      font-size: 14px;
+      display: none;
+    }
 
-.auth-buttons a {
-  color: white;
-  text-decoration: none;
-  margin-left: 10px;
-  font-size: 14px;
-}
+    .marquee {
+      background: black;
+      color: yellow;
+      padding: 10px;
+      font-weight: bold;
+      overflow: hidden;
+      position: relative;
+    }
 
-.marquee {
-  background: black;
-  color: yellow;
-  padding: 10px;
-  font-weight: bold;
-  overflow: hidden;
-  position: relative;
-}
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
+    }
 
-.marquee-content {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scroll-left 15s linear infinite;
-}
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
 
-@keyframes scroll-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 15px;
+      background-color: #f5f5f5;
+    }
 
-.stories {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-  padding: 15px;
-  background-color: #f5f5f5;
-}
+    .story {
+      flex: 0 0 auto;
+      width: 70px;
+      text-align: center;
+      cursor: pointer;
+    }
 
-.story {
-  flex: 0 0 auto;
-  width: 70px;
-  text-align: center;
-  cursor: pointer;
-}
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff4d4d;
+    }
 
-.story img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 2px solid #ff4d4d;
-}
+    .story span {
+      font-size: 12px;
+      display: block;
+      margin-top: 5px;
+    }
 
-.story span {
-  font-size: 12px;
-  display: block;
-  margin-top: 5px;
-}
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+    }
 
-.button-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-  gap: 10px;
-  padding: 20px;
-}
+    .button-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      background-color: #b2e1e6;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 15px;
+      min-width: 140px;
+      transition: transform 0.2s ease;
+    }
 
-.button-grid a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #b2e1e6;
-  color: black;
-  text-decoration: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  font-size: 15px;
-  transition: transform 0.2s ease;
-}
+    .button-grid a:hover {
+      transform: scale(1.05);
+      background-color: #a0d8df;
+    }
 
-.button-grid a:hover {
-  transform: scale(1.05);
-  background-color: #a0d8df;
-}
+    .shorts {
+      padding: 15px;
+      background-color: #fff;
+    }
 
-.shorts {
-  padding: 15px;
-  background-color: #fff;
-}
+    .short-video {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
 
-.short-video {
-  margin-bottom: 20px;
-  cursor: pointer;
-}
+    .short-video img {
+      width: 100%;
+      border-radius: 8px;
+    }
 
-.short-video img {
-  width: 100%;
-  border-radius: 8px;
-}
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background-color: #193659;
+      padding: 10px 0;
+    }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-around;
-  background-color: #193659;
-  padding: 10px 0;
-  z-index: 999;
-}
+    .bottom-nav a {
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      text-align: center;
+    }
 
-.bottom-nav a {
-  color: white;
-  font-size: 14px;
-  text-decoration: none;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .button-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  }
-}
-
+    @media (max-width: 768px) {
+      .button-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
-<body>  <!-- Top Navigation -->  <div class="top-bar">
+<body>
+
+  <!-- Top Navigation -->
+  <div class="top-bar">
     <div class="logo">TubeEarn</div>
     <div class="search-box">
-      <input id="searchInput" type="text" placeholder="Search...">
-      <span class="search-icons" onclick="searchNow()">🔍</span>
-      <span class="search-icons" onclick="startDictation()">🎤</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search..." />
+      <button onclick="startVoice()">🎤</button>
+      <button onclick="performSearch()">🔍</button>
     </div>
-    <div class="auth-buttons">
-      <a href="login.html">Login</a>
-      <a href="signup.html">Signup</a>
-    </div>
-  </div>  <!-- Marquee -->  <div class="marquee">
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee">
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
-  </div>  <!-- Stories -->  <div class="stories">
+  </div>
+
+  <!-- Stories -->
+  <div class="stories">
     <div class="story" onclick="location.href='story-user1.html'">
       <img src="https://via.placeholder.com/60" />
       <span>Raj</span>
@@ -190,23 +185,25 @@
       <img src="https://via.placeholder.com/60" />
       <span>Rohit</span>
     </div>
-  </div>  <!-- Feature Buttons -->  <div class="button-grid">
+  </div>
+
+  <!-- Feature Buttons -->
+  <div class="button-grid">
     <a href="home.html">🏠 Home</a>
-    <a href="shorts.html">▶️ Shorts</a>
-    <a href="videos.html">🎥 Videos</a>
-    <a href="upload.html">⬆️ Upload</a>
     <a href="create.html">🎬 Creator</a>
     <a href="shop.html">🛒 Shop</a>
     <a href="education.html">📚 Education</a>
     <a href="singing.html">🎤 Singing</a>
     <a href="dating.html">💖 Dating</a>
-    <a href="gaming.html">🎮 Gaming</a>
-    <a href="marketplace.html">🏪 Market</a>
-    <a href="live.html">📺 Live</a>
-    <a href="account.html">👤 Account</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="monetize.html">💸 Monetize</a>
-  </div>  <!-- Shorts Section -->  <div class="shorts">
+    <a href="gaming.html">🎮 Games</a>
+    <a href="movies.html">🎬 Movies</a>
+    <a href="videos.html">📺 Videos</a>
+    <a href="shorts.html">▶️ Shorts</a>
+    <a href="ads.html">📢 Ads</a>
+  </div>
+
+  <!-- Shorts Section -->
+  <div class="shorts">
     <div class="short-video" onclick="location.href='video1.html'">
       <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
     </div>
@@ -216,39 +213,51 @@
     <div class="short-video" onclick="location.href='video3.html'">
       <img src="https://via.placeholder.com/300x500?text=Short+Video+3" />
     </div>
-  </div>  <!-- Bottom Nav -->  <div class="bottom-nav">
+  </div>
+
+  <!-- Bottom Nav -->
+  <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">🎬<br/>Reels</a>
-    <a href="videos.html">🎥<br/>Videos</a>
+    <a href="shorts.html">🎞<br/>Reels</a>
+    <a href="videos.html">🎥<br/>Video</a>
     <a href="upload.html">⬆️<br/>Upload</a>
     <a href="account.html">👤<br/>Account</a>
-  </div>  <!-- JS Voice Search & Navigation -->  <script>
-    function searchNow() {
-      const input = document.getElementById("searchInput").value;
-      if (input.trim() !== "") {
-        window.location.href = `search.html?query=${encodeURIComponent(input)}`;
+  </div>
+
+  <!-- JavaScript for Voice Search -->
+  <script>
+    function performSearch() {
+      const query = document.getElementById("searchInput").value.trim();
+      if (query !== "") {
+        alert("Searching for: " + query);
+        // Add actual search logic here
       }
     }
 
-    function startDictation() {
-      if (window.hasOwnProperty('webkitSpeechRecognition')) {
-        const recognition = new webkitSpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = false;
-        recognition.lang = 'en-IN';
-        recognition.start();
+    function startVoice() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = "en-IN";
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
 
-        recognition.onresult = function(e) {
-          document.getElementById('searchInput').value = e.results[0][0].transcript;
-          searchNow();
-        };
+      recognition.start();
 
-        recognition.onerror = function(e) {
-          alert('Mic permission error or not supported!');
-        };
-      } else {
-        alert('Speech Recognition not supported!');
-      }
+      recognition.onresult = function (event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("searchInput").value = transcript;
+        performSearch();
+      };
+
+      recognition.onerror = function (event) {
+        alert("Mic Error: " + event.error);
+      };
     }
-  </script></body>
+
+    // Show search input on first click
+    document.querySelector(".search-box button:nth-child(2)").addEventListener("click", function () {
+      document.getElementById("searchInput").style.display = "inline-block";
+    });
+  </script>
+
+</body>
 </html>
