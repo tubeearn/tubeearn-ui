@@ -1,70 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TubeEarn Navigation</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #e1f5fe;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #0d3559;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-    .nav-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 15px;
-      background-color: #e0f7fa;
-    }
-    .nav-item {
-      background-color: #b2ebf2;
-      margin: 10px;
-      padding: 12px 20px;
-      border-radius: 5px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.2s;
-      font-size: 16px;
-    }
-    .nav-item:hover {
-      transform: scale(1.05);
-      background-color: #a7e0e5;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn Game Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
+  <header>
+    <h1>🎮 TubeEarn Games</h1>
+  </header>
 
-<header>TubeEarn - World's Fastest Multi-System Platform</header>
+  <main>
+    <div class="game-list">
+      <a href="jcb.html" class="game-button">🚜 JCB Game</a>
+      <a href="bike.html" class="game-button">🏍️ Bike Racing</a>
+      <a href="car.html" class="game-button">🚗 Car Parking</a>
+      <a href="snake.html" class="game-button">🐍 Snake Game</a>
+      <a href="fruit.html" class="game-button">🍉 Fruit Cutter</a>
+      <a href="templerun.html" class="game-button">🏃 Temple Run</a>
+      <a href="rummy.html" class="game-button">🃏 Rummy</a>
+      <a href="ludo.html" class="game-button">🎲 Ludo</a>
+      <a href="chess.html" class="game-button">♟️ Chess</a>
+    </div>
+  </main>
 
-<div class="nav-container">
-  <div class="nav-item">🏠 Home</div>
-  <div class="nav-item">🎬 Create</div>
-  <div class="nav-item">🛒 Shopping Mall</div>
-  <div class="nav-item">📚 Education</div>
-  <div class="nav-item">🎤 Singing</div>
-  <div class="nav-item">💘 Dating</div>
-  <div class="nav-item">🎞️ Video Editor</div>
-  <div class="nav-item">🎧 Audio Editor</div>
-  <div class="nav-item">🛍️ Marketplace</div>
-  <div class="nav-item">😊 Face Swipe</div>
-  <div class="nav-item">💼 Career</div>
-  <div class="nav-item">🔔 Upcoming</div>
-  <div class="nav-item">👤 Account</div>
-  <div class="nav-item">💰 Wallet</div>
+  <!-- नीचे वाला बटन बार -->
+  <nav class="bottom-nav">
+    <a href="index.html"><i class="fa fa-home"></i><span>Home</span></a>
+    <a href="shorts.html"><i class="fa fa-video"></i><span>Shorts</span></a>
+    <a href="game.html"><i class="fa fa-gamepad"></i><span>Games</span></a>
+    <a href="wallet.html"><i class="fa fa-wallet"></i><span>Wallet</span></a>
+    <a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a>
+  </nav>
 
-  <!-- ✅ Newly Added -->
-  <div class="nav-item">🎮 Gaming Zone</div>
-  <div class="nav-item">📺 Live Stream</div>
-</div>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f2f2f2;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    .game-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 20px;
+    }
+    .game-button {
+      background: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 18px;
+    }
+    .game-button:hover {
+      background: #0056b3;
+    }
 
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #222;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+    }
+
+    .bottom-nav a {
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      text-decoration: none;
+      flex: 1;
+    }
+
+    .bottom-nav i {
+      font-size: 20px;
+      display: block;
+    }
+
+    .bottom-nav span {
+      font-size: 12px;
+    }
+  </style>
 </body>
 </html>
