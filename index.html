@@ -3,162 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Navigation</title>
+  <title>TubeEarn - India's No.1 Earning Platform</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      background: #f0f0f0;
     }
 
     header {
-      background-color: #e91e63;
-      color: white;
-      padding: 10px 20px;
+      background: #fff;
+      padding: 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #e91e63;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-icon {
+      width: 25px;
+      height: 25px;
+      background: #e91e63;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 5px;
+    }
+
+    .scroll-text {
+      background: #e91e63;
+      color: white;
+      padding: 5px 0;
+      font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .scroll-text span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 15s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    nav {
+      background: #fff;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
       position: sticky;
       top: 0;
-      z-index: 1000;
+      border-bottom: 1px solid #ddd;
     }
 
-    header img {
-      width: 30px;
-      height: 30px;
-    }
-
-    header h1 {
-      font-size: 18px;
-      margin: 0;
-    }
-
-    marquee {
-      background: #ffc107;
-      color: black;
-      padding: 10px;
-      font-weight: bold;
+    nav button {
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: #444;
+      cursor: pointer;
     }
 
     .stories {
       display: flex;
       overflow-x: auto;
       padding: 10px;
-      background: white;
+      background: #fff;
     }
 
     .story {
-      flex: 0 0 auto;
       width: 60px;
       height: 60px;
-      margin-right: 10px;
       border-radius: 50%;
-      background: #ccc;
-      border: 2px solid #e91e63;
+      margin-right: 10px;
+      background: linear-gradient(#ff9800, #f44336);
     }
 
-    .ads {
-      background: #ffecb3;
-      padding: 10px;
-      margin: 10px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    nav {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #fff;
+    .ad-section {
+      background: #000;
+      height: 150px;
+      color: #fff;
       display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-      padding: 10px 0;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
     }
 
-    nav button {
-      background: #e0e0e0;
-      border: none;
-      margin: 5px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-weight: bold;
-      color: #333;
-      cursor: pointer;
+    .shorts-section {
+      margin: 10px;
     }
 
-    nav button:hover {
-      background-color: #ff4081;
-      color: white;
+    .short {
+      background: #fff;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
     }
 
-    main {
-      padding-bottom: 130px; /* to avoid overlapping nav */
+    .short video {
+      width: 100%;
+      border-radius: 10px;
     }
+
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header with Logo -->
   <header>
-    <img src="https://img.icons8.com/ios-filled/50/youtube-play.png" alt="TubeEarn Logo">
-    <h1>TubeEarn</h1>
+    <div class="logo">
+      <div class="logo-icon">T</div>
+      TubeEarn
+    </div>
   </header>
 
-  <!-- Marquee -->
-  <marquee behavior="scroll" direction="left">
-    🇮🇳 India's No.1 Earning Platform - Join TubeEarn Today & Start Earning! 💰🚀
-  </marquee>
+  <!-- Scrolling Text -->
+  <div class="scroll-text">
+    <span>Welcome to TubeEarn - India’s No.1 Earning Platform! Join Now and Start Earning Money with Your Videos.</span>
+  </div>
 
-  <!-- Main Content -->
-  <main>
-    <!-- Stories -->
-    <div class="stories">
-      <div class="story" style="background-image: url('https://via.placeholder.com/60'); background-size: cover;"></div>
-      <div class="story" style="background-image: url('https://via.placeholder.com/60'); background-size: cover;"></div>
-      <div class="story" style="background-image: url('https://via.placeholder.com/60'); background-size: cover;"></div>
-      <div class="story" style="background-image: url('https://via.placeholder.com/60'); background-size: cover;"></div>
-      <div class="story" style="background-image: url('https://via.placeholder.com/60'); background-size: cover;"></div>
-    </div>
-
-    <!-- Ads Section -->
-    <div class="ads">
-      📢 Advertise Here — Reach Millions of Users!
-    </div>
-  </main>
-
-  <!-- Bottom Navigation -->
+  <!-- Navigation Bar -->
   <nav>
-    <button onclick="btn('Home')">Home</button>
-    <button onclick="btn('Shorts')">Shorts</button>
-    <button onclick="btn('Upload')">Upload</button>
-    <button onclick="btn('Wallet')">Wallet</button>
-    <button onclick="btn('Login')">Login</button>
-    <button onclick="btn('Signup')">Signup</button>
-    <button onclick="btn('Creator')">Creator</button>
-    <button onclick="btn('Shopping Mall')">Shopping</button>
-    <button onclick="btn('Education')">Education</button>
-    <button onclick="btn('Singing')">Singing</button>
-    <button onclick="btn('Dating')">Dating</button>
-    <button onclick="btn('Video Editor')">Video Editor</button>
-    <button onclick="btn('Audio Editor')">Audio Editor</button>
-    <button onclick="btn('Marketplace')">Marketplace</button>
-    <button onclick="btn('Face Swipe')">Face Swipe</button>
-    <button onclick="btn('Gaming')">Gaming</button>
-    <button onclick="btn('Live')">Live</button>
-    <button onclick="btn('Career')">Career</button>
-    <button onclick="btn('Upcoming')">Upcoming</button>
-    <button onclick="btn('Account')">Account</button>
-    <button onclick="btn('Monetize')">Monetize</button>
+    <button onclick="alert('Home Clicked')">Home</button>
+    <button onclick="alert('Shorts Clicked')">Shorts</button>
+    <button onclick="alert('Upload Clicked')">Upload</button>
+    <button onclick="alert('Wallet Clicked')">Wallet</button>
+    <button onclick="alert('Profile Clicked')">Profile</button>
   </nav>
 
-  <!-- JS -->
-  <script>
-    function btn(name) {
-      alert(name + " button clicked!");
-    }
-  </script>
+  <!-- Story Section -->
+  <div class="stories">
+    <div class="story"></div>
+    <div class="story"></div>
+    <div class="story"></div>
+    <div class="story"></div>
+    <div class="story"></div>
+    <div class="story"></div>
+  </div>
+
+  <!-- Advertisement Section -->
+  <div class="ad-section">
+    <p>Advertisement Here (Video / Banner)</p>
+  </div>
+
+  <!-- Shorts Section -->
+  <div class="shorts-section">
+    <div class="short">
+      <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
+    </div>
+    <div class="short">
+      <video controls src="https://www.w3schools.com/html/movie.mp4"></video>
+    </div>
+  </div>
 
 </body>
 </html>
