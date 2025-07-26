@@ -28,15 +28,19 @@
       font-size: 20px;
     }
 
-    .search-icons {
+    .top-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
     }
 
-    .search-icons i {
-      font-size: 20px;
-      cursor: pointer;
+    .top-actions a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      background: #3366cc;
+      padding: 5px 10px;
+      border-radius: 5px;
     }
 
     #searchInput {
@@ -120,6 +124,29 @@
       font-size: 14px;
     }
 
+    /* APK popup */
+    .popup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #193659;
+      padding: 15px;
+      z-index: 1000;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .popup button {
+      background: #193659;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
     @media (max-width: 768px) {
       .nav-grid {
         display: flex;
@@ -140,9 +167,10 @@
   <!-- Top bar -->
   <div class="top-bar">
     <div class="logo">TubeEarn</div>
-    <div class="search-icons">
-      <i onclick="toggleSearch()">🔍</i>
-      <i onclick="startVoice()">🎤</i>
+    <div class="top-actions">
+      <a href="#" onclick="toggleSearch()">🔍</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
     </div>
   </div>
 
@@ -199,6 +227,14 @@
     <a href="account.html">👤<br/>Account</a>
   </div>
 
+  <!-- APK Download Popup -->
+  <div class="popup" id="apkPopup" style="display: none;">
+    <strong>📱 Download the TubeEarn App!</strong><br/>
+    For faster experience, install our mobile app.<br/>
+    <a href="https://example.com/TubeEarn.apk" target="_blank">👉 Download APK</a><br/>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
   <!-- JS -->
   <script>
     function toggleSearch() {
@@ -212,23 +248,20 @@
     function handleSearchKey(e) {
       if (e.key === "Enter") {
         alert("Searching for: " + e.target.value);
-        // Add real search functionality here
+        // You can redirect to a search result page
       }
     }
 
-    function startVoice() {
-      const recognition = new(window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.onstart = () => alert("🎤 Speak now...");
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("searchInput").value = transcript;
-        alert("Voice Search: " + transcript);
-      };
-      recognition.onerror = function(event) {
-        alert("Mic Error: " + event.error);
-      };
-      recognition.start();
+    function closePopup() {
+      document.getElementById("apkPopup").style.display = "none";
+      localStorage.setItem("hideApkPopup", "true");
     }
+
+    window.onload = function() {
+      if (!localStorage.getItem("hideApkPopup")) {
+        document.getElementById("apkPopup").style.display = "block";
+      }
+    };
   </script>
 
 </body>
