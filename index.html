@@ -1,204 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Final</title>
+  <title>TubeEarn - World's Fastest Multi-System Platform</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f5f9ff;
-    }
+      background-color: #eaf8fc;
+    }.top-bar {
+  background-color: #193659;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .top-bar {
-      background-color: #193659;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-    }
+.auth-buttons {
+  display: flex;
+  align-items: center;
+}
 
-    .search-icon {
-      cursor: pointer;
-    }
+.auth-buttons a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 14px;
+}
 
-    .search-box {
-      display: none;
-      padding: 10px;
-      background-color: #eee;
-    }
+.search-container {
+  margin-left: 20px;
+}
 
-    .search-box input {
-      width: 80%;
-      padding: 8px;
-      font-size: 14px;
-    }
+.search-bar {
+  display: none;
+  margin-top: 5px;
+}
 
-    .search-box button {
-      padding: 8px;
-    }
+.search-bar input {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 200px;
+}
 
-    .marquee {
-      background: black;
-      color: yellow;
-      padding: 10px;
-      font-weight: bold;
-      overflow: hidden;
-      position: relative;
-      border-bottom: 5px solid red;
-    }
+.mic-icon {
+  margin-left: 5px;
+  cursor: pointer;
+}
 
-    .marquee-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: scroll-left 15s linear infinite;
-    }
+.marquee {
+  background: black;
+  color: yellow;
+  padding: 10px;
+  font-weight: bold;
+  overflow: hidden;
+  position: relative;
+}
 
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
 
-    .stories {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 15px;
-      background-color: #f5f5f5;
-    }
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
 
-    .story {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-      cursor: pointer;
-    }
+.stories {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
 
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
+.story {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
 
-    .story span {
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
+.story img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ff4d4d;
+}
 
-    .shorts, .video-feed {
-      padding: 15px;
-      background-color: #fff;
-    }
+.story span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
 
-    .short-video, .video-item {
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
+.button-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
 
-    .short-video img, .video-item img {
-      width: 100%;
-      border-radius: 8px;
-    }
+.button-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #b2e1e6;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  min-width: 140px;
+  transition: transform 0.2s ease;
+}
 
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      background-color: #193659;
-      padding: 10px 0;
-      z-index: 999;
-    }
+.button-grid a:hover {
+  transform: scale(1.05);
+  background-color: #a0d8df;
+}
 
-    .bottom-nav a {
-      color: white;
-      font-size: 14px;
-      text-decoration: none;
-      text-align: center;
-    }
+.shorts {
+  padding: 15px;
+  background-color: #fff;
+}
 
-    @media (max-width: 600px) {
-      .story img { width: 50px; height: 50px; }
-    }
+.short-video {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.short-video img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.suggested-content {
+  padding: 15px;
+}
+
+.suggested-content h3 {
+  margin-bottom: 10px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: #193659;
+  padding: 10px 0;
+}
+
+.bottom-nav a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .button-grid a {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
   </style>
 </head>
-<body>
-
-  <!-- Top Nav -->
-  <div class="top-bar">
-    <div class="logo">🎬 TubeEarn</div>
-    <div class="search-icon" onclick="toggleSearch()">🔍</div>
-  </div>
-
-  <!-- Search Bar -->
-  <div class="search-box" id="searchBox">
-    <input type="text" placeholder="Search here..." id="searchInput"/>
-    <button onclick="startVoice()">🎤</button>
-  </div>
-
-  <!-- Marquee -->
-  <div class="marquee">
+<body>  <!-- Top Navigation -->  <div class="top-bar">
+    <div class="logo">▶ TubeEarn</div>
+    <div class="search-container">
+      <button onclick="toggleSearch()">🔍</button>
+      <div class="search-bar" id="searchBar">
+        <input type="text" placeholder="Search videos..." id="searchInput" />
+        <span class="mic-icon" onclick="startVoiceSearch()">🎤</span>
+      </div>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </div>
+  </div>  <!-- Marquee -->  <div class="marquee">
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
-  </div>
-
-  <!-- Stories -->
-  <div class="stories">
-    <div class="story" onclick="location.href='story1.html'"><img src="https://via.placeholder.com/60"/><span>Raj</span></div>
-    <div class="story" onclick="location.href='story2.html'"><img src="https://via.placeholder.com/60"/><span>Anjali</span></div>
-    <div class="story" onclick="location.href='story3.html'"><img src="https://via.placeholder.com/60"/><span>Amit</span></div>
-  </div>
-
-  <!-- Shorts Section -->
-  <div class="shorts">
-    <div class="short-video" onclick="location.href='video1.html'"><img src="https://via.placeholder.com/300x500?text=Short+1"/></div>
-    <div class="short-video" onclick="location.href='video2.html'"><img src="https://via.placeholder.com/300x500?text=Short+2"/></div>
-  </div>
-
-  <!-- Random Videos, Games, Music, Ads -->
-  <div class="video-feed">
-    <h3>🎮 Games | 🎵 Songs | 📺 Movies | Ads</h3>
-    <div class="video-item" onclick="location.href='game1.html'"><img src="https://via.placeholder.com/300x200?text=Game+1"/></div>
-    <div class="video-item" onclick="location.href='music1.html'"><img src="https://via.placeholder.com/300x200?text=Song+1"/></div>
-    <div class="video-item" onclick="location.href='movie1.html'"><img src="https://via.placeholder.com/300x200?text=Movie+1"/></div>
-    <div class="video-item" onclick="location.href='ads.html'"><img src="https://via.placeholder.com/300x200?text=Advertisement"/></div>
-  </div>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
+  </div>  <!-- Stories -->  <div class="stories">
+    <div class="story" onclick="location.href='story-user1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story-user2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story-user3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>  <!-- Feature Buttons -->  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html">🎬 Creator</a>
+    <a href="longvideos.html">📺 Long Videos</a>
+    <!-- other buttons remain same -->
+  </div>  <!-- Shorts Section -->  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+    <div class="short-video" onclick="location.href='video3.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+3" />
+    </div>
+  </div>  <!-- Suggested Content -->  <div class="suggested-content">
+    <h3>Recommended</h3>
+    <div class="short-video" onclick="location.href='music1.html'">
+      <img src="https://via.placeholder.com/300x200?text=Song+Video" />
+    </div>
+    <div class="short-video" onclick="location.href='game1.html'">
+      <img src="https://via.placeholder.com/300x200?text=Game+Demo" />
+    </div>
+  </div>  <!-- Bottom Nav -->  <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">🎞️<br/>Shorts</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
     <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="longvideo.html">📺<br/>Videos</a>
+    <a href="notifications.html">🔔<br/>Alerts</a>
     <a href="account.html">👤<br/>You</a>
-  </div>
-
-  <!-- Scripts -->
-  <script>
+  </div>  <!-- Scripts -->  <script>
     function toggleSearch() {
-      var searchBox = document.getElementById("searchBox");
-      if (searchBox.style.display === "block") {
-        searchBox.style.display = "none";
-      } else {
-        searchBox.style.display = "block";
-        document.getElementById("searchInput").focus();
-      }
+      const searchBar = document.getElementById("searchBar");
+      searchBar.style.display = searchBar.style.display === "block" ? "none" : "block";
     }
 
-    function startVoice() {
-      alert("Voice search not supported in demo. Use mobile browser with mic permission.");
+    function startVoiceSearch() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.onresult = function(event) {
+        document.getElementById("searchInput").value = event.results[0][0].transcript;
+      };
+      recognition.start();
     }
-  </script>
-
-</body>
+  </script></body>
 </html>
