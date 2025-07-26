@@ -1,202 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeEarn</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-    }
-    header {
-      background: #111;
-      color: #fff;
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif;}
+    body {background: #f9f9f9;}
+    nav {
+      background: #000;
       padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      font-size: 20px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-    }
-    .logo-icon {
-      width: 22px;
-      height: 22px;
-      background: red;
-      border-radius: 50%;
-      margin-right: 6px;
-    }
-    .marquee {
-      background: red;
       color: white;
-      font-weight: bold;
-      padding: 6px;
-      font-size: 14px;
-    }
-    /* Scrollable Navigation Bar */
-    .nav-scroll {
       display: flex;
-      overflow-x: auto;
-      background: #222;
-      white-space: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
     }
-    .nav-scroll a {
-      display: inline-block;
+    nav .logo {font-size: 20px; font-weight: bold;}
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 15px;
+    }
+    nav ul li a {
       color: white;
       text-decoration: none;
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-    .nav-scroll a:hover {
-      background: #444;
-    }
-
-    .story-section {
-      padding: 10px;
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      background: #fafafa;
-    }
-    .story {
-      min-width: 80px;
-      height: 100px;
-      background: #ddd;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 12px;
-      padding: 5px;
-    }
-
-    .ad-section {
-      margin: 10px;
-      padding: 10px;
-      background: #ffeaa7;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    .shorts-section {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 10px;
-      background: #f1f1f1;
-    }
-    .short-video {
-      min-width: 150px;
-      height: 250px;
-      background: #bbb;
-      border-radius: 10px;
-      position: relative;
-      text-align: center;
-    }
-    .short-video button {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
       padding: 5px 10px;
-      background: #000;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+      border-radius: 5px;
     }
+    nav ul li a:hover {background: #555;}.scrolling-text {
+  background: #ff0000;
+  color: white;
+  padding: 5px;
+  margin-top: 50px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.scrolling-text marquee {font-weight: bold; font-size: 16px;}
 
-    footer {
-      background: #111;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      font-size: 14px;
-    }
+.shorts {
+  margin-top: 100px;
+  padding: 10px;
+}
+.video-card {
+  background: white;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+.video-card:hover {background: #eee;}
 
-    /* Hide scrollbar */
-    ::-webkit-scrollbar {
-      height: 5px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 10px;
-    }
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+.bottom-nav button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.bottom-nav button:hover {color: red;}
+
   </style>
 </head>
-<body>
-
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <div class="logo-icon"></div>
-      TubeEarn
-    </div>
-    <div>Welcome to TubeEarn</div>
-  </header>
-
-  <!-- Marquee -->
-  <div class="marquee">
-    <marquee>India’s No.1 Earning + Dating + Video Platform — TubeEarn T1</marquee>
+<body><nav>
+  <div class="logo">TubeEarn</div>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Shorts</a></li>
+    <li><a href="#">Upload</a></li>
+    <li><a href="#">Wallet</a></li>
+    <li><a href="#">Profile</a></li>
+  </ul>
+</nav><div class="scrolling-text">
+  <marquee>🚀 India’s No.1 Earning + Dating + Performance Platform - TubeEarn 🚀</marquee>
+</div><div class="shorts" id="shorts">
+  <!-- Multiple clickable videos -->
+  <div class="video-card" onclick="openPage('short1.html')">
+    <h3>🎬 Telugu Shorts #1</h3>
+    <p>Click anywhere to open</p>
   </div>
-
-  <!-- Scrollable Navigation Bar -->
-  <div class="nav-scroll">
-    <a href="home.html">Home</a>
-    <a href="creator.html">Creator</a>
-    <a href="gaming.html">Gaming</a>
-    <a href="reels.html">Reels</a>
-    <a href="marketplace.html">Marketplace</a>
-    <a href="dating.html">Dating</a>
-    <a href="education.html">Education</a>
-    <a href="videoeditor.html">Video Editor</a>
-    <a href="faceswipe.html">Face Swipe</a>
-    <a href="shop.html">Shopping Mall</a>
-    <a href="live.html">Live</a>
-    <a href="wallet.html">Wallet</a>
-    <a href="settings.html">Settings</a>
+  <div class="video-card" onclick="openPage('short2.html')">
+    <h3>🎬 Hindi Short #2</h3>
+    <p>Click anywhere to open</p>
   </div>
-
-  <!-- Story Section -->
-  <div class="story-section">
-    <div class="story">Story 1</div>
-    <div class="story">Story 2</div>
-    <div class="story">Story 3</div>
-    <div class="story">Story 4</div>
-    <div class="story">Story 5</div>
-    <div class="story">Story 6</div>
-    <div class="story">Story 7</div>
-    <div class="story">Story 8</div>
-    <div class="story">Story 9</div>
+  <div class="video-card" onclick="openPage('short3.html')">
+    <h3>🎬 Bhojpuri Short #3</h3>
+    <p>Click anywhere to open</p>
   </div>
-
-  <!-- Advertisement -->
-  <div class="ad-section">
-    Ad Banner / Video Playing Here
-  </div>
-
-  <!-- Shorts Section -->
-  <div class="shorts-section">
-    <div class="short-video">
-      Short 1
-      <button onclick="location.href='short1.html'">Play</button>
-    </div>
-    <div class="short-video">
-      Short 2
-      <button onclick="location.href='short2.html'">Play</button>
-    </div>
-    <div class="short-video">
-      Short 3
-      <button onclick="location.href='short3.html'">Play</button>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 TubeEarn. All rights reserved.
-  </footer>
-
-</body>
+  <!-- Add more as needed -->
+</div><div class="bottom-nav">
+  <button onclick="openPage('home.html')">🏠<br>Home</button>
+  <button onclick="openPage('shorts.html')">🎞️<br>Shorts</button>
+  <button onclick="openPage('upload.html')">⬆️<br>Upload</button>
+  <button onclick="openPage('wallet.html')">💰<br>Wallet</button>
+  <button onclick="openPage('profile.html')">👤<br>Profile</button>
+</div><script>
+  function openPage(url) {
+    window.location.href = url;
+  }
+</script></body>
 </html>
