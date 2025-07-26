@@ -18,6 +18,28 @@
       font-size: 24px;
       font-weight: bold;
     }
+
+    /* Marquee */
+    .marquee {
+      background: black;
+      color: yellow;
+      padding: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      position: relative;
+    }
+    .marquee-content {
+      display: inline-block;
+      position: absolute;
+      animation: scroll-left 20s linear infinite;
+    }
+    @keyframes scroll-left {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+
     .button-grid {
       display: flex;
       flex-wrap: wrap;
@@ -57,6 +79,10 @@
 <body>
   <div class="header">TubeEarn - World's Fastest Multi-earning System Platform</div>
 
+  <div class="marquee">
+    <div class="marquee-content">🎉 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+  </div>
+
   <div class="button-grid">
     <a href="home.html">🏠<span>Home</span></a>
     <a href="create.html">🎬<span>Creator</span></a>
@@ -74,7 +100,7 @@
     <a href="upcoming.html">🔔<span>Upcoming</span></a>
     <a href="account.html">👤<span>Account</span></a>
     <a href="wallet.html">💰<span>Wallet</span></a>
-    <a href="wallet.html">$<span>monetize</span></a>
+    <a href="wallet.html">$<span>Monetize</span></a>
   </div>
 </body>
 </html>
