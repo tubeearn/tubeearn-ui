@@ -18,6 +18,17 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-container img {
+      height: 30px;
+      margin-right: 10px;
     }
 
     .logo {
@@ -46,16 +57,18 @@
     #searchBox {
       display: none;
       position: absolute;
-      top: 55px;
+      top: 50px;
       right: 20px;
       background: white;
       padding: 5px;
       border-radius: 5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     #searchInput {
       padding: 5px;
       font-size: 14px;
+      width: 180px;
     }
 
     .marquee {
@@ -71,6 +84,11 @@
       display: inline-block;
       white-space: nowrap;
       animation: scroll-left 15s linear infinite;
+    }
+
+    .marquee-bar {
+      height: 4px;
+      background-color: red;
     }
 
     @keyframes scroll-left {
@@ -180,23 +198,26 @@
 
   <!-- Top Navigation -->
   <div class="top-bar">
-    <div class="logo">TubeEarn</div>
+    <div class="logo-container">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Logo" />
+      <div class="logo">TubeEarn</div>
+    </div>
     <div class="auth-buttons">
       <span class="search-icon" onclick="toggleSearch()">🔍</span>
       <a href="login.html">Login</a>
       <a href="signup.html">Signup</a>
     </div>
-  </div>
-
-  <!-- Search Box -->
-  <div id="searchBox">
-    <input type="text" id="searchInput" placeholder="Search videos..." onkeypress="handleSearch(event)">
+    <!-- Search Box -->
+    <div id="searchBox">
+      <input type="text" id="searchInput" placeholder="Search videos..." onkeypress="handleSearch(event)">
+    </div>
   </div>
 
   <!-- Marquee -->
   <div class="marquee">
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>
+  <div class="marquee-bar"></div>
 
   <!-- Stories -->
   <div class="stories">
