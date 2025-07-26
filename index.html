@@ -14,11 +14,10 @@
     .top-bar {
       background-color: #193659;
       color: white;
-      padding: 05px 10px;
+      padding: 6px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
     }
 
     .logo {
@@ -27,16 +26,21 @@
     }
 
     .logo img {
-      height: 200px;
-      width: 200px;
+      height: 50px;
+      width: 50px;
       object-fit: contain;
-      margin-right: 10px;
+      margin-right: 8px;
+    }
+
+    .logo div {
+      font-size: 20px;
+      font-weight: bold;
     }
 
     .auth-buttons a {
       color: white;
       text-decoration: none;
-      margin-left: 15px;
+      margin-left: 10px;
       font-size: 14px;
     }
 
@@ -218,7 +222,7 @@
   <div class="top-bar">
     <div class="logo">
       <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
-      <div style="font-size: 22px;">TubeEarn</div>
+      <div>TubeEarn</div>
     </div>
     <div class="auth-buttons">
       <a href="login.html">Login</a>
@@ -226,7 +230,7 @@
     </div>
   </div>
 
-  <!-- Search + Mic -->
+  <!-- Search Bar -->
   <div class="search-container">
     <input type="text" id="searchInput" placeholder="Search anything..." />
     <button onclick="searchNow()">🔍</button>
@@ -288,7 +292,7 @@
     <a href="account.html">👤<br/>You</a>
   </div>
 
-  <!-- Scripts -->
+  <!-- JS Scripts -->
   <script>
     function closePopup() {
       document.getElementById('apkPopup').style.display = 'none';
