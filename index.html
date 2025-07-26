@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - World's Fastest Multi-System Platform</title>
+  <title>TubeEarn - Create. Perform. Earn.</title>
   <style>
     body {
       margin: 0;
@@ -20,61 +20,40 @@
       justify-content: space-between;
     }
 
-    .logo-container {
+    .logo {
       display: flex;
       align-items: center;
     }
 
-    .logo-container img {
-      height: 30px;
+    .logo img {
+      height: 35px;
       margin-right: 10px;
     }
 
     .auth-buttons a {
       color: white;
       text-decoration: none;
-      margin-left: 10px;
+      margin-left: 15px;
       font-size: 14px;
     }
 
-    .search-bar {
-      display: flex;
-      justify-content: center;
+    .marquee {
+      background: black;
+      color: yellow;
       padding: 10px;
-      background-color: #fff;
+      font-weight: bold;
+      overflow: hidden;
     }
 
-    .search-bar input {
-      width: 80%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #aaa;
-      border-radius: 5px;
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
     }
 
-    .stories {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 10px;
-      background-color: #f5f5f5;
-    }
-
-    .story {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-    }
-
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
-
-    .story span {
-      font-size: 12px;
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
     .button-grid {
@@ -86,22 +65,61 @@
     }
 
     .button-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
       background-color: #b2e1e6;
       color: black;
       text-decoration: none;
       border-radius: 8px;
       padding: 10px 15px;
-      font-size: 14px;
-      min-width: 120px;
+      font-size: 15px;
+      min-width: 140px;
+      transition: transform 0.2s ease;
+    }
+
+    .button-grid a:hover {
+      transform: scale(1.05);
+      background-color: #a0d8df;
+    }
+
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 15px;
+      background-color: #f5f5f5;
+    }
+
+    .story {
+      flex: 0 0 auto;
+      width: 70px;
       text-align: center;
+      cursor: pointer;
+    }
+
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff4d4d;
+    }
+
+    .story span {
+      font-size: 12px;
+      display: block;
+      margin-top: 5px;
     }
 
     .shorts {
       padding: 15px;
+      background-color: #fff;
     }
 
     .short-video {
       margin-bottom: 20px;
+      cursor: pointer;
     }
 
     .short-video img {
@@ -118,56 +136,61 @@
       justify-content: space-around;
       background-color: #193659;
       padding: 10px 0;
-      z-index: 1000;
     }
 
     .bottom-nav a {
       color: white;
       font-size: 14px;
-      text-align: center;
       text-decoration: none;
+      text-align: center;
     }
 
-    #apk-popup {
-      display: none;
+    /* APK popup */
+    .apk-popup {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: #ffdb4d;
-      padding: 15px;
-      border-radius: 10px;
-      z-index: 9999;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      border: 2px solid #193659;
+      padding: 20px;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      display: none;
     }
 
-    #apk-popup button {
-      margin-left: 10px;
-      background-color: #ff4d4d;
+    .apk-popup button {
+      margin-top: 10px;
+      padding: 8px 16px;
       border: none;
+      background-color: #193659;
       color: white;
-      padding: 5px 10px;
       border-radius: 5px;
+      cursor: pointer;
     }
 
     @media (max-width: 600px) {
-      .button-grid {
-        flex-direction: column;
-        align-items: center;
+      .button-grid a {
+        width: 100%;
+        justify-content: flex-start;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- APK Download Prompt -->
-  <div id="apk-popup">
-    📲 Download the TubeEarn App Now!
+  <!-- APK Download Popup -->
+  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for a better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a>
+    <br/>
     <button onclick="closePopup()">Close</button>
   </div>
 
-  <!-- Top Bar with Logo + Auth -->
+  <!-- Top Bar -->
   <div class="top-bar">
-    <div class="logo-container">
+    <div class="logo">
       <img src="https://i.postimg.cc/52HHPD2f/Screenshot-2025-07-26-15-48-32-946-com-android-chrome.jpg" alt="TubeEarn Logo" />
       <div>TubeEarn</div>
     </div>
@@ -177,12 +200,27 @@
     </div>
   </div>
 
-  <!-- Search Bar -->
-  <div class="search-bar">
-    <input type="text" placeholder="Search anything..." onkeypress="handleSearch(event)">
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>
 
-  <!-- Stories Section -->
+  <!-- Feature Buttons -->
+  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html">🎬 Creator</a>
+    <a href="shop.html">🛒 Shopping</a>
+    <a href="education.html">📚 Education</a>
+    <a href="singing.html">🎤 Singing</a>
+    <a href="dating.html">💖 Dating</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="live.html">📺 Live</a>
+    <a href="career.html">💼 Career</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="monetize.html">$ Monetize</a>
+  </div>
+
+  <!-- Stories -->
   <div class="stories">
     <div class="story" onclick="location.href='story1.html'">
       <img src="https://via.placeholder.com/60" />
@@ -194,68 +232,41 @@
     </div>
     <div class="story" onclick="location.href='story3.html'">
       <img src="https://via.placeholder.com/60" />
-      <span>Amit</span>
+      <span>Rohit</span>
     </div>
   </div>
 
-  <!-- Feature Buttons -->
-  <div class="button-grid">
-    <a href="creator.html">🎬 Creator</a>
-    <a href="shopping.html">🛒 Shopping</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="gaming.html">🎮 Gaming</a>
-    <a href="movies.html">🎥 Movies</a>
-    <a href="career.html">💼 Career</a>
-    <a href="marketplace.html">🏪 Marketplace</a>
-    <a href="live.html">📺 Live</a>
-    <a href="wallet.html">💰 Wallet</a>
-  </div>
-
-  <!-- Shorts & Videos -->
+  <!-- Shorts -->
   <div class="shorts">
     <div class="short-video" onclick="location.href='video1.html'">
       <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
     </div>
     <div class="short-video" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Music+Short" />
-    </div>
-    <div class="short-video" onclick="location.href='video3.html'">
-      <img src="https://via.placeholder.com/300x500?text=Game+Clip" />
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
     </div>
   </div>
 
-  <!-- Bottom Navigation -->
+  <!-- Bottom Nav -->
   <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">🎞️<br/>Shorts</a>
-    <a href="video.html">🎬<br/>Videos</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
     <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="video.html">🎥<br/>Videos</a>
     <a href="account.html">👤<br/>You</a>
   </div>
 
+  <!-- Popup JS -->
   <script>
     function closePopup() {
-      document.getElementById("apk-popup").style.display = "none";
-      localStorage.setItem("apkDismissed", "true");
+      document.getElementById('apkPopup').style.display = 'none';
+      localStorage.setItem('apkClosed', 'true');
     }
 
     window.onload = function() {
-      if (!localStorage.getItem("apkDismissed")) {
-        document.getElementById("apk-popup").style.display = "block";
+      if (!localStorage.getItem('apkClosed')) {
+        document.getElementById('apkPopup').style.display = 'block';
       }
     };
-
-    function handleSearch(e) {
-      if (e.key === "Enter") {
-        const query = e.target.value.trim();
-        if (query) {
-          alert("Searching for: " + query);
-          // Optionally redirect or perform fetch
-          // location.href = `search.html?q=${encodeURIComponent(query)}`;
-        }
-      }
-    }
   </script>
 
 </body>
