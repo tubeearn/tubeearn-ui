@@ -3,227 +3,173 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Final</title>
+  <title>TubeEarn</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #eaf8fc;
+      background: #fff;
     }
-
-    .top-bar {
-      background-color: #193659;
-      color: white;
-      padding: 10px 15px;
+    header {
+      background: #111;
+      color: #fff;
+      padding: 10px;
       display: flex;
+      align-items: center;
       justify-content: space-between;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
       align-items: center;
     }
-
-    .top-bar .logo {
-      font-size: 20px;
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: red;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .marquee {
+      background: #f00;
+      color: #fff;
+      font-weight: bold;
+      padding: 5px 0;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: #222;
+      padding: 10px 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
       font-weight: bold;
     }
-
-    .search-area {
+    .story-section {
+      padding: 10px;
       display: flex;
-      align-items: center;
+      overflow-x: auto;
+      gap: 10px;
+      background: #fafafa;
     }
-
-    .search-box {
-      display: none;
-      margin-right: 10px;
-    }
-
-    .search-box input {
+    .story {
+      min-width: 80px;
+      height: 120px;
+      background: #ddd;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 12px;
       padding: 5px;
-      border-radius: 4px;
-      border: none;
-      width: 180px;
     }
-
-    .icon-btn {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-      margin-left: 10px;
+    .ad-section {
+      margin: 10px;
+      padding: 10px;
+      background: #ffeaa7;
+      text-align: center;
+      font-weight: bold;
     }
-
-    .stories {
+    .shorts-section {
       display: flex;
       overflow-x: auto;
       gap: 10px;
       padding: 10px;
-      background: #fff;
+      background: #f1f1f1;
     }
-
-    .story {
+    .short-video {
+      min-width: 150px;
+      height: 250px;
+      background: #bbb;
+      border-radius: 10px;
+      position: relative;
       text-align: center;
+    }
+    .short-video button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 10px;
+      background: #000;
+      color: #fff;
+      border: none;
       cursor: pointer;
     }
-
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #f00;
-    }
-
-    .story span {
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
-
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px;
-    }
-
-    .button-grid a {
-      text-decoration: none;
-      background: #b2e1e6;
-      padding: 10px 15px;
-      border-radius: 8px;
-      color: black;
-      font-weight: bold;
-      min-width: 130px;
-      text-align: center;
-    }
-
-    .shorts, .random-content {
-      padding: 15px;
-    }
-
-    .short-video, .content-item {
-      margin-bottom: 15px;
-    }
-
-    .short-video img, .content-item img {
-      width: 100%;
-      border-radius: 8px;
-    }
-
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      background: #193659;
-      padding: 8px 0;
-    }
-
-    .bottom-nav a {
+    footer {
+      background: #111;
       color: white;
       text-align: center;
+      padding: 10px;
       font-size: 14px;
-      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
-  <div class="top-bar">
-    <div class="logo">🎬 TubeEarn</div>
-    <div class="search-area">
-      <div class="search-box" id="searchBox">
-        <input type="text" id="searchInput" placeholder="Search videos..." />
-      </div>
-      <button class="icon-btn" onclick="toggleSearch()">🔍</button>
-      <button class="icon-btn" onclick="startVoice()">🎤</button>
+  <!-- Header with Logo & Title -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      TubeEarn
     </div>
+    <div>Welcome to T1</div>
+  </header>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <marquee>India’s No.1 Earning + Dating + Video Platform — TubeEarn T1</marquee>
   </div>
 
-  <!-- Stories Section -->
-  <div class="stories">
-    <div class="story" onclick="location.href='story1.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="location.href='story2.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Neha</span>
-    </div>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="upload.html">Upload</a>
+    <a href="shorts.html">Shorts</a>
+    <a href="live.html">Live</a>
+    <a href="wallet.html">Wallet</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+
+  <!-- Story Section -->
+  <div class="story-section">
+    <div class="story">Story 1</div>
+    <div class="story">Story 2</div>
+    <div class="story">Story 3</div>
+    <div class="story">Story 4</div>
+    <div class="story">Story 5</div>
   </div>
 
-  <!-- Feature Buttons -->
-  <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="create.html">🎬 Creator</a>
-    <a href="shop.html">🛒 Shop</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="live.html">📺 Live</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="account.html">👤 Account</a>
+  <!-- Advertisement -->
+  <div class="ad-section">
+    Ad Banner / Video Playing Here
   </div>
 
   <!-- Shorts Section -->
-  <div class="shorts">
-    <div class="short-video" onclick="location.href='short1.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+1" />
+  <div class="shorts-section">
+    <div class="short-video">
+      Short 1
+      <button onclick="location.href='short1.html'">Play</button>
     </div>
-    <div class="short-video" onclick="location.href='short2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+2" />
+    <div class="short-video">
+      Short 2
+      <button onclick="location.href='short2.html'">Play</button>
     </div>
-  </div>
-
-  <!-- Random Content (for Desktop Full View) -->
-  <div class="random-content">
-    <div class="content-item">
-      <img src="https://via.placeholder.com/600x300?text=🎮+Game+Showcase" />
+    <div class="short-video">
+      Short 3
+      <button onclick="location.href='short3.html'">Play</button>
     </div>
-    <div class="content-item">
-      <img src="https://via.placeholder.com/600x300?text=🎶+Songs+and+Music" />
-    </div>
-    <div class="content-item">
-      <img src="https://via.placeholder.com/600x300?text=🎥+Recommended+Movies" />
+    <div class="short-video">
+      Short 4
+      <button onclick="location.href='short4.html'">Play</button>
     </div>
   </div>
 
-  <!-- Bottom Nav -->
-  <div class="bottom-nav">
-    <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">▶️<br/>Shorts</a>
-    <a href="longvideos.html">🎞️<br/>Videos</a>
-    <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="account.html">👤<br/>You</a>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    function toggleSearch() {
-      const box = document.getElementById('searchBox');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function startVoice() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("Your browser doesn't support voice recognition.");
-        return;
-      }
-
-      const recognition = new SpeechRecognition();
-      recognition.lang = 'en-IN';
-      recognition.interimResults = false;
-      recognition.onstart = () => console.log("Voice started...");
-      recognition.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById('searchInput').value = transcript;
-      };
-      recognition.onerror = (e) => alert("Error: " + e.error);
-      recognition.start();
-    }
-  </script>
+  <!-- Footer -->
+  <footer>
+    © 2025 TubeEarn. All rights reserved.
+  </footer>
 
 </body>
 </html>
