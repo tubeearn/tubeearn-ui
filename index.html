@@ -1,42 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Home</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>TubeEarn Navigation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e1f5fe;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #0d3559;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .nav-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 15px;
+      background-color: #e0f7fa;
+    }
+    .nav-item {
+      background-color: #b2ebf2;
+      margin: 10px;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      font-size: 16px;
+    }
+    .nav-item:hover {
+      transform: scale(1.05);
+      background-color: #a7e0e5;
+    }
+  </style>
 </head>
 <body>
-  <div class="nav-bar">
-    <button onclick="goTo('home.html')">🏠 Home</button>
-    <button onclick="goTo('create.html')">🎥 Create</button>
-    <button onclick="goTo('shopping.html')">🛍️ Shopping Mall</button>
-    <button onclick="goTo('education.html')">📘 Education</button>
-    <button onclick="goTo('singing.html')">🎤 Singing</button>
-    <button onclick="goTo('dating.html')">💖 Dating</button>
-    <button onclick="goTo('video-editor.html')">🎬 Video Editor</button>
-    <button onclick="goTo('audio-editor.html')">🎵 Audio Editor</button>
-    <button onclick="goTo('marketplace.html')">🛒 Marketplace</button>
-    <button onclick="goTo('face-swipe.html')">😊 Face Swipe</button>
-    <button onclick="goTo('career.html')">🧑‍💼 Career</button>
-    <button onclick="goTo('upcoming.html')">🚀 Upcoming</button>
-    <button onclick="goTo('account.html')">👤 Account</button>
-    <button onclick="goTo('wallet.html')">💼 Wallet</button>
 
-    <!-- ✅ पुराने कलर/स्टाइल में नए दो बटन -->
-    <button onclick="goTo('game.html')">🎮 Game Zone</button>
-    <button onclick="goTo('live.html')">📺 Live</button>
-  </div>
+<header>TubeEarn - World's Fastest Multi-System Platform</header>
 
-  <div class="main-content">
-    <h1>Welcome to TubeEarn</h1>
-    <p>Earn, connect, and grow with a powerful AI-driven platform.</p>
-  </div>
+<div class="nav-container">
+  <div class="nav-item">🏠 Home</div>
+  <div class="nav-item">🎬 Create</div>
+  <div class="nav-item">🛒 Shopping Mall</div>
+  <div class="nav-item">📚 Education</div>
+  <div class="nav-item">🎤 Singing</div>
+  <div class="nav-item">💘 Dating</div>
+  <div class="nav-item">🎞️ Video Editor</div>
+  <div class="nav-item">🎧 Audio Editor</div>
+  <div class="nav-item">🛍️ Marketplace</div>
+  <div class="nav-item">😊 Face Swipe</div>
+  <div class="nav-item">💼 Career</div>
+  <div class="nav-item">🔔 Upcoming</div>
+  <div class="nav-item">👤 Account</div>
+  <div class="nav-item">💰 Wallet</div>
 
-  <script>
-    function goTo(page) {
-      window.location.href = page;
-    }
-  </script>
+  <!-- ✅ Newly Added -->
+  <div class="nav-item">🎮 Gaming Zone</div>
+  <div class="nav-item">📺 Live Stream</div>
+</div>
+
 </body>
 </html>
