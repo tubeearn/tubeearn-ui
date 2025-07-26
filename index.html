@@ -1,156 +1,175 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #000;
+      background: #fff;
+    }
+    header {
+      background: #111;
+      color: #fff;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: red;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+    .marquee {
+      background: #f00;
+      color: #fff;
+      font-weight: bold;
+      padding: 5px 0;
+    }
+    nav {
+      display: flex;
+      justify-content: space-around;
+      background: #222;
+      padding: 10px 0;
+    }
+    nav a {
       color: white;
-    }.header {
-  background-color: #111;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header .logo {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.header .tagline {
-  font-size: 14px;
-  animation: scroll-left 15s linear infinite;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-@keyframes scroll-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-.nav-bar {
-  background-color: #222;
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 0;
-  position: relative;
-}
-
-.nav-bar a {
-  color: white;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.stories {
-  display: flex;
-  overflow-x: scroll;
-  padding: 10px;
-  background-color: #111;
-}
-
-.story {
-  flex: 0 0 auto;
-  margin-right: 10px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: gray;
-  text-align: center;
-  line-height: 60px;
-  font-size: 12px;
-}
-
-.ad-section {
-  background-color: #000;
-  padding: 20px;
-  text-align: center;
-  border-bottom: 1px solid #333;
-}
-
-.shorts {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 10px;
-}
-
-.short-video {
-  background-color: #222;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #222;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  color: white;
-}
-
-.bottom-nav a {
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  font-size: 14px;
-}
-
-.bottom-nav a:hover {
-  color: #ff9800;
-}
-
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .story-section {
+      padding: 10px;
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      background: #fafafa;
+    }
+    .story {
+      min-width: 80px;
+      height: 120px;
+      background: #ddd;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 12px;
+      padding: 5px;
+    }
+    .ad-section {
+      margin: 10px;
+      padding: 10px;
+      background: #ffeaa7;
+      text-align: center;
+      font-weight: bold;
+    }
+    .shorts-section {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px;
+      background: #f1f1f1;
+    }
+    .short-video {
+      min-width: 150px;
+      height: 250px;
+      background: #bbb;
+      border-radius: 10px;
+      position: relative;
+      text-align: center;
+    }
+    .short-video button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 5px 10px;
+      background: #000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
   </style>
 </head>
-<body>  <div class="header">
-    <div class="logo">TubeEarn</div>
-    <div class="tagline">
-      🚀 India No.1 Earning Platform | Upload Shorts, Earn Money! 💰</div>
- 
-</div>  <div class="nav-bar">
-  
+<body>
+
+  <!-- Header with Logo & Title -->
+  <header>
+    <div class="logo">
+      <div class="logo-icon"></div>
+      TubeEarn
+    </div>
+    <div>Welcome to T1</div>
+  </header>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <marquee>India’s No.1 Earning + Dating + Video Platform — TubeEarn T1</marquee>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav>
     <a href="home.html">Home</a>
+    <a href="upload.html">Upload</a>
     <a href="shorts.html">Shorts</a>
     <a href="live.html">Live</a>
-    <a href="sing.html">Singing</a>
-    <a href="videos.html">Videos</a>
     <a href="wallet.html">Wallet</a>
-    <a href="shop.html">Shop</a>
-  </div>  <div class="stories">
-    <div class="story">User 1</div>
-    <div class="story">User 2</div>
-    <div class="story">User 3</div>
-    <div class="story">User 4</div>
-  </div>  <div class="ad-section">
-    <p>🎯 Advertisement / Promo Video</p>
-  </div>  <div class="shorts">
+    <a href="settings.html">Settings</a>
+  </nav>
+
+  <!-- Story Section -->
+  <div class="story-section">
+    <div class="story">Story 1</div>
+    <div class="story">Story 2</div>
+    <div class="story">Story 3</div>
+    <div class="story">Story 4</div>
+    <div class="story">Story 5</div>
+  </div>
+
+  <!-- Advertisement -->
+  <div class="ad-section">
+    Ad Banner / Video Playing Here
+  </div>
+
+  <!-- Shorts Section -->
+  <div class="shorts-section">
     <div class="short-video">
-      <p>🔥 Short Video 1</p>
-      <button onclick="window.location.href='video1.html'">Watch</button>
+      Short 1
+      <button onclick="location.href='short1.html'">Play</button>
     </div>
     <div class="short-video">
-      <p>🔥 Short Video 2</p>
-      <button onclick="window.location.href='video2.html'">Watch</button>
+      Short 2
+      <button onclick="location.href='short2.html'">Play</button>
     </div>
     <div class="short-video">
-      <p>🔥 Short Video 3</p>
-      <button onclick="window.location.href='video3.html'">Watch</button>
+      Short 3
+      <button onclick="location.href='short3.html'">Play</button>
     </div>
-  </div>  <div class="bottom-nav">
-    <a href="home.html">🏠<br>Home</a>
-    <a href="shorts.html">🎬<br>Shorts</a>
-    <a href="create.html">➕<br>Create</a>
-    <a href="wallet.html">💰<br>Wallet</a>
-    <a href="shop.html">🛒<br>Shop</a>
-  </div></body>
+    <div class="short-video">
+      Short 4
+      <button onclick="location.href='short4.html'">Play</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 TubeEarn. All rights reserved.
+  </footer>
+
+</body>
 </html>
