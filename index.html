@@ -18,6 +18,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -30,44 +31,35 @@
       margin-right: 10px;
     }
 
-    .search-box {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      margin: 0 20px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 6px 10px;
-      border-radius: 4px 0 0 4px;
-      border: none;
-      font-size: 14px;
-    }
-
-    .search-box button {
-      padding: 6px 10px;
-      border: none;
-      background-color: #f1c40f;
-      color: #000;
-      cursor: pointer;
-    }
-
-    .mic-btn {
-      background-color: #27ae60;
-      color: white;
-      padding: 6px 10px;
-      border: none;
-      cursor: pointer;
-      border-radius: 0 4px 4px 0;
-      margin-left: 5px;
-    }
-
     .auth-buttons a {
       color: white;
       text-decoration: none;
       margin-left: 15px;
       font-size: 14px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px auto;
+      justify-content: center;
+    }
+
+    .search-container input {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 60%;
+    }
+
+    .search-container button {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      background-color: #193659;
+      color: white;
     }
 
     .marquee {
@@ -101,13 +93,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: row;
       background-color: #b2e1e6;
       color: black;
       text-decoration: none;
       border-radius: 8px;
       padding: 10px 15px;
       font-size: 15px;
-      min-width: 130px;
+      min-width: 140px;
       transition: transform 0.2s ease;
     }
 
@@ -168,7 +161,6 @@
       justify-content: space-around;
       background-color: #193659;
       padding: 10px 0;
-      z-index: 99;
     }
 
     .bottom-nav a {
@@ -178,7 +170,6 @@
       text-align: center;
     }
 
-    /* APK popup */
     .apk-popup {
       position: fixed;
       top: 20%;
@@ -205,7 +196,8 @@
 
     @media (max-width: 600px) {
       .button-grid a {
-        width: 45%;
+        width: 100%;
+        justify-content: flex-start;
       }
     }
   </style>
@@ -226,15 +218,17 @@
       <img src="https://i.postimg.cc/1Xq1V9g9/Tube-Earn-Logo.png" alt="TubeEarn Logo" />
       <div>TubeEarn</div>
     </div>
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search anything..." />
-      <button onclick="searchNow()">🔍</button>
-      <button class="mic-btn" onclick="startListening()">🎤</button>
-    </div>
     <div class="auth-buttons">
       <a href="login.html">Login</a>
       <a href="signup.html">Signup</a>
     </div>
+  </div>
+
+  <!-- Search + Mic -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search anything..." />
+    <button onclick="searchNow()">🔍</button>
+    <button onclick="startVoice()">🎤</button>
   </div>
 
   <!-- Marquee -->
@@ -283,7 +277,7 @@
     </div>
   </div>
 
-  <!-- Bottom Nav -->
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
     <a href="shorts.html">▶️<br/>Shorts</a>
@@ -292,7 +286,7 @@
     <a href="account.html">👤<br/>You</a>
   </div>
 
-  <!-- JS -->
+  <!-- Scripts -->
   <script>
     function closePopup() {
       document.getElementById('apkPopup').style.display = 'none';
@@ -306,30 +300,41 @@
     };
 
     function searchNow() {
-      let query = document.getElementById('searchInput').value;
-      if (query.trim() !== "") {
-        alert("Searching for: " + query);
-        // Implement actual search logic here
+      const value = document.getElementById("searchInput").value.trim();
+      if (value !== "") {
+        window.location.href = "search.html?q=" + encodeURIComponent(value);
+      } else {
+        alert("Please enter something to search");
       }
     }
 
-    function startListening() {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert("Your browser doesn't support speech recognition.");
+    function startVoice() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Mic not supported in this browser.");
         return;
       }
 
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = 'en-US';
-      recognition.start();
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
 
       recognition.onresult = function(event) {
-        document.getElementById('searchInput').value = event.results[0][0].transcript;
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("searchInput").value = transcript;
+        searchNow();
       };
 
       recognition.onerror = function(event) {
         alert("Mic error: " + event.error);
       };
+
+      recognition.onspeechend = function() {
+        recognition.stop();
+      };
+
+      recognition.start();
     }
   </script>
 
