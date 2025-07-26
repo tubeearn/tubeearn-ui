@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - World's Fastest Multi-System Platform</title>
+  <title>TubeEarn - Final</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #eaf8fc;
+      background-color: #f5f9ff;
     }
 
     .top-bar {
@@ -18,17 +18,6 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo-container img {
-      height: 30px;
-      margin-right: 10px;
     }
 
     .logo {
@@ -36,39 +25,24 @@
       font-weight: bold;
     }
 
-    .auth-buttons {
-      display: flex;
-      align-items: center;
-    }
-
-    .auth-buttons a {
-      color: white;
-      text-decoration: none;
-      margin-left: 15px;
-      font-size: 14px;
-    }
-
     .search-icon {
-      margin-left: 15px;
       cursor: pointer;
-      font-size: 18px;
     }
 
-    #searchBox {
+    .search-box {
       display: none;
-      position: absolute;
-      top: 50px;
-      right: 20px;
-      background: white;
-      padding: 5px;
-      border-radius: 5px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      padding: 10px;
+      background-color: #eee;
     }
 
-    #searchInput {
-      padding: 5px;
+    .search-box input {
+      width: 80%;
+      padding: 8px;
       font-size: 14px;
-      width: 180px;
+    }
+
+    .search-box button {
+      padding: 8px;
     }
 
     .marquee {
@@ -78,17 +52,13 @@
       font-weight: bold;
       overflow: hidden;
       position: relative;
+      border-bottom: 5px solid red;
     }
 
     .marquee-content {
       display: inline-block;
       white-space: nowrap;
       animation: scroll-left 15s linear infinite;
-    }
-
-    .marquee-bar {
-      height: 4px;
-      background-color: red;
     }
 
     @keyframes scroll-left {
@@ -124,45 +94,17 @@
       margin-top: 5px;
     }
 
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 20px;
-    }
-
-    .button-grid a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row;
-      background-color: #b2e1e6;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-size: 15px;
-      min-width: 140px;
-      transition: transform 0.2s ease;
-    }
-
-    .button-grid a:hover {
-      transform: scale(1.05);
-      background-color: #a0d8df;
-    }
-
-    .shorts {
+    .shorts, .video-feed {
       padding: 15px;
       background-color: #fff;
     }
 
-    .short-video {
+    .short-video, .video-item {
       margin-bottom: 20px;
       cursor: pointer;
     }
 
-    .short-video img {
+    .short-video img, .video-item img {
       width: 100%;
       border-radius: 8px;
     }
@@ -187,116 +129,74 @@
     }
 
     @media (max-width: 600px) {
-      .button-grid a {
-        width: 100%;
-        justify-content: flex-start;
-      }
+      .story img { width: 50px; height: 50px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation -->
+  <!-- Top Nav -->
   <div class="top-bar">
-    <div class="logo-container">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="Logo" />
-      <div class="logo">TubeEarn</div>
-    </div>
-    <div class="auth-buttons">
-      <span class="search-icon" onclick="toggleSearch()">🔍</span>
-      <a href="login.html">Login</a>
-      <a href="signup.html">Signup</a>
-    </div>
-    <!-- Search Box -->
-    <div id="searchBox">
-      <input type="text" id="searchInput" placeholder="Search videos..." onkeypress="handleSearch(event)">
-    </div>
+    <div class="logo">🎬 TubeEarn</div>
+    <div class="search-icon" onclick="toggleSearch()">🔍</div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-box" id="searchBox">
+    <input type="text" placeholder="Search here..." id="searchInput"/>
+    <button onclick="startVoice()">🎤</button>
   </div>
 
   <!-- Marquee -->
   <div class="marquee">
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>
-  <div class="marquee-bar"></div>
 
   <!-- Stories -->
   <div class="stories">
-    <div class="story" onclick="location.href='story-user1.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="location.href='story-user2.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="location.href='story-user3.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
-  </div>
-
-  <!-- Feature Buttons -->
-  <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="create.html" onclick="return confirmCreate('Creator')">🎬 Creator</a>
-    <a href="shop.html" onclick="return confirmCreate('Shopping')">🛒 Shopping Mall</a>
-    <a href="education.html" onclick="return confirmCreate('Education')">📚 Education</a>
-    <a href="singing.html" onclick="return confirmCreate('Singing')">🎤 Singing</a>
-    <a href="dating.html">💖 Dating</a>
-    <a href="videoeditor.html">🎞️ Video Editor</a>
-    <a href="audioeditor.html">🎧 Audio Editor</a>
-    <a href="marketplace.html">🏪 Marketplace</a>
-    <a href="faceswipe.html">😊 Face Swipe</a>
-    <a href="gaming.html">🎮 Gaming</a>
-    <a href="live.html" onclick="return confirmCreate('Live')">📺 Live</a>
-    <a href="career.html">💼 Career</a>
-    <a href="account.html">👤 Account</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="monetize.html">$ Monetize</a>
+    <div class="story" onclick="location.href='story1.html'"><img src="https://via.placeholder.com/60"/><span>Raj</span></div>
+    <div class="story" onclick="location.href='story2.html'"><img src="https://via.placeholder.com/60"/><span>Anjali</span></div>
+    <div class="story" onclick="location.href='story3.html'"><img src="https://via.placeholder.com/60"/><span>Amit</span></div>
   </div>
 
   <!-- Shorts Section -->
   <div class="shorts">
-    <div class="short-video" onclick="location.href='video1.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
-    </div>
-    <div class="short-video" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
-    </div>
-    <div class="short-video" onclick="location.href='video3.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+3" />
-    </div>
+    <div class="short-video" onclick="location.href='video1.html'"><img src="https://via.placeholder.com/300x500?text=Short+1"/></div>
+    <div class="short-video" onclick="location.href='video2.html'"><img src="https://via.placeholder.com/300x500?text=Short+2"/></div>
   </div>
 
-  <!-- Bottom Nav -->
+  <!-- Random Videos, Games, Music, Ads -->
+  <div class="video-feed">
+    <h3>🎮 Games | 🎵 Songs | 📺 Movies | Ads</h3>
+    <div class="video-item" onclick="location.href='game1.html'"><img src="https://via.placeholder.com/300x200?text=Game+1"/></div>
+    <div class="video-item" onclick="location.href='music1.html'"><img src="https://via.placeholder.com/300x200?text=Song+1"/></div>
+    <div class="video-item" onclick="location.href='movie1.html'"><img src="https://via.placeholder.com/300x200?text=Movie+1"/></div>
+    <div class="video-item" onclick="location.href='ads.html'"><img src="https://via.placeholder.com/300x200?text=Advertisement"/></div>
+  </div>
+
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">▶️<br/>Shorts</a>
-    <a href="longvideos.html">🎥<br/>Videos</a>
+    <a href="shorts.html">🎞️<br/>Shorts</a>
     <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="longvideo.html">📺<br/>Videos</a>
     <a href="account.html">👤<br/>You</a>
   </div>
 
-  <!-- Script -->
+  <!-- Scripts -->
   <script>
-    function confirmCreate(section) {
-      const confirmMsg = `To access ${section}, you need to create a ${section} account. Proceed?`;
-      return confirm(confirmMsg);
-    }
-
     function toggleSearch() {
-      const box = document.getElementById('searchBox');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      var searchBox = document.getElementById("searchBox");
+      if (searchBox.style.display === "block") {
+        searchBox.style.display = "none";
+      } else {
+        searchBox.style.display = "block";
+        document.getElementById("searchInput").focus();
+      }
     }
 
-    function handleSearch(event) {
-      if (event.key === 'Enter') {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        if (query.includes("short video 1")) location.href = "video1.html";
-        else if (query.includes("short video 2")) location.href = "video2.html";
-        else if (query.includes("short video 3")) location.href = "video3.html";
-        else alert("No results found!");
-      }
+    function startVoice() {
+      alert("Voice search not supported in demo. Use mobile browser with mic permission.");
     }
   </script>
 
