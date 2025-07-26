@@ -12,13 +12,14 @@
     }
 
     .top-bar {
-      background-color: #193659;
-      color: white;
+      background-color: #ffffff;
+      color: black;
       padding: 10px 15px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .logo {
@@ -27,12 +28,12 @@
     }
 
     .logo img {
-      height: 35px;
+      height: 40px;
       margin-right: 10px;
     }
 
     .auth-buttons a {
-      color: white;
+      color: #193659;
       text-decoration: none;
       margin-left: 15px;
       font-size: 14px;
@@ -215,8 +216,7 @@
   <!-- Top Bar -->
   <div class="top-bar">
     <div class="logo">
-      <img src="https://i.postimg.cc/1Xq1V9g9/Tube-Earn-Logo.png" alt="TubeEarn Logo" />
-      <div>TubeEarn</div>
+      <img src="https://i.postimg.cc/Zqrbz1N8/TubeEarn-DarkLogo.png" alt="TubeEarn Logo" />
     </div>
     <div class="auth-buttons">
       <a href="login.html">Login</a>
@@ -309,13 +309,12 @@
     }
 
     function startVoice() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert("Mic not supported in this browser.");
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice search not supported in this browser.");
         return;
       }
 
-      const recognition = new SpeechRecognition();
+      const recognition = new webkitSpeechRecognition();
       recognition.lang = 'en-IN';
       recognition.interimResults = false;
       recognition.maxAlternatives = 1;
@@ -328,10 +327,6 @@
 
       recognition.onerror = function(event) {
         alert("Mic error: " + event.error);
-      };
-
-      recognition.onspeechend = function() {
-        recognition.stop();
       };
 
       recognition.start();
