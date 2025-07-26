@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Platform</title>
+  <title>TubeEarn</title>
   <style>
     body {
       margin: 0;
@@ -33,8 +33,9 @@
     }
 
     #searchInput {
-      padding: 5px;
-      display: none;
+      padding: 6px;
+      border-radius: 4px;
+      border: none;
     }
 
     .marquee {
@@ -43,7 +44,6 @@
       padding: 10px;
       font-weight: bold;
       overflow: hidden;
-      position: relative;
     }
 
     .marquee-content {
@@ -55,6 +55,32 @@
     @keyframes scroll-left {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
+    }
+
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 10px;
+      background-color: #f5f5f5;
+    }
+
+    .story {
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid red;
+    }
+
+    .story span {
+      display: block;
+      font-size: 12px;
+      margin-top: 5px;
     }
 
     .button-grid {
@@ -69,15 +95,10 @@
       background-color: #b2e1e6;
       color: black;
       text-decoration: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 14px;
+      padding: 10px;
+      border-radius: 6px;
       min-width: 120px;
       text-align: center;
-    }
-
-    .button-grid a:hover {
-      background-color: #9bd7e1;
     }
 
     .bottom-nav {
@@ -93,9 +114,9 @@
 
     .bottom-nav a {
       color: white;
-      text-align: center;
       text-decoration: none;
       font-size: 14px;
+      text-align: center;
     }
 
     @media (max-width: 768px) {
@@ -108,11 +129,11 @@
 </head>
 <body>
 
-  <!-- Top Navigation -->
+  <!-- Top Bar -->
   <div class="top-bar">
     <div class="logo">TubeEarn</div>
     <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Search..." />
+      <input type="text" id="searchInput" placeholder="Search..."/>
       <button onclick="startVoice()">🎤</button>
       <button onclick="performSearch()">🔍</button>
     </div>
@@ -123,30 +144,43 @@
     <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
   </div>
 
-  <!-- Feature Buttons -->
-  <div class="button-grid">
-    <a href="#">🏠 Home</a>
-    <a href="#">🎬 Creator</a>
-    <a href="#">🛒 Shop</a>
-    <a href="#">📚 Education</a>
-    <a href="#">🎤 Singing</a>
-    <a href="#">💖 Dating</a>
-    <a href="#">🎮 Games</a>
-    <a href="#">📺 Videos</a>
-    <a href="#">▶️ Shorts</a>
-    <a href="#">💼 Career</a>
-    <a href="#">💰 Wallet</a>
-    <a href="#">🔔 Alerts</a>
+  <!-- Stories Section -->
+  <div class="stories">
+    <div class="story" onclick="alert('Opening Raj story')">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="alert('Opening Anjali story')">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="alert('Opening Rohit story')">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
   </div>
 
-  <!-- Bottom Nav -->
+  <!-- Navigation Grid -->
+  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="creator.html">🎬 Creator</a>
+    <a href="shop.html">🛒 Shop</a>
+    <a href="education.html">📚 Education</a>
+    <a href="singing.html">🎤 Singing</a>
+    <a href="video.html">📺 Video</a>
+    <a href="shorts.html">▶️ Shorts</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="account.html">👤 Account</a>
+  </div>
+
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
-    <a href="#">🏠<br/>Home</a>
-    <a href="#">🎞<br/>Reels</a>
-    <a href="#">🎥<br/>Video</a>
-    <a href="#">⬆️<br/>Upload</a>
-    <a href="#">👥<br/>Subscribers</a>
-    <a href="#">👤<br/>Account</a>
+    <a href="home.html">🏠<br/>Home</a>
+    <a href="shorts.html">🎞<br/>Reels</a>
+    <a href="video.html">📺<br/>Video</a>
+    <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="subscribers.html">👥<br/>Subs</a>
+    <a href="account.html">👤<br/>You</a>
   </div>
 
   <!-- JavaScript -->
@@ -154,14 +188,11 @@
     function performSearch() {
       const input = document.getElementById("searchInput").value.trim();
       if (input) {
-        alert("Search: " + input);
+        alert("Searching for: " + input);
       }
     }
 
     function startVoice() {
-      const inputBox = document.getElementById("searchInput");
-      inputBox.style.display = "inline-block";
-
       if (!('webkitSpeechRecognition' in window)) {
         alert("Speech recognition not supported.");
         return;
@@ -172,19 +203,22 @@
       recognition.continuous = false;
       recognition.interimResults = false;
 
+      recognition.onstart = function() {
+        alert("Mic listening... speak now.");
+      };
+
       recognition.onresult = function(event) {
         const transcript = event.results[0][0].transcript;
-        inputBox.value = transcript;
+        document.getElementById("searchInput").value = transcript;
         performSearch();
       };
 
       recognition.onerror = function(event) {
-        alert("Mic error: " + event.error);
+        alert("Error: " + event.error);
       };
 
       recognition.start();
     }
   </script>
-
 </body>
 </html>
