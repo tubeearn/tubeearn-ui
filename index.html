@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn - Create. Perform. Earn.</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #eaf8fc;
+    }
+
+    .top-bar {
+      background-color: #193659;
+      color: white;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      width: 50px;
+      object-fit: contain;
+      margin-right: 8px;
+    }
+
+    .logo div {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .auth-buttons a {
+      color: white;
+      text-decoration: none;
+      margin-left: 10px;
+      font-size: 14px;
+    }
+
+    .maintenance-btn {
+      display: none;
+      background-color: orange;
+      color: black;
+      border: none;
+      padding: 5px 10px;
+      margin-left: 10px;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .maintenance-mobile {
+      display: none;
+      background-color: orange;
+      color: black;
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      z-index: 999;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px auto;
+      justify-content: center;
+    }
+
+    .search-container input {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 60%;
+    }
+
+    .search-container button {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      background-color: #193659;
+      color: white;
+    }
+
+    .marquee {
+      background: black;
+      color: yellow;
+      padding: 10px;
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .button-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 20px;
+    }
+
+    .button-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      background-color: #b2e1e6;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 15px;
+      min-width: 140px;
+      transition: transform 0.2s ease;
+    }
+
+    .button-grid a:hover {
+      transform: scale(1.05);
+      background-color: #a0d8df;
+    }
+
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 15px;
+      background-color: #f5f5f5;
+    }
+
+    .story {
+      flex: 0 0 auto;
+      width: 70px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .story img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ff4d4d;
+    }
+
+    .story span {
+      font-size: 12px;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .default-sections {
+      padding: 15px;
+      background: #f0f8ff;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .default-sections a {
+      background: #d1ecf1;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #000;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .default-sections a:hover {
+      background: #c1e0e5;
+    }
+
+    .shorts {
+      padding: 15px;
+      background-color: #fff;
+    }
+
+    .short-video {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .short-video img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background-color: #193659;
+      padding: 10px 0;
+    }
+
+    .bottom-nav a {
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .apk-popup {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      border: 2px solid #193659;
+      padding: 20px;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      display: none;
+    }
+
+    .apk-popup button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #193659;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .maintenance-btn {
+        display: none !important;
+      }
+      .maintenance-mobile {
+        display: block !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- APK Popup -->
+  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for a better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a><br/>
+    <button onclick="closePopup()">Later</button>
+  </div>
+
+  <!-- Maintenance Buttons -->
+  <button class="maintenance-btn" id="maintenanceBtn" onclick="alert('Maintenance Panel - Owner Only')">⚙️ Maintenance</button>
+  <button class="maintenance-mobile" id="maintenanceMobile" onclick="alert('Maintenance Panel - Owner Only')">⚙️ Maintenance</button>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
+      <div>TubeEarn</div>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search anything..." />
+    <button onclick="searchNow()">🔍</button>
+    <button onclick="startVoice()">🎤</button>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+  </div>
+
+  <!-- Feature Buttons -->
+  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html">🎬 Creator</a>
+    <a href="shop.html">🛒 Shopping</a>
+    <a href="education.html">📚 Education</a>
+    <a href="singing.html">🎤 Singing</a>
+    <a href="dating.html">💖 Dating</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="live.html">📺 Live</a>
+    <a href="career.html">💼 Career</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="monetize.html">$ Monetize</a>
+  </div>
+
+  <!-- Stories -->
+  <div class="stories">
+    <div class="story" onclick="location.href='story1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>
+
+  <!-- Default Sections Below Stories -->
+  <div class="default-sections">
+    <a href="#">🎥 Default Video</a>
+    <a href="#">🎵 Default Audio</a>
+    <a href="#">🎧 Songs</a>
+    <a href="#">🎮 Gaming</a>
+    <a href="#">📰 News</a>
+    <a href="#">📺 Shows</a>
+  </div>
+
+  <!-- Shorts -->
+  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="home.html">🏠<br/>Home</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
+    <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="video.html">🎥<br/>Videos</a>
+    <a href="account.html">👤<br/>You</a>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const isOwner = true; // Replace with actual login logic
+
+    window.onload = function() {
+      if (isOwner) {
+        document.getElementById('maintenanceBtn').style.display = 'inline-block';
+        document.getElementById('maintenanceMobile').style.display = 'inline-block';
+      }
+
+      if (!localStorage.getItem('apkClosed')) {
+        setTimeout(() => {
+          document.getElementById('apkPopup').style.display = 'block';
+        }, 10000);
+      }
+    };
+
+    function closePopup() {
+      document.getElementById('apkPopup').style.display = 'none';
+      localStorage.setItem('apkClosed', 'true');
+    }
+
+    function searchNow() {
+      const value = document.getElementById("searchInput").value.trim();
+      if (value !== "") {
+        window.location.href = "search.html?q=" + encodeURIComponent(value);
+      } else {
+        alert("Please enter something to search");
+      }
+    }
+
+    function startVoice() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice search not supported in this browser.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("searchInput").value = transcript;
+        searchNow();
+      };
+
+      recognition.onerror = function(event) {
+        alert("Mic error: " + event.error);
+      };
+
+      recognition.start();
+    }
+  </script>
+</body>
+    </html>
