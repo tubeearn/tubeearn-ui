@@ -1,156 +1,100 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #eaf8fc;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn - Create. Perform. Earn.</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.top-bar {
-  background-color: #193659;
-  color: white;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  <!-- APK Download Popup -->
+  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for a better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a>
+    <br/>
+    <button onclick="closePopup()">Close</button>
+  </div>
 
-.logo {
-  display: flex;
-  align-items: center;
-}
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
+      <div>TubeEarn</div>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </div>
+  </div>
 
-.logo img {
-  height: 80px;
-  width: 80px;
-  margin-right: 10px;
-}
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search anything..." />
+    <button onclick="searchNow()">🔍</button>
+    <button onclick="startVoice()">🎤</button>
+  </div>
 
-.logo div {
-  font-size: 22px;
-  font-weight: bold;
-}
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+  </div>
 
-.auth-buttons a {
-  color: white;
-  text-decoration: none;
-  margin-left: 10px;
-  font-size: 14px;
-}
+  <!-- Feature Buttons -->
+  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html">🎬 Creator</a>
+    <a href="shop.html">🛒 Shopping</a>
+    <a href="education.html">📚 Education</a>
+    <a href="singing.html">🎤 Singing</a>
+    <a href="dating.html">💖 Dating</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="live.html">📺 Live</a>
+    <a href="career.html">💼 Career</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="monetize.html">$ Monetize</a>
+  </div>
 
-.search-container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  justify-content: center;
-  margin: 10px auto;
-}
+  <!-- Stories -->
+  <div class="stories">
+    <div class="story" onclick="location.href='story1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>
 
-.search-container input {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  width: 60%;
-}
+  <!-- Shorts -->
+  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+  </div>
 
-.search-container button {
-  padding: 8px;
-  border-radius: 5px;
-  border: none;
-  background-color: #193659;
-  color: white;
-  cursor: pointer;
-}
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <a href="home.html">🏠<br/>Home</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
+    <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="video.html">🎥<br/>Videos</a>
+    <a href="account.html">👤<br/>You</a>
+  </div>
 
-.marquee {
-  background: lightblue;
-  color: red;
-  padding: 10px;
-  font-weight: bold;
-  overflow: hidden;
-}
+  <!-- Hidden Maintenance Icon (ONLY for Owner) -->
+  <div id="maintenanceIcon" style="position: fixed; bottom: 70px; right: 10px; display: none;">
+    <button onclick="openMaintenance()" style="background-color: red; color: white; border: none; padding: 10px; border-radius: 5px;">🛠️</button>
+  </div>
 
-.marquee-content {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scroll-left 30s linear infinite;
-}
-
-@keyframes scroll-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
-}
-
-.button-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px;
-}
-
-.button-grid a {
-  background-color: #b2e1e6;
-  padding: 10px 15px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: black;
-  font-size: 15px;
-  transition: 0.2s;
-  min-width: 140px;
-  text-align: center;
-}
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #193659;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-}
-
-.bottom-nav a {
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  font-size: 14px;
-}
-
-.maintenance-msg {
-  background-color: red;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  display: none;
-}
-
-.maintenance-control {
-  text-align: center;
-  padding: 8px;
-  background: #ffe;
-  font-weight: bold;
-}
-
-.apk-popup {
-  position: fixed;
-  top: 25%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  border: 2px solid #193659;
-  padding: 20px;
-  z-index: 1000;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  display: none;
-  text-align: center;
-}
-
-.apk-popup button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  border: none;
-  background-color: #193659;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
+  <script src="script.js"></script>
+</body>
+</html>
