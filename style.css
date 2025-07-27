@@ -1,100 +1,222 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Create. Perform. Earn.</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eaf8fc;
+}
 
-  <!-- APK Download Popup -->
-  <div class="apk-popup" id="apkPopup">
-    <p>📲 Download TubeEarn App for a better experience!</p>
-    <a href="https://your-apk-link.com"><button>Download APK</button></a>
-    <br/>
-    <button onclick="closePopup()">Close</button>
-  </div>
+.top-bar {
+  background-color: #193659;
+  color: white;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <div class="logo">
-      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
-      <div>TubeEarn</div>
-    </div>
-    <div class="auth-buttons">
-      <a href="login.html">Login</a>
-      <a href="signup.html">Signup</a>
-    </div>
-  </div>
+.logo {
+  display: flex;
+  align-items: center;
+}
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search anything..." />
-    <button onclick="searchNow()">🔍</button>
-    <button onclick="startVoice()">🎤</button>
-  </div>
+.logo img {
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  margin-right: 8px;
+}
 
-  <!-- Marquee -->
-  <div class="marquee">
-    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
-  </div>
+.logo div {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-  <!-- Feature Buttons -->
-  <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="create.html">🎬 Creator</a>
-    <a href="shop.html">🛒 Shopping</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="dating.html">💖 Dating</a>
-    <a href="gaming.html">🎮 Gaming</a>
-    <a href="live.html">📺 Live</a>
-    <a href="career.html">💼 Career</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="monetize.html">$ Monetize</a>
-  </div>
+.auth-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
 
-  <!-- Stories -->
-  <div class="stories">
-    <div class="story" onclick="location.href='story1.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="location.href='story2.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="location.href='story3.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
-  </div>
+.auth-buttons a, .auth-buttons button {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
 
-  <!-- Shorts -->
-  <div class="shorts">
-    <div class="short-video" onclick="location.href='video1.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
-    </div>
-    <div class="short-video" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
-    </div>
-  </div>
+.auth-buttons button:hover,
+.auth-buttons a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
 
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
-    <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">▶️<br/>Shorts</a>
-    <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="video.html">🎥<br/>Videos</a>
-    <a href="account.html">👤<br/>You</a>
-  </div>
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px auto;
+  justify-content: center;
+}
 
-  <!-- Hidden Maintenance Icon (ONLY for Owner) -->
-  <div id="maintenanceIcon" style="position: fixed; bottom: 70px; right: 10px; display: none;">
-    <button onclick="openMaintenance()" style="background-color: red; color: white; border: none; padding: 10px; border-radius: 5px;">🛠️</button>
-  </div>
+.search-container input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 60%;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+.search-container button {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #193659;
+  color: white;
+}
+
+.marquee {
+  background: black;
+  color: yellow;
+  padding: 10px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.button-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.button-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #b2e1e6;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  min-width: 140px;
+  transition: transform 0.2s ease;
+}
+
+.button-grid a:hover {
+  transform: scale(1.05);
+  background-color: #a0d8df;
+}
+
+.stories {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.story {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.story img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ff4d4d;
+}
+
+.story span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.shorts, .infinite-scroll {
+  padding: 15px;
+  background-color: #fff;
+}
+
+.short-video {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.short-video img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: #193659;
+  padding: 10px 0;
+}
+
+.bottom-nav a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.apk-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 2px solid #193659;
+  padding: 20px;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
+  display: none;
+}
+
+.apk-popup button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #193659;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .button-grid a {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
