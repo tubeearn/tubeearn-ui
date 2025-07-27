@@ -21,8 +21,7 @@ body {
 .logo img {
   height: 70px;
   width: 70px;
-  object-fit: contain;
-  margin-right: 8px;
+  margin-right: 10px;
 }
 
 .logo div {
@@ -41,8 +40,8 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin: 10px auto;
   justify-content: center;
+  margin: 10px auto;
 }
 
 .search-container input {
@@ -56,9 +55,9 @@ body {
   padding: 8px;
   border-radius: 5px;
   border: none;
-  cursor: pointer;
   background-color: #193659;
   color: white;
+  cursor: pointer;
 }
 
 .marquee {
@@ -89,18 +88,15 @@ body {
 }
 
 .button-grid a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
   background-color: #b2e1e6;
-  color: black;
-  text-decoration: none;
-  border-radius: 8px;
   padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: black;
   font-size: 15px;
+  transition: 0.2s;
   min-width: 140px;
-  transition: transform 0.2s ease;
+  text-align: center;
 }
 
 .button-grid a:hover {
@@ -110,17 +106,16 @@ body {
 
 .stories {
   display: flex;
-  overflow-x: auto;
   gap: 10px;
   padding: 15px;
   background-color: #f5f5f5;
+  overflow-x: auto;
 }
 
 .story {
-  flex: 0 0 auto;
-  width: 70px;
   text-align: center;
-  cursor: pointer;
+  width: 70px;
+  flex: 0 0 auto;
 }
 
 .story img {
@@ -131,8 +126,8 @@ body {
 }
 
 .story span {
-  font-size: 12px;
   display: block;
+  font-size: 12px;
   margin-top: 5px;
 }
 
@@ -143,7 +138,6 @@ body {
 
 .short-video {
   margin-bottom: 20px;
-  cursor: pointer;
 }
 
 .short-video img {
@@ -154,48 +148,16 @@ body {
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  width: 100%;
+  background-color: #193659;
   display: flex;
   justify-content: space-around;
-  background-color: #193659;
   padding: 10px 0;
 }
 
 .bottom-nav a {
   color: white;
-  font-size: 14px;
   text-decoration: none;
   text-align: center;
-}
-
-.apk-popup {
-  position: fixed;
-  top: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ffffff;
-  border: 2px solid #193659;
-  padding: 20px;
-  z-index: 999;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  text-align: center;
-  display: none;
-}
-
-.apk-popup button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  border: none;
-  background-color: #193659;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-@media (max-width: 600px) {
-  .button-grid a {
-    width: 100%;
-    justify-content: flex-start;
-  }
+  font-size: 14px;
 }
