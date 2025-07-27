@@ -1,29 +1,27 @@
-// ✅ APK Popup Logic
-function closePopup() {
-  document.getElementById('apkPopup').style.display = 'none';
-  localStorage.setItem('apkClosed', 'true');
-}
+// Toggle this ON/OFF
+const maintenanceMode = false;
 
 window.onload = function () {
-  if (!localStorage.getItem('apkClosed')) {
-    document.getElementById('apkPopup').style.display = 'block';
+  if (maintenanceMode) {
+    document.getElementById('maintenanceNotice').style.display = 'block';
+    document.body.style.pointerEvents = 'none';
+    document.getElementById('maintenanceNotice').style.pointerEvents = 'auto';
   }
 };
 
-// ✅ Search Logic
 function searchNow() {
-  const value = document.getElementById("searchInput").value.trim();
-  if (value !== "") {
-    window.location.href = "search.html?q=" + encodeURIComponent(value);
+  const input = document.getElementById("searchInput").value.trim();
+  if (input) {
+    alert("Searching for: " + input);
+    // window.location.href = "search.html?q=" + encodeURIComponent(input);
   } else {
     alert("Please enter something to search");
   }
 }
 
-// ✅ Mic (Voice Recognition) Logic
 function startVoice() {
   if (!('webkitSpeechRecognition' in window)) {
-    alert("🎤 Mic not supported in this browser.");
+    alert("Voice recognition not supported");
     return;
   }
 
@@ -32,13 +30,13 @@ function startVoice() {
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
-  recognition.onresult = function (event) {
+  recognition.onresult = function(event) {
     const transcript = event.results[0][0].transcript;
     document.getElementById("searchInput").value = transcript;
     searchNow();
   };
 
-  recognition.onerror = function (event) {
+  recognition.onerror = function(event) {
     alert("Mic error: " + event.error);
   };
 
