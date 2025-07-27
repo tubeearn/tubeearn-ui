@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,6 +10,7 @@
       font-family: Arial, sans-serif;
       background-color: #eaf8fc;
     }
+
     .top-bar {
       background-color: #193659;
       color: white;
@@ -17,47 +19,25 @@
       align-items: center;
       justify-content: space-between;
     }
+
     .logo {
       display: flex;
       align-items: center;
     }
+
     .logo img {
       height: 50px;
       width: 50px;
-      object-fit: contain;
       margin-right: 8px;
     }
-    .logo div {
-      font-size: 20px;
-      font-weight: bold;
-    }
+
     .auth-buttons a {
       color: white;
       text-decoration: none;
       margin-left: 10px;
       font-size: 14px;
     }
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin: 10px auto;
-      justify-content: center;
-    }
-    .search-container input {
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 60%;
-    }
-    .search-container button {
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      background-color: #193659;
-      color: white;
-    }
+
     .marquee {
       background: black;
       color: yellow;
@@ -65,101 +45,18 @@
       font-weight: bold;
       overflow: hidden;
     }
+
     .marquee-content {
       display: inline-block;
       white-space: nowrap;
       animation: scroll-left 15s linear infinite;
     }
+
     @keyframes scroll-left {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 20px;
-    }
-    .button-grid a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row;
-      background-color: #b2e1e6;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-size: 15px;
-      min-width: 140px;
-      transition: transform 0.2s ease;
-    }
-    .button-grid a:hover {
-      transform: scale(1.05);
-      background-color: #a0d8df;
-    }
-    .stories {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 15px;
-      background-color: #f5f5f5;
-    }
-    .story {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .story img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
-    .story span {
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
-    .shorts {
-      padding: 15px;
-      background-color: #fff;
-    }
-    .short-video {
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-    .short-video img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .main-feed {
-      padding: 15px;
-      background-color: #f0f0f0;
-    }
-    .main-feed video, .main-feed img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: 20px;
-    }
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      background-color: #193659;
-      padding: 10px 0;
-    }
-    .bottom-nav a {
-      color: white;
-      font-size: 14px;
-      text-decoration: none;
-      text-align: center;
-    }
+
     .apk-popup {
       position: fixed;
       top: 20%;
@@ -169,10 +66,9 @@
       border: 2px solid #193659;
       padding: 20px;
       z-index: 999;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
       display: none;
     }
+
     .apk-popup button {
       margin-top: 10px;
       padding: 8px 16px;
@@ -182,131 +78,109 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .maintenance-icon {
       position: fixed;
-      top: 70px;
-      right: 10px;
-      font-size: 28px;
-      color: red;
-      z-index: 999;
+      top: 5px;
+      left: 5px;
+      background: #193659;
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 20px;
       display: none;
       cursor: pointer;
+      z-index: 1000;
     }
-    @media (max-width: 600px) {
-      .maintenance-icon {
-        top: 10px;
-        right: 10px;
+
+    .vertical-nav {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 80px;
+      background-color: #193659;
+      z-index: 999;
+    }
+
+    .vertical-nav a {
+      padding: 15px;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-bottom: 1px solid #2e5a8e;
+    }
+
+    @media (max-width: 768px) {
+      .vertical-nav {
+        display: flex;
       }
     }
   </style>
 </head>
 <body>
-  <!-- APK Download Popup -->
-  <div class="apk-popup" id="apkPopup">
-    <p>📲 Download TubeEarn App for a better experience!</p>
-    <a href="https://your-apk-link.com"><button>Download APK</button></a>
-    <br/>
-    <button onclick="closePopup()">Close</button>
-  </div>  <!-- Maintenance Icon (Only for owner) -->  <div class="maintenance-icon" id="maintIcon" onclick="window.location.href='maintenance.html'">🛠️</div>  <!-- Top Bar -->  <div class="top-bar">
-    <div class="logo">
-      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
-      <div>TubeEarn</div>
-    </div>
-    <div class="auth-buttons">
-      <a href="login.html">Login</a>
-      <a href="signup.html">Signup</a>
-    </div>
-  </div>  <!-- Search Bar -->  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search anything..." />
-    <button onclick="searchNow()">🔍</button>
-    <button onclick="startVoice()">🎤</button>
-  </div>  <!-- Marquee -->  <div class="marquee">
-    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
-  </div>  <!-- Feature Buttons -->  <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="create.html">🎬 Creator</a>
-    <a href="shop.html">🛒 Shopping</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="dating.html">💖 Dating</a>
-    <a href="gaming.html">🎮 Gaming</a>
-    <a href="live.html">📺 Live</a>
-    <a href="career.html">💼 Career</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="monetize.html">$ Monetize</a>
-  </div>  <!-- Stories -->  <div class="stories">
-    <div class="story" onclick="location.href='story1.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="location.href='story2.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="location.href='story3.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
-  </div>  <!-- Shorts -->  <div class="shorts">
-    <div class="short-video" onclick="location.href='video1.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
-    </div>
-    <div class="short-video" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
-    </div>
-  </div>  <!-- Feed Area -->  <div class="main-feed">
-    <video controls src="https://www.w3schools.com/html/mov_bbb.mp4"></video>
-    <img src="https://via.placeholder.com/600x400?text=Gaming+Thumbnail" alt="Gaming Thumbnail">
-    <img src="https://via.placeholder.com/600x400?text=Movie+Promo" alt="Movie Promo">
-  </div>  <!-- Bottom Navigation -->  <div class="bottom-nav">
-    <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">▶️<br/>Shorts</a>
-    <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="video.html">🎥<br/>Videos</a>
-    <a href="account.html">👤<br/>You</a>
-  </div>  <!-- Scripts -->  <script>
-    // APK Popup logic
-    function closePopup() {
-      document.getElementById('apkPopup').style.display = 'none';
-      localStorage.setItem('apkClosed', 'true');
+
+<!-- Maintenance Icon for Owner Only -->
+<div class="maintenance-icon" id="maintIcon" onclick="location.href='maintenance.html'">🛠️</div>
+
+<!-- APK Popup -->
+<div class="apk-popup" id="apkPopup">
+  <p>📲 Download TubeEarn App!</p>
+  <a href="https://your-apk-link.com"><button>Download APK</button></a><br/>
+  <button onclick="closePopup()">Close</button>
+</div>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="logo">
+    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" alt="TubeEarn Logo" />
+    <div>TubeEarn</div>
+  </div>
+  <div class="auth-buttons">
+    <a href="login.html">Login</a>
+    <a href="signup.html">Signup</a>
+  </div>
+</div>
+
+<!-- Marquee -->
+<div class="marquee">
+  <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+</div>
+
+<!-- Vertical Mobile Navigation -->
+<div class="vertical-nav">
+  <a href="home.html">🏠</a>
+  <a href="shorts.html">▶️</a>
+  <a href="upload.html">⬆️</a>
+  <a href="video.html">🎥</a>
+  <a href="account.html">👤</a>
+</div>
+
+<!-- JS Script -->
+<script>
+  // Only show maintenance icon to owner
+  const ownerName = "Sanjeev Kumar"; // Replace with logic for real owner check
+  const currentUser = "Sanjeev Kumar"; // Simulate login name for now
+
+  if (currentUser === ownerName) {
+    document.getElementById("maintIcon").style.display = "block";
+  }
+
+  // APK Popup after 10 seconds
+  window.onload = function() {
+    if (!localStorage.getItem("apkClosed")) {
+      setTimeout(() => {
+        document.getElementById("apkPopup").style.display = "block";
+      }, 10000);
     }
-    window.onload = function() {
-      if (!localStorage.getItem('apkClosed')) {
-        setTimeout(() => {
-          document.getElementById('apkPopup').style.display = 'block';
-        }, 10000);
-      }
-      const user = localStorage.getItem("user") || "guest";
-      if (user === "owner") {
-        document.getElementById("maintIcon").style.display = "block";
-      }
-    };
-    function searchNow() {
-      const value = document.getElementById("searchInput").value.trim();
-      if (value !== "") {
-        window.location.href = "search.html?q=" + encodeURIComponent(value);
-      } else {
-        alert("Please enter something to search");
-      }
-    }
-    function startVoice() {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert("Voice search not supported in this browser.");
-        return;
-      }
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = 'en-IN';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("searchInput").value = transcript;
-        searchNow();
-      };
-      recognition.onerror = function(event) {
-        alert("Mic error: " + event.error);
-      };
-      recognition.start();
-    }
-  </script></body>
+  };
+
+  function closePopup() {
+    document.getElementById("apkPopup").style.display = "none";
+    localStorage.setItem("apkClosed", "true");
+  }
+</script>
+
+</body>
 </html>
