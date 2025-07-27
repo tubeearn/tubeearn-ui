@@ -1,44 +1,57 @@
-// Toggle this ON/OFF
-const maintenanceMode = false;
-
+// Show popup if not closed before
 window.onload = function () {
-  if (maintenanceMode) {
-    document.getElementById('maintenanceNotice').style.display = 'block';
-    document.body.style.pointerEvents = 'none';
-    document.getElementById('maintenanceNotice').style.pointerEvents = 'auto';
+  if (!localStorage.getItem("apkClosed")) {
+    document.getElementById("apkPopup").style.display = "block";
+  }
+
+  // Check maintenance
+  if (localStorage.getItem("maintenance") === "on") {
+    document.getElementById("maintenanceNotice").style.display = "block";
+    document.body.style.pointerEvents = "none";
+    document.getElementById("maintenanceNotice").style.pointerEvents = "auto";
+    document.getElementById("maintToggle").checked = true;
   }
 };
 
+function closePopup() {
+  document.getElementById("apkPopup").style.display = "none";
+  localStorage.setItem("apkClosed", "true");
+}
+
+function toggleMaintenance() {
+  const enabled = document.getElementById("maintToggle").checked;
+  localStorage.setItem("maintenance", enabled ? "on" : "off");
+  location.reload();
+}
+
 function searchNow() {
-  const input = document.getElementById("searchInput").value.trim();
-  if (input) {
-    alert("Searching for: " + input);
-    // window.location.href = "search.html?q=" + encodeURIComponent(input);
+  const value = document.getElementById("searchInput").value.trim();
+  if (value) {
+    alert("Searching for: " + value);
   } else {
     alert("Please enter something to search");
   }
 }
 
 function startVoice() {
-  if (!('webkitSpeechRecognition' in window)) {
-    alert("Voice recognition not supported");
-    return;
+  try {
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById("searchInput").value = transcript;
+      searchNow();
+    };
+
+    recognition.onerror = function (event) {
+      alert("Mic Error: " + event.error);
+    };
+
+    recognition.start();
+  } catch (e) {
+    alert("Your browser doesn't support voice search.");
   }
-
-  const recognition = new webkitSpeechRecognition();
-  recognition.lang = 'en-IN';
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  recognition.onresult = function(event) {
-    const transcript = event.results[0][0].transcript;
-    document.getElementById("searchInput").value = transcript;
-    searchNow();
-  };
-
-  recognition.onerror = function(event) {
-    alert("Mic error: " + event.error);
-  };
-
-  recognition.start();
 }
