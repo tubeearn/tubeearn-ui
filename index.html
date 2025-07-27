@@ -4,19 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn - Create. Perform. Earn.</title>
-
-  <!-- External CSS -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- APK Download Popup -->
-  <div class="apk-popup" id="apkPopup">
-    <p>📲 Download TubeEarn App for a better experience!</p>
-    <a href="https://your-apk-link.com"><button>Download APK</button></a>
-    <br/>
-    <button onclick="closePopup()">Close</button>
+  <!-- Maintenance Toggle for Owner Only -->
+  <div id="maintenance-toggle">
+    <label>Maintenance Mode</label>
+    <label class="switch">
+      <input type="checkbox" id="maintSwitch">
+      <span class="slider"></span>
+    </label>
   </div>
+
+  <div id="maintenance-popup">🚧 Site is under maintenance.</div>
 
   <!-- Top Bar -->
   <div class="top-bar">
@@ -39,14 +40,16 @@
 
   <!-- Marquee -->
   <div class="marquee">
-    <div class="marquee-content">🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating , 🛍️ Shopping, 🎮 Gaming, 🎤 Singing, Go Viral & Earn!</div>
+    <div class="marquee-content">
+      🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating , 🛍️ Shopping, 🎮 Gaming, 🎤 Singing, Famous and Go Viral! 🌟
+    </div>
   </div>
 
   <!-- Feature Buttons -->
   <div class="button-grid">
+    <a href="shop.html">🛍️ Shopping</a>
     <a href="home.html">🏠 Home</a>
     <a href="create.html">🎬 Creator</a>
-    <a href="shopping.html">🛒 Shopping</a>
     <a href="education.html">📚 Education</a>
     <a href="singing.html">🎤 Singing</a>
     <a href="dating.html">💖 Dating</a>
@@ -55,9 +58,9 @@
     <a href="career.html">💼 Career</a>
     <a href="wallet.html">💰 Wallet</a>
     <a href="monetize.html">💵 Monetize</a>
-    <a href="videoeditor.html">🎞️ Video Editor</a>
-    <a href="audioeditor.html">🎧 Audio Editor</a>
-    <a href="faceswap.html">👤 Face Swap</a>
+    <a href="video-editor.html">🎞️ Video Editor</a>
+    <a href="audio-editor.html">🎧 Audio Editor</a>
+    <a href="face-swap.html">🧑‍🤝‍🧑 Face Swap</a>
   </div>
 
   <!-- Bottom Navigation -->
@@ -65,11 +68,11 @@
     <a href="home.html">🏠<br/>Home</a>
     <a href="shorts.html">▶️<br/>Shorts</a>
     <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="videos.html">🎥<br/>Videos</a>
-    <a href="account.html">👤<br/>Account</a>
+    <a href="video.html">🎥<br/>Videos</a>
+    <a href="account.html">👤<br/>You</a>
   </div>
 
-  <!-- External JavaScript -->
+  <!-- JS -->
   <script src="script.js"></script>
 </body>
 </html>
