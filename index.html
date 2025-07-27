@@ -1,78 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn - Create. Perform. Earn.</title>
+  <!-- You can move the style section to style.css later -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-
-  <!-- Maintenance Toggle for Owner Only -->
-  <div id="maintenance-toggle">
-    <label>Maintenance Mode</label>
-    <label class="switch">
-      <input type="checkbox" id="maintSwitch">
-      <span class="slider"></span>
-    </label>
-  </div>
-
-  <div id="maintenance-popup">🚧 Site is under maintenance.</div>
-
-  <!-- Top Bar -->
-  <div class="top-bar">
+<body>  <!-- APK Download Popup -->  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for a better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a>
+    <br/>
+    <button onclick="closePopup()">Close</button>
+  </div>  <!-- Top Bar -->  <div class="top-bar">
     <div class="logo">
-      <img src="https://i.postimg.cc/kG8Z26Ld/Tube-Earn-logos.png" alt="TubeEarn Logo" />
+      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
       <div>TubeEarn</div>
     </div>
     <div class="auth-buttons">
       <a href="login.html">Login</a>
       <a href="signup.html">Signup</a>
     </div>
-  </div>
-
-  <!-- Search Bar -->
-  <div class="search-container">
+  </div>  <!-- Search Bar -->  <div class="search-container">
     <input type="text" id="searchInput" placeholder="Search anything..." />
     <button onclick="searchNow()">🔍</button>
     <button onclick="startVoice()">🎤</button>
-  </div>
-
-  <!-- Marquee -->
-  <div class="marquee">
-    <div class="marquee-content">
-      🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating , 🛍️ Shopping, 🎮 Gaming, 🎤 Singing, Famous and Go Viral! 🌟
+  </div>  <!-- Marquee -->  <div class="marquee">
+    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟
     </div>
-  </div>
-
-  <!-- Feature Buttons -->
-  <div class="button-grid">
-    <a href="shop.html">🛍️ Shopping</a>
+  </div>  <!-- Feature Buttons -->  <div class="button-grid">
     <a href="home.html">🏠 Home</a>
-    <a href="create.html">🎬 Creator</a>
+    <a href="create.html">🎮 Creator</a>
+    <a href="shop.html">🛒 Shopping</a>
     <a href="education.html">📚 Education</a>
     <a href="singing.html">🎤 Singing</a>
     <a href="dating.html">💖 Dating</a>
     <a href="gaming.html">🎮 Gaming</a>
-    <a href="live.html">📺 Live</a>
+    <a href="live.html">📻 Live</a>
     <a href="career.html">💼 Career</a>
     <a href="wallet.html">💰 Wallet</a>
-    <a href="monetize.html">💵 Monetize</a>
-    <a href="video-editor.html">🎞️ Video Editor</a>
-    <a href="audio-editor.html">🎧 Audio Editor</a>
-    <a href="face-swap.html">🧑‍🤝‍🧑 Face Swap</a>
-  </div>
-
-  <!-- Bottom Navigation -->
-  <div class="bottom-nav">
+    <a href="monetize.html">$ Monetize</a>
+  </div>  <!-- Stories -->  <div class="stories">
+    <div class="story" onclick="location.href='story1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>  <!-- Shorts -->  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+  </div>  <!-- Bottom Navigation -->  <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
     <a href="shorts.html">▶️<br/>Shorts</a>
     <a href="upload.html">⬆️<br/>Upload</a>
     <a href="video.html">🎥<br/>Videos</a>
     <a href="account.html">👤<br/>You</a>
-  </div>
-
-  <!-- JS -->
-  <script src="script.js"></script>
-</body>
+  </div>  <!-- External JS -->  <script src="script.js"></script></body>
 </html>
