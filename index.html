@@ -7,13 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- APK Download Popup -->
-  <div class="apk-popup" id="apkPopup">
-    <p>📲 Download TubeEarn App for a better experience!</p>
-    <a href="https://your-apk-link.com"><button>Download APK</button></a>
-    <br/>
-    <button onclick="closePopup()">Close</button>
+  <!-- Maintenance Notice (visible only if enabled) -->
+  <div id="maintenanceNotice" style="display: none; background-color: red; color: white; padding: 10px; text-align: center;">
+    🚧 Site is under maintenance. Please check back later.
   </div>
 
   <!-- Top Bar -->
@@ -37,10 +33,10 @@
 
   <!-- Marquee -->
   <div class="marquee">
-    <div class="marquee-content">🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating, 🛍️ Shopping, 🎮 Gaming, 🎤 Singing, and Go Viral! 🌟</div>
+    <div class="marquee-content">🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating, 🛍️💸 Shopping, 🎮 Gaming, 🎤 Singing — Go Viral & Earn! 🌟</div>
   </div>
 
-  <!-- Feature Buttons -->
+  <!-- Buttons -->
   <div class="button-grid">
     <a href="home.html">🏠 Home</a>
     <a href="create.html">🎬 Creator</a>
@@ -53,45 +49,25 @@
     <a href="career.html">💼 Career</a>
     <a href="wallet.html">💰 Wallet</a>
     <a href="monetize.html">$ Monetize</a>
-    <a href="#">🎞 Video Editor</a>
+    <a href="#">🎞️ Video Editor</a>
     <a href="#">🎧 Audio Editor</a>
-    <a href="#">🤳 Face Swap</a>
+    <a href="#">🧑‍🎤 Face Swap</a>
   </div>
 
   <!-- Stories -->
   <div class="stories">
-    <div class="story" onclick="location.href='story1.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="location.href='story2.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="location.href='story3.html'">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
+    <div class="story"><img src="https://via.placeholder.com/60"><span>Raj</span></div>
+    <div class="story"><img src="https://via.placeholder.com/60"><span>Anjali</span></div>
+    <div class="story"><img src="https://via.placeholder.com/60"><span>Rohit</span></div>
   </div>
 
   <!-- Shorts -->
   <div class="shorts">
-    <div class="short-video" onclick="location.href='video1.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
-    </div>
-    <div class="short-video" onclick="location.href='video2.html'">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
-    </div>
-    <!-- Placeholder Videos -->
-    <div class="short-video" onclick="location.href='video3.html'">
-      <img src="https://via.placeholder.com/300x500?text=Comedy+Clip" />
-    </div>
-    <div class="short-video" onclick="location.href='video4.html'">
-      <img src="https://via.placeholder.com/300x500?text=Latest+Song" />
-    </div>
+    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+1" /></div>
+    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+2" /></div>
   </div>
 
-  <!-- Bottom Navigation -->
+  <!-- Bottom Nav -->
   <div class="bottom-nav">
     <a href="home.html">🏠<br/>Home</a>
     <a href="shorts.html">▶️<br/>Shorts</a>
@@ -100,7 +76,6 @@
     <a href="account.html">👤<br/>You</a>
   </div>
 
-  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
