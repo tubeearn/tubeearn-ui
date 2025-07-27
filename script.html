@@ -1,14 +1,16 @@
+// ✅ APK Popup Logic
 function closePopup() {
   document.getElementById('apkPopup').style.display = 'none';
   localStorage.setItem('apkClosed', 'true');
 }
 
-window.onload = function() {
+window.onload = function () {
   if (!localStorage.getItem('apkClosed')) {
     document.getElementById('apkPopup').style.display = 'block';
   }
 };
 
+// ✅ Search Logic
 function searchNow() {
   const value = document.getElementById("searchInput").value.trim();
   if (value !== "") {
@@ -18,9 +20,10 @@ function searchNow() {
   }
 }
 
+// ✅ Mic (Voice Recognition) Logic
 function startVoice() {
   if (!('webkitSpeechRecognition' in window)) {
-    alert("Voice search not supported in this browser.");
+    alert("🎤 Mic not supported in this browser.");
     return;
   }
 
@@ -29,13 +32,13 @@ function startVoice() {
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
-  recognition.onresult = function(event) {
+  recognition.onresult = function (event) {
     const transcript = event.results[0][0].transcript;
     document.getElementById("searchInput").value = transcript;
     searchNow();
   };
 
-  recognition.onerror = function(event) {
+  recognition.onerror = function (event) {
     alert("Mic error: " + event.error);
   };
 
