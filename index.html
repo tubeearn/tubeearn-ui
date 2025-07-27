@@ -1,144 +1,339 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn</title>
+  <title>TubeEarn - Create. Perform. Earn.</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-    }
+      background-color: #eaf8fc;
+    }.top-bar {
+  background-color: #193659;
+  color: white;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    /* Maintenance Button */
-    #maintenance-btn {
-      position: fixed;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff4d4d;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-weight: bold;
-      z-index: 999;
-      border-radius: 5px;
-      display: none; /* Default hidden */
-    }
+.logo {
+  display: flex;
+  align-items: center;
+}
 
-    /* Video/Audio Feed */
-    .feed-container {
-      margin-top: 70px;
-      padding: 10px;
-    }
+.logo img {
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  margin-right: 8px;
+}
 
-    .feed-item {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+.logo div {
+  font-size: 20px;
+  font-weight: bold;
+}
 
-    .feed-item video,
-    .feed-item audio {
-      width: 100%;
-      border-radius: 8px;
-    }
+.auth-buttons a, .auth-buttons button {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-    /* APK Popup */
-    .popup {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ffffff;
-      border: 2px solid #000000;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px auto;
+  justify-content: center;
+}
 
-    .popup button {
-      margin: 5px;
-      padding: 10px 15px;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.search-container input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 60%;
+}
 
-    .popup .download {
-      background-color: #28a745;
-      color: white;
-    }
+.search-container button {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #193659;
+  color: white;
+}
 
-    .popup .later {
-      background-color: #6c757d;
-      color: white;
-    }
+.marquee {
+  background: black;
+  color: yellow;
+  padding: 10px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.button-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.button-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #b2e1e6;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  min-width: 140px;
+  transition: transform 0.2s ease;
+}
+
+.button-grid a:hover {
+  transform: scale(1.05);
+  background-color: #a0d8df;
+}
+
+.stories {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.story {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.story img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ff4d4d;
+}
+
+.story span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.shorts, .infinite-scroll {
+  padding: 15px;
+  background-color: #fff;
+}
+
+.short-video {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.short-video img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: #193659;
+  padding: 10px 0;
+}
+
+.bottom-nav a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.apk-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 2px solid #193659;
+  padding: 20px;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
+  display: none;
+}
+
+.apk-popup button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #193659;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .button-grid a {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
   </style>
 </head>
-<body>
-
-  <!-- Maintenance Button (Visible only for owner) -->
-  <button id="maintenance-btn">🛠️ Maintenance</button>
-
-  <!-- Feed Container -->
-  <div class="feed-container" id="feed">
-    <!-- Random videos/audio will be injected here -->
-  </div>
-
-  <!-- APK Download Popup -->
-  <div class="popup" id="apkPopup">
-    <p>📲 Download TubeEarn App</p>
-    <button class="download" onclick="downloadApk()">Download</button>
-    <button class="later" onclick="closePopup()">Later</button>
-  </div>
-
-  <script>
-    // Show Maintenance button only if owner (you can customize this condition)
-    const isOwner = true;
-    if (isOwner) {
-      document.getElementById('maintenance-btn').style.display = 'block';
-    }
-
-    // Load random videos/audio
-    const sampleContent = [
-      { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-      { type: 'audio', src: 'https://www.w3schools.com/html/horse.mp3' },
-      { type: 'video', src: 'https://www.w3schools.com/html/movie.mp4' },
-    ];
-
-    const feed = document.getElementById('feed');
-
-    for (let i = 0; i < 20; i++) {
-      const item = sampleContent[Math.floor(Math.random() * sampleContent.length)];
-      const div = document.createElement('div');
-      div.className = 'feed-item';
-      if (item.type === 'video') {
-        div.innerHTML = `<video controls src="${item.src}"></video>`;
-      } else {
-        div.innerHTML = `<audio controls src="${item.src}"></audio>`;
-      }
-      feed.appendChild(div);
-    }
-
-    // Show APK popup after 10 seconds
-    setTimeout(() => {
-      document.getElementById('apkPopup').style.display = 'block';
-    }, 10000);
-
-    function downloadApk() {
-      window.location.href = 'https://example.com/tubeearn.apk'; // Replace with real APK link
-    }
+<body>  <!-- APK Download Popup -->  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for a better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a>
+    <br/>
+    <button onclick="closePopup()">Later</button>
+  </div>  <!-- Top Bar -->  <div class="top-bar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
+      <div>TubeEarn</div>
+    </div>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+      <button id="maintenanceBtn" onclick="goMaintenance()" style="display:none;">🛠 Maintenance</button>
+    </div>
+  </div>  <!-- Search Bar -->  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search anything..." />
+    <button onclick="searchNow()">🔍</button>
+    <button onclick="startVoice()">🎤</button>
+  </div>  <!-- Marquee -->  <div class="marquee">
+    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
+  </div>  <!-- Feature Buttons -->  <div class="button-grid">
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html">🎬 Creator</a>
+    <a href="shop.html">🛒 Shopping</a>
+    <a href="education.html">📚 Education</a>
+    <a href="singing.html">🎤 Singing</a>
+    <a href="dating.html">💖 Dating</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="live.html">📺 Live</a>
+    <a href="career.html">💼 Career</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="monetize.html">$ Monetize</a>
+  </div>  <!-- Stories -->  <div class="stories">
+    <div class="story" onclick="location.href='story1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
+  </div>  <!-- Shorts -->  <div class="shorts" id="shortContainer">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
+  </div>  <!-- Infinite Scroll Content -->  <div class="infinite-scroll" id="infiniteScroll"></div>  <!-- Bottom Navigation -->  <div class="bottom-nav">
+    <a href="home.html">🏠<br/>Home</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
+    <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="video.html">🎥<br/>Videos</a>
+    <a href="account.html">👤<br/>You</a>
+  </div>  <!-- JS Scripts -->  <script>
+    const isOwner = true; // Replace with actual owner check
+    if (isOwner) document.getElementById('maintenanceBtn').style.display = 'inline';
 
     function closePopup() {
       document.getElementById('apkPopup').style.display = 'none';
+      localStorage.setItem('apkClosed', 'true');
     }
-  </script>
 
-</body>
+    function goMaintenance() {
+      window.location.href = 'maintenance.html';
+    }
+
+    setTimeout(() => {
+      if (!localStorage.getItem('apkClosed')) {
+        document.getElementById('apkPopup').style.display = 'block';
+      }
+    }, 5000);
+
+    function searchNow() {
+      const value = document.getElementById("searchInput").value.trim();
+      if (value !== "") {
+        window.location.href = "search.html?q=" + encodeURIComponent(value);
+      } else {
+        alert("Please enter something to search");
+      }
+    }
+
+    function startVoice() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice search not supported in this browser.");
+        return;
+      }
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("searchInput").value = transcript;
+        searchNow();
+      };
+      recognition.onerror = function(event) {
+        alert("Mic error: " + event.error);
+      };
+      recognition.start();
+    }
+
+    // Infinite Scroll Video Content
+    window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        addMoreVideos();
+      }
+    });
+
+    function addMoreVideos() {
+      const container = document.getElementById('infiniteScroll');
+      for (let i = 0; i < 3; i++) {
+        const div = document.createElement('div');
+        div.className = 'short-video';
+        div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=More+Video+${Math.floor(Math.random()*1000)}" />`;
+        container.appendChild(div);
+      }
+    }
+  </script></body>
 </html>
