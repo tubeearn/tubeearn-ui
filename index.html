@@ -8,278 +8,246 @@
       margin: 0;
       font-family: Arial, sans-serif;
       background-color: #eaf8fc;
-    }
-    .top-bar {
-      background-color: #193659;
-      color: white;
-      padding: 6px 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-    .logo img {
-      height: 50px;
-      width: 50px;
-      object-fit: contain;
-      margin-right: 8px;
-    }
-    .logo div {
-      font-size: 20px;
-      font-weight: bold;
-    }
-    .auth-buttons a {
-      color: white;
-      text-decoration: none;
-      margin-left: 10px;
-      font-size: 14px;
-    }
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin: 10px auto;
-      justify-content: center;
-    }
-    .search-container input {
-      padding: 8px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      width: 60%;
-    }
-    .search-container button {
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
-      cursor: pointer;
-      background-color: #193659;
-      color: white;
-    }
-    .marquee {
-      background: black;
-      color: yellow;
-      padding: 10px;
-      font-weight: bold;
-      overflow: hidden;
-    }
-    .marquee-content {
-      display: inline-block;
-      white-space: nowrap;
-      animation: scroll-left 15s linear infinite;
-    }
-    @keyframes scroll-left {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 20px;
-    }
-    .button-grid a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: row;
-      background-color: #b2e1e6;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      padding: 10px 15px;
-      font-size: 15px;
-      min-width: 140px;
-      transition: transform 0.2s ease;
-    }
-    .button-grid a:hover {
-      transform: scale(1.05);
-      background-color: #a0d8df;
-    }
-    .stories, .extra-feed {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      padding: 15px;
-      background-color: #f5f5f5;
-    }
-    .story, .extra-item {
-      flex: 0 0 auto;
-      width: 70px;
-      text-align: center;
-      cursor: pointer;
-    }
-    .story img, .extra-item img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid #ff4d4d;
-    }
-    .story span, .extra-item span {
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
-    .shorts {
-      padding: 15px;
-      background-color: #fff;
-    }
-    .short-video {
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-    .short-video img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-around;
-      background-color: #193659;
-      padding: 10px 0;
-    }
-    .bottom-nav a {
-      color: white;
-      font-size: 14px;
-      text-decoration: none;
-      text-align: center;
-    }
-    .apk-popup {
-      position: fixed;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ffffff;
-      border: 2px solid #193659;
-      padding: 20px;
-      z-index: 999;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
-      display: none;
-    }
-    .apk-popup button {
-      margin-top: 10px;
-      padding: 8px 16px;
-      border: none;
-      background-color: #193659;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .maintenance-icon {
-      position: fixed;
-      top: 5px;
-      right: 5px;
-      background: red;
-      color: white;
-      padding: 6px 10px;
-      border-radius: 50%;
-      font-weight: bold;
-      z-index: 999;
-      cursor: pointer;
-      display: none;
-    }
+    }.top-bar {
+  background-color: #193659;
+  color: white;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  margin-right: 8px;
+}
+
+.logo div {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.auth-buttons a {
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 10px auto;
+  justify-content: center;
+}
+
+.search-container input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 60%;
+}
+
+.search-container button {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #193659;
+  color: white;
+}
+
+.marquee {
+  background: black;
+  color: yellow;
+  padding: 10px;
+  font-weight: bold;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll-left 15s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.button-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.button-grid a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #b2e1e6;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  font-size: 15px;
+  min-width: 140px;
+  transition: transform 0.2s ease;
+}
+
+.button-grid a:hover {
+  transform: scale(1.05);
+  background-color: #a0d8df;
+}
+
+.stories {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+
+.story {
+  flex: 0 0 auto;
+  width: 70px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.story img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #ff4d4d;
+}
+
+.story span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
+}
+
+.shorts {
+  padding: 15px;
+  background-color: #fff;
+}
+
+.short-video {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.short-video img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: #193659;
+  padding: 10px 0;
+}
+
+.bottom-nav a {
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.apk-popup {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 2px solid #193659;
+  padding: 20px;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
+  display: none;
+}
+
+.apk-popup button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #193659;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.maintenance-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: #ff6347;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .maintenance-btn {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
   </style>
 </head>
-<body>  <div class="maintenance-icon" id="maintIcon" onclick="window.location.href='maintenance.html'">🛠️</div>  <div class="apk-popup" id="apkPopup">
+<body>  <!-- Maintenance Button (only visible to owner) --><button class="maintenance-btn" id="maintBtn" onclick="window.location.href='maintenance.html'">🛠️</button>
+
+  <!-- APK Download Popup -->  <div class="apk-popup" id="apkPopup">
     <p>📲 Download TubeEarn App for a better experience!</p>
     <a href="https://your-apk-link.com"><button>Download APK</button></a>
     <br/>
     <button onclick="closePopup()">Close</button>
-  </div>  <div class="top-bar">
-    <div class="logo">
-      <img src="https://i.postimg.cc/PqczTGwW/TubeEarn.png" alt="TubeEarn Logo" />
-      <div>TubeEarn</div>
-    </div>
-    <div class="auth-buttons">
-      <a href="login.html">Login</a>
-      <a href="signup.html">Signup</a>
-    </div>
-  </div>  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Search anything..." />
-    <button onclick="searchNow()">🔍</button>
-    <button onclick="startVoice()">🎤</button>
-  </div>  <div class="marquee">
-    <div class="marquee-content">🔥 Join India’s No.1 Multi-Earning Platform — TubeEarn! Upload, Earn, Shop, Learn, Date, and Go Viral! 🌟</div>
-  </div>  <div class="button-grid">
-    <a href="home.html">🏠 Home</a>
-    <a href="create.html">🎮 Creator</a>
-    <a href="shop.html">🛒 Shopping</a>
-    <a href="education.html">📚 Education</a>
-    <a href="singing.html">🎤 Singing</a>
-    <a href="dating.html">💖 Dating</a>
-    <a href="gaming.html">🎮 Gaming</a>
-    <a href="live.html">💼 Live</a>
-    <a href="career.html">💼 Career</a>
-    <a href="wallet.html">💰 Wallet</a>
-    <a href="monetize.html">$ Monetize</a>
-  </div>  <div class="stories">
-    <div class="story"><img src="https://via.placeholder.com/60" /><span>Raj</span></div>
-    <div class="story"><img src="https://via.placeholder.com/60" /><span>Anjali</span></div>
-    <div class="story"><img src="https://via.placeholder.com/60" /><span>Rohit</span></div>
-  </div>  <div class="shorts">
-    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+Video+1" /></div>
-    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+Video+2" /></div>
-  </div>  <div class="extra-feed">
-    <div class="extra-item"><img src="https://via.placeholder.com/60" /><span>Ad 1</span></div>
-    <div class="extra-item"><img src="https://via.placeholder.com/60" /><span>Game</span></div>
-    <div class="extra-item"><img src="https://via.placeholder.com/60" /><span>Music</span></div>
-  </div>  <div class="bottom-nav">
-    <a href="home.html">🏠<br/>Home</a>
-    <a href="shorts.html">▶️<br/>Shorts</a>
-    <a href="upload.html">⬆️<br/>Upload</a>
-    <a href="video.html">🎥<br/>Videos</a>
-    <a href="account.html">👤<br/>You</a>
-  </div>  <script>
+  </div>  <!-- (Keep rest of your existing HTML here as it is) -->  <script>
+    // Show maintenance icon only if owner
+    const isOwner = window.location.href.includes("owner=1");
+    if (isOwner) {
+      document.getElementById("maintBtn").style.display = "block";
+    }
+
+    // APK popup after 10 seconds
+    window.onload = function() {
+      setTimeout(() => {
+        if (!localStorage.getItem('apkClosed')) {
+          document.getElementById('apkPopup').style.display = 'block';
+        }
+      }, 10000);
+    };
+
     function closePopup() {
       document.getElementById('apkPopup').style.display = 'none';
       localStorage.setItem('apkClosed', 'true');
-    }
-    window.onload = function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const isOwner = urlParams.get('owner') === 'owner123';
-      if (isOwner) {
-        document.getElementById('maintIcon').style.display = 'block';
-      }
-      if (!localStorage.getItem('apkClosed')) {
-        setTimeout(() => {
-          document.getElementById('apkPopup').style.display = 'block';
-        }, 10000);
-      }
-    };
-    function searchNow() {
-      const value = document.getElementById("searchInput").value.trim();
-      if (value !== "") {
-        window.location.href = "search.html?q=" + encodeURIComponent(value);
-      } else {
-        alert("Please enter something to search");
-      }
-    }
-    function startVoice() {
-      if (!('webkitSpeechRecognition' in window)) {
-        alert("Voice search not supported in this browser.");
-        return;
-      }
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = 'en-IN';
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
-      recognition.onresult = function(event) {
-        const transcript = event.results[0][0].transcript;
-        document.getElementById("searchInput").value = transcript;
-        searchNow();
-      };
-      recognition.onerror = function(event) {
-        alert("Mic error: " + event.error);
-      };
-      recognition.start();
     }
   </script></body>
 </html>
