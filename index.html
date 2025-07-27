@@ -7,10 +7,21 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- Maintenance Notice (visible only if enabled) -->
-  <div id="maintenanceNotice" style="display: none; background-color: red; color: white; padding: 10px; text-align: center;">
-    🚧 Site is under maintenance. Please check back later.
+
+  <!-- APK Popup -->
+  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a><br/>
+    <button onclick="closePopup()">Close</button>
   </div>
+
+  <!-- Maintenance Toggle for Owner -->
+  <div class="maintenance-control">
+    <label><input type="checkbox" id="maintToggle" onchange="toggleMaintenance()"> Maintenance Mode</label>
+  </div>
+
+  <!-- Maintenance Message -->
+  <div id="maintenanceNotice" class="maintenance-msg">🚧 Site is under maintenance. Please check back later.</div>
 
   <!-- Top Bar -->
   <div class="top-bar">
@@ -33,10 +44,10 @@
 
   <!-- Marquee -->
   <div class="marquee">
-    <div class="marquee-content">🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating, 🛍️💸 Shopping, 🎮 Gaming, 🎤 Singing — Go Viral & Earn! 🌟</div>
+    <div class="marquee-content">🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating, 🛍️ Shopping, 🎮 Gaming, 🎤 Singing & Earn!</div>
   </div>
 
-  <!-- Buttons -->
+  <!-- Feature Buttons -->
   <div class="button-grid">
     <a href="home.html">🏠 Home</a>
     <a href="create.html">🎬 Creator</a>
@@ -52,19 +63,6 @@
     <a href="#">🎞️ Video Editor</a>
     <a href="#">🎧 Audio Editor</a>
     <a href="#">🧑‍🎤 Face Swap</a>
-  </div>
-
-  <!-- Stories -->
-  <div class="stories">
-    <div class="story"><img src="https://via.placeholder.com/60"><span>Raj</span></div>
-    <div class="story"><img src="https://via.placeholder.com/60"><span>Anjali</span></div>
-    <div class="story"><img src="https://via.placeholder.com/60"><span>Rohit</span></div>
-  </div>
-
-  <!-- Shorts -->
-  <div class="shorts">
-    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+1" /></div>
-    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+2" /></div>
   </div>
 
   <!-- Bottom Nav -->
