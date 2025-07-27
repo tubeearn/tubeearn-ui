@@ -1,126 +1,163 @@
-<!-- ✅ UPDATED TUBEEARN CODE WITH MONETIZATION BUTTON -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TubeEarn - World's Fastest Multi-System Platform</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn - Create. Perform. Earn.</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: sans-serif;
-    }
     body {
-      background: #f5f5f5;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #eaf8fc;
     }
-    header {
-      background: #092c5c;
+
+    .top-bar {
+      background-color: #193659;
       color: white;
-      padding: 12px;
-      font-size: 1.1rem;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .header-left {
-      display: flex;
-      align-items: center;
-    }
-    .monetize-btn {
-      margin-left: 15px;
-      background: #ffd700;
-      color: #000;
       padding: 6px 10px;
-      border-radius: 5px;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .search-icon {
-      font-size: 20px;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-    .nav-bar {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      background: #cbe2f7;
-      padding: 10px;
-      gap: 10px;
-      scrollbar-width: none;
-    }
-    .nav-bar::-webkit-scrollbar {
-      display: none;
-    }
-    .nav-bar button {
-      padding: 10px;
-      border: none;
-      background: #d8f0f8;
-      border-radius: 6px;
-      font-weight: bold;
-      white-space: nowrap;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .nav-bar button:hover {
-      background: #bde0f0;
-    }
-    .ticker {
       display: flex;
       align-items: center;
-      background: #001f3f;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 70px;
+      width: 70px;
+      object-fit: contain;
+      margin-right: 8px;
+    }
+
+    .logo div {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .auth-buttons a {
       color: white;
-      padding: 5px 10px;
+      text-decoration: none;
+      margin-left: 10px;
+      font-size: 14px;
+    }
+
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px auto;
+      justify-content: center;
+    }
+
+    .search-container input {
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 60%;
+    }
+
+    .search-container button {
+      padding: 8px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      background-color: #193659;
+      color: white;
+    }
+
+    .marquee {
+      background: Light Blue;
+      color: Read;
+      padding: 10px;
+      font-weight: bold;
       overflow: hidden;
     }
-    .ticker img {
-      width: 28px;
-      height: 28px;
-      margin-right: 10px;
-    }
-    .scroll-text {
+
+    .marquee-content {
+      display: inline-block;
       white-space: nowrap;
-      animation: scroll-left 20s linear infinite;
+      animation: scroll-left 30s linear infinite;
     }
+
     @keyframes scroll-left {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-    .story {
+
+    .button-grid {
       display: flex;
-      gap: 15px;
+      flex-wrap: wrap;
       justify-content: center;
-      padding: 10px;
-      background: white;
+      gap: 10px;
+      padding: 20px;
     }
-    .story div {
+
+    .button-grid a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+      background-color: #b2e1e6;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      font-size: 15px;
+      min-width: 140px;
+      transition: transform 0.2s ease;
+    }
+
+    .button-grid a:hover {
+      transform: scale(1.05);
+      background-color: #a0d8df;
+    }
+
+    .stories {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 15px;
+      background-color: #f5f5f5;
+    }
+
+    .story {
+      flex: 0 0 auto;
+      width: 70px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .story img {
       width: 60px;
       height: 60px;
-      border: 3px solid pink;
       border-radius: 50%;
+      border: 2px solid #ff4d4d;
     }
-    .section-title {
-      font-size: 24px;
-      font-weight: bold;
-      color: navy;
-      text-align: center;
-      margin-top: 10px;
+
+    .story span {
+      font-size: 12px;
+      display: block;
+      margin-top: 5px;
     }
-    .reels, .trending, .ads {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 10px;
+
+    .shorts {
+      padding: 15px;
+      background-color: #fff;
     }
-    .reels img, .trending img, .ads img {
+
+    .short-video {
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+
+    .short-video img {
       width: 100%;
       border-radius: 8px;
     }
+
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -128,99 +165,181 @@
       right: 0;
       display: flex;
       justify-content: space-around;
-      background: #092c5c;
+      background-color: #193659;
       padding: 10px 0;
-      z-index: 999;
     }
-    .bottom-nav button {
-      background: none;
-      border: none;
+
+    .bottom-nav a {
       color: white;
-      font-size: 16px;
+      font-size: 14px;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .apk-popup {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffffff;
+      border: 2px solid #193659;
+      padding: 20px;
+      z-index: 999;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      display: none;
+    }
+
+    .apk-popup button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #193659;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
     }
-    .bottom-nav .center-btn {
-      background: white;
-      color: #092c5c;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: -25px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+
+    @media (max-width: 600px) {
+      .button-grid a {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="header-left">
-      TubeEarn - World's Fastest Multi-System Platform
-      <div class="monetize-btn" onclick="goTo('monetization.html')">💰 Monetize</div>
+  <!-- APK Download Popup -->
+  <div class="apk-popup" id="apkPopup">
+    <p>📲 Download TubeEarn App for a better experience!</p>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a>
+    <br/>
+    <button onclick="closePopup()">Close</button>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="logo">
+      <img src="https://i.postimg.cc/kG8Z26Ld/Tube-Earn-logos.png" alt="TubeEarn Logo" />
+      <div>TubeEarn</div>
     </div>
-    <div class="search-icon" onclick="goTo('search.html')">🔍</div>
-  </header>
-
-  <div class="nav-bar">
-    <button onclick="goTo('home.html')">🏠 Home</button>
-    <button onclick="goTo('create.html')">🎥 Create</button>
-    <button onclick="goTo('shopping.html')">🛍️ Shopping Mall</button>
-    <button onclick="goTo('education.html')">📘 Education</button>
-    <button onclick="goTo('singing.html')">🎤 Singing</button>
-    <button onclick="goTo('dating.html')">💖 Dating</button>
-    <button onclick="goTo('video-editor.html')">🎬 Video Editor</button>
-    <button onclick="goTo('audio-editor.html')">🎵 Audio Editor</button>
-    <button onclick="goTo('marketplace.html')">🛒 Marketplace</button>
-    <button onclick="goTo('face-swipe.html')">😊 Face Swipe</button>
-    <button onclick="goTo('career.html')">🧑‍💼 Career</button>
-    <button onclick="goTo('upcoming.html')">🚀 Upcoming</button>
-    <button onclick="goTo('account.html')">👤 Account</button>
-    <button onclick="goTo('wallet.html')">💼 Wallet</button>
+    <div class="auth-buttons">
+      <a href="login.html">Login</a>
+      <a href="signup.html">Signup</a>
+    </div>
   </div>
 
-  <div class="ticker">
-    <img src="logo.png" alt="logo" />
-    <div class="scroll-text">Welcome to TubeEarn - Create | Earn | Perform | Educate | Shop | Date & more!</div>
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search anything..." />
+    <button onclick="searchNow()">🔍</button>
+    <button onclick="startVoice()">🎤</button>
   </div>
 
-  <div class="story">
-    <div></div><div></div><div></div><div></div><div></div>
+  <!-- Marquee -->
+  <div class="marquee">
+    <div class="marquee-content">🔥 Join World's No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 💕 Dating , 🛍️💸 Shopping, 🎮 Gaming, 🎤 Signing, Famous and Go Viral! 🌟</div>
   </div>
 
-  <div class="section-title">📲 REELS 👇</div>
-  <div class="reels">
-    <img src="reel1.jpg" alt="Reel 1" />
-    <img src="reel2.jpg" alt="Reel 2" />
+  <!-- Feature Buttons -->
+  <div class="button-grid">
+    <a href="shop.html">Coming soon </a>
+    <a href="home.html">🏠 Home</a>
+    <a href="create.html">🎬 Creator</a>
+    <a href="shop.html">🛒 Shopping</a>
+    <a href="education.html">📚 Education</a>
+    <a href="singing.html">🎤 Singing</a>
+    <a href="dating.html">💖 Dating</a>
+    <a href="gaming.html">🎮 Gaming</a>
+    <a href="live.html">📺 Live</a>
+    <a href="career.html">💼 Career</a>
+    <a href="wallet.html">💰 Wallet</a>
+    <a href="monetize.html">$ Monetize</a>
+    <a href="monetize.html"> vidro Editor</a>
+    <a href="monetize.html"> Audio Editor</a>
+    <a href="monetize.html"> Face Swaip</a>
   </div>
 
-  <div class="section-title">🔥 Trending Video 👇</div>
-  <div class="trending">
-    <img src="trend1.jpg" alt="Trending 1" />
-    <img src="trend2.jpg" alt="Trending 2" />
+  <!-- Stories -->
+  <div class="stories">
+    <div class="story" onclick="location.href='story1.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Raj</span>
+    </div>
+    <div class="story" onclick="location.href='story2.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Anjali</span>
+    </div>
+    <div class="story" onclick="location.href='story3.html'">
+      <img src="https://via.placeholder.com/60" />
+      <span>Rohit</span>
+    </div>
   </div>
 
-  <div class="section-title">📢 Ads Section 👇</div>
-  <div class="ads">
-    <img src="ad1.jpg" alt="Ad 1" />
-    <img src="ad2.jpg" alt="Ad 2" />
-    <img src="ad3.jpg" alt="Ad 3" />
-    <img src="ad4.jpg" alt="Ad 4" />
+  <!-- Shorts -->
+  <div class="shorts">
+    <div class="short-video" onclick="location.href='video1.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
+    </div>
+    <div class="short-video" onclick="location.href='video2.html'">
+      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
+    </div>
   </div>
 
+  <!-- Bottom Navigation -->
   <div class="bottom-nav">
-    <button onclick="goTo('home.html')">🏠</button>
-    <button onclick="goTo('shorts.html')">🎬 Shorts</button>
-    <button class="center-btn" onclick="goTo('create.html')">＋</button>
-    <button onclick="goTo('subscribe.html')">🔔 Sub</button>
-    <button onclick="goTo('profile.html')">👤</button>
+    <a href="home.html">🏠<br/>Home</a>
+    <a href="shorts.html">▶️<br/>Shorts</a>
+    <a href="upload.html">⬆️<br/>Upload</a>
+    <a href="video.html">🎥<br/>Videos</a>
+    <a href="account.html">👤<br/>You</a>
   </div>
 
+  <!-- JS Scripts -->
   <script>
-    function goTo(page) {
-      window.location.href = page;
+    function closePopup() {
+      document.getElementById('apkPopup').style.display = 'none';
+      localStorage.setItem('apkClosed', 'true');
+    }
+
+    window.onload = function() {
+      if (!localStorage.getItem('apkClosed')) {
+        document.getElementById('apkPopup').style.display = 'block';
+      }
+    };
+
+    function searchNow() {
+      const value = document.getElementById("searchInput").value.trim();
+      if (value !== "") {
+        window.location.href = "search.html?q=" + encodeURIComponent(value);
+      } else {
+        alert("Please enter something to search");
+      }
+    }
+
+    function startVoice() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice search not supported in this browser.");
+        return;
+      }
+
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("searchInput").value = transcript;
+        searchNow();
+      };
+
+      recognition.onerror = function(event) {
+        alert("Mic error: " + event.error);
+      };
+
+      recognition.start();
     }
   </script>
 
