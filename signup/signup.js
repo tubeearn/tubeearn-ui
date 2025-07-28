@@ -4,26 +4,30 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function signUp() {
+  const mobile = document.getElementById("mobile").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
-  const firstName = document.getElementById("firstName").value.trim();
-  const lastName = document.getElementById("lastName").value.trim();
+  const confirmPassword = document.getElementById("confirmPassword").value.trim();
   const status = document.getElementById("status");
 
-  status.innerText = "⏳ Creating account...";
-
-  if (!email || !password || !firstName || !lastName) {
+  if (!mobile || !email || !password || !confirmPassword) {
     status.innerText = "❌ All fields are required.";
     return;
   }
+
+  if (password !== confirmPassword) {
+    status.innerText = "❌ Passwords do not match.";
+    return;
+  }
+
+  status.innerText = "⏳ Processing your request...";
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       data: {
-        first_name: firstName,
-        last_name: lastName
+        mobile
       }
     }
   });
@@ -31,6 +35,6 @@ async function signUp() {
   if (error) {
     status.innerText = "❌ " + error.message;
   } else {
-    status.innerText = "✅ Signup successful! Please check your email to confirm.";
+    status.innerText = "✅ Account created! Please confirm your email to activate.";
   }
 }
