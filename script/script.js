@@ -1,7 +1,5 @@
 const isOwner = true;
-if (isOwner) {
-  document.getElementById('maintenanceBtn').style.display = 'inline';
-}
+if (isOwner) document.getElementById('maintenanceBtn').style.display = 'inline';
 
 function closePopup() {
   document.getElementById('apkPopup').style.display = 'none';
@@ -19,9 +17,9 @@ setTimeout(() => {
 }, 5000);
 
 function searchNow() {
-  const val = document.getElementById("searchInput").value.trim();
-  if (val !== "") {
-    window.location.href = "search.html?q=" + encodeURIComponent(val);
+  const value = document.getElementById("searchInput").value.trim();
+  if (value !== "") {
+    window.location.href = "../search.html?q=" + encodeURIComponent(value);
   } else {
     alert("Please enter something to search");
   }
@@ -29,18 +27,26 @@ function searchNow() {
 
 function startVoice() {
   if (!('webkitSpeechRecognition' in window)) {
-    alert("Voice search not supported.");
+    alert("Voice search not supported in this browser.");
     return;
   }
   const recognition = new webkitSpeechRecognition();
   recognition.lang = 'en-IN';
-  recognition.onresult = function(e) {
-    document.getElementById("searchInput").value = e.results[0][0].transcript;
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+  recognition.onresult = function(event) {
+    const transcript = event.results[0][0].transcript;
+    document.getElementById("searchInput").value = transcript;
     searchNow();
+  };
+  recognition.onerror = function(event) {
+    alert("Mic error: " + event.error);
   };
   recognition.start();
 }
 
+// Infinite Scroll + Ads
+let videoCount = 0;
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
     addMoreVideos();
@@ -52,7 +58,14 @@ function addMoreVideos() {
   for (let i = 0; i < 3; i++) {
     const div = document.createElement('div');
     div.className = 'short-video';
-    div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=Video+${Math.random()*1000}" />`;
+
+    // Add ad after every 10 videos
+    if (++videoCount % 10 === 0) {
+      div.innerHTML = `<img src="https://via.placeholder.com/300x250?text=Ad+Video">`;
+    } else {
+      div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=More+Video+${Math.floor(Math.random()*1000)}" />`;
+    }
+
     container.appendChild(div);
   }
 }
