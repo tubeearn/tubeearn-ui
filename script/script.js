@@ -32,8 +32,6 @@ function startVoice() {
   }
   const recognition = new webkitSpeechRecognition();
   recognition.lang = 'en-IN';
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
   recognition.onresult = function(event) {
     const transcript = event.results[0][0].transcript;
     document.getElementById("searchInput").value = transcript;
@@ -45,7 +43,7 @@ function startVoice() {
   recognition.start();
 }
 
-// Infinite Scroll Video Content
+// Infinite Scroll Logic
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
     addMoreVideos();
@@ -57,7 +55,7 @@ function addMoreVideos() {
   for (let i = 0; i < 3; i++) {
     const div = document.createElement('div');
     div.className = 'short-video';
-    div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=Auto+Video+${Math.floor(Math.random()*1000)}" />`;
+    div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=More+Video+${Math.floor(Math.random()*1000)}" />`;
     container.appendChild(div);
   }
 }
