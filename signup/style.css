@@ -1,19 +1,20 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background: #c6f2ff; /* light blue */
+  font-family: 'Segoe UI', sans-serif;
+  background: #dff6ff;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100vh;
 }
 
 .signup-container {
   background: white;
   padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #aaa;
+  margin-top: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
   text-align: center;
   width: 100%;
   max-width: 400px;
@@ -21,39 +22,37 @@ body {
 
 .logo {
   width: 60px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 h2 {
   color: #002b5b;
-}
-
-p {
-  margin: 10px 0;
-  font-size: 16px;
+  margin-bottom: 5px;
 }
 
 form input {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
 }
 
 button {
   background: #002b5b;
   color: white;
   padding: 12px;
-  width: 100%;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  width: 100%;
 }
 
 .status {
   margin-top: 15px;
-  font-size: 14px;
+  font-size: 15px;
   color: green;
+  font-weight: bold;
 }
