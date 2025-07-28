@@ -7,11 +7,11 @@
   <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
+
   <!-- APK Download Popup -->
   <div class="apk-popup" id="apkPopup">
     <p>📲 Download TubeEarn App for a better experience!</p>
-    <a href="https://your-apk-link.com"><button>Download APK</button></a>
-    <br/>
+    <a href="https://your-apk-link.com"><button>Download APK</button></a><br/>
     <button onclick="closePopup()">Later</button>
   </div>
 
@@ -22,8 +22,8 @@
       <div>TubeEarn</div>
     </div>
     <div class="auth-buttons">
-      <a href="login.html">Login</a>
-      <a href="signup.html">Signup</a>
+      <a href="../login.html">Login</a>
+      <a href="../signup.html">Signup</a>
       <button id="maintenanceBtn" onclick="goMaintenance()" style="display:none;">🛠 Maintenance</button>
     </div>
   </div>
@@ -37,67 +37,54 @@
 
   <!-- Marquee -->
   <div class="marquee">
-    <div class="marquee-content">🔥 Join World’s No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 🎮Gaming, 💖 Dating, 📚 Education, 🎤 Singing, 💼 Career, $ Monetization and more!</div>
+    <div class="marquee-content">🔥 Join World’s No.1 Multi-Earning Platform — TubeEarn! 🎥 Creator, 🎮 Gaming, 💰 Earning, 🛒 Shopping, 💕 Dating, 🎤 Singing, $ Monetization, 📈 Growth, and Go Viral! 🌟</div>
   </div>
 
   <!-- Feature Buttons -->
   <div class="button-grid">
-    <a href="upcoming/upcoming.html">📢 Upcoming Feature</a>
-    <a href="home/home.html">🏠 Home</a>
-    <a href="creator/creator.html">🎬 Creator</a>
-    <a href="shopping/shopping.html">🛒 Shopping</a>
-    <a href="education/education.html">📚 Education</a>
-    <a href="singing/singing.html">🎤 Singing</a>
-    <a href="dating/dating.html">💖 Dating</a>
-    <a href="gaming/gaming.html">🎮 Gaming</a>
-    <a href="live/live.html">📺 Live</a>
-    <a href="face-swipe/face-swipe.html">👨‍👦 Face Swipe</a>
-    <a href="video-editor/video-editor.html">🎥 Video Editor</a>
-    <a href="audio-editor/audio-editor.html">🔊 Audio Editor</a>
-    <a href="career/career.html">💼 Career</a>
-    <a href="wallet/wallet.html">💰 Wallet</a>
-    <a href="monetize/monetize.html">$ Monetize</a>
+    <a href="../upcoming/upcoming.html">📢 Upcoming</a>
+    <a href="../home/home.html">🏠 Home</a>
+    <a href="../creator/creator.html">🎬 Creator</a>
+    <a href="../shopping/shopping.html">🛒 Shopping</a>
+    <a href="../education/education.html">📚 Education</a>
+    <a href="../singing/singing.html">🎤 Singing</a>
+    <a href="../dating/dating.html">💖 Dating</a>
+    <a href="../gaming/gaming.html">🎮 Gaming</a>
+    <a href="../live/live.html">📺 Live</a>
+    <a href="../face-swipe/face-swipe.html">👨‍👦 Face Swipe</a>
+    <a href="../video-editor/video-editor.html">🎥 Video Editor</a>
+    <a href="../audio-editor/audio-editor.html">🔊 Audio Editor</a>
+    <a href="../career/career.html">💼 Career</a>
+    <a href="../wallet/wallet.html">💰 Wallet</a>
+    <a href="../monetize/monetize.html">$ Monetize</a>
   </div>
 
   <!-- Stories -->
-  <div class="stories">
-    <div class="story" onclick="alert('Raj story')">
-      <img src="https://via.placeholder.com/60" />
-      <span>Raj</span>
-    </div>
-    <div class="story" onclick="alert('Anjali story')">
-      <img src="https://via.placeholder.com/60" />
-      <span>Anjali</span>
-    </div>
-    <div class="story" onclick="alert('Rohit story')">
-      <img src="https://via.placeholder.com/60" />
-      <span>Rohit</span>
-    </div>
+  <div class="stories" id="storySlider">
+    <div class="story"><img src="https://via.placeholder.com/60" /><span>Raj</span></div>
+    <div class="story"><img src="https://via.placeholder.com/60" /><span>Anjali</span></div>
+    <div class="story"><img src="https://via.placeholder.com/60" /><span>Rohit</span></div>
   </div>
 
   <!-- Shorts -->
   <div class="shorts" id="shortContainer">
-    <div class="short-video">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+1" />
-    </div>
-    <div class="short-video">
-      <img src="https://via.placeholder.com/300x500?text=Short+Video+2" />
-    </div>
+    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+Video+1" /></div>
+    <div class="short-video"><img src="https://via.placeholder.com/300x500?text=Short+Video+2" /></div>
   </div>
 
-  <!-- Infinite Scroll Content -->
+  <!-- Infinite Scroll -->
   <div class="infinite-scroll" id="infiniteScroll"></div>
 
   <!-- Bottom Navigation -->
   <div class="bottom-nav">
-    <a href="home/home.html">🏠<br/>Home</a>
-    <a href="shorts/shorts.html">▶️<br/>Shorts</a>
-    <a href="upload/upload.html">⬆️<br/>Upload</a>
-    <a href="video/video.html">🎥<br/>Videos</a>
-    <a href="account/account.html">👤<br/>Account</a>
+    <a href="../home/home.html">🏠<br/>Home</a>
+    <a href="../shorts/shorts.html">▶️<br/>Shorts</a>
+    <a href="../upload/upload.html">⬆️<br/>Upload</a>
+    <a href="../video/video.html">🎥<br/>Videos</a>
+    <a href="../account/account.html">👤<br/>Account</a>
   </div>
 
-  <!-- Script -->
+  <!-- JS -->
   <script src="../script/script.js"></script>
 </body>
 </html>
