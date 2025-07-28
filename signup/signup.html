@@ -3,20 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TubeEarn - Signup</title>
+  <title>Sign Up - TubeEarn</title>
   <link rel="stylesheet" href="signup.css" />
 </head>
 <body>
-  <div class="signup-container">
-    <div class="logo-section">
-      <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" />
-      <h2>Welcome to TubeEarn</h2>
+
+  <!-- Header -->
+  <header class="header">
+    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" alt="TubeEarn Logo" class="site-logo" />
+    <h1>Welcome to TubeEarn</h1>
+  </header>
+
+  <div class="container">
+    <!-- Left Ad -->
+    <div class="left-ad">ADVERTISEMENT</div>
+
+    <!-- Sign Up Form -->
+    <div class="form-container">
+      <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" class="form-logo" />
+      <h2>Create Your Account</h2>
+      <input type="text" id="firstName" placeholder="First Name" />
+      <input type="text" id="lastName" placeholder="Last Name" />
+      <input type="email" id="email" placeholder="Enter your email" />
+      <input type="password" id="password" placeholder="Create a password" />
+      <button onclick="signUp()">Sign Up</button>
+      <div id="status"></div>
     </div>
-    
-    <input id="email" type="email" placeholder="Enter email" />
-    <input id="password" type="password" placeholder="Enter password" />
-    <button onclick="signUp()">Sign Up</button>
-    <p id="status"></p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
