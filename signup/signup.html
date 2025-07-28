@@ -1,35 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Signup - TubeEarn</title>
-  <link rel="stylesheet" href="signup.css" />
-</head>
-<body>
-  <div class="top-banner">📢 India's No.1 Earning Platform - TubeEarn</div>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom right, #e6f7ff, #cceeff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
-  <div class="signup-box">
-    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" class="logo" alt="TubeEarn Logo" />
-    <h2>Welcome to TubeEarn</h2>
-    <p>Create Account Details</p>
+.signup-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-    <input type="text" id="fullname" placeholder="Full Name" />
-    <input type="text" id="mobile" placeholder="Mobile Number" />
-    <input type="email" id="email" placeholder="Email Address" />
-    <input type="password" id="password" placeholder="Create Password" />
-    <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+.form-box {
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  text-align: center;
+}
 
-    <div class="captcha-container">
-      <span id="captcha"></span>
-      <input type="text" id="captchaInput" placeholder="Enter above code" />
-    </div>
+.logo {
+  width: 60px;
+  margin-bottom: 15px;
+}
 
-    <button onclick="signUp()">Create Account</button>
-    <div id="status"></div>
-  </div>
+h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #193659;
+}
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="signup.js"></script>
-</body>
-</html>
+p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #193659;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #145299;
+}
+
+.captcha-box {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#captchaText {
+  background: #e0e0e0;
+  padding: 8px 12px;
+  font-weight: bold;
+  border-radius: 5px;
+  user-select: none;
+}
+
+#status {
+  margin-top: 10px;
+  font-size: 14px;
+  color: green;
+}
