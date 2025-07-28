@@ -7,12 +7,12 @@ const captchaCode = Math.floor(1000 + Math.random() * 9000);
 document.getElementById("captchaText").innerText = captchaCode;
 
 async function signUp() {
-  const name = document.getElementById("fullname").value;
-  const phone = document.getElementById("phone").value;
-  const email = document.getElementById("email").value;
+  const name = document.getElementById("fullname").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
-  const captchaInput = document.getElementById("captchaInput").value;
+  const captchaInput = document.getElementById("captchaInput").value.trim();
   const status = document.getElementById("status");
 
   if (!name || !phone || !email || !password || !confirmPassword || !captchaInput) {
@@ -28,12 +28,12 @@ async function signUp() {
   }
 
   if (captchaInput !== captchaCode.toString()) {
-    status.innerText = "❌ Incorrect captcha.";
+    status.innerText = "❌ Captcha incorrect.";
     status.style.color = "red";
     return;
   }
 
-  status.innerText = "⏳ Creating account...";
+  status.innerText = "⏳ Processing...";
 
   const { error } = await supabase.auth.signUp({
     email,
@@ -50,7 +50,7 @@ async function signUp() {
     status.innerText = "❌ " + error.message;
     status.style.color = "red";
   } else {
-    status.innerText = "✅ Account created! Please confirm your email.";
+    status.innerText = "✅ Account created! Please check your email to confirm.";
     status.style.color = "green";
   }
 }
