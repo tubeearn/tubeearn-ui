@@ -72,8 +72,8 @@ body {
   color: white;
 }
 .marquee {
-  background: black;
-  color: yellow;
+  background: Light blue;
+  color: Red & yellow ;
   padding: 10px;
   font-weight: bold;
   overflow: hidden;
