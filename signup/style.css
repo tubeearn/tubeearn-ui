@@ -1,65 +1,91 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #eaf8fc;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0fbff;
 }
 
-.signup-container {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 25px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+.header {
+  text-align: center;
+  padding: 20px;
+  background-color: #193659;
+  color: white;
 }
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+.site-logo {
+  width: 60px;
+  display: block;
+  margin: 0 auto 10px;
 }
-
-.logo-section img {
-  height: 50px;
-}
-
-.logo-section h2 {
+.header h1 {
+  font-size: 24px;
   margin: 0;
-  font-size: 22px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.left-ad {
+  flex: 1;
+  max-width: 150px;
+  background-color: #d1f0f8;
+  padding: 20px;
+  color: #555;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form-container {
+  flex: 2;
+  max-width: 450px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.form-logo {
+  width: 50px;
+  margin-bottom: 10px;
+}
+.form-container h2 {
+  margin-bottom: 20px;
   color: #193659;
 }
-
-input[type="email"],
-input[type="password"] {
+input {
   width: 100%;
   padding: 12px;
-  margin-top: 12px;
+  margin: 8px 0;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-size: 15px;
 }
-
 button {
   width: 100%;
-  margin-top: 20px;
   padding: 12px;
   background-color: #193659;
   color: white;
   border: none;
-  font-size: 16px;
   border-radius: 6px;
+  margin-top: 10px;
   cursor: pointer;
-  transition: background 0.3s;
 }
-
 button:hover {
   background-color: #145399;
 }
-
 #status {
   margin-top: 15px;
-  text-align: center;
   font-weight: bold;
-  color: #193659;
+  color: #0a73c0;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .left-ad {
+    display: none;
+  }
 }
