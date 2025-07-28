@@ -1,64 +1,60 @@
 body {
   margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #e0f7fa, #80deea);
   font-family: Arial, sans-serif;
+  background: #eaf8fc;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   height: 100vh;
 }
 
 .signup-container {
-  background: white;
-  margin-top: 50px;
-  padding: 30px;
-  border-radius: 10px;
-  width: 340px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   text-align: center;
+  background: white;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  width: 90%;
+  max-width: 400px;
 }
 
-.signup-container h1 {
-  color: #193659;
-  margin: 15px 0 10px;
-}
-
-.signup-container p {
-  font-size: 14px;
-  color: #555;
-}
-
-.signup-container input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.signup-container button {
-  width: 100%;
-  padding: 10px;
-  background-color: #193659;
-  color: white;
-  margin-top: 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.signup-container button:hover {
-  background-color: #0f2a45;
-}
-
-.logo-img {
-  width: 70px;
-  height: 70px;
+.logo {
+  width: 80px;
+  height: 80px;
   margin-bottom: 10px;
 }
 
-#message {
+h2 {
+  color: #193659;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+button {
+  width: 95%;
+  padding: 12px;
+  background: #193659;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #142e4d;
+}
+
+.status-msg {
   margin-top: 15px;
   font-weight: bold;
+  color: green;
 }
