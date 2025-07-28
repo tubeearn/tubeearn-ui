@@ -1,26 +1,23 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #d0f1ff, #e8faff);
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: #eee;
 }
 
-.signup-wrapper {
-  width: 100%;
+.container {
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .signup-box {
-  width: 100%;
-  max-width: 380px;
-  background: white;
+  background: linear-gradient(to bottom, #00ff77, #007bff);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
@@ -29,75 +26,58 @@ body {
   margin-bottom: 10px;
 }
 
-.welcome-text {
-  font-size: 20px;
+h2 {
   margin: 0;
-  color: #193659;
+  font-size: 22px;
+  color: white;
 }
 
-.welcome-text span {
-  font-weight: bold;
-  background: linear-gradient(45deg, #0072ff, #00c6ff);
+h2 span {
+  background: linear-gradient(45deg, yellow, white);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.create-account-text {
-  font-size: 15px;
-  margin: 10px 0 20px;
-  color: #444;
+p {
+  color: #fff;
+  margin-bottom: 20px;
 }
 
-.form-group input {
+input {
   width: 100%;
   padding: 10px;
-  margin-bottom: 12px;
-  font-size: 15px;
-  border: 1px solid #ccc;
+  margin: 7px 0;
   border-radius: 6px;
-  box-sizing: border-box;
+  border: none;
+  font-size: 15px;
 }
 
-.captcha-box {
+.captcha {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+  margin: 10px 0;
 }
 
-#captchaText {
-  background: #f0f0f0;
-  padding: 8px 14px;
+#captchaCode {
+  background: white;
+  padding: 8px 15px;
   font-weight: bold;
   border-radius: 5px;
-}
-
-#captchaInput {
-  flex: 1;
-  margin-left: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background-color: #193659;
-  color: white;
   font-size: 16px;
+  background: #003366;
+  color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-top: 10px;
 }
 
-button:hover {
-  background-color: #145299;
-}
-
-#status {
-  margin-top: 15px;
+#message {
+  color: white;
+  margin-top: 12px;
   font-size: 14px;
-  color: green;
 }
