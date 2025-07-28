@@ -4,23 +4,25 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function signUp() {
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const msg = document.getElementById('message');
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+  const status = document.getElementById("status");
 
-  msg.style.color = 'black';
-  msg.textContent = "⏳ Creating your account...";
+  status.innerText = "⏳ Processing...";
 
-  const { data, error } = await supabase.auth.signUp({
+  if (!email || !password) {
+    status.innerText = "❌ Email and Password are required!";
+    return;
+  }
+
+  const { user, error } = await supabase.auth.signUp({
     email,
     password,
   });
 
   if (error) {
-    msg.style.color = 'red';
-    msg.textContent = "❌ " + error.message;
+    status.innerText = "❌ " + error.message;
   } else {
-    msg.style.color = 'green';
-    msg.textContent = "✅ Signup successful! Check your email to verify.";
+    status.innerText = "✅ Check your email to confirm signup!";
   }
 }
