@@ -19,7 +19,7 @@ setTimeout(() => {
 function searchNow() {
   const value = document.getElementById("searchInput").value.trim();
   if (value !== "") {
-    window.location.href = "../search.html?q=" + encodeURIComponent(value);
+    window.location.href = "../search/search.html?q=" + encodeURIComponent(value);
   } else {
     alert("Please enter something to search");
   }
@@ -45,8 +45,7 @@ function startVoice() {
   recognition.start();
 }
 
-// Infinite Scroll + Ads
-let videoCount = 0;
+// Infinite Scroll Video Content
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
     addMoreVideos();
@@ -58,14 +57,7 @@ function addMoreVideos() {
   for (let i = 0; i < 3; i++) {
     const div = document.createElement('div');
     div.className = 'short-video';
-
-    // Add ad after every 10 videos
-    if (++videoCount % 10 === 0) {
-      div.innerHTML = `<img src="https://via.placeholder.com/300x250?text=Ad+Video">`;
-    } else {
-      div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=More+Video+${Math.floor(Math.random()*1000)}" />`;
-    }
-
+    div.innerHTML = `<img src="https://via.placeholder.com/300x500?text=Auto+Video+${Math.floor(Math.random()*1000)}" />`;
     container.appendChild(div);
   }
 }
