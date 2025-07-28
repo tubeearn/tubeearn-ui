@@ -4,27 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Signup - TubeEarn</title>
-  <link rel="stylesheet" href="signup.css" />
+  <link rel="stylesheet" href="signup.css">
 </head>
 <body>
-  <div class="signup-container">
-    <div class="form-box">
-      <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" class="logo" alt="TubeEarn Logo" />
-      <h2>Welcome to TubeEarn</h2>
-      <p>Create Your Account</p>
+  <div class="signup-wrapper">
+    <div class="signup-box">
+      <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" class="logo" alt="TubeEarn" />
+      <h2 class="welcome-text">Welcome to <span>T1</span></h2>
+      <p class="create-account-text">Create Your Account</p>
 
-      <input type="text" id="fullname" placeholder="Full Name" />
-      <input type="text" id="phone" placeholder="Mobile Number" />
-      <input type="email" id="email" placeholder="Email Address" />
-      <input type="password" id="password" placeholder="Create Password" />
-      <input type="password" id="confirmPassword" placeholder="Confirm Password" />
-
+      <div class="form-group">
+        <input type="text" id="fullname" placeholder="👦 Full Name">
+      </div>
+      <div class="form-group">
+        <input type="text" id="phone" placeholder="📱 Mobile Number">
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="📧 Email Address">
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="🔒 Create Password">
+      </div>
+      <div class="form-group">
+        <input type="password" id="confirmPassword" placeholder="🔁 Confirm Password">
+      </div>
       <div class="captcha-box">
         <span id="captchaText">1234</span>
         <input type="text" id="captchaInput" placeholder="Enter Captcha" />
       </div>
-
-      <button onclick="signUp()">Create Account</button>
+      <button onclick="signUp()">🚀 Sign Up</button>
       <div id="status"></div>
     </div>
   </div>
