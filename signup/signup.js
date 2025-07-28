@@ -4,18 +4,18 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const captchaCode = Math.floor(1000 + Math.random() * 9000);
-document.getElementById("captcha").textContent = captchaCode;
+document.getElementById("captchaText").innerText = captchaCode;
 
 async function signUp() {
-  const fullname = document.getElementById("fullname").value.trim();
-  const mobile = document.getElementById("mobile").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const confirmPassword = document.getElementById("confirmPassword").value.trim();
-  const captchaInput = document.getElementById("captchaInput").value.trim();
+  const name = document.getElementById("fullname").value;
+  const phone = document.getElementById("phone").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const captchaInput = document.getElementById("captchaInput").value;
   const status = document.getElementById("status");
 
-  if (!fullname || !mobile || !email || !password || !confirmPassword || !captchaInput) {
+  if (!name || !phone || !email || !password || !confirmPassword || !captchaInput) {
     status.innerText = "❌ All fields are required.";
     status.style.color = "red";
     return;
@@ -28,7 +28,7 @@ async function signUp() {
   }
 
   if (captchaInput !== captchaCode.toString()) {
-    status.innerText = "❌ Captcha incorrect.";
+    status.innerText = "❌ Incorrect captcha.";
     status.style.color = "red";
     return;
   }
@@ -40,8 +40,8 @@ async function signUp() {
     password,
     options: {
       data: {
-        fullname,
-        mobile
+        name,
+        phone
       }
     }
   });
