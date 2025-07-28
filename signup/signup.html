@@ -7,21 +7,25 @@
   <link rel="stylesheet" href="signup.css" />
 </head>
 <body>
+  <div class="top-banner">📢 India's No.1 Earning Platform - TubeEarn</div>
 
-  <div class="header">
-    <h1>Welcome to TubeEarn</h1>
-  </div>
+  <div class="signup-box">
+    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" class="logo" alt="TubeEarn Logo" />
+    <h2>Welcome to TubeEarn</h2>
+    <p>Create Account Details</p>
 
-  <div class="signup-container">
-    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" class="logo" alt="TubeEarn" />
-    <h2>Create Your Account</h2>
-    
+    <input type="text" id="fullname" placeholder="Full Name" />
     <input type="text" id="mobile" placeholder="Mobile Number" />
     <input type="email" id="email" placeholder="Email Address" />
     <input type="password" id="password" placeholder="Create Password" />
-    <input type="password" id="confirmPassword" placeholder="Re-enter Password" />
-    
-    <button onclick="signUp()">Sign Up</button>
+    <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+
+    <div class="captcha-container">
+      <span id="captcha"></span>
+      <input type="text" id="captchaInput" placeholder="Enter above code" />
+    </div>
+
+    <button onclick="signUp()">Create Account</button>
     <div id="status"></div>
   </div>
 
