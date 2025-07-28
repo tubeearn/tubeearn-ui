@@ -3,6 +3,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #eaf8fc;
 }
+
 .top-bar {
   background-color: #193659;
   color: white;
@@ -14,44 +15,88 @@ body {
   top: 0;
   z-index: 1000;
 }
+
 .logo {
   display: flex;
   align-items: center;
 }
+
 .logo img {
   height: 50px;
   width: 50px;
   object-fit: contain;
   margin-right: 8px;
 }
-.auth-buttons a, .auth-buttons button {
+
+.logo div {
+  font-size: 20px;
+  font-weight: bold;
   color: white;
+}
+
+.auth-buttons a,
+.auth-buttons button {
+  color: white;
+  text-decoration: none;
   background: none;
   border: none;
   padding: 6px 10px;
   cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
 }
+
+.auth-buttons a:hover,
+.auth-buttons button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .search-container {
   display: flex;
   justify-content: center;
   margin: 10px;
   gap: 5px;
 }
+
+.search-container input {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 60%;
+}
+
+.search-container button {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #193659;
+  color: white;
+}
+
 .marquee {
-  background: lightblue;
-  color: darkred;
+  background-color: lightblue;
+  color: red;
   padding: 10px;
   font-weight: bold;
   overflow: hidden;
 }
+
 .marquee-content {
   white-space: nowrap;
   animation: scroll-left 15s linear infinite;
 }
+
 @keyframes scroll-left {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
+
 .button-grid {
   display: flex;
   flex-wrap: wrap;
@@ -59,33 +104,64 @@ body {
   padding: 10px;
   gap: 10px;
 }
+
 .button-grid a {
   background: #b2e1e6;
   padding: 10px 15px;
   border-radius: 6px;
   text-decoration: none;
-  color: #000;
+  color: black;
+  font-weight: bold;
 }
+
+.button-grid a:hover {
+  background-color: #a0d8df;
+}
+
 .stories {
   display: flex;
   overflow-x: auto;
   gap: 10px;
   padding: 10px;
-  background: #f2f2f2;
+  background-color: #f5f5f5;
 }
+
+.story {
+  flex: 0 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
 .story img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
   border: 2px solid #ff4d4d;
 }
-.shorts, .infinite-scroll {
-  padding: 10px;
+
+.story span {
+  font-size: 12px;
+  display: block;
+  margin-top: 5px;
 }
+
+.shorts,
+.infinite-scroll {
+  padding: 10px;
+  background: white;
+}
+
+.short-video {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
 .short-video img {
   width: 100%;
   border-radius: 8px;
 }
+
+/* ✅ Fixed: Bottom Navigation Restore */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -93,10 +169,18 @@ body {
   right: 0;
   display: flex;
   justify-content: space-around;
-  background: #193659;
-  color: white;
+  background-color: #193659;
   padding: 10px 0;
+  z-index: 1000;
 }
+
+.bottom-nav a {
+  color: white;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+}
+
 .apk-popup {
   position: fixed;
   top: 25%;
@@ -107,4 +191,15 @@ body {
   padding: 20px;
   z-index: 1000;
   display: none;
+  text-align: center;
+}
+
+.apk-popup button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  background-color: #193659;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
