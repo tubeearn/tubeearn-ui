@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Signup | TubeEarn</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>TubeEarn - Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
-  <div class="signup-box">
-    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo" />
-    <h1>Welcome to TubeEarn</h1>
-    <p class="tagline">Create your account and start earning with TubeEarn 🚀</p>
+  <div class="container">
+    <img src="logo.png" alt="TubeEarn Logo" class="logo" />
+    <h2>Welcome to TubeEarn</h2>
+    <p>Create your account and start earning with TubeEarn 🚀</p>
 
     <form id="signup-form">
-      <input type="text" id="fullname" placeholder="Full Name" required />
-      <input type="tel" id="mobile" placeholder="Mobile Number" required />
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="tel" id="phone" placeholder="Mobile Number" required />
       <input type="email" id="email" placeholder="Email Address" required />
       <input type="password" id="password" placeholder="Create Password" required />
       <button type="submit">Sign Up</button>
-      <p class="status-msg" id="status-msg"></p>
+      <div id="message" class="message"></div>
     </form>
   </div>
-  <script type="module" src="signup.js"></script>
+
+  <script src="signup.js"></script>
 </body>
 </html>
