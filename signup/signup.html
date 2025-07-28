@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup | TubeEarn</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="signup-container">
-    <img src="https://i.ibb.co/FYrCkjg/tubeearn-logo.png" alt="TubeEarn Logo" class="logo" />
-    <h2>Welcome to TubeEarn</h2>
-    <p>Create your account to start your journey 🚀</p>
+  <div class="signup-box">
+    <img src="https://i.postimg.cc/x1pLBPdb/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo" />
+    <h1>Welcome to TubeEarn</h1>
+    <p class="tagline">Create your account and start earning with TubeEarn 🚀</p>
+
     <form id="signup-form">
       <input type="text" id="fullname" placeholder="Full Name" required />
       <input type="tel" id="mobile" placeholder="Mobile Number" required />
-      <input type="email" id="email" placeholder="Email" required />
+      <input type="email" id="email" placeholder="Email Address" required />
       <input type="password" id="password" placeholder="Create Password" required />
       <button type="submit">Sign Up</button>
+      <p class="status-msg" id="status-msg"></p>
     </form>
-    <p id="status-msg" class="status"></p>
   </div>
   <script type="module" src="signup.js"></script>
 </body>
