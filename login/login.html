@@ -2,12 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn - Sign Up</title>
+  <link rel="stylesheet" href="signup.css" />
 </head>
 <body>
-  <h1>Login Page</h1>
-  <p>This is a placeholder for the login page.</p>
-  <a href="index.html">Go Back to Home</a>
+  <div class="signup-container">
+    <div class="signup-box">
+      <img src="https://i.postimg.cc/WbJMX0Pz/tubeearn-logo-white-bg.png" alt="TubeEarn Logo" class="logo" />
+      <h2>Welcome to <strong>TubeEarn</strong></h2>
+      <p>Create your account to start your journey 🚀</p>
+      <form id="signup-form">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="text" id="phone" placeholder="Mobile Number" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Create Password" required />
+        <button type="submit">Sign Up</button>
+        <p id="message" class="message"></p>
+      </form>
+    </div>
+  </div>
+  <script type="module" src="signup.js"></script>
 </body>
 </html>
