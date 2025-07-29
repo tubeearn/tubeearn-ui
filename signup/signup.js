@@ -1,39 +1,44 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+// Supabase Setup
+const SUPABASE_URL = "https://ejbvidirnsjvadvekede.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// ✅ Your Supabase project credentials
-const supabaseUrl = 'https://ejbvidirnsjvadvekede.supabase.co'
-const supabaseKey = 'YOUR_PUBLIC_ANON_KEY' // 👈 यहाँ सही key लगाओ
+// Form submission
+document.getElementById('signupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
 
-const supabase = createClient(supabaseUrl, supabaseKey)
+  const fullName = document.getElementById('name').value.trim();
+  const mobile = document.getElementById('mobile').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const confirm = document.getElementById('confirmPassword').value.trim();
+  const messageBox = document.getElementById('message');
 
-const form = document.getElementById('signup-form')
-const message = document.getElementById('message')
+  messageBox.textContent = '';
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault()
-
-  const name = document.getElementById('name').value
-  const phone = document.getElementById('phone').value
-  const email = document.getElementById('email').value
-  const password = document.getElementById('password').value
+  if (password !== confirm) {
+    messageBox.textContent = "Passwords do not match!";
+    messageBox.className = 'error-message';
+    return;
+  }
 
   const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
+    email: email,
+    password: password,
     options: {
       data: {
-        name,
-        phone,
-      },
-    },
-  })
+        full_name: fullName,
+        mobile: mobile
+      }
+    }
+  });
 
   if (error) {
-    message.className = 'message error'
-    message.textContent = `❌ ${error.message}`
+    messageBox.textContent = error.message;
+    messageBox.className = 'error-message';
   } else {
-    message.className = 'message success'
-    message.textContent = `✅ Account created! Please check your email.`
-    form.reset()
+    messageBox.textContent = "Account created! Check your email to confirm.";
+    messageBox.className = 'success-message';
+    document.getElementById('signupForm').reset();
   }
-})
+});
