@@ -1,23 +1,28 @@
-<!-- signup.html --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Signup - TubeEarn</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account - TubeEarn</title>
   <link rel="stylesheet" href="signup.css">
 </head>
 <body>
-  <div class="container">
-    <img src="https://i.postimg.cc/k5JPqYtV/tubeearn-logo-white.png" class="logo" alt="TubeEarn Logo">
-    <h2 class="title">Welcome to TubeEarn</h2>
-    <p class="subtitle">Create your account and start your journey</p><form id="signup-form">
-  <input type="text" id="name" placeholder="Full Name" required>
-  <input type="tel" id="phone" placeholder="Mobile Number" required>
-  <input type="email" id="email" placeholder="Email Address" required>
-  <input type="password" id="password" placeholder="Create a Password" required>
-  <input type="password" id="confirm-password" placeholder="Confirm Password" required>
-  <button type="submit">Sign Up</button>
-  <p class="message" id="message"></p>
-</form>
+  <div class="main-box">
+    <img src="https://i.postimg.cc/d19XPG9V/Screenshot-2025-07-29-00-43-38-940-com-android-chrome.jpg" class="logo" alt="TubeEarn Logo">
+    <h1>Welcome to TubeEarn</h1>
+    <p>Create your account below</p>
+    
+    <form id="signupForm">
+      <input type="text" id="name" placeholder="Full Name" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <input type="password" id="password" placeholder="Create Password" required>
+      <button type="submit">Sign Up</button>
+    </form>
 
-  </div>  <script src="signup.js"></script></body>
+    <p id="statusMsg"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="signup.js"></script>
+</body>
 </html>
