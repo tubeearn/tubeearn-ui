@@ -4,89 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn - Sign Up</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #b3e5fc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .signup-container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      width: 350px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      text-align: center;
-    }
-
-    .signup-container img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      color: #0d47a1;
-      margin: 0;
-    }
-
-    p {
-      margin: 10px 0 20px;
-      color: #333;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #0d47a1;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .message {
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    .error {
-      color: red;
-    }
-
-    .success {
-      color: green;
-    }
-  </style>
+  <link rel="stylesheet" href="signup.css" />
 </head>
 <body>
-  <div class="signup-container">
-    <img src="https://i.ibb.co/tLnhn1T/logo.png" alt="TubeEarn Logo" />
-    <h2>Welcome to TubeEarn</h2>
-    <p>Create your account to start your journey 🚀</p>
-    <form id="signup-form">
-      <input type="text" id="name" placeholder="Full Name" required />
-      <input type="text" id="phone" placeholder="Mobile Number" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Create Password" required />
-      <button type="submit">Sign Up</button>
-    </form>
-    <div class="message" id="message"></div>
+  <div class="container">
+    <div class="form-box">
+      <img src="https://i.ibb.co/Vt9zX4M/tubelogo.png" alt="TubeEarn Logo" class="logo" />
+      <h2>Welcome to <span>TubeEarn</span></h2>
+      <p>Create your account to start your journey 🚀</p>
+      <form id="signup-form">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="text" id="phone" placeholder="Mobile Number" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Create Password" required />
+        <button type="submit">Sign Up</button>
+        <p id="message" class="message"></p>
+      </form>
+    </div>
   </div>
 
   <script type="module" src="signup.js"></script>
