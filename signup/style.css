@@ -2,62 +2,65 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #e3f2fd, #ffffff);
-  height: 100vh;
+  background: linear-gradient(to right, #dbeafe, #eff6ff);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-.main-box {
+.signup-container {
   background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  width: 90%;
+  padding: 40px;
+  border-radius: 10px;
+  width: 100%;
   max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   text-align: center;
 }
 
 .logo {
   width: 80px;
-  margin-bottom: 15px;
-  border-radius: 12px;
+  margin-bottom: 20px;
 }
 
-h1 {
-  color: #1565c0;
+.signup-container h2 {
   margin: 10px 0;
+  color: #1e3a8a;
 }
 
-p {
+.tagline {
+  font-size: 14px;
+  margin-bottom: 20px;
   color: #555;
 }
 
 input {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
 }
 
 button {
-  width: 95%;
-  padding: 10px;
-  background-color: #1565c0;
+  width: 100%;
+  padding: 12px;
+  background-color: #1e40af;
   color: white;
   font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #0d47a1;
+  background-color: #1d4ed8;
 }
 
-#statusMsg {
+.message {
   margin-top: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  color: green;
 }
