@@ -1,27 +1,34 @@
-// Supabase URL and API Key
-const SUPABASE_URL = "https://ejbvidirnsjvadvekede.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs";
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// 🛠 Replace with your Supabase details
+const supabaseUrl = 'https://ejbvidirnsjvadvekede.supabase.co'
+const supabaseKey = 'YOUR_PUBLIC_ANON_KEY'  // 👈 यहाँ अपना सही key लगाओ
 
-// Signup Logic
-document.getElementById('signup-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
+const supabase = createClient(supabaseUrl, supabaseKey)
 
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+const form = document.getElementById('signup-form')
+const message = document.getElementById('message')
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault()
+
+  const name = document.getElementById('name').value
+  const phone = document.getElementById('phone').value
+  const email = document.getElementById('email').value
+  const password = document.getElementById('password').value
 
   const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
-  });
+    email,
+    password,
+    options: {
+      data: { name, phone }
+    }
+  })
 
-  const message = document.getElementById('message');
   if (error) {
-    message.innerText = "❌ " + error.message;
-    message.style.color = 'red';
+    message.innerHTML = `<span class="error">❌ ${error.message}</span>`
   } else {
-    message.innerText = "✅ Please check your email to confirm.";
-    message.style.color = 'green';
+    message.innerHTML = `<span class="success">✅ Account created! Please confirm your email to proceed.</span>`
+    form.reset()
   }
-});
+})
