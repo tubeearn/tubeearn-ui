@@ -1,44 +1,30 @@
-// Supabase Setup
-const SUPABASE_URL = "https://ejbvidirnsjvadvekede.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...";
+const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
+
 const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-// Form submission
-document.getElementById('signupForm').addEventListener('submit', async function(e) {
+document.getElementById("signupForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const fullName = document.getElementById('name').value.trim();
-  const mobile = document.getElementById('mobile').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-  const confirm = document.getElementById('confirmPassword').value.trim();
-  const messageBox = document.getElementById('message');
-
-  messageBox.textContent = '';
-
-  if (password !== confirm) {
-    messageBox.textContent = "Passwords do not match!";
-    messageBox.className = 'error-message';
-    return;
-  }
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const statusMsg = document.getElementById("statusMsg");
 
   const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
+    email,
+    password,
     options: {
-      data: {
-        full_name: fullName,
-        mobile: mobile
-      }
+      data: { full_name: name }
     }
   });
 
   if (error) {
-    messageBox.textContent = error.message;
-    messageBox.className = 'error-message';
+    statusMsg.style.color = "red";
+    statusMsg.textContent = "❌ " + error.message;
   } else {
-    messageBox.textContent = "Account created! Check your email to confirm.";
-    messageBox.className = 'success-message';
-    document.getElementById('signupForm').reset();
+    statusMsg.style.color = "green";
+    statusMsg.textContent = "✅ Account created. Check your email to confirm.";
+    document.getElementById("signupForm").reset();
   }
 });
