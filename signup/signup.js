@@ -1,8 +1,8 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-// 🛠 Replace with your Supabase details
+// ✅ Your Supabase project credentials
 const supabaseUrl = 'https://ejbvidirnsjvadvekede.supabase.co'
-const supabaseKey = 'YOUR_PUBLIC_ANON_KEY'  // 👈 यहाँ अपना सही key लगाओ
+const supabaseKey = 'YOUR_PUBLIC_ANON_KEY' // 👈 यहाँ सही key लगाओ
 
 const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -21,14 +21,19 @@ form.addEventListener('submit', async (e) => {
     email,
     password,
     options: {
-      data: { name, phone }
-    }
+      data: {
+        name,
+        phone,
+      },
+    },
   })
 
   if (error) {
-    message.innerHTML = `<span class="error">❌ ${error.message}</span>`
+    message.className = 'message error'
+    message.textContent = `❌ ${error.message}`
   } else {
-    message.innerHTML = `<span class="success">✅ Account created! Please confirm your email to proceed.</span>`
+    message.className = 'message success'
+    message.textContent = `✅ Account created! Please check your email.`
     form.reset()
   }
 })
