@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+  <meta charset="UTF-8" />
+  <title>Login | TubeEarn</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
 <body>
-  <h2>Login</h2>
+  <h2>Login to TubeEarn</h2>
   <form id="loginForm">
     <input type="email" id="email" placeholder="Email" required><br><br>
     <input type="password" id="password" placeholder="Password" required><br><br>
@@ -23,6 +23,7 @@
 
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
       const status = document.getElementById('status');
@@ -32,8 +33,10 @@
       if (error) {
         status.textContent = "❌ " + error.message;
       } else {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        window.location.href = "../dashboard/dashboard.html";
+        // Save user info in localStorage
+        localStorage.setItem("user_email", data.user.email);
+        localStorage.setItem("user_fullname", data.user.user_metadata?.fullname || "");
+        window.location.href = "../index.html"; // Go to homepage
       }
     });
   </script>
