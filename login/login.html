@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom right, #0d47a1, #42a5f5);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-box {
+      width: 380px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .login-box img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+    .login-box h2 {
+      color: #0d47a1;
+      margin-bottom: 6px;
+    }
+    .login-box p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .captcha-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+    }
+    .captcha-box label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .captcha-box input {
+      width: 100px;
+      margin-left: 10px;
+    }
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      background: #0d47a1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .login-box button:hover {
+      background: #1565c0;
+    }
+    .login-box .forgot {
+      font-size: 13px;
+      margin-top: 12px;
+      display: block;
+      color: #0d47a1;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    #statusMsg {
+      margin-top: 10px;
+      color: green;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" />
+    <h2>Welcome to T1</h2>
+    <p>Grow & Earn with Us</p>
+    <input type="email" id="email" placeholder="Email Address" required />
+    <input type="password" id="password" placeholder="Password" required />
+
+    <div class="captcha-box">
+      <label id="captcha-qn">3 + 4 = ?</label>
+      <input type="text" id="captcha-ans" placeholder="Answer" required />
+    </div>
+
+    <button onclick="login()">Sign In</button>
+    <a class="forgot" onclick="resetPassword()">Forgot Password?</a>
+    <p id="statusMsg"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const supabase = supabase.createClient(
+      'https://ejbvidirnsjvadvekede.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
+    );
+
+    let n1 = Math.floor(Math.random() * 10) + 1;
+    let n2 = Math.floor(Math.random() * 10) + 1;
+    let captchaCorrect = n1 + n2;
+    document.getElementById('captcha-qn').innerText = `${n1} + ${n2} = ?`;
+
+    async function login() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const captcha = parseInt(document.getElementById('captcha-ans').value.trim());
+      const status = document.getElementById('statusMsg');
+
+      if (captcha !== captchaCorrect) {
+        status.innerText = "❌ Captcha incorrect!";
+        return;
+      }
+
+      status.innerText = "⏳ Logging in...";
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        status.innerText = "❌ " + error.message;
+      } else {
+        status.innerText = "✅ Login successful!";
+        setTimeout(() => {
+          window.location.href = "index.html"; // redirect after login
+        }, 1500);
+      }
+    }
+
+    async function resetPassword() {
+      const email = prompt("Enter your email to reset password:");
+      if (!email) return;
+
+      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://your-site.com/reset-done"  // change this to your page
+      });
+
+      if (error) {
+        alert("❌ " + error.message);
+      } else {
+        alert("📩 Reset email sent. Check your inbox.");
+      }
+    }
+  </script>
+</body>
+</html>
