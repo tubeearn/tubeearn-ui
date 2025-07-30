@@ -6,10 +6,7 @@
   <title>TubeEarn - Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0; padding: 0; box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body {
       background: linear-gradient(to bottom right, #0d47a1, #42a5f5);
       height: 100vh;
@@ -92,7 +89,7 @@
 <body>
   <div class="login-box">
     <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" />
-    <h2>Welcome to TubeEarn</h2>
+    <h2>Welcome to T1</h2>
     <p>Grow & Earn with Us</p>
     <input type="email" id="email" placeholder="Email Address" required />
     <input type="password" id="password" placeholder="Password" required />
@@ -102,11 +99,12 @@
       <input type="text" id="captcha-ans" placeholder="Answer" required />
     </div>
 
-    <button onclick="login()">Sign In</button>
+    <button id="signinBtn">Sign In</button>
     <a class="forgot" onclick="resetPassword()">Forgot Password?</a>
     <p id="statusMsg"></p>
   </div>
 
+  <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const supabase = supabase.createClient(
@@ -114,10 +112,14 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
     );
 
+    // Captcha setup
     let n1 = Math.floor(Math.random() * 10) + 1;
     let n2 = Math.floor(Math.random() * 10) + 1;
     let captchaCorrect = n1 + n2;
     document.getElementById('captcha-qn').innerText = `${n1} + ${n2} = ?`;
+
+    // Button click event
+    document.getElementById('signinBtn').addEventListener('click', login);
 
     async function login() {
       const email = document.getElementById('email').value.trim();
@@ -148,8 +150,8 @@
       const email = prompt("Enter your email to reset password:");
       if (!email) return;
 
-      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://your-site.com/reset-done"  // change this to your page
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://yourdomain.com/password-reset"
       });
 
       if (error) {
