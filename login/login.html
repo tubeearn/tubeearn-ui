@@ -12,16 +12,16 @@
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* top aligned */
+      align-items: flex-start;
       height: 100vh;
-      padding-top: 50px; /* move container down from top */
+      padding-top: 40px;
     }
     .container {
-      width: 380px;
-      background: white;
-      border-radius: 12px;
+      width: 370px;
+      background: #fff;
       padding: 30px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
       text-align: center;
     }
     .container img {
@@ -29,8 +29,14 @@
       margin-bottom: 10px;
     }
     h2 {
+      margin: 0;
+      font-size: 22px;
       color: #0d47a1;
-      margin-bottom: 10px;
+    }
+    .tagline {
+      font-size: 13px;
+      margin-bottom: 15px;
+      color: #444;
     }
     input {
       width: 100%;
@@ -84,12 +90,14 @@
   <div class="container">
     <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" alt="Logo" />
     <h2>Welcome to TubeEarn</h2>
+    <div class="tagline">🌟 Fastest growing global earning & performance platform!</div>
+
     <input type="email" id="email" placeholder="Email Address" required />
     <input type="password" id="password" placeholder="Password" required />
     
     <div class="captcha-box">
       <label id="captcha-question">Loading...</label>
-      <input type="text" id="captcha-answer" placeholder="?" required />
+      <input type="text" id="captcha-answer" placeholder="Answer" required />
     </div>
 
     <button onclick="login()">Sign In</button>
@@ -107,16 +115,16 @@
 
     let correctAnswer;
 
-    // Generate captcha on page load
+    // Captcha Generate Function
     function generateCaptcha() {
-      let num1 = Math.floor(Math.random() * 10) + 1;
-      let num2 = Math.floor(Math.random() * 10) + 1;
+      const num1 = Math.floor(Math.random() * 10) + 1;
+      const num2 = Math.floor(Math.random() * 10) + 1;
       correctAnswer = num1 + num2;
       document.getElementById("captcha-question").innerText = `${num1} + ${num2} = ?`;
     }
 
-    // Call on load
-    generateCaptcha();
+    // Run on Load
+    window.onload = generateCaptcha;
 
     async function login() {
       const email = document.getElementById("email").value.trim();
@@ -133,17 +141,14 @@
       if (captcha !== correctAnswer) {
         status.innerText = "❌ Captcha incorrect.";
         status.style.color = "red";
-        generateCaptcha(); // refresh
+        generateCaptcha(); // Refresh captcha
         return;
       }
 
       status.innerText = "⏳ Signing in...";
       status.style.color = "black";
 
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
         status.innerText = "❌ " + error.message;
@@ -152,7 +157,7 @@
         status.innerText = "✅ Login successful!";
         status.style.color = "green";
         setTimeout(() => {
-          window.location.href = "index.html"; // Update as needed
+          window.location.href = "index.html"; // Set home page path here
         }, 1500);
       }
     }
