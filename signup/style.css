@@ -4,11 +4,13 @@ body {
   background: linear-gradient(to bottom, #e3f2fd, #ffffff);
   font-family: 'Segoe UI', sans-serif;
 }
+
 .main-wrapper {
   display: flex;
   justify-content: center;
   margin-top: 30px;
 }
+
 .container {
   width: 400px;
   background: white;
@@ -17,20 +19,24 @@ body {
   border-radius: 12px;
   text-align: center;
 }
+
 .logo {
   width: 140px;
   margin-bottom: 10px;
 }
+
 header h1 {
   margin: 0;
   font-size: 22px;
   color: #0d47a1;
 }
+
 header p {
   font-size: 14px;
   margin-bottom: 20px;
   color: #555;
 }
+
 form input {
   width: 100%;
   padding: 10px;
@@ -39,18 +45,22 @@ form input {
   border-radius: 6px;
   font-size: 14px;
 }
+
 .captcha-box {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .captcha-box label {
   flex: 1;
   text-align: left;
 }
+
 .captcha-box input {
   width: 100px;
 }
+
 button {
   background-color: #0d47a1;
   color: white;
@@ -60,9 +70,11 @@ button {
   border-radius: 6px;
   cursor: pointer;
 }
+
 button:hover {
   background-color: #1565c0;
 }
+
 #statusMessage {
   margin-top: 10px;
   color: green;
