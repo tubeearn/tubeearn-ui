@@ -6,141 +6,132 @@
   <title>Login - TubeEarn</title>
   <style>
     body {
-      font-family: Arial;
-      background: linear-gradient(to right, #007bff, #00c6ff);
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #1e3c72, #2a5298);
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      padding-top: 50px;
-      height: 100vh;
-      margin: 0;
+      padding-top: 40px;
     }
-
     .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-
-    .login-box h2 {
+      background-color: #fff;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       text-align: center;
-      margin-bottom: 20px;
-      color: #007bff;
     }
-
-    input[type="email"], input[type="password"], input[type="text"] {
+    h2 {
+      margin-bottom: 10px;
+      color: #1e3c72;
+    }
+    p.subtitle {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
     }
-
     button {
       width: 100%;
-      background: #007bff;
-      color: white;
       padding: 10px;
+      background-color: #1e3c72;
+      color: white;
+      font-weight: bold;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
       margin-top: 10px;
     }
-
-    .links {
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    .links a {
-      color: #007bff;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    #status {
-      text-align: center;
+    .link {
       margin-top: 10px;
-      font-size: 14px;
+      font-size: 13px;
+    }
+    .link a {
+      color: #1e3c72;
+      text-decoration: none;
+    }
+    #captchaBox {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+    #status {
+      margin-top: 10px;
+      font-size: 13px;
+      color: red;
     }
   </style>
 </head>
 <body>
+
   <div class="login-box">
     <h2>Welcome to TubeEarn</h2>
+    <p class="subtitle">World's No.1 Fast Growing Earning Platform</p>
     <form id="loginForm">
       <input type="email" id="email" placeholder="Email" required />
       <input type="password" id="password" placeholder="Password" required />
-
-      <label id="captchaQuestion"></label>
-      <input type="text" id="captchaAnswer" placeholder="Enter Captcha" required />
+      
+      <div id="captchaBox">Loading Captcha...</div>
+      <input type="text" id="captchaInput" placeholder="Answer Captcha" required />
 
       <button type="submit">Sign In</button>
+
+      <p class="link"><a href="forgot.html">Forgot Password?</a></p>
+
       <p id="status"></p>
     </form>
-
-    <div class="links">
-      <a href="#" id="forgotLink">Forgot Password?</a><br>
-      <a href="signup.html">Create an account</a>
-    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
-    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
+    const supabase = supabase.createClient(
+      'https://ejbvidirnsjvadvekede.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
+    );
 
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
     let num1, num2;
 
     function generateCaptcha() {
-      num1 = Math.floor(Math.random() * 10);
-      num2 = Math.floor(Math.random() * 10);
-      document.getElementById("captchaQuestion").innerText = `What is ${num1} + ${num2}?`;
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+      document.getElementById("captchaBox").innerText = `Captcha: ${num1} + ${num2} = ?`;
     }
 
     generateCaptcha();
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
-      const captcha = parseInt(document.getElementById("captchaAnswer").value.trim());
+      const captchaInput = document.getElementById("captchaInput").value.trim();
       const status = document.getElementById("status");
 
-      if (captcha !== num1 + num2) {
-        status.innerText = "❌ Captcha is incorrect";
+      if (parseInt(captchaInput) !== (num1 + num2)) {
+        status.innerText = "❌ Captcha incorrect. Try again.";
         generateCaptcha();
         return;
       }
 
-      const { data, error } = await client.auth.signInWithPassword({ email, password });
+      status.innerText = "⏳ Logging in...";
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
-        status.innerText = "✅ Login successful!";
+        status.innerText = "✅ Login successful! Redirecting...";
         setTimeout(() => {
-          window.location.href = "index.html"; // Redirect to homepage
+          window.location.href = "../index.html"; // फ्रंट होमपेज का path
         }, 1000);
-      }
-    });
-
-    document.getElementById("forgotLink").addEventListener("click", async () => {
-      const email = prompt("Enter your email to reset password:");
-      if (!email) return;
-
-      const { error } = await client.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://tubeearn.netlify.app/reset-password.html"
-      });
-
-      if (error) {
-        alert("❌ " + error.message);
-      } else {
-        alert("✅ Reset link sent to your email.");
       }
     });
   </script>
