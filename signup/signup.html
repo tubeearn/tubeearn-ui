@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Signup - TubeEarn</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
       <header>
         <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo" />
         <h1>Welcome to TubeEarn</h1>
-        <p>Create your account and enjoy your journey</p>
+        <p>Create your account and start your journey</p>
       </header>
 
       <form id="signupForm">
@@ -23,9 +23,9 @@
         <input type="password" id="password" placeholder="Create Password" required />
         <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
 
-        <div class="captcha-box">
-          <label id="captcha-question"></label>
-          <input type="text" id="captcha-answer" placeholder="Answer" required />
+        <div class="captcha-container">
+          <label class="captcha-label" id="captcha-question">What is 2 + 2?</label>
+          <input type="text" id="captcha-answer" placeholder="Enter answer" required />
         </div>
 
         <button type="submit" id="signupBtn">Sign Up & Proceed</button>
@@ -34,6 +34,7 @@
     </div>
   </div>
 
+  <!-- Supabase JS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script src="script.js"></script>
 </body>
