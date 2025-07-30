@@ -1,13 +1,14 @@
 const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
-const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // आपका API की पूरी लाइन रखें
-
+const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...GfUs'; // (Already trimmed for security, but you know the full one)
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
+// Captcha logic
 let num1 = Math.floor(Math.random() * 10) + 1;
 let num2 = Math.floor(Math.random() * 10) + 1;
 let correctAnswer = num1 + num2;
 document.getElementById('captcha-question').innerText = `What is ${num1} + ${num2}?`;
 
+// Signup
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -20,16 +21,16 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
   const status = document.getElementById('statusMessage');
 
   if (password !== confirmPassword) {
-    status.innerText = "Passwords do not match.";
+    status.innerText = "❌ Passwords do not match.";
     return;
   }
 
   if (captcha !== correctAnswer) {
-    status.innerText = "Captcha answer is incorrect.";
+    status.innerText = "❌ Captcha answer is incorrect.";
     return;
   }
 
-  status.innerText = "Processing your request...";
+  status.innerText = "⏳ Processing your request...";
 
   const { data, error } = await client.auth.signUp({
     email,
