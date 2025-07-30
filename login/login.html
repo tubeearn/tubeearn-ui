@@ -3,36 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - TubeEarn</title>
+  <title>Login | TubeEarn</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      font-family: Arial, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      color: #000;
+      padding: 30px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .link {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .link a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+    #captchaText {
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-<body style="font-family: Arial; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh;">
-  <div style="background: white; padding: 30px; border-radius: 8px; width: 100%; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-    <h2 style="text-align: center; margin-bottom: 20px;">Welcome to TubeEarn</h2>
+<body>
+  <div class="container">
+    <h2>Welcome to TubeEarn</h2>
     <form id="loginForm">
-      <input type="email" id="loginEmail" placeholder="Email" required style="width:100%; padding:10px; margin:10px 0;" />
-      <input type="password" id="loginPassword" placeholder="Password" required style="width:100%; padding:10px; margin:10px 0;" />
-      <button type="submit" style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:4px;">Login</button>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      
+      <div id="captchaText">Loading...</div>
+      <input type="text" id="captchaInput" placeholder="Enter captcha" required />
+
+      <button type="submit">Sign In</button>
+      <p id="status" style="color: red; text-align: center;"></p>
     </form>
-    <p style="text-align:center; margin-top:10px;">
-      <a href="forgot-password.html">Forgot Password?</a>
-    </p>
-    <p id="loginStatus" style="text-align:center; color:red;"></p>
+
+    <div class="link">
+      <a href="#" onclick="showForgot()">Forgot Password?</a><br>
+      <a href="signup.html">Create an Account</a>
+    </div>
+
+    <form id="forgotForm" style="display:none; margin-top: 20px;">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required />
+      <button type="submit">Reset Password</button>
+      <p id="forgotStatus" style="color: green; text-align: center;"></p>
+    </form>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    const client = supabase.createClient(
-      'https://ejbvidirnsjvadvekede.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
-    );
+    const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
+    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...GfUs'; // तुम्हारा API key यहां पूरा डाल देना
 
-    const form = document.getElementById("loginForm");
-    const status = document.getElementById("loginStatus");
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-    form.addEventListener("submit", async (e) => {
+    let num1 = Math.floor(Math.random() * 10);
+    let num2 = Math.floor(Math.random() * 10);
+    let answer = num1 + num2;
+    document.getElementById('captchaText').innerText = `What is ${num1} + ${num2}?`;
+
+    document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const captchaInput = parseInt(document.getElementById("captchaInput").value.trim());
+      const status = document.getElementById("status");
+
+      if (captchaInput !== answer) {
+        status.innerText = "❌ Incorrect captcha";
+        return;
+      }
 
       const { data, error } = await client.auth.signInWithPassword({ email, password });
 
@@ -41,8 +120,28 @@
       } else {
         status.innerText = "✅ Login successful!";
         setTimeout(() => {
-          window.location.href = "index.html"; // लॉगिन के बाद redirect
+          window.location.href = "index.html"; // redirect to main front page
         }, 1000);
+      }
+    });
+
+    function showForgot() {
+      document.getElementById("forgotForm").style.display = "block";
+    }
+
+    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmail").value.trim();
+      const status = document.getElementById("forgotStatus");
+
+      const { data, error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://tubeearn.netlify.app/reset-password.html"
+      });
+
+      if (error) {
+        status.innerText = "❌ " + error.message;
+      } else {
+        status.innerText = "✅ Reset link sent to your email.";
       }
     });
   </script>
