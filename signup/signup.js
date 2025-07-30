@@ -1,14 +1,14 @@
 const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
-const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...GfUs'; // (Already trimmed for security, but you know the full one)
+const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // 🔐 Replace with your full Supabase API key
+
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
 // Captcha logic
-let num1 = Math.floor(Math.random() * 10) + 1;
-let num2 = Math.floor(Math.random() * 10) + 1;
-let correctAnswer = num1 + num2;
+const num1 = Math.floor(Math.random() * 10) + 1;
+const num2 = Math.floor(Math.random() * 10) + 1;
+const correctAnswer = num1 + num2;
 document.getElementById('captcha-question').innerText = `What is ${num1} + ${num2}?`;
 
-// Signup
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -36,7 +36,10 @@ document.getElementById('signupForm').addEventListener('submit', async (e) => {
     email,
     password,
     options: {
-      data: { fullname, phone }
+      data: {
+        fullname,
+        phone
+      }
     }
   });
 
