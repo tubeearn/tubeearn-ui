@@ -3,41 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <title>TubeEarn Login</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body {
+      margin: 0;
+      padding: 0;
       background: linear-gradient(to bottom right, #0d47a1, #42a5f5);
-      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    .login-box {
+    .container {
       width: 380px;
+      background: white;
+      border-radius: 12px;
       padding: 30px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
       text-align: center;
     }
-    .login-box img {
+    .container img {
       width: 100px;
       margin-bottom: 10px;
     }
-    .login-box h2 {
+    h2 {
       color: #0d47a1;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
-    .login-box p {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 15px;
-    }
-    .login-box input {
+    input {
       width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin: 8px 0;
       border: 1px solid #ccc;
       border-radius: 8px;
@@ -45,66 +41,61 @@
     }
     .captcha-box {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin: 10px 0;
+      justify-content: space-between;
     }
     .captcha-box label {
       font-weight: bold;
-      font-size: 14px;
     }
     .captcha-box input {
-      width: 100px;
+      width: 80px;
       margin-left: 10px;
     }
-    .login-box button {
+    button {
       width: 100%;
       padding: 12px;
-      background: #0d47a1;
+      background-color: #0d47a1;
       color: white;
       border: none;
-      border-radius: 8px;
       font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
       margin-top: 10px;
-      cursor: pointer;
     }
-    .login-box button:hover {
-      background: #1565c0;
-    }
-    .login-box .forgot {
-      font-size: 13px;
-      margin-top: 12px;
-      display: block;
-      color: #0d47a1;
-      text-decoration: underline;
-      cursor: pointer;
+    button:hover {
+      background-color: #1565c0;
     }
     #statusMsg {
       margin-top: 10px;
-      color: green;
       font-size: 14px;
+    }
+    .forgot {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #0d47a1;
+      cursor: pointer;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="login-box">
-    <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" />
-    <h2>Welcome to T1</h2>
-    <p>Grow & Earn with Us</p>
+  <div class="container">
+    <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" alt="Logo" />
+    <h2>Welcome to TubeEarn</h2>
     <input type="email" id="email" placeholder="Email Address" required />
     <input type="password" id="password" placeholder="Password" required />
-
+    
     <div class="captcha-box">
-      <label id="captcha-qn">3 + 4 = ?</label>
-      <input type="text" id="captcha-ans" placeholder="Answer" required />
+      <label id="captcha-question">Loading...</label>
+      <input type="text" id="captcha-answer" placeholder="?" required />
     </div>
 
-    <button id="signinBtn">Sign In</button>
-    <a class="forgot" onclick="resetPassword()">Forgot Password?</a>
-    <p id="statusMsg"></p>
+    <button onclick="login()">Sign In</button>
+    <div class="forgot" onclick="resetPassword()">Forgot Password?</div>
+    <div id="statusMsg"></div>
   </div>
 
-  <!-- Supabase SDK -->
+  <!-- Supabase JS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const supabase = supabase.createClient(
@@ -112,36 +103,45 @@
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
     );
 
-    // Captcha setup
-    let n1 = Math.floor(Math.random() * 10) + 1;
-    let n2 = Math.floor(Math.random() * 10) + 1;
-    let captchaCorrect = n1 + n2;
-    document.getElementById('captcha-qn').innerText = `${n1} + ${n2} = ?`;
-
-    // Button click event
-    document.getElementById('signinBtn').addEventListener('click', login);
+    let num1 = Math.floor(Math.random() * 10) + 1;
+    let num2 = Math.floor(Math.random() * 10) + 1;
+    let correctAnswer = num1 + num2;
+    document.getElementById("captcha-question").innerText = `${num1} + ${num2} = ?`;
 
     async function login() {
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const captcha = parseInt(document.getElementById('captcha-ans').value.trim());
-      const status = document.getElementById('statusMsg');
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const captcha = parseInt(document.getElementById("captcha-answer").value.trim());
+      const status = document.getElementById("statusMsg");
 
-      if (captcha !== captchaCorrect) {
-        status.innerText = "❌ Captcha incorrect!";
+      if (!email || !password || isNaN(captcha)) {
+        status.innerText = "❌ Fill all fields correctly.";
+        status.style.color = "red";
         return;
       }
 
-      status.innerText = "⏳ Logging in...";
+      if (captcha !== correctAnswer) {
+        status.innerText = "❌ Captcha incorrect.";
+        status.style.color = "red";
+        return;
+      }
 
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      status.innerText = "⏳ Signing in...";
+      status.style.color = "black";
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
       if (error) {
         status.innerText = "❌ " + error.message;
+        status.style.color = "red";
       } else {
         status.innerText = "✅ Login successful!";
+        status.style.color = "green";
         setTimeout(() => {
-          window.location.href = "index.html"; // redirect after login
+          window.location.href = "index.html"; // Update as needed
         }, 1500);
       }
     }
@@ -151,7 +151,7 @@
       if (!email) return;
 
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://yourdomain.com/password-reset"
+        redirectTo: "https://yourdomain.com/reset"
       });
 
       if (error) {
