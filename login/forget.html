@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reset Password - TubeEarn</title>
+</head>
+<body>
+  <h2>Reset Your Password</h2>
+  <form id="forgotForm">
+    <input type="email" id="forgotEmail" placeholder="Enter your email" required />
+    <button type="submit">Send Reset Link</button>
+    <p id="forgotStatus"></p>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const client = supabase.createClient(
+      "https://ejbvidirnsjvadvekede.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+    );
+
+    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmail").value.trim();
+      const status = document.getElementById("forgotStatus");
+
+      status.textContent = "⏳ Sending...";
+
+      const { data, error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://tubeearn.netlify.app/reset-password.html"
+      });
+
+      if (error) {
+        status.textContent = "❌ " + error.message;
+      } else {
+        status.textContent = "✅ Link sent to your email.";
+      }
+    });
+  </script>
+</body>
+</html>
