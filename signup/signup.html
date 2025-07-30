@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup - TubeEarn</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="container">
+      <header>
+        <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo" />
+        <h1>Welcome to TubeEarn</h1>
+        <p>Create your account and start your journey</p>
+      </header>
+
+      <form id="signupForm">
+        <input type="text" id="fullname" placeholder="Full Name" required />
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <input type="password" id="password" placeholder="Create Password" required />
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required />
+
+        <div class="captcha-box">
+          <label id="captcha-question"></label>
+          <input type="text" id="captcha-answer" placeholder="Answer" required />
+        </div>
+
+        <button type="submit" id="signupBtn">Sign Up & Proceed</button>
+        <p id="statusMessage"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="signup.js"></script>
+</body>
+</html>
