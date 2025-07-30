@@ -46,19 +46,21 @@ form input {
   font-size: 14px;
 }
 
-.captcha-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.captcha-box label {
-  flex: 1;
+.captcha-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 6px;
   text-align: left;
 }
 
-.captcha-box input {
-  width: 100px;
+.captcha-label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  color: #333;
 }
 
 button {
@@ -69,6 +71,7 @@ button {
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
+  width: 100%;
 }
 
 button:hover {
@@ -78,4 +81,5 @@ button:hover {
 #statusMessage {
   margin-top: 10px;
   color: green;
+  font-size: 14px;
 }
