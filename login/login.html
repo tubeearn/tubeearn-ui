@@ -1,153 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - TubeEarn</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #003973, #e5e5be);
-      margin: 0;
-      padding: 0;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
+      justify-content: center;
+      align-items: start;
+      height: 100vh;
+      padding-top: 50px;
+      margin: 0;
     }
-
-    .login-container {
+    .container {
       background-color: white;
-      margin-top: 50px;
       padding: 30px;
-      border-radius: 8px;
-      width: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
       max-width: 400px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
-
     h2 {
       text-align: center;
-      margin-bottom: 20px;
-      color: #003973;
+      color: #1e3c72;
     }
-
     input {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 4px;
+      border-radius: 5px;
     }
-
     button {
       width: 100%;
       padding: 10px;
-      background-color: #003973;
+      background-color: #1e3c72;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
-      margin-top: 10px;
     }
-
     button:hover {
-      background-color: #005fa3;
+      background-color: #16365c;
     }
-
-    .link {
-      margin-top: 10px;
+    p {
       text-align: center;
     }
-
-    .link a {
-      color: #003973;
+    a {
+      color: #1e3c72;
       text-decoration: none;
     }
-
     #forgotStatus {
-      text-align: center;
       margin-top: 10px;
+      text-align: center;
       color: green;
     }
   </style>
 </head>
 <body>
-
-  <div class="login-container">
+  <div class="container">
     <h2>Welcome to TubeEarn</h2>
     <form id="loginForm">
-      <input type="email" id="email" placeholder="Enter your email" required />
-      <input type="password" id="password" placeholder="Enter your password" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
       <button type="submit">Sign In</button>
     </form>
-
-    <div class="link">
-      <a href="#" id="showForgot">Forgot Password?</a>
+    <p><a href="#" id="showForgot">Forgot Password?</a></p>
+    <div id="forgotContainer" style="display: none;">
+      <form id="forgotForm">
+        <input type="email" id="forgotEmail" placeholder="Enter your email" required />
+        <button type="submit">Reset Password</button>
+        <p id="forgotStatus"></p>
+      </form>
     </div>
-
-    <div class="link">
-      <a href="signup.html">Don't have an account? Create One</a>
-    </div>
-  </div>
-
-  <!-- Forgot Password Modal -->
-  <div class="login-container" id="forgotContainer" style="display:none;">
-    <h2>Reset Your Password</h2>
-    <form id="forgotForm">
-      <input type="email" id="forgotEmail" placeholder="Enter your email" required />
-      <button type="submit">Send Reset Link</button>
-    </form>
-    <p id="forgotStatus"></p>
-    <div class="link">
-      <a href="#" id="backToLogin">← Back to Login</a>
-    </div>
-  </div>
-
-  <!-- Supabase Script -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
+    <p><a href="signup.html">Create an account</a></p>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>  <script>
     const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
     const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
 
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-    // Login form logic
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      const { data, error } = await client.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
 
       if (error) {
-        alert("❌ Login failed: " + error.message);
+        alert("Login failed: " + error.message);
       } else {
-        alert("✅ Login successful!");
-        window.location.href = "index.html"; // Redirect to home page
+        alert("Login successful");
+        window.location.href = "../index.html"; // Redirect to home page
       }
     });
 
-    // Show Forgot Password
     document.getElementById("showForgot").addEventListener("click", () => {
-      document.getElementById("loginForm").parentElement.style.display = "none";
       document.getElementById("forgotContainer").style.display = "block";
     });
 
-    // Back to Login
-    document.getElementById("backToLogin").addEventListener("click", () => {
-      document.getElementById("forgotContainer").style.display = "none";
-      document.getElementById("loginForm").parentElement.style.display = "block";
-    });
-
-    // Forgot password logic
     document.getElementById("forgotForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = document.getElementById("forgotEmail").value;
+      const email = document.getElementById("forgotEmail").value.trim();
       const status = document.getElementById("forgotStatus");
 
       status.innerText = "⏳ Sending reset email...";
@@ -162,6 +118,5 @@
         status.innerText = "✅ Reset link sent to your email.";
       }
     });
-  </script>
-</body>
+  </script></body>
 </html>
