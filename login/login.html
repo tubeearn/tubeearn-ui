@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - TubeEarn</title>
+</head>
+<body style="font-family: Arial; background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh;">
+  <div style="background: white; padding: 30px; border-radius: 8px; width: 100%; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; margin-bottom: 20px;">Welcome to TubeEarn</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Email" required style="width:100%; padding:10px; margin:10px 0;" />
+      <input type="password" id="loginPassword" placeholder="Password" required style="width:100%; padding:10px; margin:10px 0;" />
+      <button type="submit" style="width:100%; padding:10px; background:#007bff; color:white; border:none; border-radius:4px;">Login</button>
+    </form>
+    <p style="text-align:center; margin-top:10px;">
+      <a href="forgot-password.html">Forgot Password?</a>
+    </p>
+    <p id="loginStatus" style="text-align:center; color:red;"></p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const client = supabase.createClient(
+      'https://ejbvidirnsjvadvekede.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
+    );
+
+    const form = document.getElementById("loginForm");
+    const status = document.getElementById("loginStatus");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        status.innerText = "❌ " + error.message;
+      } else {
+        status.innerText = "✅ Login successful!";
+        setTimeout(() => {
+          window.location.href = "index.html"; // लॉगिन के बाद redirect
+        }, 1000);
+      }
+    });
+  </script>
+</body>
+</html>
