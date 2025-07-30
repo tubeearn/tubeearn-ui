@@ -1,1 +1,22 @@
-welcome sanjeev
+
+<!-- /account/account.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Account | TubeEarn</title>
+</head>
+<body>
+  <h2>My Account Details</h2>
+  <p><strong>Email:</strong> <span id="email"></span></p>
+  <p><strong>Full Name:</strong> <span id="fullname"></span></p>
+
+  <script>
+    const email = localStorage.getItem("user_email");
+    const fullname = localStorage.getItem("user_fullname");
+
+    document.getElementById("email").textContent = email || "Not logged in";
+    document.getElementById("fullname").textContent = fullname || "Not available";
+  </script>
+</body>
+</html>
