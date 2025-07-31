@@ -2,160 +2,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Login - TubeEarn</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+      font-family: Arial, sans-serif;
+      background: #e0f7fa;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100vh;
     }
-
     .login-box {
-      background: #fff;
-      padding: 30px 25px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      max-width: 400px;
-      width: 100%;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+    .login-box h2 {
       text-align: center;
-    }
-
-    .logo {
-      width: 80px;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      margin: 10px 0;
-      font-size: 22px;
-      color: #333;
-    }
-
-    .caption {
-      font-size: 13px;
-      color: #555;
       margin-bottom: 20px;
     }
-
     input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 15px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
     }
-
     button {
-      background: #3a7bd5;
-      color: white;
-      padding: 10px 0;
-      border: none;
       width: 100%;
-      border-radius: 8px;
+      background: #0077b6;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
       font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
     }
-
-    button:hover {
-      background: #326dc3;
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #0077b6;
+      text-decoration: none;
     }
-
-    .link {
-      font-size: 13px;
-      color: #3a7bd5;
-      text-decoration: underline;
-      cursor: pointer;
-      margin-top: 12px;
-      display: inline-block;
-    }
-
-    .status {
-      font-size: 13px;
+    #status {
       color: red;
-      margin-top: 10px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-
   <div class="login-box">
-    <img src="https://i.postimg.cc/h4tL3kVn/tubeearnlogo.png" alt="Logo" class="logo" />
     <h2>Welcome to TubeEarn</h2>
-    <div class="caption">World's No.1 Growth & Earning Platform</div>
-
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Password" required />
-      <button type="submit">Sign In</button>
-    </form>
-
-    <div class="link" onclick="toggleForgot()">Forgot Password?</div>
-
-    <form id="forgotForm" style="display:none;">
-      <input type="email" id="forgotEmail" placeholder="Enter your email" required />
-      <button type="submit">Send Reset Link</button>
-    </form>
-
-    <p id="status" class="status"></p>
+    <input type="email" id="email" placeholder="Enter your email" />
+    <input type="password" id="password" placeholder="Enter your password" />
+    <button onclick="login()">Sign In</button>
+    <p id="status"></p>
+    <a href="forgot-password.html">Forgot Password?</a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
-    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
+    const supabase = supabase.createClient(
+      'https://ejbvidirnsjvadvekede.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
+    );
 
-    const loginForm = document.getElementById("loginForm");
-    const forgotForm = document.getElementById("forgotForm");
-    const status = document.getElementById("status");
-
-    loginForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value.trim();
+    async function login() {
+      const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
+      const status = document.getElementById("status");
+      status.innerText = "Processing...";
 
-      status.innerText = "⏳ Logging in...";
-
-      const { data, error } = await client.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        status.innerText = "❌ " + error.message;
-      } else {
-        status.innerText = "✅ Login successful!";
-        setTimeout(() => {
-          window.location.href = "index.html"; // अपने फ्रंट पेज का नाम डालो
-        }, 1500);
-      }
-    });
-
-    forgotForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("forgotEmail").value.trim();
-      status.innerText = "⏳ Sending reset link...";
-
-      const { data, error } = await client.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://tubeearn.netlify.app/reset-password.html"
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
       });
 
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
-        status.innerText = "✅ Reset link sent!";
+        status.innerText = "✅ Login successful! Redirecting...";
+        setTimeout(() => {
+          window.location.href = "../index.html"; // TubeEarn main home
+        }, 1500);
       }
-    });
-
-    function toggleForgot() {
-      forgotForm.style.display = forgotForm.style.display === "none" ? "block" : "none";
     }
   </script>
-
 </body>
 </html>
