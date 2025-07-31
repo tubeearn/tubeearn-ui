@@ -1,122 +1,145 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TubeEarn Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | TubeEarn</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #0077ff, #00c6ff);
+      background: linear-gradient(to right, #4b6cb7, #182848);
       font-family: Arial, sans-serif;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       min-height: 100vh;
+      margin: 0;
     }
-    .container {
-      background: #fff;
+    .login-box {
+      background: white;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      max-width: 400px;
       width: 100%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
     }
     h2 {
       text-align: center;
-      color: #0077ff;
+      margin-bottom: 20px;
     }
     input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border: 1px solid #ccc;
       border-radius: 6px;
+      border: 1px solid #ccc;
     }
     button {
       width: 100%;
       padding: 10px;
-      background: #0077ff;
-      color: #fff;
+      background: #4b6cb7;
+      color: white;
+      font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
+    }
+    button:hover {
+      background: #3b5998;
     }
     .link {
       text-align: center;
       margin-top: 10px;
     }
     .link a {
-      color: #0077ff;
+      color: #4b6cb7;
       text-decoration: none;
     }
-    #forgotForm, #resetForm {
-      display: none;
+    #status {
+      text-align: center;
+      margin-top: 10px;
+      color: red;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Welcome to TubeEarn</h2><!-- Login Form -->
-<form id="loginForm">
-  <input type="email" id="loginEmail" placeholder="Email" required />
-  <input type="password" id="loginPassword" placeholder="Password" required />
-  <button type="submit">Login</button>
-  <p id="loginStatus"></p>
-</form>
+  <div class="login-box">
+    <h2>Welcome to TubeEarn</h2>
+    <p style="text-align:center; font-weight:bold;">World's #1 Fast-Growing Earning Platform</p>
+    
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Enter email" required />
+      <input type="password" id="password" placeholder="Enter password" required />
+      <div id="captchaBox"></div>
+      <input type="text" id="captchaAnswer" placeholder="Answer the CAPTCHA" required />
+      <button type="submit">Sign In</button>
+    </form>
+    
+    <div class="link">
+      <a href="#" id="forgotLink">Forgot Password?</a>
+    </div>
+    <div class="link">
+      <a href="signup.html">Create New Account</a>
+    </div>
+    
+    <div id="status"></div>
+    
+    <form id="forgotForm" style="display:none; margin-top:20px;">
+      <input type="email" id="forgotEmail" placeholder="Enter email to reset" required />
+      <button type="submit">Reset Password</button>
+    </form>
+  </div>
 
-<!-- Forgot Password Form -->
-<form id="forgotForm">
-  <input type="email" id="forgotEmail" placeholder="Enter your email" required />
-  <button type="submit">Send Reset Link</button>
-  <p id="forgotStatus"></p>
-</form>
-
-<!-- Reset Password Form (for future use) -->
-<form id="resetForm">
-  <input type="password" id="newPassword" placeholder="New Password" required />
-  <button type="submit">Reset Password</button>
-  <p id="resetStatus"></p>
-</form>
-
-<div class="link">
-  <a href="#" onclick="toggleForm('forgot')">Forgot Password?</a> |
-  <a href="#" onclick="toggleForm('login')">Back to Login</a>
-</div>
-
-  </div>  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>  <script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
     const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
     const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-    async function toggleForm(type) {
-      document.getElementById('loginForm').style.display = (type === 'login') ? 'block' : 'none';
-      document.getElementById('forgotForm').style.display = (type === 'forgot') ? 'block' : 'none';
+    const captchaBox = document.getElementById("captchaBox");
+    const captchaInput = document.getElementById("captchaAnswer");
+    const status = document.getElementById("status");
+    let a, b;
+
+    function loadCaptcha() {
+      a = Math.floor(Math.random() * 10);
+      b = Math.floor(Math.random() * 10);
+      captchaBox.innerHTML = `<p>Solve: ${a} + ${b} = ?</p>`;
     }
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
-      const status = document.getElementById("loginStatus");
-      status.innerText = "⏳ Logging in...";
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const answer = document.getElementById("captchaAnswer").value.trim();
+
+      if (parseInt(answer) !== a + b) {
+        status.innerText = "❌ CAPTCHA incorrect!";
+        return;
+      }
+
+      status.innerText = "⏳ Signing in...";
 
       const { data, error } = await client.auth.signInWithPassword({ email, password });
 
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
-        status.innerText = "✅ Logged in successfully!";
-        setTimeout(() => window.location.href = "../index.html", 1000); // redirect to homepage
+        status.innerText = "✅ Login successful!";
+        setTimeout(() => {
+          window.location.href = "index.html"; // Redirect to homepage
+        }, 1000);
       }
+    });
+
+    // Forgot Password system
+    document.getElementById("forgotLink").addEventListener("click", () => {
+      document.getElementById("forgotForm").style.display = "block";
     });
 
     document.getElementById("forgotForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("forgotEmail").value.trim();
-      const status = document.getElementById("forgotStatus");
       status.innerText = "⏳ Sending reset email...";
-
       const { data, error } = await client.auth.resetPasswordForEmail(email, {
         redirectTo: "https://tubeearn.netlify.app/reset-password.html"
       });
@@ -124,8 +147,12 @@
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
-        status.innerText = "✅ Reset link sent to your email.";
+        status.innerText = "✅ Reset email sent!";
       }
     });
-  </script></body>
+
+    // Load CAPTCHA on page load
+    window.onload = loadCaptcha;
+  </script>
+</body>
 </html>
