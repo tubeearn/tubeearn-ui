@@ -3,90 +3,108 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login | TubeEarn</title>
+  <title>TubeEarn Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(to right, #4b6cb7, #182848);
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
       margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
+
     .login-box {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      width: 100%;
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       max-width: 400px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    }
-    h2 {
+      width: 100%;
       text-align: center;
+    }
+
+    .logo {
+      width: 80px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 10px 0;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .caption {
+      font-size: 13px;
+      color: #555;
       margin-bottom: 20px;
     }
+
     input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid #ccc;
+      font-size: 15px;
     }
+
     button {
-      width: 100%;
-      padding: 10px;
-      background: #4b6cb7;
+      background: #3a7bd5;
       color: white;
-      font-weight: bold;
+      padding: 10px 0;
       border: none;
-      border-radius: 6px;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
+      margin-top: 10px;
     }
+
     button:hover {
-      background: #3b5998;
+      background: #326dc3;
     }
+
     .link {
-      text-align: center;
-      margin-top: 10px;
+      font-size: 13px;
+      color: #3a7bd5;
+      text-decoration: underline;
+      cursor: pointer;
+      margin-top: 12px;
+      display: inline-block;
     }
-    .link a {
-      color: #4b6cb7;
-      text-decoration: none;
-    }
-    #status {
-      text-align: center;
-      margin-top: 10px;
+
+    .status {
+      font-size: 13px;
       color: red;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
+
   <div class="login-box">
+    <img src="https://i.postimg.cc/h4tL3kVn/tubeearnlogo.png" alt="Logo" class="logo" />
     <h2>Welcome to TubeEarn</h2>
-    <p style="text-align:center; font-weight:bold;">World's #1 Fast-Growing Earning Platform</p>
-    
+    <div class="caption">World's No.1 Growth & Earning Platform</div>
+
     <form id="loginForm">
-      <input type="email" id="email" placeholder="Enter email" required />
-      <input type="password" id="password" placeholder="Enter password" required />
-      <div id="captchaBox"></div>
-      <input type="text" id="captchaAnswer" placeholder="Answer the CAPTCHA" required />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
       <button type="submit">Sign In</button>
     </form>
-    
-    <div class="link">
-      <a href="#" id="forgotLink">Forgot Password?</a>
-    </div>
-    <div class="link">
-      <a href="signup.html">Create New Account</a>
-    </div>
-    
-    <div id="status"></div>
-    
-    <form id="forgotForm" style="display:none; margin-top:20px;">
-      <input type="email" id="forgotEmail" placeholder="Enter email to reset" required />
-      <button type="submit">Reset Password</button>
+
+    <div class="link" onclick="toggleForgot()">Forgot Password?</div>
+
+    <form id="forgotForm" style="display:none;">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required />
+      <button type="submit">Send Reset Link</button>
     </form>
+
+    <p id="status" class="status"></p>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
@@ -95,29 +113,16 @@
     const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-    const captchaBox = document.getElementById("captchaBox");
-    const captchaInput = document.getElementById("captchaAnswer");
+    const loginForm = document.getElementById("loginForm");
+    const forgotForm = document.getElementById("forgotForm");
     const status = document.getElementById("status");
-    let a, b;
 
-    function loadCaptcha() {
-      a = Math.floor(Math.random() * 10);
-      b = Math.floor(Math.random() * 10);
-      captchaBox.innerHTML = `<p>Solve: ${a} + ${b} = ?</p>`;
-    }
-
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
-      const answer = document.getElementById("captchaAnswer").value.trim();
 
-      if (parseInt(answer) !== a + b) {
-        status.innerText = "❌ CAPTCHA incorrect!";
-        return;
-      }
-
-      status.innerText = "⏳ Signing in...";
+      status.innerText = "⏳ Logging in...";
 
       const { data, error } = await client.auth.signInWithPassword({ email, password });
 
@@ -126,20 +131,16 @@
       } else {
         status.innerText = "✅ Login successful!";
         setTimeout(() => {
-          window.location.href = "index.html"; // Redirect to homepage
-        }, 1000);
+          window.location.href = "index.html"; // अपने फ्रंट पेज का नाम डालो
+        }, 1500);
       }
     });
 
-    // Forgot Password system
-    document.getElementById("forgotLink").addEventListener("click", () => {
-      document.getElementById("forgotForm").style.display = "block";
-    });
-
-    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+    forgotForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const email = document.getElementById("forgotEmail").value.trim();
-      status.innerText = "⏳ Sending reset email...";
+      status.innerText = "⏳ Sending reset link...";
+
       const { data, error } = await client.auth.resetPasswordForEmail(email, {
         redirectTo: "https://tubeearn.netlify.app/reset-password.html"
       });
@@ -147,12 +148,14 @@
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
-        status.innerText = "✅ Reset email sent!";
+        status.innerText = "✅ Reset link sent!";
       }
     });
 
-    // Load CAPTCHA on page load
-    window.onload = loadCaptcha;
+    function toggleForgot() {
+      forgotForm.style.display = forgotForm.style.display === "none" ? "block" : "none";
+    }
   </script>
+
 </body>
 </html>
