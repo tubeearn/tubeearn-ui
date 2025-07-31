@@ -3,172 +3,137 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Login</title>
+  <title>Login | TubeEarn</title>
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #2196f3, #e3f2fd);
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      font-family: Arial, sans-serif;
+      color: #fff;
     }
-
-    .container {
-      width: 360px;
-      margin: 50px auto;
+    .login-container {
+      width: 90%;
+      max-width: 400px;
+      margin: 60px auto;
+      background: #ffffff;
+      color: #333;
+      border-radius: 10px;
       padding: 30px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
     }
-
-    .logo {
-      width: 120px;
-      display: block;
-      margin: 0 auto 15px;
-    }
-
     h2 {
       text-align: center;
-      color: #0d47a1;
       margin-bottom: 10px;
     }
-
-    p.description {
+    p {
       text-align: center;
-      color: #555;
       font-size: 14px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      color: #777;
     }
-
     input {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin: 10px 0;
+      border-radius: 5px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
     }
-
     button {
       width: 100%;
       padding: 12px;
-      background: #0d47a1;
-      color: white;
-      font-size: 16px;
+      background: #1e3c72;
+      color: #fff;
+      font-weight: bold;
       border: none;
-      border-radius: 6px;
+      border-radius: 5px;
       cursor: pointer;
       margin-top: 10px;
     }
-
-    button:hover {
-      background: #1565c0;
+    .link {
+      text-align: center;
+      margin-top: 15px;
     }
-
-    .captcha-box {
+    .link a {
+      color: #1e3c72;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .captcha {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
-    .captcha-box label {
+    .captcha span {
+      background: #eee;
+      padding: 10px;
       font-weight: bold;
-      flex: 1;
-    }
-
-    .captcha-box input {
-      width: 80px;
-    }
-
-    .links {
-      text-align: center;
-      margin-top: 12px;
-    }
-
-    .links a {
-      text-decoration: none;
-      font-size: 13px;
-      color: #0d47a1;
-    }
-
-    #status {
-      margin-top: 10px;
-      text-align: center;
-      font-size: 14px;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo">
+  <div class="login-container">
     <h2>Welcome to TubeEarn</h2>
-    <p class="description">World’s #1 Fastest Growing Earning Platform</p>
+    <p>World's No.1 Fastest Growing Earning Platform</p>
 
-    <form id="loginForm">
-      <input type="email" id="email" placeholder="Email Address" required />
-      <input type="password" id="password" placeholder="Password" required />
-      
-      <div class="captcha-box">
-        <label id="captchaLabel">Loading...</label>
-        <input type="text" id="captchaAnswer" required />
-      </div>
+    <input type="email" id="email" placeholder="Enter Email" required />
+    <input type="password" id="password" placeholder="Enter Password" required />
 
-      <button type="submit">Sign In</button>
+    <div class="captcha">
+      <span id="captchaText">Loading...</span>
+      <input type="text" id="captchaInput" placeholder="Answer" />
+    </div>
 
-      <div class="links">
-        <a href="forgot.html">Forgot Password?</a> |
-        <a href="signup.html">Create an Account</a>
-      </div>
+    <button onclick="signIn()">Sign In</button>
 
-      <p id="status"></p>
-    </form>
+    <div class="link">
+      <a href="forgot.html">Forgot Password?</a> |
+      <a href="signup.html">Create Account</a>
+    </div>
+
+    <p id="status" style="text-align:center; color:red; font-weight:bold;"></p>
   </div>
 
-  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
     const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
+    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
 
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-    // Generate captcha on load
-    let a, b, correct;
-    function generateCaptcha() {
-      a = Math.floor(Math.random() * 10) + 1;
-      b = Math.floor(Math.random() * 10) + 1;
-      correct = a + b;
-      document.getElementById("captchaLabel").innerText = `What is ${a} + ${b}?`;
-    }
+    // Generate captcha
+    let a = Math.floor(Math.random() * 10);
+    let b = Math.floor(Math.random() * 10);
+    let answer = a + b;
+    document.getElementById("captchaText").innerText = `${a} + ${b} = ?`;
 
-    window.onload = generateCaptcha;
-
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
+    async function signIn() {
       const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const userAnswer = parseInt(document.getElementById("captchaAnswer").value);
+      const password = document.getElementById("password").value.trim();
+      const captchaAnswer = parseInt(document.getElementById("captchaInput").value);
       const status = document.getElementById("status");
 
-      if (userAnswer !== correct) {
-        status.innerText = "❌ Captcha is incorrect.";
-        generateCaptcha();
+      if (captchaAnswer !== answer) {
+        status.innerText = "❌ Captcha incorrect!";
         return;
       }
 
-      status.innerText = "⏳ Signing you in...";
-
-      const { data, error } = await client.auth.signInWithPassword({ email, password });
+      const { data, error } = await client.auth.signInWithPassword({
+        email,
+        password
+      });
 
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
-        status.innerText = "✅ Login successful!";
+        status.style.color = "green";
+        status.innerText = "✅ Login successful! Redirecting...";
         setTimeout(() => {
-          window.location.href = "index.html"; // Redirect to home page
-        }, 1500);
+          window.location.href = "/index.html"; // ✅ Redirect to your main front page
+        }, 1000);
       }
-    });
+    }
   </script>
 </body>
 </html>
