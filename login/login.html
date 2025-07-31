@@ -2,186 +2,104 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Login</title>
+  <title>Login - TubeEarn</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
-      font-family: 'Segoe UI', sans-serif;
-    }
-    .main-wrapper {
+      font-family: sans-serif;
+      background: linear-gradient(to right, #74ebd5, #9face6);
       display: flex;
       justify-content: center;
-      padding-top: 40px;
+      align-items: center;
+      height: 100vh;
     }
     .container {
-      width: 400px;
       background: white;
-      padding: 30px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      border-radius: 12px;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    h2 {
       text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
     }
-    .logo {
-      width: 120px;
-      margin-bottom: 10px;
-    }
-    h1 {
-      font-size: 22px;
-      margin: 0;
-      color: #0d47a1;
-    }
-    p {
-      font-size: 14px;
-      margin-bottom: 20px;
-      color: #555;
-    }
-    form input {
+    input {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #bbb;
-      border-radius: 6px;
-      font-size: 14px;
-    }
-    .captcha-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .captcha-box label {
-      flex: 1;
-      text-align: left;
-    }
-    .captcha-box input {
-      width: 100px;
+      padding: 0.7rem;
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
     }
     button {
-      background-color: #0d47a1;
+      width: 100%;
+      padding: 0.7rem;
+      background: #4b6cb7;
       color: white;
       border: none;
-      padding: 12px;
-      font-size: 16px;
-      border-radius: 6px;
-      margin-top: 10px;
+      border-radius: 0.5rem;
+      margin-top: 1rem;
+      font-weight: bold;
       cursor: pointer;
     }
-    button:hover {
-      background-color: #1565c0;
+    p {
+      text-align: center;
+      margin-top: 1rem;
     }
-    .link-btn {
-      background: none;
-      color: #0d47a1;
-      border: none;
-      font-size: 14px;
-      margin-top: 10px;
-      cursor: pointer;
-      text-decoration: underline;
+    a {
+      color: #4b6cb7;
+      text-decoration: none;
     }
-    #statusMessage, #forgotStatus {
-      margin-top: 10px;
-      font-size: 14px;
+    #status {
+      margin-top: 1rem;
+      text-align: center;
+      color: red;
     }
   </style>
 </head>
 <body>
-  <div class="main-wrapper">
-    <div class="container">
-      <img src="https://i.postimg.cc/Nfb3fLh1/Tube-Earn-logos.png" class="logo" alt="TubeEarn Logo" />
-      <h1>Welcome to TubeEarn</h1>
-      <p>The Fastest Growing Earning Platform in the World</p>
 
-      <!-- Login Form -->
-      <form id="loginForm">
-        <input type="email" id="email" placeholder="Email Address" required />
-        <input type="password" id="password" placeholder="Password" required />
-        
-        <div class="captcha-box">
-          <label id="captcha-question">Loading...</label>
-          <input type="text" id="captcha-answer" placeholder="Answer" required />
-        </div>
+<div class="container">
+  <h2>Welcome to TubeEarn</h2>
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Enter email" required />
+    <input type="password" id="password" placeholder="Enter password" required />
+    <button type="submit">Sign In</button>
+    <p><a href="account/forgot.html">Forgot Password?</a></p>
+    <p id="status"></p>
+  </form>
+</div>
 
-        <button type="submit">Sign In</button>
-        <button class="link-btn" type="button" onclick="toggleForgot(true)">Forgot Password?</button>
-        <p id="statusMessage"></p>
-      </form>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+  const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
+  const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs';
+  const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-      <!-- Forgot Password Form -->
-      <form id="forgotForm" style="display:none;">
-        <input type="email" id="forgotEmail" placeholder="Enter your email" required />
-        <button type="submit">Send Reset Link</button>
-        <button class="link-btn" type="button" onclick="toggleForgot(false)">Back to Login</button>
-        <p id="forgotStatus"></p>
-      </form>
-    </div>
-  </div>
+  document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const status = document.getElementById("status");
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script>
-    const SUPABASE_URL = 'https://ejbvidirnsjvadvekede.supabase.co';
-    const SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...gGfUs'; // Already known, shortened for clarity
-
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
-
-    // Captcha
-    let num1 = Math.floor(Math.random() * 10) + 1;
-    let num2 = Math.floor(Math.random() * 10) + 1;
-    let correctAnswer = num1 + num2;
-    document.getElementById("captcha-question").innerText = `What is ${num1} + ${num2}?`;
-
-    // Login Submit
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-      const captcha = parseInt(document.getElementById("captcha-answer").value);
-      const status = document.getElementById("statusMessage");
-
-      if (captcha !== correctAnswer) {
-        status.innerText = "❌ Incorrect captcha.";
-        return;
-      }
-
-      status.innerText = "⏳ Logging in...";
-
-      const { data, error } = await client.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        status.innerText = "❌ " + error.message;
-      } else {
-        status.innerText = "✅ Login successful. Redirecting...";
-        setTimeout(() => {
-          window.location.href = "/index.html"; // Redirect to main home
-        }, 1500);
-      }
+    const { data, error } = await client.auth.signInWithPassword({
+      email,
+      password
     });
 
-    // Forgot Password Submit
-    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("forgotEmail").value.trim();
-      const status = document.getElementById("forgotStatus");
-      status.innerText = "⏳ Sending reset email...";
-
-      const { data, error } = await client.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://tubeearn.netlify.app/reset-password.html"
-      });
-
-      if (error) {
-        status.innerText = "❌ " + error.message;
-      } else {
-        status.innerText = "✅ Reset link sent. Check your inbox.";
-      }
-    });
-
-    // Toggle Forms
-    function toggleForgot(showForgot) {
-      document.getElementById("loginForm").style.display = showForgot ? "none" : "block";
-      document.getElementById("forgotForm").style.display = showForgot ? "block" : "none";
+    if (error) {
+      status.innerText = "❌ " + error.message;
+    } else {
+      status.innerText = "✅ Login successful! Redirecting...";
+      setTimeout(() => {
+        window.location.href = "../index.html"; // redirect to home
+      }, 1000);
     }
-  </script>
+  });
+</script>
+
 </body>
 </html>
