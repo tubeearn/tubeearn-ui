@@ -1,72 +1,42 @@
+<!-- forgot-password.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>Forgot Password - TubeEarn</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f1f1f1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .box {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #aaa;
-      border-radius: 5px;
-    }
-    button {
-      width: 100%;
-      background: #0077b6;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-    }
-    #status {
-      text-align: center;
-      margin-top: 10px;
-      color: green;
-    }
+    body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f2f2f2; }
+    .box { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); width: 300px; }
+    input, button { width: 100%; margin-top: 10px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+    #status { margin-top: 10px; font-weight: bold; }
   </style>
 </head>
 <body>
   <div class="box">
-    <h2>Reset Password</h2>
-    <input type="email" id="forgotEmail" placeholder="Enter your email" />
-    <button onclick="resetPassword()">Send Reset Link</button>
-    <p id="status"></p>
+    <h2>Forgot Password</h2>
+    <form id="forgotForm">
+      <input type="email" id="forgotEmail" placeholder="Enter your email" required />
+      <button type="submit">Send Reset Link</button>
+      <p id="status"></p>
+    </form>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    const supabase = supabase.createClient(
+    const client = supabase.createClient(
       'https://ejbvidirnsjvadvekede.supabase.co',
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs'
     );
 
-    async function resetPassword() {
-      const email = document.getElementById("forgotEmail").value;
+    document.getElementById("forgotForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmail").value.trim();
       const status = document.getElementById("status");
 
-      status.innerText = "Sending reset link...";
+      status.innerText = "⏳ Sending reset email...";
 
-      const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: "https://tubeearn.netlify.app/reset-password.html"
+      const { data, error } = await client.auth.resetPasswordForEmail(email, {
+        redirectTo: "https://tubeearn.netlify.app/reset-password.html" // यह पेज हम नीचे बना रहे हैं
       });
 
       if (error) {
@@ -74,7 +44,7 @@
       } else {
         status.innerText = "✅ Reset link sent to your email.";
       }
-    }
+    });
   </script>
 </body>
 </html>
