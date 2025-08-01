@@ -3,172 +3,80 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TubeEarn Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background-color: #f0f2f5; }
-    header {
-      background: linear-gradient(to right, #0047ab, #0f52ba, #5dade2);
-      color: white;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1.5rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
     }
-    nav {
-      background-color: #003366;
-      color: white;
-      width: 250px;
+    .dashboard {
+      display: flex;
       min-height: 100vh;
-      float: left;
-      padding: 20px 10px;
     }
-    nav h3 { margin-bottom: 10px; }
-    nav ul { list-style: none; }
-    nav ul li {
-      padding: 10px;
-      background: #004080;
-      margin: 5px 0;
-      cursor: pointer;
-      border-radius: 5px;
-      position: relative;
-    }
-    nav ul li:hover { background: #0059b3; }
-    nav ul li ul {
-      display: none;
-      padding-left: 15px;
-    }
-    nav ul li.active > ul {
-      display: block;
-    }
-    main {
-      margin-left: 270px;
+    .sidebar {
+      width: 250px;
+      background: #2c3e50;
+      color: #fff;
       padding: 20px;
     }
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 15px;
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 30px;
     }
-    .game-box {
-      background: white;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
     }
-    footer {
-      background: #003366;
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+    .sidebar ul li a {
       color: white;
-      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      display: block;
       padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      border-radius: 5px;
+    }
+    .sidebar ul li a:hover {
+      background: #1abc9c;
+    }
+    .main-content {
+      flex: 1;
+      padding: 40px;
+    }
+    .content-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
-  <header>TubeEarn - Game Dashboard</header>
-  <nav>
-    <ul>
-      <li onclick="toggleMenu(this)">🎮 Free Games
-        <ul>
-          <li>All Games</li>
-          <li>Categories</li>
-        </ul>
-      </li>
-      <li onclick="toggleMenu(this)">💰 Paid Games
-        <ul>
-          <li>Subscription</li>
-          <li>Offers</li>
-        </ul>
-      </li>
-      <li onclick="toggleMenu(this)">🏦 Wallet
-        <ul>
-          <li>Add Money</li>
-          <li>History</li>
-        </ul>
-      </li>
-      <li onclick="toggleMenu(this)">📈 Monetization
-        <ul>
-          <li>Apply</li>
-          <li>Status</li>
-        </ul>
-      </li>
-      <li onclick="toggleMenu(this)">🧑‍💼 Profile
-        <ul>
-          <li>View</li>
-          <li>Edit</li>
-        </ul>
-      </li>
-      <li onclick="toggleMenu(this)">❤️ Love Card
-        <ul>
-          <li>Sent</li>
-          <li>Received</li>
-        </ul>
-      </li>
-      <li>🔓 Logout</li>
-    </ul>
-  </nav>
-  <main>
-    <h2>🎮 Random Free Games</h2>
-    <div class="game-grid" id="gameGrid"></div>
-  </main>
-  <footer>
-    TubeEarn - All Rights Reserved
-  </footer>  <script>
-    function toggleMenu(element) {
-      element.classList.toggle('active');
-    }
-
-    // Load games from JSON (Simulated)
-    const games = [
-      { title: "Car Racer" },
-      { title: "Shooting Star" },
-      { title: "Zombie Attack" },
-      { title: "Puzzle Master" },
-      { title: "Basket Ball" },
-      { title: "Memory Flip" }
-    ];
-
-    const gameGrid = document.getElementById("gameGrid");
-
-    function shuffle(array) {
-      return array.sort(() => 0.5 - Math.random());
-    }
-
-    function renderGames() {
-      const randomGames = shuffle(games);
-      gameGrid.innerHTML = "";
-      randomGames.forEach(game => {
-        const div = document.createElement("div");
-        div.className = "game-box";
-        div.textContent = game.title;
-        gameGrid.appendChild(div);
-      });
-    }
-
-    renderGames();
-  </script>    text-decoration: none;
-    padding: 10px;
-  }
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    background: #444;
-    min-width: 150px;
-    z-index: 1;
-  }
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  .dropdown-content li {
-    border-bottom: 1px solid #666;
-  }
-  .dropdown-content a {
-    display: block;
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>TubeEarn</h2>
+      <ul>
+        <li><a href="#">🎮 Free Games</a></li>
+        <li><a href="#">💰 Paid Games</a></li>
+        <li><a href="#">🎁 Love Card</a></li>
+        <li><a href="#">👛 Wallet</a></li>
+        <li><a href="#">📊 Monetization</a></li>
+        <li><a href="#">🧾 Address</a></li>
+        <li><a href="#">🧍‍♂️ Profile</a></li>
+        <li><a href="#">🚪 Logout</a></li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <div class="content-box">
+        <h1>Welcome to TubeEarn Dashboard</h1>
+        <p>This is your central hub. Select an option from the left menu to manage features like Free Games, Paid Games, Wallet, Monetization, and more.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>    display: block;
     padding: 10px;
     color: white;
   }
