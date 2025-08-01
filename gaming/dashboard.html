@@ -1,80 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn - Dashboard</title>
+  <title>TubeEarn Dashboard</title>
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-    body {font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333;}
-    header {background: #111; color: #fff; padding: 20px; text-align: center;}
-    nav {margin-top: 10px;}
-    nav a {
-      margin: 0 10px;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #f4f7fa;
+      color: #333;
+    }
+    aside {
+      width: 220px;
+      background: #111827;
+      color: #fff;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    aside h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.5em;
       color: #00f5d4;
+    }
+    aside a {
+      padding: 15px 20px;
+      color: #cbd5e1;
       text-decoration: none;
+      transition: background 0.3s;
+    }
+    aside a:hover {
+      background: #1f2937;
+      color: #fff;
+    }
+    main {
+      flex-grow: 1;
+      padding: 30px;
+      background: #fff;
+    }
+    header {
+      font-size: 24px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
-    nav a:hover {
-      text-decoration: underline;
+    .card {
+      background: #f1f5f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    main {padding: 20px;}
-    section {margin-bottom: 40px;}
-    input {
-      display: block;
-      margin: 8px 0;
-      padding: 8px;
-      width: 250px;
+    .card h3 {
+      margin-bottom: 10px;
     }
-    button {
-      background: #00b4d8;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      cursor: pointer;
-      border-radius: 6px;
-    }
-    button:hover {background: #0077b6;}
     footer {
       text-align: center;
-      background: #222;
-      color: #fff;
+      font-size: 14px;
       padding: 15px;
+      background: #f9fafb;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
     }
   </style>
 </head>
-<body>
+<body>  <aside>
+    <h2>TubeEarn</h2>
+    <a href="#">📊 Dashboard</a>
+    <a href="profile/index.html">👤 My Profile</a>
+    <a href="game-list/index.html">🎮 Game List</a>
+    <a href="upcoming-games/index.html">🕹️ Upcoming Games</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
+  </aside>  <main>
+    <header>Welcome to TubeEarn Dashboard</header><div class="card">
+  <h3>Your Activity</h3>
+  <p>Uploaded Videos: 15</p>
+  <p>Games Played: 45</p>
+  <p>Followers: 320</p>
+</div>
 
-  <header>
-    <h1>🎮 TubeEarn - Dashboard</h1>
-    <nav>
-      <a href="#">Dashboard</a>
-      <a href="profile.html">My Profile</a>
-      <a href="game-list/index.html">Game List</a> <!-- ✅ Game List link here -->
-      <a href="#" onclick="logout()">Logout</a>
-    </nav>
-  </header>
+<div class="card">
+  <h3>Shortcuts</h3>
+  <p><a href="game-list/index.html">➡️ Go to Game List</a></p>
+  <p><a href="upcoming-games/index.html">➡️ View Upcoming Games</a></p>
+  <p><a href="profile/index.html">➡️ View Profile</a></p>
+</div>
 
-  <main>
-    <section>
-      <h2>📊 Welcome to your Dashboard</h2>
-      <p>Here you can manage your profile, games, videos, and more.</p>
-
-      <p>➡️ <strong><a href="game-list/index.html">Go to Game List</a></strong></p> <!-- Optional link in content too -->
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 TubeEarn | All rights reserved.</p>
-  </footer>
-
-  <script>
+  </main>  <footer>
+    © 2025 TubeEarn | All rights reserved.
+  </footer>  <script>
     function logout() {
-      if (confirm("Are you sure you want to logout?")) {
+      if (confirm("Logout now?")) {
         window.location.href = "login.html";
       }
     }
-  </script>
-
-</body>
+  </script></body>
 </html>
