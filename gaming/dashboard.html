@@ -3,69 +3,98 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Game Dashboard</title>
+  <title>🎮 TubeEarn Game Dashboard</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f2f5;
-      color: #333;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f4f8;
+      color: #222;
+      line-height: 1.6;
     }
     header {
-      background: #0d47a1;
+      background: linear-gradient(to right, #2196f3, #0d47a1);
       color: white;
-      padding: 1rem;
+      padding: 1.5rem;
       text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
-    .horizontal-menu {
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    nav.horizontal-menu {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 1rem;
       margin: 1rem 0;
     }
-    .horizontal-menu a {
-      background: #1565c0;
+    nav.horizontal-menu a {
+      background: #1976d2;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
       text-decoration: none;
       font-weight: bold;
       transition: background 0.3s ease;
     }
-    .horizontal-menu a:hover {
+    nav.horizontal-menu a:hover {
       background: #0d47a1;
     }
+
     .games-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
     }
+
     .game-card {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      width: 150px;
-      padding: 0.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
       text-align: center;
-      transition: transform 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
     }
+
     .game-card:hover {
       transform: scale(1.05);
     }
+
     .game-card img {
       width: 100%;
-      height: auto;
-      border-radius: 6px;
+      height: 120px;
+      object-fit: cover;
     }
+
+    .game-card p {
+      padding: 0.8rem;
+      font-weight: 600;
+    }
+
     footer {
-      margin-top: 2rem;
-      text-align: center;
       background: #0d47a1;
       color: white;
+      text-align: center;
       padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -80,10 +109,12 @@
   </header>
 
   <section class="games-grid" id="gameContainer">
-    <!-- Dynamic game cards will appear here -->
+    <!-- JavaScript will load game cards here -->
   </section>
 
-  <footer>&copy; 2025 TubeEarn</footer>
+  <footer>
+    &copy; 2025 TubeEarn. All rights reserved.
+  </footer>
 
   <script>
     async function loadGames() {
@@ -91,22 +122,21 @@
         const res = await fetch("game-list/games.json");
         const allGames = await res.json();
         const shuffled = allGames.sort(() => 0.5 - Math.random());
-        const selectedGames = shuffled.slice(0, 8); // Show 8 random games
+        const selectedGames = shuffled.slice(0, 8); // Random 8 games
 
         const container = document.getElementById("gameContainer");
         selectedGames.forEach(game => {
-          const card = document.createElement("div");
+          const card = document.createElement("a");
           card.className = "game-card";
+          card.href = game.link;
           card.innerHTML = `
-            <a href="${game.link}">
-              <img src="${game.thumbnail}" alt="${game.name}" />
-              <p>${game.name}</p>
-            </a>
+            <img src="${game.thumbnail}" alt="${game.name}" />
+            <p>${game.name}</p>
           `;
           container.appendChild(card);
         });
-      } catch (e) {
-        document.getElementById("gameContainer").innerHTML = "<p>❌ Error loading games.</p>";
+      } catch (error) {
+        document.getElementById("gameContainer").innerHTML = "<p style='color:red;'>❌ Error loading games. Please try again.</p>";
       }
     }
 
