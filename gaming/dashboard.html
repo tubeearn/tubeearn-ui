@@ -1,154 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎮 TubeEarn Dashboard</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "Segoe UI", sans-serif;
-      background: #f4f6fa;
-      color: #333;
-    }
-
-    header {
-      background: #1a73e8;
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background: #fff;
-      padding: 1rem;
-      gap: 1rem;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-
-    nav a {
-      background: #1a73e8;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
-
-    nav a:hover {
-      background: #0b50b1;
-    }
-
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .game-card {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      overflow: hidden;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease;
-    }
-
-    .game-card:hover {
-      transform: scale(1.05);
-    }
-
-    .game-card img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-    }
-
-    .game-card p {
-      padding: 0.8rem;
-      font-weight: 600;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #1a73e8;
-      color: white;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        font-size: 1.4rem;
-        padding: 1rem;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubeEarn Dashboard</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    🎮 TubeEarn Game Dashboard
-  </header>
+    <nav class="navbar">
+      <div class="logo">TubeEarn</div>
+      <ul class="nav-links">
+        <li class="dropdown">
+          <a href="#">Free Games</a>
+          <ul class="dropdown-content">
+            <li><a href="#">All Free Games</a></li>
+            <li><a href="#">Game Monetization</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Paid Games</a>
+          <ul class="dropdown-content">
+            <li><a href="#">Play with Wallet</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Wallet</a>
+          <ul class="dropdown-content">
+            <li><a href="#">TubeEarn Wallet</a></li>
+            <li><a href="#">Transactions</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Profile</a>
+          <ul class="dropdown-content">
+            <li><a href="#">My Profile</a></li>
+            <li><a href="#">Logout</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Love Card</a>
+          <ul class="dropdown-content">
+            <li><a href="#">Send Card</a></li>
+            <li><a href="#">Received</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>  <main>
+    <section class="games-section">
+      <h2>Random Free Games</h2>
+      <div id="gamesContainer" class="games-grid"></div>
+    </section>
+  </main>  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const gamesData = [
+        { title: "Snakes", thumbnail: "thumb1.jpg" },
+        { title: "Car Race", thumbnail: "thumb2.jpg" },
+        { title: "Quiz Master", thumbnail: "thumb3.jpg" },
+        { title: "Space Shooter", thumbnail: "thumb4.jpg" },
+        { title: "Memory Flip", thumbnail: "thumb5.jpg" }
+      ];
 
-  <nav>
-    <a href="game-list/">Free Games</a>
-    <a href="game-monetization/">Monetized Games</a>
-    <a href="wallet/">Wallet</a>
-    <a href="profile/">Profile</a>
-    <a href="love-card/">Love Card</a>
-  </nav>
-
-  <section class="games-grid" id="gameContainer">
-    <p style="text-align:center; width:100%;">⏳ Loading games...</p>
-  </section>
-
-  <footer>
-    &copy; 2025 TubeEarn. All rights reserved.
-  </footer>
-
-  <script>
-    async function loadGames() {
-      try {
-        const res = await fetch("game-list/games.json");
-        const games = await res.json();
-        const randomGames = games.sort(() => 0.5 - Math.random()).slice(0, 12);
-
-        const container = document.getElementById("gameContainer");
-        container.innerHTML = "";
-
-        randomGames.forEach(game => {
-          const card = document.createElement("a");
-          card.className = "game-card";
-          card.href = game.link;
-          card.innerHTML = `
-            <img src="${game.thumbnail}" alt="${game.name}" />
-            <p>${game.name}</p>
-          `;
-          container.appendChild(card);
-        });
-      } catch (err) {
-        document.getElementById("gameContainer").innerHTML = "<p style='color:red;'>❌ Failed to load games.</p>";
-      }
-    }
-
-    loadGames();
-  </script>
-</body>
-</html>
+      const container = document.getElementById('gamesContainer');
+      const shuffled = gamesData.sort(() => 0.5 - Math.random());
+      shuffled.forEach(game => {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.innerHTML = `
+          <img src="${game.thumbnail}" alt="${game.title}" />
+          <h3>${game.title}</h3>
+        `;
+        card.addEventListener('click', () => alert(`Launching ${game.title}`));
+        container.appendChild(card);
+      });
+    });
+  </script></body>
+</html><style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+  }
+  .navbar {
+    background: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  .nav-links li {
+    position: relative;
+  }
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background: #444;
+    min-width: 150px;
+    z-index: 1;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .dropdown-content li {
+    border-bottom: 1px solid #666;
+  }
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: white;
+  }
+  .games-section {
+    padding: 20px;
+  }
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .game-card {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .game-card:hover {
+    transform: scale(1.05);
+  }
+  .game-card img {
+    width: 100%;
+    border-radius: 6px;
+  }
+</style>
