@@ -3,107 +3,154 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TubeEarn Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background-color: #f0f2f5; }
+    header {
+      background: linear-gradient(to right, #0047ab, #0f52ba, #5dade2);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav {
+      background-color: #003366;
+      color: white;
+      width: 250px;
+      min-height: 100vh;
+      float: left;
+      padding: 20px 10px;
+    }
+    nav h3 { margin-bottom: 10px; }
+    nav ul { list-style: none; }
+    nav ul li {
+      padding: 10px;
+      background: #004080;
+      margin: 5px 0;
+      cursor: pointer;
+      border-radius: 5px;
+      position: relative;
+    }
+    nav ul li:hover { background: #0059b3; }
+    nav ul li ul {
+      display: none;
+      padding-left: 15px;
+    }
+    nav ul li.active > ul {
+      display: block;
+    }
+    main {
+      margin-left: 270px;
+      padding: 20px;
+    }
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+    }
+    .game-box {
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">TubeEarn</div>
-      <ul class="nav-links">
-        <li class="dropdown">
-          <a href="#">Free Games</a>
-          <ul class="dropdown-content">
-            <li><a href="#">All Free Games</a></li>
-            <li><a href="#">Game Monetization</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#">Paid Games</a>
-          <ul class="dropdown-content">
-            <li><a href="#">Play with Wallet</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#">Wallet</a>
-          <ul class="dropdown-content">
-            <li><a href="#">TubeEarn Wallet</a></li>
-            <li><a href="#">Transactions</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#">Profile</a>
-          <ul class="dropdown-content">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#">Logout</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#">Love Card</a>
-          <ul class="dropdown-content">
-            <li><a href="#">Send Card</a></li>
-            <li><a href="#">Received</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
-  </header>  <main>
-    <section class="games-section">
-      <h2>Random Free Games</h2>
-      <div id="gamesContainer" class="games-grid"></div>
-    </section>
-  </main>  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const gamesData = [
-        { title: "Snakes", thumbnail: "thumb1.jpg" },
-        { title: "Car Race", thumbnail: "thumb2.jpg" },
-        { title: "Quiz Master", thumbnail: "thumb3.jpg" },
-        { title: "Space Shooter", thumbnail: "thumb4.jpg" },
-        { title: "Memory Flip", thumbnail: "thumb5.jpg" }
-      ];
+  <header>TubeEarn - Game Dashboard</header>
+  <nav>
+    <ul>
+      <li onclick="toggleMenu(this)">🎮 Free Games
+        <ul>
+          <li>All Games</li>
+          <li>Categories</li>
+        </ul>
+      </li>
+      <li onclick="toggleMenu(this)">💰 Paid Games
+        <ul>
+          <li>Subscription</li>
+          <li>Offers</li>
+        </ul>
+      </li>
+      <li onclick="toggleMenu(this)">🏦 Wallet
+        <ul>
+          <li>Add Money</li>
+          <li>History</li>
+        </ul>
+      </li>
+      <li onclick="toggleMenu(this)">📈 Monetization
+        <ul>
+          <li>Apply</li>
+          <li>Status</li>
+        </ul>
+      </li>
+      <li onclick="toggleMenu(this)">🧑‍💼 Profile
+        <ul>
+          <li>View</li>
+          <li>Edit</li>
+        </ul>
+      </li>
+      <li onclick="toggleMenu(this)">❤️ Love Card
+        <ul>
+          <li>Sent</li>
+          <li>Received</li>
+        </ul>
+      </li>
+      <li>🔓 Logout</li>
+    </ul>
+  </nav>
+  <main>
+    <h2>🎮 Random Free Games</h2>
+    <div class="game-grid" id="gameGrid"></div>
+  </main>
+  <footer>
+    TubeEarn - All Rights Reserved
+  </footer>  <script>
+    function toggleMenu(element) {
+      element.classList.toggle('active');
+    }
 
-      const container = document.getElementById('gamesContainer');
-      const shuffled = gamesData.sort(() => 0.5 - Math.random());
-      shuffled.forEach(game => {
-        const card = document.createElement('div');
-        card.className = 'game-card';
-        card.innerHTML = `
-          <img src="${game.thumbnail}" alt="${game.title}" />
-          <h3>${game.title}</h3>
-        `;
-        card.addEventListener('click', () => alert(`Launching ${game.title}`));
-        container.appendChild(card);
+    // Load games from JSON (Simulated)
+    const games = [
+      { title: "Car Racer" },
+      { title: "Shooting Star" },
+      { title: "Zombie Attack" },
+      { title: "Puzzle Master" },
+      { title: "Basket Ball" },
+      { title: "Memory Flip" }
+    ];
+
+    const gameGrid = document.getElementById("gameGrid");
+
+    function shuffle(array) {
+      return array.sort(() => 0.5 - Math.random());
+    }
+
+    function renderGames() {
+      const randomGames = shuffle(games);
+      gameGrid.innerHTML = "";
+      randomGames.forEach(game => {
+        const div = document.createElement("div");
+        div.className = "game-box";
+        div.textContent = game.title;
+        gameGrid.appendChild(div);
       });
-    });
-  </script></body>
-</html><style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-  }
-  .navbar {
-    background: #333;
-    color: white;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  .nav-links li {
-    position: relative;
-  }
-  .nav-links a {
-    color: white;
-    text-decoration: none;
+    }
+
+    renderGames();
+  </script>    text-decoration: none;
     padding: 10px;
   }
   .dropdown-content {
