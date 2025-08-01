@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn - Dashboard</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333;}
+    header {background: #111; color: #fff; padding: 20px; text-align: center;}
+    nav {margin-top: 10px;}
+    nav a {
+      margin: 0 10px;
+      color: #00f5d4;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {padding: 20px;}
+    section {margin-bottom: 40px;}
+    input {
+      display: block;
+      margin: 8px 0;
+      padding: 8px;
+      width: 250px;
+    }
+    button {
+      background: #00b4d8;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    button:hover {background: #0077b6;}
+    footer {
+      text-align: center;
+      background: #222;
+      color: #fff;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎮 TubeEarn - Dashboard</h1>
+    <nav>
+      <a href="#">Dashboard</a>
+      <a href="profile.html">My Profile</a>
+      <a href="game-list/index.html">Game List</a> <!-- ✅ Game List link here -->
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>📊 Welcome to your Dashboard</h2>
+      <p>Here you can manage your profile, games, videos, and more.</p>
+
+      <p>➡️ <strong><a href="game-list/index.html">Go to Game List</a></strong></p> <!-- Optional link in content too -->
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 TubeEarn | All rights reserved.</p>
+  </footer>
+
+  <script>
+    function logout() {
+      if (confirm("Are you sure you want to logout?")) {
+        window.location.href = "login.html";
+      }
+    }
+  </script>
+
+</body>
+</html>
