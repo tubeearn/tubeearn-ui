@@ -3,48 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎮 TubeEarn Game Dashboard</title>
+  <title>🎮 TubeEarn Dashboard</title>
   <style>
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f2f4f8;
-      color: #222;
-      line-height: 1.6;
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f6fa;
+      color: #333;
     }
+
     header {
-      background: linear-gradient(to right, #2196f3, #0d47a1);
+      background: #1a73e8;
       color: white;
       padding: 1.5rem;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    nav.horizontal-menu {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin: 1rem 0;
-    }
-    nav.horizontal-menu a {
-      background: #1976d2;
-      color: white;
-      padding: 0.5rem 1.2rem;
-      border-radius: 30px;
-      text-decoration: none;
+      font-size: 1.8rem;
       font-weight: bold;
-      transition: background 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    nav.horizontal-menu a:hover {
-      background: #0d47a1;
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #fff;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      background: #1a73e8;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: #0b50b1;
     }
 
     .games-grid {
@@ -58,14 +61,14 @@
 
     .game-card {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       overflow: hidden;
-      transition: transform 0.2s ease;
-      text-align: center;
       cursor: pointer;
+      text-align: center;
       text-decoration: none;
       color: inherit;
+      transition: transform 0.2s ease;
     }
 
     .game-card:hover {
@@ -84,32 +87,36 @@
     }
 
     footer {
-      background: #0d47a1;
-      color: white;
       text-align: center;
       padding: 1rem;
+      background: #1a73e8;
+      color: white;
       margin-top: 2rem;
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5rem;
+      header {
+        font-size: 1.4rem;
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🎮 TubeEarn Game Dashboard</h1>
-    <nav class="horizontal-menu">
-      <a href="game-list/">🎲 Game List</a>
-      <a href="paid-games/">💰 Paid Games</a>
-      <a href="wallet/">💼 TubeEarn Wallet</a>
-    </nav>
+    🎮 TubeEarn Game Dashboard
   </header>
 
+  <nav>
+    <a href="game-list/">Free Games</a>
+    <a href="game-monetization/">Monetized Games</a>
+    <a href="wallet/">Wallet</a>
+    <a href="profile/">Profile</a>
+    <a href="love-card/">Love Card</a>
+  </nav>
+
   <section class="games-grid" id="gameContainer">
-    <!-- JavaScript will load game cards here -->
+    <p style="text-align:center; width:100%;">⏳ Loading games...</p>
   </section>
 
   <footer>
@@ -120,12 +127,13 @@
     async function loadGames() {
       try {
         const res = await fetch("game-list/games.json");
-        const allGames = await res.json();
-        const shuffled = allGames.sort(() => 0.5 - Math.random());
-        const selectedGames = shuffled.slice(0, 8); // Random 8 games
+        const games = await res.json();
+        const randomGames = games.sort(() => 0.5 - Math.random()).slice(0, 12);
 
         const container = document.getElementById("gameContainer");
-        selectedGames.forEach(game => {
+        container.innerHTML = "";
+
+        randomGames.forEach(game => {
           const card = document.createElement("a");
           card.className = "game-card";
           card.href = game.link;
@@ -135,8 +143,8 @@
           `;
           container.appendChild(card);
         });
-      } catch (error) {
-        document.getElementById("gameContainer").innerHTML = "<p style='color:red;'>❌ Error loading games. Please try again.</p>";
+      } catch (err) {
+        document.getElementById("gameContainer").innerHTML = "<p style='color:red;'>❌ Failed to load games.</p>";
       }
     }
 
