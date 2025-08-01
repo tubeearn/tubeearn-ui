@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Dashboard</title>
+  <title>TubeEarn Game Dashboard</title>
   <style>
     body {
       margin: 0;
@@ -11,14 +11,12 @@
       background: #f0f2f5;
       color: #333;
     }
-
     header {
       background: #0d47a1;
       color: white;
       padding: 1rem;
       text-align: center;
     }
-
     .horizontal-menu {
       display: flex;
       flex-wrap: wrap;
@@ -26,7 +24,6 @@
       gap: 1rem;
       margin: 1rem 0;
     }
-
     .horizontal-menu a {
       background: #1565c0;
       color: white;
@@ -36,24 +33,16 @@
       font-weight: bold;
       transition: background 0.3s ease;
     }
-
     .horizontal-menu a:hover {
       background: #0d47a1;
     }
-
-    .game-showcase {
-      padding: 1rem;
-      text-align: center;
-    }
-
     .games-grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 1rem;
-      margin-top: 1rem;
+      margin: 1rem;
     }
-
     .game-card {
       background: white;
       border-radius: 10px;
@@ -63,17 +52,14 @@
       text-align: center;
       transition: transform 0.2s;
     }
-
     .game-card:hover {
       transform: scale(1.05);
     }
-
     .game-card img {
       width: 100%;
       height: auto;
       border-radius: 6px;
     }
-
     footer {
       margin-top: 2rem;
       text-align: center;
@@ -85,68 +71,46 @@
 </head>
 <body>
   <header>
-    <h1>🌍 World's No.1 Growing Earning Site - TubeEarn</h1>
+    <h1>🎮 TubeEarn Game Dashboard</h1>
     <nav class="horizontal-menu">
-      <a href="game-list/index.html">🎮 Game List</a>
-      <a href="paid-games/index.html">💰 Paid Games</a>
-      <a href="wallet/index.html">💼 TubeEarn Wallet</a>
-      <a href="profile/index.html">👤 Profile</a>
-      <a href="monetization/index.html">📈 Monetization</a>
+      <a href="game-list/">🎲 Game List</a>
+      <a href="paid-games/">💰 Paid Games</a>
+      <a href="wallet/">💼 TubeEarn Wallet</a>
     </nav>
   </header>
 
-  <main class="game-showcase">
-    <h2>Featured Free Games</h2>
-    <div class="games-grid">
-      <div class="game-card">
-        <img src="thumbs/game1.png" alt="Game 1 Thumbnail" />
-        <p>Snakes Game</p>
-      </div>
-      <div class="game-card">
-        <img src="thumbs/game2.png" alt="Game 2 Thumbnail" />
-        <p>Memory Match</p>
-      </div>
-      <!-- Add more game cards dynamically -->
-    </div>
-  </main>
+  <section class="games-grid" id="gameContainer">
+    <!-- Dynamic game cards will appear here -->
+  </section>
 
-  <footer>
-    <p>&copy; TubeEarn</p>
-  </footer>
-</body>
-</html>    </div>
-  </div>
+  <footer>&copy; 2025 TubeEarn</footer>
 
-  <!-- Main Dashboard -->
-  <main class="main-content">
-    <h1>Available Games</h1>
-    <div class="game-cards">
-      <div class="card">
-        <h3>🏎️ Car Racing</h3>
-        <p>Speed your way to earn real money!</p>
-      </div>
-      <div class="card">
-        <h3>🧠 Puzzle Master</h3>
-        <p>Solve & get rewarded instantly.</p>
-      </div>
-      <div class="card">
-        <h3>🐍 Snake Classic</h3>
-        <p>Retro fun + monetization combo.</p>
-      </div>
-      <div class="card">
-        <h3>🏹 Archery King</h3>
-        <p>Hit the target & unlock levels.</p>
-      </div>
-      <div class="card">
-        <h3>🔫 Zombie Attack</h3>
-        <p>Shoot, survive & earn every kill.</p>
-      </div>
-      <div class="card">
-        <h3>⚽ Football Pro</h3>
-        <p>Score goals, win rewards.</p>
-      </div>
-    </div>
-  </main>
+  <script>
+    async function loadGames() {
+      try {
+        const res = await fetch("game-list/games.json");
+        const allGames = await res.json();
+        const shuffled = allGames.sort(() => 0.5 - Math.random());
+        const selectedGames = shuffled.slice(0, 8); // Show 8 random games
 
+        const container = document.getElementById("gameContainer");
+        selectedGames.forEach(game => {
+          const card = document.createElement("div");
+          card.className = "game-card";
+          card.innerHTML = `
+            <a href="${game.link}">
+              <img src="${game.thumbnail}" alt="${game.name}" />
+              <p>${game.name}</p>
+            </a>
+          `;
+          container.appendChild(card);
+        });
+      } catch (e) {
+        document.getElementById("gameContainer").innerHTML = "<p>❌ Error loading games.</p>";
+      }
+    }
+
+    loadGames();
+  </script>
 </body>
 </html>
