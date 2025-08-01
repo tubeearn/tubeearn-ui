@@ -1,96 +1,112 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn Dashboard</title>
   <style>
-    * {
+    body {
       margin: 0;
-      padding: 0;
+      font-family: sans-serif;
+      background: #0d0f24;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: #1a1c33;
+      padding: 20px;
       box-sizing: border-box;
     }
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #0f172a, #1e293b);
-      color: #fff;
-      padding: 20px;
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .dashboard {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 20px;
-    }
-    .feature-box {
-      background-color: #1e40af;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      transition: transform 0.2s;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+    .sidebar li {
+      padding: 12px;
       cursor: pointer;
+      border-bottom: 1px solid #333;
     }
-    .feature-box:hover {
+
+    .sidebar li:hover {
+      background: #333957;
+    }
+
+    .content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .game-grid img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #000;
+      transition: 0.3s;
+    }
+
+    .game-grid img:hover {
       transform: scale(1.05);
-      background-color: #2563eb;
-    }
-    .feature-box i {
-      font-size: 28px;
-      margin-bottom: 10px;
-      display: block;
-    }
-    .feature-name {
-      font-size: 16px;
-      font-weight: bold;
-    }
-    @media (max-width: 600px) {
-      .feature-box {
-        padding: 12px;
-      }
-      .feature-box i {
-        font-size: 24px;
-      }
     }
   </style>
 </head>
 <body>
-  <h1>🎮 TubeEarn Dashboard</h1>
-  <div class="dashboard">
-    <div class="feature-box" onclick="location.href='wallet/index.html'">
-      <i>👛</i>
-      <div class="feature-name">Wallet</div>
-    </div>
-    <div class="feature-box" onclick="location.href='free-games/index.html'">
-      <i>🆓</i>
-      <div class="feature-name">Free Games</div>
-    </div>
-    <div class="feature-box" onclick="location.href='paid-games/index.html'">
-      <i>💰</i>
-      <div class="feature-name">Paid Games</div>
-    </div>
-    <div class="feature-box" onclick="location.href='monetization/index.html'">
-      <i>📈</i>
-      <div class="feature-name">Monetization</div>
-    </div>
-    <div class="feature-box" onclick="location.href='address/index.html'">
-      <i>📍</i>
-      <div class="feature-name">Address</div>
-    </div>
-    <div class="feature-box" onclick="location.href='logout.html'">
-      <i>🚪</i>
-      <div class="feature-name">Logout</div>
-    </div>
-    <div class="feature-box" onclick="location.href='profile/index.html'">
-      <i>👤</i>
-      <div class="feature-name">Profile</div>
-    </div>
-    <div class="feature-box" onclick="location.href='support/index.html'">
-      <i>🛠️</i>
-      <div class="feature-name">Support</div>
-    </div>
+
+  <div class="container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li onclick="loadFolder('free-games')">🎮 Free Games</li>
+        <li onclick="loadFolder('paid-games')">💰 Paid Games</li>
+        <li onclick="loadFolder('wallet')">👛 Wallet</li>
+        <li onclick="loadFolder('monetization')">📈 Monetization</li>
+        <li onclick="loadFolder('profile')">👤 Profile</li>
+        <li onclick="loadFolder('career')">📋 Career</li>
+        <li onclick="loadFolder('logout')">🚪 Logout</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="content">
+      <h1>🎮 TubeEarn Game Zone</h1>
+      <div id="gameDisplay" class="game-grid">
+        <!-- Games will be loaded here -->
+      </div>
+    </main>
   </div>
+
+  <script>
+    function loadFolder(folderName) {
+      const gameDisplay = document.getElementById("gameDisplay");
+      gameDisplay.innerHTML = '';
+
+      for (let i = 1; i <= 10; i++) {
+        let img = document.createElement("img");
+        img.src = `assets/${folderName}/${i}.jpg`;
+        img.alt = folderName + ' Game';
+        gameDisplay.appendChild(img);
+      }
+    }
+
+    // Load Free Games by default
+    window.onload = () => {
+      loadFolder('free-games');
+    };
+  </script>
+
 </body>
 </html>
