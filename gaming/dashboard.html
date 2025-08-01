@@ -1,123 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TubeEarn Dashboard</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: sans-serif;
-      background: #f0f0f0;
+      padding: 0;
+      background-color: #f8f9fa;
     }
-
-    .container {
-      display: flex;
-      height: 100vh;
-    }
-
     .sidebar {
-      width: 230px;
-      background-color: #111;
-      color: white;
+      width: 260px;
+      height: 100vh;
+      background-color: #343a40;
       padding: 20px;
-      box-sizing: border-box;
-    }
-
-    .sidebar h2 {
-      font-size: 22px;
-      margin-bottom: 30px;
-    }
-
-    .sidebar button {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      background-color: #333;
-      border: none;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
-      text-align: left;
-    }
-
-    .sidebar button:hover {
-      background-color: #555;
-    }
-
-    .content {
-      flex: 1;
-      padding: 20px;
+      position: fixed;
       overflow-y: auto;
     }
-
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 15px;
+    .sidebar h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 20px;
     }
-
-    .game-grid img {
-      width: 100%;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
     }
-
-    h3 {
-      margin-top: 0;
+    .sidebar ul li {
+      margin-bottom: 10px;
+    }
+    .sidebar ul li a {
+      color: #adb5bd;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .sidebar ul li a:hover {
+      background-color: #495057;
+      color: #fff;
+    }
+    .content {
+      margin-left: 280px;
+      padding: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="sidebar">
-      <h2>TubeEarn</h2>
-      <button onclick="loadGames('free-games')">🎮 Free Games</button>
-      <button onclick="loadGames('paid-games')">💰 Paid Games</button>
-      <button onclick="loadGames('wallet')">👛 Wallet</button>
-      <button onclick="loadGames('game-monetization')">🎯 Game Monetization</button>
-      <button onclick="loadGames('upcoming-games')">🚀 Upcoming Games</button>
-      <button onclick="loadGames('profile')">👤 Profile</button>
-      <button onclick="loadGames('career')">📋 Career</button>
-      <button onclick="loadGames('logout')">🚪 Logout</button>
-    </div>
-
-    <div class="content">
-      <h3>🎯 Select a feature to load content</h3>
-      <div class="game-grid" id="gameGrid"></div>
-    </div>
+  <div class="sidebar">
+    <h2>TubeEarn</h2>
+    <ul>
+      <li><a href="assets/free-games/play-game.html">Free Games</a></li>
+      <li><a href="assets/paid-games/paid-game.html">Paid Games</a></li>
+      <li><a href="assets/upcoming-games/upcoming-game.html">Upcoming Games</a></li>
+      <li><a href="assets/wallet/wallet.html">Wallet</a></li>
+      <li><a href="assets/wallet/reward.html">Rewards</a></li>
+      <li><a href="assets/wallet/leaderboard.html">Leaderboard</a></li>
+      <li><a href="assets/wallet/history.html">Transaction History</a></li>
+      <li><a href="assets/monetization/game-monetization.html">Game Monetization</a></li>
+      <li><a href="assets/monetization/ads-setting.html">Ads Settings</a></li>
+      <li><a href="assets/profile/user-profile.html">User Profile</a></li>
+      <li><a href="assets/career/career.html">Career</a></li>
+    </ul>
+  </div>  <div class="content">
+    <h1>🎮 Welcome to TubeEarn Dashboard</h1>
+    <p>Select a section from the sidebar to begin.</p>
   </div>
-
-  <script>
-    function loadGames(folderName) {
-      const gameGrid = document.getElementById('gameGrid');
-      gameGrid.innerHTML = '';
-      for (let i = 1; i <= 10; i++) {
-        const img = document.createElement('img');
-        img.src = `assets/${folderName}/${i}.jpg`;
-        img.alt = `${folderName} Image ${i}`;
-        gameGrid.appendChild(img);
-      }
-
-      // अगर game-monetization है, subfolder दिखाए
-      if (folderName === 'game-monetization') {
-        const subFolders = ['rewards', 'leaderboard', 'history'];
-        subFolders.forEach(sub => {
-          const subTitle = document.createElement('h3');
-          subTitle.textContent = `🔸 ${sub.charAt(0).toUpperCase() + sub.slice(1)}`;
-          gameGrid.appendChild(subTitle);
-
-          for (let j = 1; j <= 5; j++) {
-            const img = document.createElement('img');
-            img.src = `assets/${folderName}/${sub}/${j}.jpg`;
-            img.alt = `${sub} ${j}`;
-            gameGrid.appendChild(img);
-          }
-        });
-      }
-    }
-  </script>
 </body>
 </html>
