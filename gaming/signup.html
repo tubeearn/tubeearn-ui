@@ -1,0 +1,109 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubeEarn Gaming - Sign Up</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body {
+      background: #f1f1f1;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .logo {
+      width: 200px;
+      margin: 40px auto 20px;
+    }
+    .signup-box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 500px;
+    }
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      background: #ff4d4d;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e04343;
+    }
+  </style>
+</head>
+<body>
+  <img src="https://merry-sunflower-421769.netlify.app/logo.png" alt="TubeEarn Logo" class="logo" />
+  <div class="signup-box">
+    <h2>Create Your Gaming Account</h2>
+    <form id="signup-form">
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="tel" id="phone" placeholder="Phone Number" required />
+      <input type="email" id="email" placeholder="Email Address" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>  <script>
+    const SUPABASE_URL = "https://ejbvidirnsjvadvekede.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqYnZpZGlybnNqdmFkdmVrZWRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM2MTA3ODMsImV4cCI6MjA2OTE4Njc4M30.KoCt8f2bXjn3843XOsRMLwyZ0lKpARkrRqb_GXlGfUs";
+
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    document.getElementById("signup-form").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+            phone_number: phone
+          }
+        }
+      });
+
+      if (error) {
+        alert("Error: " + error.message);
+      } else {
+        alert("Signup successful! You can now login.");
+        window.location.href = "/dashboard.html";
+      }
+    });
+  </script></body>
+</html>
