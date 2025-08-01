@@ -4,106 +4,117 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn Dashboard</title>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f3f4f6;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      color: #333;
     }
 
-    .top-bar {
-      background: linear-gradient(to right, #1e3a8a, #2563eb);
+    header {
+      background: #0d47a1;
       color: white;
-      padding: 8px 15px;
-      font-size: 14px;
+      padding: 1rem;
       text-align: center;
     }
 
-    .navbar {
-      overflow-x: auto;
-      white-space: nowrap;
-      background-color: #0f172a;
-      padding: 8px 0;
+    .horizontal-menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 1rem 0;
     }
 
-    .nav-links {
-      display: inline-flex;
-      gap: 15px;
-      padding-left: 10px;
-    }
-
-    .nav-links a {
-      display: inline-block;
+    .horizontal-menu a {
+      background: #1565c0;
       color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
       text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      background-color: #1e293b;
-      font-size: 14px;
-      transition: background 0.3s;
+      font-weight: bold;
+      transition: background 0.3s ease;
     }
 
-    .nav-links a:hover {
-      background-color: #334155;
+    .horizontal-menu a:hover {
+      background: #0d47a1;
     }
 
-    .main-content {
-      padding: 20px;
+    .game-showcase {
+      padding: 1rem;
+      text-align: center;
     }
 
-    .main-content h1 {
-      color: #1e293b;
-      margin-bottom: 20px;
+    .games-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
     }
 
-    .game-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background-color: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    .game-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      width: 150px;
+      padding: 0.5rem;
+      text-align: center;
       transition: transform 0.2s;
     }
 
-    .card:hover {
-      transform: scale(1.03);
+    .game-card:hover {
+      transform: scale(1.05);
     }
 
-    .card h3 {
-      margin-top: 0;
+    .game-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
     }
 
-    @media (max-width: 500px) {
-      .nav-links a {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
+    footer {
+      margin-top: 2rem;
+      text-align: center;
+      background: #0d47a1;
+      color: white;
+      padding: 1rem;
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>🌍 World's No.1 Growing Earning Site - TubeEarn</h1>
+    <nav class="horizontal-menu">
+      <a href="game-list/index.html">🎮 Game List</a>
+      <a href="paid-games/index.html">💰 Paid Games</a>
+      <a href="wallet/index.html">💼 TubeEarn Wallet</a>
+      <a href="profile/index.html">👤 Profile</a>
+      <a href="monetization/index.html">📈 Monetization</a>
+    </nav>
+  </header>
 
-  <!-- Top Banner -->
-  <div class="top-bar">
-    🌍 World’s No.1 Earning & Growing Gaming Monetization Site - Monetize Your Games Now!
-  </div>
-
-  <!-- Horizontal Navbar -->
-  <div class="navbar">
-    <div class="nav-links">
-      <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
-      <a href="profile/index.html"><i class="fas fa-user"></i> Profile</a>
-      <a href="game-list/index.html"><i class="fas fa-gamepad"></i> Game List</a>
-      <a href="upcoming-games/index.html"><i class="fas fa-calendar-alt"></i> Upcoming</a>
-      <a href="monetization/index.html"><i class="fas fa-coins"></i> Monetization</a>
-      <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  <main class="game-showcase">
+    <h2>Featured Free Games</h2>
+    <div class="games-grid">
+      <div class="game-card">
+        <img src="thumbs/game1.png" alt="Game 1 Thumbnail" />
+        <p>Snakes Game</p>
+      </div>
+      <div class="game-card">
+        <img src="thumbs/game2.png" alt="Game 2 Thumbnail" />
+        <p>Memory Match</p>
+      </div>
+      <!-- Add more game cards dynamically -->
     </div>
+  </main>
+
+  <footer>
+    <p>&copy; TubeEarn</p>
+  </footer>
+</body>
+</html>    </div>
   </div>
 
   <!-- Main Dashboard -->
