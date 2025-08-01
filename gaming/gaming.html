@@ -15,11 +15,13 @@
       padding: 40px;
     }
     .logo {
-      width: 120px;
+      width: 150px;
       margin: auto;
     }
     .logo img {
       width: 100%;
+      border-radius: 12px;
+      cursor: pointer;
     }
     .welcome h1 {
       font-size: 30px;
@@ -77,7 +79,9 @@
 <body>
 
   <div class="logo">
-    <img src="logo.png" alt="TubeEarn Logo" />
+    <a href="login.html">
+      <img src="https://i.postimg.cc/HnCjQcwd/Tube-Earn-logos.png" alt="TubeEarn Logo" />
+    </a>
   </div>
 
   <div class="welcome">
@@ -108,15 +112,13 @@
     Already have an account? <a href="login.html">Login</a>
   </div>
 
-  <!-- Place your AdSense ID here -->
+  <!-- AdSense Placeholder -->
   <!-- <script data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
 
   <script>
     document.getElementById("signupForm").addEventListener("submit", function (e) {
       e.preventDefault();
       document.getElementById("successMsg").style.display = "block";
-
-      // Simulate dashboard redirect
       setTimeout(() => {
         window.location.href = "dashboard.html";
       }, 1500);
