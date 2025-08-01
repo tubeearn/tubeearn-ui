@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background: #f4f4f4;
+      background: #f0f0f0;
     }
 
     .container {
@@ -17,7 +17,7 @@
     }
 
     .sidebar {
-      width: 220px;
+      width: 230px;
       background-color: #111;
       color: white;
       padding: 20px;
@@ -25,7 +25,7 @@
     }
 
     .sidebar h2 {
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 30px;
     }
 
@@ -53,7 +53,7 @@
 
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 15px;
     }
 
@@ -62,7 +62,7 @@
       height: 100px;
       object-fit: cover;
       border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
     h3 {
@@ -77,17 +77,16 @@
       <button onclick="loadGames('free-games')">🎮 Free Games</button>
       <button onclick="loadGames('paid-games')">💰 Paid Games</button>
       <button onclick="loadGames('wallet')">👛 Wallet</button>
-      <button onclick="loadGames('monetization')">💡 Monetization</button>
+      <button onclick="loadGames('game-monetization')">🎯 Game Monetization</button>
+      <button onclick="loadGames('upcoming-games')">🚀 Upcoming Games</button>
       <button onclick="loadGames('profile')">👤 Profile</button>
       <button onclick="loadGames('career')">📋 Career</button>
       <button onclick="loadGames('logout')">🚪 Logout</button>
     </div>
 
     <div class="content">
-      <h3>🎯 Select a feature to display content</h3>
-      <div class="game-grid" id="gameGrid">
-        <!-- Images will be loaded here -->
-      </div>
+      <h3>🎯 Select a feature to load content</h3>
+      <div class="game-grid" id="gameGrid"></div>
     </div>
   </div>
 
@@ -98,16 +97,27 @@
       for (let i = 1; i <= 10; i++) {
         const img = document.createElement('img');
         img.src = `assets/${folderName}/${i}.jpg`;
-        img.alt = `${folderName} Game ${i}`;
+        img.alt = `${folderName} Image ${i}`;
         gameGrid.appendChild(img);
+      }
+
+      // अगर game-monetization है, subfolder दिखाए
+      if (folderName === 'game-monetization') {
+        const subFolders = ['rewards', 'leaderboard', 'history'];
+        subFolders.forEach(sub => {
+          const subTitle = document.createElement('h3');
+          subTitle.textContent = `🔸 ${sub.charAt(0).toUpperCase() + sub.slice(1)}`;
+          gameGrid.appendChild(subTitle);
+
+          for (let j = 1; j <= 5; j++) {
+            const img = document.createElement('img');
+            img.src = `assets/${folderName}/${sub}/${j}.jpg`;
+            img.alt = `${sub} ${j}`;
+            gameGrid.appendChild(img);
+          }
+        });
       }
     }
   </script>
-</body>
-</html>    window.onload = () => {
-      loadFolder('free-games');
-    };
-  </script>
-
 </body>
 </html>
