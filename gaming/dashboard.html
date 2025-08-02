@@ -1,72 +1,93 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
     }
-    .sidebar {
-      width: 260px;
-      height: 100vh;
-      background-color: #343a40;
-      padding: 20px;
-      position: fixed;
-      overflow-y: auto;
-    }
-    .sidebar h2 {
-      color: #fff;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-    .sidebar ul li {
-      margin-bottom: 10px;
-    }
-    .sidebar ul li a {
-      color: #adb5bd;
-      text-decoration: none;
-      display: block;
+
+    .dashboard-bar {
+      background: #fff;
       padding: 10px;
-      border-radius: 5px;
+      overflow-x: auto;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-    .sidebar ul li a:hover {
-      background-color: #495057;
-      color: #fff;
+
+    .dashboard-icon {
+      display: inline-block;
+      width: 80px;
+      margin-right: 10px;
+      text-align: center;
+      color: #555;
+      text-decoration: none;
+      transition: all 0.3s ease;
     }
-    .content {
-      margin-left: 280px;
-      padding: 20px;
+
+    .dashboard-icon:hover {
+      color: #007bff;
+      transform: scale(1.05);
+    }
+
+    .dashboard-icon img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #eee;
+      padding: 10px;
+    }
+
+    .dashboard-icon span {
+      display: block;
+      margin-top: 5px;
+      font-size: 13px;
+    }
+
+    @media screen and (max-width: 768px) {
+      .dashboard-icon {
+        width: 70px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>TubeEarn</h2>
-    <ul>
-      <li><a href="assets/free-games/play-game.html">Free Games</a></li>
-      <li><a href="assets/paid-games/paid-game.html">Paid Games</a></li>
-      <li><a href="assets/upcoming-games/upcoming-game.html">Upcoming Games</a></li>
-      <li><a href="assets/wallet/wallet.html">Wallet</a></li>
-      <li><a href="assets/wallet/reward.html">Rewards</a></li>
-      <li><a href="assets/wallet/leaderboard.html">Leaderboard</a></li>
-      <li><a href="assets/wallet/history.html">Transaction History</a></li>
-      <li><a href="assets/monetization/game-monetization.html">Game Monetization</a></li>
-      <li><a href="assets/monetization/ads-setting.html">Ads Settings</a></li>
-      <li><a href="assets/profile/user-profile.html">User Profile</a></li>
-      <li><a href="assets/career/career.html">Career</a></li>
-    </ul>
-  </div>  <div class="content">
-    <h1>🎮 Welcome to TubeEarn Dashboard</h1>
-    <p>Select a section from the sidebar to begin.</p>
+
+  <div class="dashboard-bar">
+    <a href="./free-games/play-game.html" class="dashboard-icon">
+      <img src="./assets/free.png" alt="Free" />
+      <span>Free Game</span>
+    </a>
+    <a href="./paid-games/ptm-game.html" class="dashboard-icon">
+      <img src="./assets/paid.png" alt="Paid" />
+      <span>Paid Game</span>
+    </a>
+    <a href="./monetization/game-monetization.html" class="dashboard-icon">
+      <img src="./assets/monetize.png" alt="Monetize" />
+      <span>Monetize</span>
+    </a>
+    <a href="./wallet/wallet-balance.html" class="dashboard-icon">
+      <img src="./assets/wallet.png" alt="Wallet" />
+      <span>Wallet</span>
+    </a>
+    <a href="./upcoming-games/release-calendar.html" class="dashboard-icon">
+      <img src="./assets/upcoming.png" alt="Upcoming" />
+      <span>Upcoming</span>
+    </a>
+    <a href="./career/apply-job.html" class="dashboard-icon">
+      <img src="./assets/job.png" alt="Career" />
+      <span>Career</span>
+    </a>
+    <a href="./settings/user-profile.html" class="dashboard-icon">
+      <img src="./assets/user.png" alt="Profile" />
+      <span>Profile</span>
+    </a>
   </div>
+
 </body>
 </html>
