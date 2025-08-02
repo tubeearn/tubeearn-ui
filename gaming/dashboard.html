@@ -1,88 +1,116 @@
-<!-- Dashboard Main Page (index.html) --><!DOCTYPE html><html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - TubeEarn</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubeEarn Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f2f2;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 15px 5px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .icon-button {
+      text-align: center;
+      color: #001f5f;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .icon-button:hover {
+      color: #ff0000;
+    }
+    .icon-circle {
+      width: 50px;
+      height: 50px;
+      background-color: #001f5f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      margin: auto;
+      margin-bottom: 5px;
+    }.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  padding: 20px;
+}
+.game-card {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.game-card h4 {
+  margin: 10px 0 5px;
+  font-size: 16px;
+}
+.game-card p {
+  font-size: 13px;
+  color: #666;
+}
+
+  </style>
 </head>
-<body>
-  <div class="dashboard-container">
-    <h1 class="dashboard-title">🎮 TubeEarn Game Dashboard</h1><div class="dashboard-grid">
-  <a href="./free-games/free-games.html" class="dashboard-card">
-    <div class="circle-icon">🎲</div>
-    <p>Free Games</p>
-  </a>
-
-  <a href="./paid-games/paid-games.html" class="dashboard-card">
-    <div class="circle-icon">💰</div>
-    <p>Paid Games</p>
-  </a>
-
-  <a href="./game-monetization/game-monetization.html" class="dashboard-card">
-    <div class="circle-icon">📈</div>
-    <p>Game Monetization</p>
-  </a>
-
-  <a href="./profile/profile.html" class="dashboard-card">
-    <div class="circle-icon">👤</div>
-    <p>Profile</p>
-  </a>
-</div>
-
-  </div>
-</body>
-</html><!-- style.css --><style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-  }
-
-  .dashboard-container {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .dashboard-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-
-  .dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 20px;
-    padding: 0 10px;
-  }
-
-  .dashboard-card {
-    text-decoration: none;
-    background-color: red;
-    color: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    transition: transform 0.2s;
-  }
-
-  .dashboard-card:hover {
-    transform: scale(1.05);
-  }
-
-  .circle-icon {
-    background-color: #222;
-    color: #007BFF;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    margin: 0 auto 10px auto;
-  }
-</style><!-- free-games/free-games.html --><h2>🎲 Free Games List</h2>
-<!-- Content Here --><!-- paid-games/paid-games.html --><h2>💰 Paid Games List</h2>
-<!-- Content Here --><!-- game-monetization/game-monetization.html --><h2>📈 Game Monetization Info</h2>
-<!-- Content Here --><!-- profile/profile.html --><h2>👤 User Profile</h2>
-<!-- Content Here -->
+<body>  <!-- Top Icon Bar -->  <div class="top-bar">
+    <a href="./profile/profile.html" class="icon-button">
+      <div class="icon-circle">👤</div>
+      Profile
+    </a>
+    <a href="./monetization/index.html" class="icon-button">
+      <div class="icon-circle">💰</div>
+      Monetize
+    </a>
+    <a href="./freegame/index.html" class="icon-button">
+      <div class="icon-circle">🎮</div>
+      Free Game
+    </a>
+    <a href="./paidgame/index.html" class="icon-button">
+      <div class="icon-circle">💸</div>
+      Paid Game
+    </a>
+    <a href="./upcominggame/index.html" class="icon-button">
+      <div class="icon-circle">🚀</div>
+      Upcoming
+    </a>
+    <a href="./wallet/index.html" class="icon-button">
+      <div class="icon-circle">👛</div>
+      Wallet
+    </a>
+  </div>  <!-- Game Grid Section -->  <div class="game-grid">
+    <div class="game-card">
+      <h4>Game A</h4>
+      <p>Type: Free</p>
+    </div>
+    <div class="game-card">
+      <h4>Game B</h4>
+      <p>Type: Paid</p>
+    </div>
+    <div class="game-card">
+      <h4>Game C</h4>
+      <p>Type: Upcoming</p>
+    </div>
+    <div class="game-card">
+      <h4>Game D</h4>
+      <p>Type: Free</p>
+    </div>
+    <div class="game-card">
+      <h4>Game E</h4>
+      <p>Type: Paid</p>
+    </div>
+    <div class="game-card">
+      <h4>Game F</h4>
+      <p>Type: Upcoming</p>
+    </div>
+  </div></body>
+</html>
