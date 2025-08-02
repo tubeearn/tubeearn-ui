@@ -1,1 +1,62 @@
-cjjjcjmhch
+
+<!-- File: wallet.html --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TubeEarn Wallet Dashboard</title>
+  <link rel="stylesheet" href="style/wallet.css">
+  <link rel="stylesheet" href="icons/fontawesome.css">
+</head>
+<body>
+  <!-- Header & Logo -->
+  <header class="header">
+    <img src="assets/logo.png" alt="TubeEarn Logo" class="logo" />
+    <h1>Wallet Dashboard</h1>
+  </header>  <!-- Navigation Sidebar -->  <nav class="sidebar">
+    <ul>
+      <li><i class="fa fa-wallet"></i> Wallet</li>
+      <li><i class="fa fa-money-bill-wave"></i> Add Money</li>
+      <li><i class="fa fa-history"></i> Transaction History</li>
+      <li><i class="fa fa-gift"></i> Rewards</li>
+      <li><i class="fa fa-chart-line"></i> Analytics</li>
+      <li><i class="fa fa-user-shield"></i> Security</li>
+      <li><i class="fa fa-cogs"></i> Settings</li>
+    </ul>
+  </nav>  <!-- Main Content Area -->  <main class="dashboard">
+    <section id="wallet-balance">
+      <h2>Current Balance</h2>
+      <p>₹0.00</p>
+    </section><section id="add-money">
+  <h2>Add Money</h2>
+  <button>UPI</button>
+  <button>Card</button>
+  <button>Crypto</button>
+</section>
+
+<section id="transactions">
+  <h2>Transaction History</h2>
+  <div class="txn-list">Loading...</div>
+</section>
+
+<section id="rewards">
+  <h2>Rewards</h2>
+  <p>No rewards yet</p>
+</section>
+
+<section id="analytics">
+  <h2>Analytics</h2>
+  <div class="chart">Coming Soon...</div>
+</section>
+
+<section id="security">
+  <h2>Security Settings</h2>
+  <ul>
+    <li>2FA Enabled</li>
+    <li>Device Login History</li>
+    <li>PIN Code Setup</li>
+    <li>Account Recovery</li>
+  </ul>
+</section>
+
+  </main>  <!-- Scripts -->  <script src="script/wallet.js"></script></body>
+</html>
