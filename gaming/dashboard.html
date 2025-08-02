@@ -1,93 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Dashboard Main Page (index.html) --><!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f2f2f2;
-    }
-
-    .dashboard-bar {
-      background: #ff0000; /* 🔴 Red bar */
-      padding: 12px 8px;
-      overflow-x: auto;
-      white-space: nowrap;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    }
-
-    .dashboard-icon {
-      display: inline-block;
-      width: 80px;
-      margin-right: 12px;
-      text-align: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      color: #002244; /* 🔵 Dark Blue text */
-    }
-
-    .dashboard-icon:hover {
-      transform: scale(1.05);
-    }
-
-    .dashboard-icon img {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #002244; /* 🔵 Dark Blue circle */
-      padding: 8px;
-    }
-
-    .dashboard-icon span {
-      display: block;
-      margin-top: 5px;
-      font-size: 13px;
-      color: #002244; /* 🔵 Dark Blue text */
-    }
-
-    @media screen and (max-width: 768px) {
-      .dashboard-icon {
-        width: 70px;
-      }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - TubeEarn</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="dashboard-container">
+    <h1 class="dashboard-title">🎮 TubeEarn Game Dashboard</h1><div class="dashboard-grid">
+  <a href="./free-games/free-games.html" class="dashboard-card">
+    <div class="circle-icon">🎲</div>
+    <p>Free Games</p>
+  </a>
 
-  <div class="dashboard-bar">
-    <a href="./free-games/play-game.html" class="dashboard-icon">
-      <img src="./assets/free.png" alt="Free" />
-      <span>Free Game</span>
-    </a>
-    <a href="./paid-games/ptm-game.html" class="dashboard-icon">
-      <img src="./assets/paid.png" alt="Paid" />
-      <span>Paid Game</span>
-    </a>
-    <a href="./monetization/game-monetization.html" class="dashboard-icon">
-      <img src="./assets/monetize.png" alt="Monetize" />
-      <span>Monetize</span>
-    </a>
-    <a href="./wallet/wallet-balance.html" class="dashboard-icon">
-      <img src="./assets/wallet.png" alt="Wallet" />
-      <span>Wallet</span>
-    </a>
-    <a href="./upcoming-games/release-calendar.html" class="dashboard-icon">
-      <img src="./assets/upcoming.png" alt="Upcoming" />
-      <span>Upcoming</span>
-    </a>
-    <a href="./career/apply-job.html" class="dashboard-icon">
-      <img src="./assets/job.png" alt="Career" />
-      <span>Career</span>
-    </a>
-    <a href="./settings/user-profile.html" class="dashboard-icon">
-      <img src="./assets/user.png" alt="Profile" />
-      <span>Profile</span>
-    </a>
+  <a href="./paid-games/paid-games.html" class="dashboard-card">
+    <div class="circle-icon">💰</div>
+    <p>Paid Games</p>
+  </a>
+
+  <a href="./game-monetization/game-monetization.html" class="dashboard-card">
+    <div class="circle-icon">📈</div>
+    <p>Game Monetization</p>
+  </a>
+
+  <a href="./profile/profile.html" class="dashboard-card">
+    <div class="circle-icon">👤</div>
+    <p>Profile</p>
+  </a>
+</div>
+
   </div>
-
 </body>
-</html>
+</html><!-- style.css --><style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+  }
+
+  .dashboard-container {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .dashboard-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .dashboard-card {
+    text-decoration: none;
+    background-color: red;
+    color: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+  }
+
+  .dashboard-card:hover {
+    transform: scale(1.05);
+  }
+
+  .circle-icon {
+    background-color: #222;
+    color: #007BFF;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 10px auto;
+  }
+</style><!-- free-games/free-games.html --><h2>🎲 Free Games List</h2>
+<!-- Content Here --><!-- paid-games/paid-games.html --><h2>💰 Paid Games List</h2>
+<!-- Content Here --><!-- game-monetization/game-monetization.html --><h2>📈 Game Monetization Info</h2>
+<!-- Content Here --><!-- profile/profile.html --><h2>👤 User Profile</h2>
+<!-- Content Here -->
