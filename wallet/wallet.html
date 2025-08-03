@@ -1,98 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TubeEarn Wallet</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
-      background: #f3f3f3;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #0f172a, #1e293b);
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-
     .container {
-      background: white;
-      padding: 30px;
+      background: #1e293b;
+      padding: 40px;
+      border-radius: 16px;
       width: 90%;
-      max-width: 400px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      max-width: 450px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
       text-align: center;
-      border-radius: 10px;
     }
-
     .hidden {
       display: none;
     }
-
     .logo {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      margin-bottom: 20px;
+    }
+    h2 {
       margin-bottom: 15px;
     }
-
-    input {
-      padding: 10px;
-      width: 80%;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    input[type="text"] {
+      padding: 12px;
+      width: 90%;
+      margin: 15px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
     }
-
     button {
-      padding: 10px 20px;
-      margin: 10px;
-      background: #007bff;
+      padding: 12px 24px;
+      background: #3b82f6;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
+      margin: 10px;
     }
-
     button:hover {
-      background: #0056b3;
+      background: #2563eb;
     }
-
     #passphraseBox {
-      background: #e9ecef;
-      padding: 10px;
+      background: #334155;
+      padding: 12px;
       margin: 15px 0;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 16px;
       font-weight: bold;
+      color: #facc15;
+    }
+    .link-button {
+      background: none;
+      color: #60a5fa;
+      border: none;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container" id="step1">
-    <img src="logo.png" class="logo" alt="Logo">
-    <h2>Create Your Wallet</h2>
-    <input type="text" id="username" placeholder="Enter Your Name" required />
+    <img src="logo.png" alt="TubeEarn Logo" class="logo">
+    <h2>Welcome to TubeEarn</h2>
+    <p>Create TubeEarn Wallet</p>
+    <input type="text" id="username" placeholder="Please enter your name" required>
     <button onclick="nextStep()">Next</button>
-  </div>
-
-  <div class="container hidden" id="step2">
-    <h2>Generate Your Passphrase</h2>
+    <p>Already have wallet? <button class="link-button" onclick="goToImport()">Import Wallet</button></p>
+  </div>  <div class="container hidden" id="step2">
+    <h2>Generate Your Wallet Passphrase</h2>
     <div id="passphraseBox">**************</div>
     <button onclick="generatePass()">Generate</button>
     <button onclick="copyPass()">Copy</button>
-    <p>Please save your 12-word passphrase for future login.</p>
+    <p>Please save your 12-word passphrase for future login. Don’t share with anyone.</p>
     <button onclick="nextStep()">Next</button>
-  </div>
-
-  <div class="container hidden" id="step3">
+  </div>  <div class="container hidden" id="step3">
     <h2>Enable Fingerprint</h2>
     <p>Use your fingerprint to secure your wallet.</p>
     <button onclick="verifyFingerprint()">Enable Fingerprint</button>
     <button onclick="redirectToDashboard()">Skip</button>
-  </div>
-
-  <script>
+  </div>  <div class="container hidden" id="import">
+    <h2>Import Wallet</h2>
+    <textarea id="importPhrase" rows="3" style="width:90%;padding:10px;border-radius:8px;"></textarea>
+    <br>
+    <button onclick="verifyImport()">Import & Enable Fingerprint</button>
+  </div>  <script>
     let currentStep = 1;
 
     function nextStep() {
@@ -102,7 +112,7 @@
     }
 
     function generatePass() {
-      const words = ["alpha", "beta", "delta", "omega", "tiger", "lion", "eagle", "horse", "stone", "river", "sky", "cloud"];
+      const words = ["moon", "river", "sky", "stone", "dream", "glow", "light", "truth", "storm", "sun", "fire", "peace"];
       let phrase = [];
       for (let i = 0; i < 12; i++) {
         phrase.push(words[Math.floor(Math.random() * words.length)]);
@@ -113,17 +123,18 @@
     function copyPass() {
       const text = document.getElementById("passphraseBox").innerText;
       navigator.clipboard.writeText(text);
-      alert("Passphrase copied!");
+      alert("Passphrase copied successfully ✅");
     }
 
     function verifyFingerprint() {
-      alert("Your fingerprint is verified ✅");
+      alert("Your fingerprint is verified successfully ✅");
       redirectToDashboard();
     }
 
     function redirectToDashboard() {
-      window.location.href = "dashboard/index.html"; // Change to your actual path
+      window.location.href = "dashboard/index.html";
     }
-  </script>
-</body>
-</html>
+
+    function goToImport() {
+      document.getElementById(`step${currentStep}`).classList.add("hidden");
+      document.getElementBy
