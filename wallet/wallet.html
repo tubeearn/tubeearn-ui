@@ -4,44 +4,43 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TubeEarn Wallet Onboarding</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       font-family: Arial, sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
+      align-items: flex-start;
+      min-height: 100vh;
     }
+
     .wallet-container {
       background-color: #111;
       padding: 2rem;
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-      width: 100%;
+      width: 90%;
       max-width: 400px;
       color: white;
+      margin-top: 30px;
       text-align: center;
       position: relative;
     }
+
     .logo {
-      position: absolute;
-      top: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #00eaff;
-      color: #000;
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: 50px;
-      box-shadow: 0 0 10px rgba(0,255,255,0.6);
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 10px;
     }
+
     h1 {
-      margin-top: 30px;
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #00eaff;
     }
+
     input[type="text"] {
       padding: 10px;
       width: 100%;
@@ -50,30 +49,53 @@
       margin-bottom: 1rem;
       font-size: 1rem;
     }
+
     .btn {
       background-color: #00eaff;
       border: none;
       color: #000;
-      padding: 10px 15px;
+      padding: 12px 15px;
       border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
-      margin-bottom: 1rem;
+      margin-top: 0.5rem;
       width: 100%;
     }
+
     .hidden {
       display: none;
     }
+
     .warning {
-      color: red;
-      font-weight: bold;
+      color: #ffa500;
+      font-size: 14px;
       margin-top: 10px;
+    }
+
+    #passphrase {
+      color: #00ffff;
+      font-weight: bold;
+      margin: 10px 0;
+      word-wrap: break-word;
+    }
+
+    .copy-btn {
+      background-color: #222;
+      color: #00eaff;
+      border: 1px solid #00eaff;
+      margin-top: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <div class="wallet-container">
-    <div class="logo">TubeEarn</div>
+    <!-- Logo Image -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_T.svg/512px-Logo_T.svg.png" class="logo" alt="TubeEarn Logo" />
+
     <h1 id="step-title">Welcome to TubeEarn Wallet</h1>
 
     <!-- Name Step -->
@@ -85,15 +107,16 @@
     <!-- Passphrase Step -->
     <div id="step-passphrase" class="hidden">
       <p><strong>Your Passphrase:</strong></p>
-      <p id="passphrase" style="margin: 10px 0; color: #0ff; font-weight: bold;"></p>
-      <p class="warning">⚠️ Please save this phrase for future login. You will need it.</p>
+      <p id="passphrase"></p>
+      <button class="copy-btn" onclick="copyPassphrase()">Copy</button>
+      <p class="warning">⚠️ Please save this phrase for future login.</p>
       <button class="btn" onclick="goToFingerprint()">Enable Fingerprint & Proceed</button>
       <button class="btn" onclick="skipToDashboard()">Skip</button>
     </div>
 
     <!-- Fingerprint Step -->
     <div id="step-fingerprint" class="hidden">
-      <p>Enable Fingerprint Authentication</p>
+      <p>Touch your fingerprint sensor to verify.</p>
       <button class="btn" onclick="verifyFingerprint()">Verify Fingerprint</button>
     </div>
   </div>
@@ -120,18 +143,34 @@
       document.getElementById('passphrase').innerText = phrase.join(' ');
     }
 
+    function copyPassphrase() {
+      const pass = document.getElementById('passphrase').innerText;
+      navigator.clipboard.writeText(pass).then(() => {
+        alert("Passphrase copied to clipboard!");
+      });
+    }
+
     function goToFingerprint() {
       document.getElementById('step-passphrase').classList.add('hidden');
       document.getElementById('step-fingerprint').classList.remove('hidden');
-      document.getElementById('step-title').innerText = 'Enable Fingerprint';
+      document.getElementById('step-title').innerText = 'Fingerprint Verification';
     }
 
-    function verifyFingerprint() {
-      alert("🔒 Please touch your phone's fingerprint sensor to verify.");
-      setTimeout(() => {
+    async function verifyFingerprint() {
+      try {
+        // Simulated fingerprint check using WebAuthn API
+        const publicKey = {
+          challenge: new Uint8Array([1,2,3,4]),
+          timeout: 60000,
+          allowCredentials: [],
+          userVerification: 'preferred'
+        };
+        await navigator.credentials.get({ publicKey });
         alert("✅ Fingerprint verified successfully!");
         redirectToDashboard();
-      }, 2000);
+      } catch (e) {
+        alert("❌ Fingerprint verification failed.");
+      }
     }
 
     function skipToDashboard() {
@@ -142,114 +181,5 @@
       window.location.href = "dashboard/index.html";
     }
   </script>
-</body>
-</html>      }
-
-      errorDiv.classList.add('hidden');
-      document.getElementById('step-name').classList.add('hidden');
-      document.getElementById('step-passphrase').classList.remove('hidden');
-      document.getElementById('step-title').innerText = 'Save your Passphrase';
-      generatePassphrase();
-    }
-
-    function generatePassphrase() {
-      const words = ["ocean", "river", "moon", "star", "light", "tree", "mountain", "sky", "cloud", "earth", "code", "dream"];
-      let phrase = [];
-      for (let i = 0; i < 12; i++) {
-        phrase.push(words[Math.floor(Math.random() * words.length)]);
-      }
-      document.getElementById('passphrase').innerText = phrase.join(' ');
-    }
-
-    function goToFingerprint() {
-      document.getElementById('step-passphrase').classList.add('hidden');
-      document.getElementById('step-fingerprint').classList.remove('hidden');
-      document.getElementById('step-title').innerText = 'Enable Fingerprint';
-    }
-
-    function skipToDashboard() {
-      redirectToDashboard();
-    }
-
-    function handleFingerprint() {
-      if (window.PublicKeyCredential) {
-        // Attempt fingerprint authentication
-        navigator.credentials.get({
-          publicKey: {
-            challenge: new Uint8Array(26),
-            timeout: 60000,
-            userVerification: 'required'
-          }
-        }).then(() => {
-          redirectToDashboard();
-        }).catch(() => {
-          alert("Fingerprint verification failed. Try again.");
-        });
-      } else {
-        alert("Fingerprint authentication not supported on this device.");
-      }
-    }
-
-    function redirectToDashboard() {
-      window.location.href = "dashboard/index.html";
-    }
-  </script>
-</body>
-</html>    const list = ['apple', 'banana', 'cloud', 'drive', 'wallet', 'tube', 'earn', 'voice', 'video', 'finger', 'secure', 'gate'];
-    while (words.length < 12) {
-      const word = list[Math.floor(Math.random() * list.length)];
-      if (!words.includes(word)) words.push(word);
-    }
-    document.getElementById('passphrase').innerText = words.join(' ');
-  }
-
-  function copyPassphrase() {
-    const text = document.getElementById('passphrase').innerText;
-    navigator.clipboard.writeText(text).then(() => {
-      showToast("Passphrase copied!");
-    });
-  }
-
-  function showToast(msg) {
-    const toast = document.getElementById('toast');
-    toast.innerText = msg;
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 3000);
-  }
-
-  async function enableFingerprint() {
-    try {
-      const publicKey = {
-        challenge: new Uint8Array(32),
-        rp: { name: "TubeEarn" },
-        user: {
-          id: new Uint8Array(16),
-          name: "user@example.com",
-          displayName: "User"
-        },
-        pubKeyCredParams: [{ type: "public-key", alg: -7 }],
-        timeout: 60000,
-        authenticatorSelection: { authenticatorAttachment: "platform", userVerification: "required" },
-        attestation: "none"
-      };
-      await navigator.credentials.create({ publicKey });
-      showToast("Biometric verified. Redirecting...");
-      setTimeout(() => {
-        window.location.href = "index.html";
-      }, 2000);
-    } catch (e) {
-      showToast("Fingerprint verification failed. Try again.");
-    }
-  }
-
-  function skipFingerprint() {
-    window.location.href = "index.html";
-  }
-
-  window.onload = () => {
-    generatePassphrase();
-  };
-</script>
-
 </body>
 </html>
