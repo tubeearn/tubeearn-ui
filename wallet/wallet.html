@@ -1,61 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Wallet</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create TubeEarn Wallet</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 450px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      color: #00e5ff;
+      margin-bottom: 10px;
+    }
+    .heading {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #00e5ff;
+      border: none;
+      color: #000;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 10px 0;
+    }
+    .passphrase-box {
+      background-color: #fff;
+      color: #000;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px 0;
+      word-break: break-word;
+    }
+    .copy-btn {
+      background-color: #03dac6;
+      color: #000;
+      margin-top: 5px;
+    }
+    .small-text {
+      font-size: 12px;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-  <h1>Create Your Wallet</h1>
+  <div class="container">
+    <div class="logo">TubeEarn</div>
+    <div class="heading">Welcome to TubeEarn Wallet</div>
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button onclick="generatePassphrase()">Generate 12-Word Passphrase</button>
+    <div id="passphrase" class="passphrase-box" style="display:none;"></div>
+    <button class="copy-btn" onclick="copyPassphrase()" style="display:none;">Copy Passphrase</button>
+    <p class="small-text">Save this passphrase securely. You'll need it to login later.</p>
+    <button onclick="enableBiometric()">Enable Fingerprint & Proceed</button>
+  </div>  <script>
+    const words = [
+      "apple", "banana", "cat", "dog", "eagle", "fish", "goat", "hat", "igloo",
+      "jungle", "kite", "lion", "monkey", "notebook", "orange", "pencil",
+      "queen", "robot", "sun", "tree", "umbrella", "vase", "whale", "xray",
+      "yarn", "zebra"
+    ];
 
-  <!-- Step 1: Enter Wallet Name -->
-  <div id="step1">
-    <label for="wallet-name">Wallet Name:</label>
-    <input type="text" id="wallet-name" placeholder="Enter your Wallet Name">
-    <br><br>
-    <button onclick="generatePhrase()">Next: Generate Phrase</button>
-  </div>
+    function generatePassphrase() {
+      let phrase = [];
+      for (let i = 0; i < 12; i++) {
+        const randIndex = Math.floor(Math.random() * words.length);
+        phrase.push(words[randIndex]);
+      }
+      const joined = phrase.join(' ');
+      document.getElementById("passphrase").style.display = "block";
+      document.getElementById("passphrase").innerText = joined;
+      document.querySelector(".copy-btn").style.display = "inline-block";
+    }
 
-  <!-- Step 2: Show 12-word Phrase -->
-  <div id="step2" style="display:none;">
-    <p><strong>Your 12-word Recovery Phrase:</strong></p>
-    <textarea id="phrase" readonly rows="2" style="width:300px;"></textarea>
-    <br><br>
-    <button onclick="nextStep()">Next: Biometric Verification</button>
-  </div>
+    function copyPassphrase() {
+      const text = document.getElementById("passphrase").innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Passphrase copied to clipboard!");
+      });
+    }
 
-  <!-- Step 3: Biometric Verification -->
-  <div id="step3" style="display:none;">
-    <p><strong>Biometric Verification:</strong></p>
-    <button onclick="verifyBiometric()">Verify Fingerprint</button>
-  </div>
-
-  <script>
-    function generatePhrase() {
-      const walletName = document.getElementById('wallet-name').value.trim();
-      if (!walletName) {
-        alert("Please enter a wallet name.");
+    function enableBiometric() {
+      const name = document.getElementById("username").value;
+      const phrase = document.getElementById("passphrase").innerText;
+      if (!name || !phrase) {
+        alert("Please enter your name and generate passphrase first.");
         return;
       }
-
-      // Dummy phrase generator
-      const words = ["apple", "tree", "mountain", "river", "stone", "light", "moon", "sun", "rain", "cloud", "earth", "fire"];
-      const phrase = words.sort(() => 0.5 - Math.random()).slice(0, 12).join(" ");
-      document.getElementById("phrase").value = phrase;
-
-      document.getElementById("step1").style.display = "none";
-      document.getElementById("step2").style.display = "block";
+      alert("Fingerprint enabled! Redirecting to Dashboard...");
+      window.location.href = "dashboard/index.html";
     }
-
-    function nextStep() {
-      document.getElementById("step2").style.display = "none";
-      document.getElementById("step3").style.display = "block";
-    }
-
-    function verifyBiometric() {
-      alert("Biometric verified successfully!");
-      window.location.href = "dashboard/index.html"; // Redirect to dashboard
-    }
-  </script>
-</body>
+  </script></body>
 </html>
