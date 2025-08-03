@@ -5,97 +5,126 @@
   <title>Secure Wallet Access</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background: #001f3f;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    h1 {
-      font-size: 2em;
-      margin-bottom: 20px;
+      color: white;
+      margin: 0;
+      padding: 20px;
     }
     .container {
+      max-width: 400px;
+      margin: auto;
       background: #003366;
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      border-radius: 15px;
+      box-shadow: 0 0 10px #000000aa;
+    }
+    h2 {
       text-align: center;
-      width: 300px;
+    }
+    input, button, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
     }
     button {
-      background: #0074D9;
-      border: none;
+      background-color: #0074D9;
       color: white;
-      padding: 10px 20px;
-      margin: 10px 0;
-      border-radius: 6px;
       cursor: pointer;
-      font-size: 1em;
-    }
-    button:hover {
-      background: #005fa3;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
     }
     .hidden {
       display: none;
+    }
+    .phrase-box {
+      background: #002244;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Wallet Access</h1>
+    <h2>Secure Wallet</h2>
     <div id="main-options">
-      <button onclick="showCreate()">Create Wallet Account</button>
-      <button onclick="showLogin()">I Have Wallet Account</button>
-      <button onclick="enableFingerprint()">Enable Fingerprint</button>
-    </div><div id="login-section" class="hidden">
-  <input type="text" id="passphrase" placeholder="Enter 12-word passphrase">
-  <button onclick="verifyPassphrase()">Login</button>
+      <button onclick="showCreate()">Create Wallet</button>
+      <button onclick="showImport()">I Have Wallet Account</button>
+    </div><div id="create-wallet" class="hidden">
+  <input type="text" id="wallet-name" placeholder="Enter your name">
+  <button onclick="generatePhrase()">Generate Wallet</button>
+  <div id="phrase-box" class="hidden">
+    <textarea id="phrase" rows="3" readonly></textarea>
+    <button onclick="copyPhrase()">Copy Phrase</button>
+    <button onclick="enableFingerprint()">Enable Fingerprint</button>
+  </div>
+</div>
+
+<div id="import-wallet" class="hidden">
+  <textarea id="import-phrase" placeholder="Enter your 12-word phrase" rows="3"></textarea>
+  <button onclick="verifyAndOpen()">Submit</button>
 </div>
 
 <div id="dashboard" class="hidden">
-  <h2>Welcome to Your Wallet</h2>
-  <p>Access granted securely.</p>
+  <h2>Welcome to your Dashboard</h2>
+  <p>Wallet Activated ✅</p>
 </div>
 
   </div>  <script>
-    function showLogin() {
-      document.getElementById('main-options').classList.add('hidden');
-      document.getElementById('login-section').classList.remove('hidden');
-    }
-
-    function verifyPassphrase() {
-      const phrase = document.getElementById('passphrase').value.trim();
-      if (phrase.split(' ').length === 12) {
-        document.getElementById('login-section').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-      } else {
-        alert('Please enter a valid 12-word passphrase.');
-      }
-    }
+    const phrases = ["apple", "banana", "cat", "dog", "eagle", "fish", "giraffe", "hat", "ice", "juice", "kite", "lion"];
 
     function showCreate() {
-      alert('Feature coming soon.');
+      document.getElementById('main-options').classList.add('hidden');
+      document.getElementById('create-wallet').classList.remove('hidden');
+    }
+
+    function showImport() {
+      document.getElementById('main-options').classList.add('hidden');
+      document.getElementById('import-wallet').classList.remove('hidden');
+    }
+
+    function generatePhrase() {
+      const name = document.getElementById('wallet-name').value.trim();
+      if (!name) {
+        alert('Please enter your name');
+        return;
+      }
+      let phrase = [];
+      for (let i = 0; i < 12; i++) {
+        phrase.push(phrases[Math.floor(Math.random() * phrases.length)]);
+      }
+      document.getElementById('phrase').value = phrase.join(' ');
+      document.getElementById('phrase-box').classList.remove('hidden');
+    }
+
+    function copyPhrase() {
+      const phrase = document.getElementById('phrase');
+      phrase.select();
+      document.execCommand('copy');
+      alert('Phrase copied!');
     }
 
     function enableFingerprint() {
-      // Simulation only — actual fingerprint API would require HTTPS and server auth
-      if (window.confirm('Touch your fingerprint sensor to continue.')) {
-        document.getElementById('main-options').classList.add('hidden');
+      // Simulate fingerprint authentication
+      const confirmed = confirm("Place your finger on the scanner to authenticate.");
+      if (confirmed) {
+        document.getElementById('create-wallet').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
       } else {
-        alert('Fingerprint authentication failed.');
+        alert("Fingerprint verification failed.");
+      }
+    }
+
+    function verifyAndOpen() {
+      const input = document.getElementById('import-phrase').value.trim();
+      if (input.split(' ').length === 12) {
+        alert("Verifying...");
+        document.getElementById('import-wallet').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+      } else {
+        alert("Invalid phrase. Must be 12 words.");
       }
     }
   </script></body>
