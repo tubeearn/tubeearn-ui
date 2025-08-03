@@ -1,158 +1,183 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TubeEarn Wallet Onboarding</title>
+  <title>Create Wallet</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      font-family: Arial, sans-serif;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 50px;
-      min-height: 100vh;
-      margin: 0;
-    }
-    .wallet-container {
-      background-color: #111;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-      width: 100%;
-      max-width: 400px;
-      color: white;
-      text-align: center;
-    }
-    .wallet-container h1 {
-      color: #00eaff;
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .wallet-container p {
-      margin-bottom: 1rem;
-    }
-    input[type="text"] {
-      padding: 10px;
-      width: 100%;
-      border-radius: 8px;
-      border: none;
-      margin-bottom: 0.5rem;
-      font-size: 1rem;
-    }
-    .btn {
-      background-color: #00eaff;
-      border: none;
-      color: #000;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 0.5rem;
-      width: 100%;
-    }
-    .hidden { display: none; }
-
-    .error-msg {
-      color: #ff4d4d;
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
-    }
-
-    .info-msg {
-      color: #ff4444;
-      font-weight: bold;
-      margin-top: 1rem;
-      font-size: 0.95rem;
-    }
-  </style>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="wallet-container">
-    <h1>TubeEarn</h1>
-    <p id="step-title">Welcome to TubeEarn Wallet</p>
-
-    <div id="step-name">
-      <input type="text" id="userName" placeholder="Enter your name" />
-      <div id="nameError" class="error-msg hidden">Please enter your name</div>
-      <button class="btn" onclick="goToPassphrase()">Generate 12-Word Passphrase</button>
-    </div>
-
-    <div id="step-passphrase" class="hidden">
-      <p><strong>Your Passphrase:</strong></p>
-      <p id="passphrase" style="margin: 10px 0; color: #0ff; font-weight: bold;"></p>
-      <div class="info-msg">Please save this passphrase securely. It will be required for future login.</div>
-      <button class="btn" onclick="goToFingerprint()">Enable Fingerprint & Proceed</button>
-      <button class="btn" onclick="skipToDashboard()">Skip</button>
-    </div>
-
-    <div id="step-fingerprint" class="hidden">
-      <p>Fingerprint Authentication Enabled.</p>
-      <button class="btn" onclick="handleFingerprint()">Verify Fingerprint & Go to Dashboard</button>
-    </div>
+  <header>
+    <img src="logo.png" alt="TubeEarn Logo" class="logo" />
+  </header>  <main>
+    <section id="create-wallet">
+      <h2>Enter Your Name</h2>
+      <input type="text" id="username" placeholder="Enter your name" required />
+      <button onclick="nextStep()">Next</button>
+      <p id="name-error" class="error"></p>
+    </section><section id="generate-passphrase" style="display: none;">
+  <h2>Your Secure Passphrase</h2>
+  <div class="passphrase-box">
+    <p id="passphrase">example twelve word seed goes here</p>
+    <button onclick="copyPassphrase()">Copy</button>
   </div>
+  <p class="notice">Please store this passphrase securely. It will be required for future logins.</p>
+  <button onclick="nextFingerprintStep()">Next</button>
+</section>
 
-  <script>
-    function goToPassphrase() {
-      const nameInput = document.getElementById('userName');
-      const name = nameInput.value.trim();
-      const errorDiv = document.getElementById('nameError');
+<section id="fingerprint-step" style="display: none;">
+  <h2>Enable Fingerprint</h2>
+  <button onclick="enableFingerprint()">Enable Fingerprint</button>
+  <button onclick="skipFingerprint()">Skip</button>
+  <p id="finger-status"></p>
+</section>
 
-      if (!name) {
-        errorDiv.classList.remove('hidden');
-        return;
-      }
-
-      errorDiv.classList.add('hidden');
-      document.getElementById('step-name').classList.add('hidden');
-      document.getElementById('step-passphrase').classList.remove('hidden');
-      document.getElementById('step-title').innerText = 'Save your Passphrase';
-      generatePassphrase();
-    }
-
-    function generatePassphrase() {
-      const words = ["ocean", "river", "moon", "star", "light", "tree", "mountain", "sky", "cloud", "earth", "code", "dream"];
-      let phrase = [];
-      for (let i = 0; i < 12; i++) {
-        phrase.push(words[Math.floor(Math.random() * words.length)]);
-      }
-      document.getElementById('passphrase').innerText = phrase.join(' ');
-    }
-
-    function goToFingerprint() {
-      document.getElementById('step-passphrase').classList.add('hidden');
-      document.getElementById('step-fingerprint').classList.remove('hidden');
-      document.getElementById('step-title').innerText = 'Enable Fingerprint';
-    }
-
-    function skipToDashboard() {
-      redirectToDashboard();
-    }
-
-    function handleFingerprint() {
-      if (window.PublicKeyCredential) {
-        // Attempt fingerprint authentication
-        navigator.credentials.get({
-          publicKey: {
-            challenge: new Uint8Array(26),
-            timeout: 60000,
-            userVerification: 'required'
-          }
-        }).then(() => {
-          redirectToDashboard();
-        }).catch(() => {
-          alert("Fingerprint verification failed. Try again.");
-        });
-      } else {
-        alert("Fingerprint authentication not supported on this device.");
-      }
-    }
-
-    function redirectToDashboard() {
-      window.location.href = "dashboard/index.html";
-    }
-  </script>
+  </main>  <footer>
+    <p>© 2025 TubeEarn</p>
+  </footer>
 </body>
-</html>
+</html><style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  max-width: 150px;
+}
+
+main {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.passphrase-box {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.notice {
+  font-size: 0.9rem;
+  color: #777;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #888;
+}
+</style><script>
+function nextStep() {
+  const username = document.getElementById('username').value.trim();
+  const errorText = document.getElementById('name-error');
+  if (!username) {
+    errorText.textContent = "Please enter your name.";
+    return;
+  }
+  errorText.textContent = "";
+  document.getElementById('create-wallet').style.display = 'none';
+  document.getElementById('generate-passphrase').style.display = 'block';
+  document.getElementById('passphrase').textContent = generatePassphrase();
+}
+
+function generatePassphrase() {
+  const words = ["apple", "banana", "cloud", "dream", "elephant", "forest", "galaxy", "hero", "island", "jungle", "king", "light"];
+  return Array.from({ length: 12 }, () => words[Math.floor(Math.random() * words.length)]).join(' ');
+}
+
+function copyPassphrase() {
+  const text = document.getElementById('passphrase').textContent;
+  navigator.clipboard.writeText(text);
+  alert("Passphrase copied to clipboard.");
+}
+
+function nextFingerprintStep() {
+  document.getElementById('generate-passphrase').style.display = 'none';
+  document.getElementById('fingerprint-step').style.display = 'block';
+}
+
+function enableFingerprint() {
+  const status = document.getElementById('finger-status');
+  if (window.PublicKeyCredential) {
+    navigator.credentials.get({
+      publicKey: {
+        challenge: new Uint8Array([/* dummy */ 1,2,3]),
+        timeout: 60000,
+        userVerification: "required",
+        allowCredentials: []
+      }
+    }).then(result => {
+      status.textContent = "✅ Your biometric has been verified successfully.";
+      setTimeout(() => {
+        window.location.href = "dashboard/index.html";
+      }, 2000);
+    }).catch(err => {
+      status.textContent = "❌ Biometric verification failed. Try again.";
+    });
+  } else {
+    status.textContent = "❌ Biometric authentication is not supported on this device.";
+  }
+}
+
+function skipFingerprint() {
+  window.location.href = "dashboard/index.html";
+}
+</script>
