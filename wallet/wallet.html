@@ -2,108 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Wallet Setup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TubeEarn Wallet</title>
   <style>
     body {
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f2f2f2;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at center, #003344, #000000);
+      height: 100vh;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
       align-items: center;
     }
-    header {
-      width: 100%;
-      background: #000;
-      color: #fff;
-      padding: 10px;
+
+    .wallet-box {
+      background-color: #111;
+      padding: 30px 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
       text-align: center;
-      font-size: 20px;
-    }
-    .step {
-      display: none;
-      padding: 20px;
-      width: 100%;
+      color: white;
+      width: 90%;
       max-width: 400px;
     }
-    .step.active {
-      display: block;
+
+    .wallet-box h1 {
+      color: #00e6e6;
+      margin-bottom: 10px;
     }
-    input {
+
+    .wallet-box p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .wallet-box .passphrase {
+      margin: 10px 0;
+      color: #00ffff;
+      font-weight: bold;
+      font-size: 16px;
+      word-wrap: break-word;
+    }
+
+    .wallet-box button {
       width: 100%;
       padding: 12px;
       margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      padding: 12px 20px;
-      background: #000;
-      color: #fff;
       border: none;
+      border-radius: 10px;
+      background-color: #00e6e6;
+      color: #000;
+      font-size: 16px;
       cursor: pointer;
-      border-radius: 5px;
-      margin-top: 10px;
+      transition: background-color 0.3s;
     }
-    #passphrase {
-      background: #eee;
-      padding: 10px;
-      font-size: 14px;
-      margin: 10px 0;
-      border-radius: 5px;
-      text-align: center;
-    }
-    .copy-btn {
-      margin-top: 5px;
-      background: #444;
-    }
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #000;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      display: none;
-      font-size: 14px;
+
+    .wallet-box button:hover {
+      background-color: #00cccc;
     }
   </style>
 </head>
 <body>
+  <div class="wallet-box">
+    <h1>TubeEarn</h1>
+    <p>Save your Passphrase</p>
+    <p><strong>Your Passphrase:</strong></p>
+    <div class="passphrase">
+      light tree sky code dream moon mountain tree dream sky tree cloud
+    </div>
+    <button onclick="proceed()">Enable Fingerprint & Proceed</button>
+    <button onclick="skip()">Skip</button>
+  </div>
 
-<header><img src="logo.png" height="30" style="vertical-align: middle;"> TubeEarn Wallet</header>
+  <script>
+    function proceed() {
+      alert("Fingerprint Enabled & Proceeding...");
+      // redirect or next step logic here
+    }
 
-<div class="step active" id="step1">
-  <h2>Enter Your Name</h2>
-  <input type="text" id="name" placeholder="Full Name" />
-  <button onclick="nextStep()">Next</button>
-</div>
-
-<div class="step" id="step2">
-  <h2>Your Secret Passphrase</h2>
-  <div id="passphrase">loading...</div>
-  <button class="copy-btn" onclick="copyPassphrase()">Copy</button>
-  <p style="font-size: 13px;">Please store this passphrase securely. This will be required for login in the future.</p>
-  <button onclick="nextStep()">Next</button>
-</div>
-
-<div class="step" id="step3">
-  <h2>Enable Fingerprint</h2>
-  <button onclick="enableFingerprint()">Enable Fingerprint</button>
-  <button onclick="skipFingerprint()">Skip</button>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-  let currentStep = 1;
-
-  function nextStep() {
-    if (currentStep === 1) {
+    function skip() {
+      alert("Skipped. Redirecting...");
+      // redirect to dashboard or next screen
+    }
+  </script>
+</body>
+</html>    if (currentStep === 1) {
       const name = document.getElementById('name').value.trim();
       if (!name) return showToast('Please enter your name');
     }
