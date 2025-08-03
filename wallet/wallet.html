@@ -1,121 +1,102 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TubeEarn Wallet Setup</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Wallet Access</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0a1e40;
+      background: #001f3f;
       color: #fff;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
     }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
     .container {
-      background-color: #132a4f;
-      padding: 2rem;
+      background: #003366;
+      padding: 30px;
       border-radius: 12px;
-      width: 100%;
-      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
       text-align: center;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 300px;
     }
-    .logo {
-      width: 120px;
-      margin-bottom: 1rem;
-    }
-    .title {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-    }
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 1rem;
+    button {
+      background: #0074D9;
       border: none;
-      border-radius: 6px;
-    }
-    .btn {
-      width: 100%;
-      padding: 10px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
+      color: white;
+      padding: 10px 20px;
+      margin: 10px 0;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 1em;
     }
-    .phrase-box {
-      background-color: #0e2347;
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
-      font-size: 14px;
-      line-height: 1.6;
+    button:hover {
+      background: #005fa3;
     }
-    .hidden { display: none; }
-    .instruction { font-size: 12px; margin-top: 1rem; color: #ccc; }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <img class="logo" src="https://i.postimg.cc/N0V3PywR/Tube-Earn-logos.png" alt="TubeEarn Logo">
-    <div class="title">Welcome to TubeEarn</div><div id="step1">
-  <p>Create your Wallet</p>
-  <p>Please enter your name</p>
-  <input type="text" id="username" placeholder="Your Name">
-  <button class="btn" onclick="nextStep()">Next</button>
+    <h1>Wallet Access</h1>
+    <div id="main-options">
+      <button onclick="showCreate()">Create Wallet Account</button>
+      <button onclick="showLogin()">I Have Wallet Account</button>
+      <button onclick="enableFingerprint()">Enable Fingerprint</button>
+    </div><div id="login-section" class="hidden">
+  <input type="text" id="passphrase" placeholder="Enter 12-word passphrase">
+  <button onclick="verifyPassphrase()">Login</button>
 </div>
 
-<div id="step2" class="hidden">
-  <p>🟦 Your Wallet Recovery Phrase</p>
-  <div class="phrase-box" id="recoveryPhrase"></div>
-  <button class="btn" onclick="copyPhrase()">Copy</button>
-  <div class="instruction">Please save your 12-word phrase. It is required to recover your wallet in the future.</div>
-  <button class="btn" style="margin-top: 1rem;" onclick="enableFingerprint()">Enable Fingerprint</button>
-</div>
-
-<div id="step3" class="hidden">
-  <p>Verifying fingerprint...</p>
+<div id="dashboard" class="hidden">
+  <h2>Welcome to Your Wallet</h2>
+  <p>Access granted securely.</p>
 </div>
 
   </div>  <script>
-    const step1 = document.getElementById("step1");
-    const step2 = document.getElementById("step2");
-    const step3 = document.getElementById("step3");
-    const recoveryPhrase = document.getElementById("recoveryPhrase");
-
-    const phrases = [
-      "apple", "brick", "charge", "drum", "eagle", "frost",
-      "globe", "honey", "ice", "jungle", "kite", "lemon"
-    ];
-
-    function nextStep() {
-      const username = document.getElementById("username").value.trim();
-      if (!username) {
-        alert("Please enter your name");
-        return;
-      }
-      step1.classList.add("hidden");
-      step2.classList.remove("hidden");
-      recoveryPhrase.textContent = phrases.join(" ");
+    function showLogin() {
+      document.getElementById('main-options').classList.add('hidden');
+      document.getElementById('login-section').classList.remove('hidden');
     }
 
-    function copyPhrase() {
-      navigator.clipboard.writeText(phrases.join(" "));
-      alert("Recovery phrase copied to clipboard.");
+    function verifyPassphrase() {
+      const phrase = document.getElementById('passphrase').value.trim();
+      if (phrase.split(' ').length === 12) {
+        document.getElementById('login-section').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+      } else {
+        alert('Please enter a valid 12-word passphrase.');
+      }
+    }
+
+    function showCreate() {
+      alert('Feature coming soon.');
     }
 
     function enableFingerprint() {
-      step2.classList.add("hidden");
-      step3.classList.remove("hidden");
-      setTimeout(() => {
-        alert("Fingerprint verified successfully. Redirecting to dashboard...");
-        window.location.href = "/dashboard/index.html";
-      }, 3000);
+      // Simulation only — actual fingerprint API would require HTTPS and server auth
+      if (window.confirm('Touch your fingerprint sensor to continue.')) {
+        document.getElementById('main-options').classList.add('hidden');
+        document.getElementById('dashboard').classList.remove('hidden');
+      } else {
+        alert('Fingerprint authentication failed.');
+      }
     }
   </script></body>
 </html>
