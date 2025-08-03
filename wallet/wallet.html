@@ -1,136 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TubeEarn Wallet - Create/Login/Connect</title>
-  <script src="https://cdn.jsdelivr.net/npm/bip39@3.0.4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TubeEarn Wallet</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
     }
-    .wallet-box {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
+    .container {
+      max-width: 400px;
+      margin: 50px auto;
+      background: white;
       padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    h2 {
+    h2, h3, h4 {
       text-align: center;
-      margin-bottom: 20px;
+      color: #333;
     }
-    button, input {
-      padding: 10px;
-      font-size: 16px;
+    input, button {
       width: 100%;
-      margin-top: 10px;
-      border-radius: 8px;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
     }
-    #output {
-      margin-top: 20px;
-      padding: 15px;
+    button {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .fingerprint-section {
+      margin: 15px 0;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    ul li {
       background: #f9f9f9;
-      border-radius: 8px;
-      font-family: monospace;
-      white-space: pre-wrap;
-    }
-    .note {
-      font-size: 14px;
-      color: #666;
+      margin: 6px 0;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>TubeEarn Wallet</h2>
 
-<div class="wallet-box">
-  <h2>🔐 TubeEarn Wallet System</h2>
+    <div id="form-section">
+      <input type="text" id="username" placeholder="Enter Username" required>
+      <input type="password" id="passphrase" placeholder="Enter 12-word Passphrase" required>
 
-  <button onclick="createWallet()">🔁 Create New Wallet</button>
+      <div class="fingerprint-section">
+        <label><input type="checkbox" id="finger-toggle"> Enable Fingerprint Login</label>
+        <button onclick="fingerAuth()">🔒 Use Fingerprint</button>
+      </div>
 
-  <input type="text" id="phraseInput" placeholder="Enter 12-word Passphrase to Login" />
-  <button onclick="loginWallet()">🔓 Login to Wallet</button>
+      <button onclick="login()">Login / Create Wallet</button>
+    </div>
 
-  <button onclick="simulateUPIPayment()">💸 Simulate UPI Payment</button>
-  <button onclick="connectFingerprint()">🔒 Enable Fingerprint</button>
+    <div id="dashboard" style="display:none;">
+      <h3>Welcome to Wallet Dashboard</h3>
+      <p>Wallet ID: <span id="wallet-id"></span></p>
 
-  <div id="output"></div>
-</div>
+      <h4>Withdraw Options</h4>
+      <ul>
+        <li>📤 Withdraw to Bank Account</li>
+        <li>📤 Withdraw to PayPal</li>
+        <li>📤 Withdraw in BTC</li>
+      </ul>
 
-<script>
-  let currentWallet = null;
+      <h4>Deposit Options</h4>
+      <ul>
+        <li>💰 Add via UPI</li>
+        <li>💳 Add via Card</li>
+        <li>🪙 Buy BTC</li>
+      </ul>
+    </div>
+  </div>
 
-  async function createWallet() {
-    const mnemonic = bip39.generateMnemonic();
-    const wallet = ethers.ethers.Wallet.fromMnemonic(mnemonic);
-    currentWallet = wallet;
+  <script>
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const passphrase = document.getElementById('passphrase').value.trim();
+      const fingerEnabled = document.getElementById('finger-toggle').checked;
 
-    document.getElementById("output").innerText = `
-✅ Wallet Created
-
-📜 Mnemonic: ${mnemonic}
-
-📮 Address: ${wallet.address}
-🔑 Private Key: ${wallet.privateKey}
-
-⚠️ Please save your phrase and key securely!
-    `;
-  }
-
-  function loginWallet() {
-    const phrase = document.getElementById("phraseInput").value.trim();
-    try {
-      if (!bip39.validateMnemonic(phrase)) {
-        throw new Error("❌ Invalid passphrase");
+      if (!username || !passphrase) {
+        alert("Please enter both username and 12-word passphrase.");
+        return;
       }
-      const wallet = ethers.ethers.Wallet.fromMnemonic(phrase);
-      currentWallet = wallet;
 
-      document.getElementById("output").innerText = `
-✅ Login Successful
-
-📮 Address: ${wallet.address}
-🔑 Private Key: ${wallet.privateKey}
-      `;
-    } catch (err) {
-      document.getElementById("output").innerText = err.message;
-    }
-  }
-
-  function simulateUPIPayment() {
-    if (!currentWallet) {
-      alert("❗Login or create wallet first");
-      return;
-    }
-
-    // Placeholder: Simulate UPI logic (connect to backend API)
-    const paymentRef = "TXN" + Math.floor(Math.random() * 100000);
-    document.getElementById("output").innerText += `\n\n💸 Payment Simulated\n🧾 Ref: ${paymentRef}`;
-  }
-
-  function connectFingerprint() {
-    if (!window.PublicKeyCredential) {
-      alert("❌ Fingerprint/WebAuthn not supported");
-      return;
-    }
-
-    navigator.credentials.get({
-      publicKey: {
-        challenge: new Uint8Array(26),
-        timeout: 60000,
-        userVerification: "preferred",
-        allowCredentials: []
+      if (passphrase.split(' ').length !== 12) {
+        alert("Passphrase must be 12 words.");
+        return;
       }
-    }).then(res => {
-      document.getElementById("output").innerText += `\n\n🔓 Fingerprint Enabled ✅`;
-    }).catch(err => {
-      document.getElementById("output").innerText += `\n\n❌ Fingerprint Failed: ${err.message}`;
-    });
-  }
-</script>
 
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('wallet-id').innerText = `${username}@tubeearn`;
+
+      if (fingerEnabled) {
+        alert("Fingerprint enabled for next login.");
+      }
+    }
+
+    function fingerAuth() {
+      const isEnabled = document.getElementById('finger-toggle').checked;
+      if (!isEnabled) {
+        alert("Enable fingerprint first.");
+        return;
+      }
+
+      alert("🔓 Fingerprint recognized. Logging in...");
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('wallet-id').innerText = `User@tubeearn`;
+    }
+  </script>
 </body>
 </html>
