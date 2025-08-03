@@ -1,59 +1,61 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TubeEarn Wallet Dashboard</title>
-  <link rel="stylesheet" href="style/wallet.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Wallet</title>
 </head>
 <body>
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">TubeEarn Wallet</div>
-    <ul class="menu">
-      <li><i class="fas fa-wallet"></i> Wallet Overview</li>
-      <li><i class="fas fa-plus-circle"></i> Add Money</li>
-      <li><i class="fas fa-gift"></i> Rewards</li>
-      <li><i class="fas fa-history"></i> Payment History</li>
-      <li><i class="fas fa-briefcase"></i> Career</li>
-      <li><i class="fas fa-shield-alt"></i> Security</li>
-      <li><i class="fas fa-cog"></i> Settings</li>
-      <li><i class="fas fa-sign-out-alt"></i> Logout</li>
-    </ul>
-  </aside>  <!-- Main Content -->  <main class="main-content">
-    <header class="header">
-      <h1>Welcome, User</h1>
-      <p>Wallet Dashboard - Full Control & Analytics</p>
-    </header><section class="dashboard-grid">
-  <div class="card">
-    <h2>Total Balance</h2>
-    <p>₹12,500.00</p>
-  </div>
-  <div class="card">
-    <h2>Add Funds</h2>
-    <button>Add via UPI</button>
-  </div>
-  <div class="card">
-    <h2>Recent Transactions</h2>
-    <ul>
-      <li>+₹500 from UPI</li>
-      <li>-₹100 Sent to UserX</li>
-    </ul>
-  </div>
-  <div class="card">
-    <h2>Career Status</h2>
-    <p>3 Jobs Applied</p>
-  </div>
-  <div class="card">
-    <h2>Security Level</h2>
-    <p>2FA Enabled</p>
-  </div>
-  <div class="card">
-    <h2>Saved Addresses</h2>
-    <p>1 Home, 1 Office</p>
-  </div>
-</section>
+  <h1>Create Your Wallet</h1>
 
-  </main>
+  <!-- Step 1: Enter Wallet Name -->
+  <div id="step1">
+    <label for="wallet-name">Wallet Name:</label>
+    <input type="text" id="wallet-name" placeholder="Enter your Wallet Name">
+    <br><br>
+    <button onclick="generatePhrase()">Next: Generate Phrase</button>
+  </div>
+
+  <!-- Step 2: Show 12-word Phrase -->
+  <div id="step2" style="display:none;">
+    <p><strong>Your 12-word Recovery Phrase:</strong></p>
+    <textarea id="phrase" readonly rows="2" style="width:300px;"></textarea>
+    <br><br>
+    <button onclick="nextStep()">Next: Biometric Verification</button>
+  </div>
+
+  <!-- Step 3: Biometric Verification -->
+  <div id="step3" style="display:none;">
+    <p><strong>Biometric Verification:</strong></p>
+    <button onclick="verifyBiometric()">Verify Fingerprint</button>
+  </div>
+
+  <script>
+    function generatePhrase() {
+      const walletName = document.getElementById('wallet-name').value.trim();
+      if (!walletName) {
+        alert("Please enter a wallet name.");
+        return;
+      }
+
+      // Dummy phrase generator
+      const words = ["apple", "tree", "mountain", "river", "stone", "light", "moon", "sun", "rain", "cloud", "earth", "fire"];
+      const phrase = words.sort(() => 0.5 - Math.random()).slice(0, 12).join(" ");
+      document.getElementById("phrase").value = phrase;
+
+      document.getElementById("step1").style.display = "none";
+      document.getElementById("step2").style.display = "block";
+    }
+
+    function nextStep() {
+      document.getElementById("step2").style.display = "none";
+      document.getElementById("step3").style.display = "block";
+    }
+
+    function verifyBiometric() {
+      alert("Biometric verified successfully!");
+      window.location.href = "dashboard/index.html"; // Redirect to dashboard
+    }
+  </script>
 </body>
 </html>
