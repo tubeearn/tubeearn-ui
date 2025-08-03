@@ -1,171 +1,138 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create TubeEarn Wallet</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TubeEarn Wallet</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      height: 100vh;
+      min-height: 100vh;
     }
     .container {
-      margin-top: 40px;
+      background: white;
       width: 90%;
-      max-width: 500px;
-      background-color: white;
+      max-width: 600px;
+      margin-top: 30px;
       padding: 30px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
     }
-    .logo {
-      width: 120px;
+    img.logo {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+    h1 {
+      color: #2c3e50;
       margin-bottom: 10px;
     }
-    h2, h3 {
-      text-align: center;
+    p {
+      color: #555;
+      font-size: 16px;
       margin: 10px 0;
     }
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
+      margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 16px;
     }
     button {
-      background-color: #2e89ff;
+      background-color: #2ecc71;
       color: white;
       border: none;
-      padding: 12px;
-      margin-top: 15px;
-      width: 100%;
-      border-radius: 8px;
+      padding: 12px 24px;
       font-size: 16px;
+      border-radius: 10px;
       cursor: pointer;
-    }
-    .phrase-box {
-      background-color: #f0f0f0;
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 16px;
       margin-top: 10px;
-      word-wrap: break-word;
     }
-    .copy-msg {
-      font-size: 14px;
-      color: green;
-      margin-top: 5px;
+    button:hover {
+      background-color: #27ae60;
     }
-    .link-option {
-      text-align: center;
-      margin-top: 20px;
+    .hidden {
+      display: none;
     }
-    .fingerprint {
-      text-align: center;
-      margin-top: 20px;
+    .mnemonic-box {
+      background-color: #ecf0f1;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      word-break: break-word;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <img src="https://i.postimg.cc/N0V3PywR/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo">
-    <h2>Welcome to TubeEarn</h2>
-    <h3>Create TubeEarn Wallet</h3><div id="step1">
-  <label>Please enter your name</label>
-  <input type="text" id="nameInput" placeholder="Enter your name" />
+    <h1>Welcome to TubeEarn</h1>
+    <p>Create your TubeEarn Wallet</p><div id="step1">
+  <p>Please enter your name and click Next</p>
+  <input type="text" id="nameInput" placeholder="Enter your name">
   <button onclick="goToStep2()">Next</button>
 </div>
 
-<div id="step2" style="display:none">
-  <label>Please generate your wallet password</label>
-  <button onclick="generatePassphrase()">Generate 12 Word Passphrase</button>
-  <div class="phrase-box" id="passphraseBox"></div>
-  <button onclick="copyPassphrase()">Copy</button>
-  <div class="copy-msg" id="copyMsg"></div>
-  <p>Please save your 12-word passphrase safely. You will need it to log in again.</p>
-  <button onclick="goToStep3()">Next</button>
+<div id="step2" class="hidden">
+  <p>Generate your password phrase</p>
+  <button onclick="generateMnemonic()">Generate</button>
+  <div id="mnemonicBox" class="mnemonic-box hidden"></div>
+  <p id="saveInstruction" class="hidden">Please save your 12-word passphrase for future logins.</p>
+  <button onclick="goToStep3()" class="hidden" id="nextToFingerprint">Next</button>
 </div>
 
-<div id="step3" style="display:none">
-  <div class="fingerprint">
-    <h3>Enable Fingerprint</h3>
-    <button onclick="verifyFingerprint()">Enable Fingerprint</button>
-    <button onclick="skipFingerprint()">Skip</button>
-  </div>
-</div>
-
-<div class="link-option">
-  <p>Already have a Wallet?</p>
-  <button onclick="goToImport()">Import Wallet</button>
+<div id="step3" class="hidden">
+  <p>Enable Fingerprint Verification</p>
+  <button onclick="fingerScan()">Enable Fingerprint</button>
 </div>
 
   </div>  <script>
     function goToStep2() {
-      const name = document.getElementById("nameInput").value.trim();
-      if (!name) {
+      const name = document.getElementById('nameInput').value.trim();
+      if (name === '') {
         alert("Please enter your name");
         return;
       }
-      document.getElementById("step1").style.display = "none";
-      document.getElementById("step2").style.display = "block";
+      document.getElementById('step1').classList.add('hidden');
+      document.getElementById('step2').classList.remove('hidden');
     }
 
-    function generatePassphrase() {
+    function generateMnemonic() {
       const words = [
-        "apple", "banana", "cat", "dog", "elephant", "fish", "grape", "hat", "ice", "jungle", "kite", "lemon",
-        "moon", "nest", "orange", "pizza", "queen", "rose", "sun", "tree", "umbrella", "violin", "wolf", "x-ray",
-        "yogurt", "zebra"
+        'apple','robot','sun','tree','jungle','wallet','earn','tube','media','cloud','safe','crypto',
+        'coin','data','secure','voice','video','login','access','love','light','dream','power','click','connect'
       ];
-      let phrase = [];
+      let mnemonic = [];
       for (let i = 0; i < 12; i++) {
-        phrase.push(words[Math.floor(Math.random() * words.length)]);
+        const index = Math.floor(Math.random() * words.length);
+        mnemonic.push(words[index]);
       }
-      document.getElementById("passphraseBox").innerText = phrase.join(" ");
-    }
-
-    function copyPassphrase() {
-      const phrase = document.getElementById("passphraseBox").innerText;
-      navigator.clipboard.writeText(phrase).then(() => {
-        document.getElementById("copyMsg").innerText = "Passphrase copied to clipboard!";
-      });
+      document.getElementById('mnemonicBox').textContent = mnemonic.join(' ');
+      document.getElementById('mnemonicBox').classList.remove('hidden');
+      document.getElementById('saveInstruction').classList.remove('hidden');
+      document.getElementById('nextToFingerprint').classList.remove('hidden');
     }
 
     function goToStep3() {
-      const passphrase = document.getElementById("passphraseBox").innerText;
-      if (!passphrase || passphrase.split(" ").length !== 12) {
-        alert("Please generate your 12-word passphrase before proceeding.");
-        return;
-      }
-      document.getElementById("step2").style.display = "none";
-      document.getElementById("step3").style.display = "block";
+      document.getElementById('step2').classList.add('hidden');
+      document.getElementById('step3').classList.remove('hidden');
     }
 
-    function verifyFingerprint() {
-      alert("Your fingerprint is verified successfully. Redirecting to dashboard...");
-      window.location.href = "dashboard/index.html";
-    }
-
-    function skipFingerprint() {
-      alert("Skipping fingerprint setup. Redirecting to dashboard...");
-      window.location.href = "dashboard/index.html";
-    }
-
-    function goToImport() {
-      const phrase = prompt("Enter your 12-word passphrase:");
-      if (phrase && phrase.trim().split(" ").length === 12) {
-        alert("Fingerprint verified and wallet imported successfully. Redirecting to dashboard...");
+    function fingerScan() {
+      // Simulation of fingerprint
+      setTimeout(() => {
+        alert("Fingerprint successfully connected to your wallet!");
         window.location.href = "dashboard/index.html";
-      } else {
-        alert("Invalid passphrase. Must be 12 words.");
-      }
+      }, 1500);
     }
   </script></body>
 </html>
