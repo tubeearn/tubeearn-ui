@@ -10,10 +10,9 @@
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       font-family: Arial, sans-serif;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      padding-top: 50px;
-      min-height: 100vh;
+      height: 100vh;
       margin: 0;
     }
     .wallet-container {
@@ -25,21 +24,30 @@
       max-width: 400px;
       color: white;
       text-align: center;
+      position: relative;
     }
-    .wallet-container h1 {
-      color: #00eaff;
+    .logo {
+      position: absolute;
+      top: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #00eaff;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.6);
+    }
+    h1 {
+      margin-top: 30px;
       font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .wallet-container p {
-      margin-bottom: 1rem;
     }
     input[type="text"] {
       padding: 10px;
       width: 100%;
       border-radius: 8px;
       border: none;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       font-size: 1rem;
     }
     .btn {
@@ -50,60 +58,92 @@
       border-radius: 8px;
       font-size: 1rem;
       cursor: pointer;
-      margin-top: 0.5rem;
+      margin-bottom: 1rem;
       width: 100%;
     }
-    .hidden { display: none; }
-
-    .error-msg {
-      color: #ff4d4d;
-      font-size: 0.9rem;
-      margin-top: 0.3rem;
+    .hidden {
+      display: none;
     }
-
-    .info-msg {
-      color: #ff4444;
+    .warning {
+      color: red;
       font-weight: bold;
-      margin-top: 1rem;
-      font-size: 0.95rem;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <div class="wallet-container">
-    <h1>TubeEarn</h1>
-    <p id="step-title">Welcome to TubeEarn Wallet</p>
+    <div class="logo">TubeEarn</div>
+    <h1 id="step-title">Welcome to TubeEarn Wallet</h1>
 
+    <!-- Name Step -->
     <div id="step-name">
       <input type="text" id="userName" placeholder="Enter your name" />
-      <div id="nameError" class="error-msg hidden">Please enter your name</div>
       <button class="btn" onclick="goToPassphrase()">Generate 12-Word Passphrase</button>
     </div>
 
+    <!-- Passphrase Step -->
     <div id="step-passphrase" class="hidden">
       <p><strong>Your Passphrase:</strong></p>
       <p id="passphrase" style="margin: 10px 0; color: #0ff; font-weight: bold;"></p>
-      <div class="info-msg">Please save this passphrase securely. It will be required for future login.</div>
+      <p class="warning">⚠️ Please save this phrase for future login. You will need it.</p>
       <button class="btn" onclick="goToFingerprint()">Enable Fingerprint & Proceed</button>
       <button class="btn" onclick="skipToDashboard()">Skip</button>
     </div>
 
+    <!-- Fingerprint Step -->
     <div id="step-fingerprint" class="hidden">
-      <p>Fingerprint Authentication Enabled.</p>
-      <button class="btn" onclick="handleFingerprint()">Verify Fingerprint & Go to Dashboard</button>
+      <p>Enable Fingerprint Authentication</p>
+      <button class="btn" onclick="verifyFingerprint()">Verify Fingerprint</button>
     </div>
   </div>
 
   <script>
     function goToPassphrase() {
-      const nameInput = document.getElementById('userName');
-      const name = nameInput.value.trim();
-      const errorDiv = document.getElementById('nameError');
-
+      const name = document.getElementById('userName').value.trim();
       if (!name) {
-        errorDiv.classList.remove('hidden');
+        alert('Please enter your name');
         return;
       }
+      document.getElementById('step-name').classList.add('hidden');
+      document.getElementById('step-passphrase').classList.remove('hidden');
+      document.getElementById('step-title').innerText = 'Save your Passphrase';
+      generatePassphrase();
+    }
+
+    function generatePassphrase() {
+      const words = ["ocean", "river", "moon", "star", "light", "tree", "mountain", "sky", "cloud", "earth", "code", "dream"];
+      let phrase = [];
+      for (let i = 0; i < 12; i++) {
+        phrase.push(words[Math.floor(Math.random() * words.length)]);
+      }
+      document.getElementById('passphrase').innerText = phrase.join(' ');
+    }
+
+    function goToFingerprint() {
+      document.getElementById('step-passphrase').classList.add('hidden');
+      document.getElementById('step-fingerprint').classList.remove('hidden');
+      document.getElementById('step-title').innerText = 'Enable Fingerprint';
+    }
+
+    function verifyFingerprint() {
+      alert("🔒 Please touch your phone's fingerprint sensor to verify.");
+      setTimeout(() => {
+        alert("✅ Fingerprint verified successfully!");
+        redirectToDashboard();
+      }, 2000);
+    }
+
+    function skipToDashboard() {
+      redirectToDashboard();
+    }
+
+    function redirectToDashboard() {
+      window.location.href = "dashboard/index.html";
+    }
+  </script>
+</body>
+</html>      }
 
       errorDiv.classList.add('hidden');
       document.getElementById('step-name').classList.add('hidden');
