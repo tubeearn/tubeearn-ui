@@ -3,161 +3,126 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TubeEarn Wallet Setup</title>
+  <title>TubeEarn Wallet</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f4f4;
       margin: 0;
       padding: 0;
+      font-family: sans-serif;
+      background: #f3f3f3;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      height: 100vh;
     }
 
     .container {
-      background: #fff;
+      background: white;
       padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      width: 100%;
+      width: 90%;
       max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      border-radius: 10px;
     }
 
-    h2 {
-      margin-bottom: 20px;
-      color: #ff4444;
-      text-align: center;
+    .hidden {
+      display: none;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
     }
 
     input {
-      width: 100%;
-      padding: 12px;
+      padding: 10px;
+      width: 80%;
       margin: 10px 0;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+      border-radius: 5px;
     }
 
     button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      background-color: #ff4444;
+      padding: 10px 20px;
+      margin: 10px;
+      background: #007bff;
       color: white;
-      font-size: 16px;
       border: none;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
     }
 
     button:hover {
-      background-color: #e03e3e;
+      background: #0056b3;
     }
 
-    .info {
-      font-size: 14px;
-      color: #666;
-      margin-top: 10px;
-      text-align: center;
-    }
-
-    .step {
-      display: none;
-    }
-
-    .step.active {
-      display: block;
-    }
-
-    .logo {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
-    .logo img {
-      width: 60px;
+    #passphraseBox {
+      background: #e9ecef;
+      padding: 10px;
+      margin: 15px 0;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="step step1 active">
-      <div class="logo">
-        <img src="logo.png" alt="Logo" />
-      </div>
-      <h2>Welcome to TubeEarn Wallet</h2>
-      <input type="text" id="name" placeholder="Enter your name" />
-      <input type="text" id="password" placeholder="Generated password" readonly />
-      <button onclick="generatePassword()">Generate Password</button>
-      <button onclick="copyPassword()">Copy Password</button>
-      <div class="info">Please save your password for future login.</div>
-      <button onclick="goToStep2()">Next</button>
-    </div>
+  <div class="container" id="step1">
+    <img src="logo.png" class="logo" alt="Logo">
+    <h2>Create Your Wallet</h2>
+    <input type="text" id="username" placeholder="Enter Your Name" required />
+    <button onclick="nextStep()">Next</button>
+  </div>
 
-    <div class="step step2">
-      <div class="logo">
-        <img src="fingerprint.png" alt="Fingerprint" />
-      </div>
-      <h2>Enable Fingerprint</h2>
-      <button onclick="enableFingerprint()">Enable Fingerprint</button>
-      <div class="info">Skip if your device does not support fingerprint.</div>
-      <button onclick="skipFingerprint()">Skip</button>
-    </div>
+  <div class="container hidden" id="step2">
+    <h2>Generate Your Passphrase</h2>
+    <div id="passphraseBox">**************</div>
+    <button onclick="generatePass()">Generate</button>
+    <button onclick="copyPass()">Copy</button>
+    <p>Please save your 12-word passphrase for future login.</p>
+    <button onclick="nextStep()">Next</button>
+  </div>
+
+  <div class="container hidden" id="step3">
+    <h2>Enable Fingerprint</h2>
+    <p>Use your fingerprint to secure your wallet.</p>
+    <button onclick="verifyFingerprint()">Enable Fingerprint</button>
+    <button onclick="redirectToDashboard()">Skip</button>
   </div>
 
   <script>
-    function generatePassword() {
-      const pass = Math.random().toString(36).substring(2, 10).toUpperCase();
-      document.getElementById("password").value = pass;
+    let currentStep = 1;
+
+    function nextStep() {
+      document.getElementById(`step${currentStep}`).classList.add("hidden");
+      currentStep++;
+      document.getElementById(`step${currentStep}`).classList.remove("hidden");
     }
 
-    function copyPassword() {
-      const password = document.getElementById("password").value;
-      if (!password) {
-        alert("Please generate the password first.");
-        return;
+    function generatePass() {
+      const words = ["alpha", "beta", "delta", "omega", "tiger", "lion", "eagle", "horse", "stone", "river", "sky", "cloud"];
+      let phrase = [];
+      for (let i = 0; i < 12; i++) {
+        phrase.push(words[Math.floor(Math.random() * words.length)]);
       }
-      navigator.clipboard.writeText(password);
-      alert("Password copied to clipboard!");
+      document.getElementById("passphraseBox").innerText = phrase.join(" ");
     }
 
-    function goToStep2() {
-      const name = document.getElementById("name").value.trim();
-      const pass = document.getElementById("password").value.trim();
-      if (!name || !pass) {
-        alert("Please enter your name and generate password.");
-        return;
-      }
-
-      localStorage.setItem("walletName", name);
-      localStorage.setItem("walletPass", pass);
-      document.querySelector(".step1").classList.remove("active");
-      document.querySelector(".step2").classList.add("active");
+    function copyPass() {
+      const text = document.getElementById("passphraseBox").innerText;
+      navigator.clipboard.writeText(text);
+      alert("Passphrase copied!");
     }
 
-    function enableFingerprint() {
-      // Try to use biometric authentication (WebAuthn)
-      if (window.PublicKeyCredential) {
-        alert("Biometric authentication successful!");
-        redirectToDashboard();
-      } else {
-        alert("Fingerprint not supported on this device.");
-      }
-    }
-
-    function skipFingerprint() {
+    function verifyFingerprint() {
+      alert("Your fingerprint is verified ✅");
       redirectToDashboard();
     }
 
     function redirectToDashboard() {
-      alert("Redirecting to your wallet...");
-      window.location.href = "dashboard/india.html";
+      window.location.href = "dashboard/index.html"; // Change to your actual path
     }
   </script>
 </body>
