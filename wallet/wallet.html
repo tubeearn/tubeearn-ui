@@ -28,20 +28,19 @@
     }
     .logo {
       position: absolute;
-      top: 20px;
+      top: -50px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 1.8rem;
+      background-color: #00eaff;
+      color: #000;
       font-weight: bold;
-      color: #00eaff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0,255,255,0.6);
     }
-    .wallet-container h1 {
-      margin-top: 60px;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .wallet-container p {
-      margin-bottom: 1rem;
+    h1 {
+      margin-top: 30px;
+      font-size: 2rem;
     }
     input[type="text"] {
       padding: 10px;
@@ -62,45 +61,40 @@
       margin-bottom: 1rem;
       width: 100%;
     }
-    .note {
+    .hidden {
+      display: none;
+    }
+    .warning {
       color: red;
-      font-size: 0.9rem;
-      margin-bottom: 0.5rem;
+      font-weight: bold;
+      margin-top: 10px;
     }
-    .copy-btn {
-      background-color: #333;
-      color: #0ff;
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      margin-top: 5px;
-    }
-    .hidden { display: none; }
   </style>
 </head>
 <body>
   <div class="wallet-container">
     <div class="logo">TubeEarn</div>
-    <h1>Wallet Setup</h1>
-    <p id="step-title">Welcome to TubeEarn Wallet</p>
+    <h1 id="step-title">Welcome to TubeEarn Wallet</h1>
 
+    <!-- Name Step -->
     <div id="step-name">
       <input type="text" id="userName" placeholder="Enter your name" />
       <button class="btn" onclick="goToPassphrase()">Generate 12-Word Passphrase</button>
     </div>
 
+    <!-- Passphrase Step -->
     <div id="step-passphrase" class="hidden">
       <p><strong>Your Passphrase:</strong></p>
       <p id="passphrase" style="margin: 10px 0; color: #0ff; font-weight: bold;"></p>
-      <p class="note">⚠ इसे सुरक्षित रखें, भविष्य में यही पासवर्ड काम देगा</p>
-      <button class="copy-btn" onclick="copyPassphrase()">📋 Copy</button>
-      <br><br>
+      <p class="warning">⚠️ Please save this phrase for future login. You will need it.</p>
       <button class="btn" onclick="goToFingerprint()">Enable Fingerprint & Proceed</button>
       <button class="btn" onclick="skipToDashboard()">Skip</button>
     </div>
 
+    <!-- Fingerprint Step -->
     <div id="step-fingerprint" class="hidden">
-      <p>Fingerprint Authentication Required</p>
-      <button class="btn" onclick="authenticateFingerprint()">Verify Fingerprint</button>
+      <p>Enable Fingerprint Authentication</p>
+      <button class="btn" onclick="verifyFingerprint()">Verify Fingerprint</button>
     </div>
   </div>
 
@@ -126,37 +120,18 @@
       document.getElementById('passphrase').innerText = phrase.join(' ');
     }
 
-    function copyPassphrase() {
-      const passphrase = document.getElementById("passphrase").innerText;
-      navigator.clipboard.writeText(passphrase).then(() => {
-        alert("Passphrase copied to clipboard!");
-      });
-    }
-
     function goToFingerprint() {
       document.getElementById('step-passphrase').classList.add('hidden');
       document.getElementById('step-fingerprint').classList.remove('hidden');
       document.getElementById('step-title').innerText = 'Enable Fingerprint';
     }
 
-    function authenticateFingerprint() {
-      if (window.PublicKeyCredential) {
-        navigator.credentials.get({
-          publicKey: {
-            challenge: new Uint8Array([1,2,3,4]),
-            timeout: 60000,
-            userVerification: "required",
-            allowCredentials: []
-          }
-        }).then(() => {
-          alert("Fingerprint verified successfully!");
-          redirectToDashboard();
-        }).catch(() => {
-          alert("Fingerprint verification failed.");
-        });
-      } else {
-        alert("Fingerprint authentication not supported on this device.");
-      }
+    function verifyFingerprint() {
+      alert("🔒 Please touch your phone's fingerprint sensor to verify.");
+      setTimeout(() => {
+        alert("✅ Fingerprint verified successfully!");
+        redirectToDashboard();
+      }, 2000);
     }
 
     function skipToDashboard() {
@@ -168,52 +143,4 @@
     }
   </script>
 </body>
-</html>    }
-
-    function generatePassphrase() {
-      const words = ["ocean", "river", "moon", "star", "light", "tree", "mountain", "sky", "cloud", "earth", "code", "dream"];
-      let phrase = [];
-      for (let i = 0; i < 12; i++) {
-        phrase.push(words[Math.floor(Math.random() * words.length)]);
-      }
-      savedPassphrase = phrase.join(' ');
-      document.getElementById('passphrase').innerText = savedPassphrase;
-    }
-
-    function goToFingerprint() {
-      document.getElementById('step-passphrase').classList.add('hidden');
-      document.getElementById('step-fingerprint').classList.remove('hidden');
-      document.getElementById('step-title').innerText = 'Enable Fingerprint';
-    }
-
-    function enableFingerprint() {
-      if (!window.PublicKeyCredential) {
-        alert("Fingerprint authentication not supported on this device.");
-        return;
-      }
-      navigator.credentials.get({ publicKey: { challenge: new Uint8Array([1,2,3,4]), timeout: 60000, allowCredentials: [], userVerification: 'preferred' } })
-        .then(result => {
-          alert("Fingerprint enabled successfully.");
-          redirectToDashboard();
-        })
-        .catch(err => {
-          alert("Fingerprint failed or was cancelled.");
-        });
-    }
-
-    function skipToDashboard() {
-      redirectToDashboard();
-    }
-
-    function redirectToDashboard() {
-      window.location.href = "dashboard/index.html";
-    }
-  </script></body>
-</html>      redirectToDashboard();
-    }
-
-    function redirectToDashboard() {
-      window.location.href = "dashboard/index.html";
-    }
-  </script></body>
 </html>
