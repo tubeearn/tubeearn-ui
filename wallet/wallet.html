@@ -1,131 +1,136 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Wallet Access</title>
+  <title>TubeEarn Wallet - Create/Login/Connect</title>
+  <script src="https://cdn.jsdelivr.net/npm/bip39@3.0.4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #001f3f;
-      color: white;
-      margin: 0;
+      font-family: sans-serif;
+      background: #f4f4f4;
       padding: 20px;
     }
-    .container {
-      max-width: 400px;
+    .wallet-box {
+      max-width: 600px;
       margin: auto;
-      background: #003366;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px #000000aa;
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
     h2 {
       text-align: center;
+      margin-bottom: 20px;
     }
-    input, button, textarea {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    button {
-      background-color: #0074D9;
-      color: white;
-      cursor: pointer;
-    }
-    .hidden {
-      display: none;
-    }
-    .phrase-box {
-      background: #002244;
+    button, input {
       padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 10px;
       border-radius: 8px;
-      font-weight: bold;
+    }
+    #output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+    .note {
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Secure Wallet</h2>
-    <div id="main-options">
-      <button onclick="showCreate()">Create Wallet</button>
-      <button onclick="showImport()">I Have Wallet Account</button>
-    </div><div id="create-wallet" class="hidden">
-  <input type="text" id="wallet-name" placeholder="Enter your name">
-  <button onclick="generatePhrase()">Generate Wallet</button>
-  <div id="phrase-box" class="hidden">
-    <textarea id="phrase" rows="3" readonly></textarea>
-    <button onclick="copyPhrase()">Copy Phrase</button>
-    <button onclick="enableFingerprint()">Enable Fingerprint</button>
-  </div>
+
+<div class="wallet-box">
+  <h2>🔐 TubeEarn Wallet System</h2>
+
+  <button onclick="createWallet()">🔁 Create New Wallet</button>
+
+  <input type="text" id="phraseInput" placeholder="Enter 12-word Passphrase to Login" />
+  <button onclick="loginWallet()">🔓 Login to Wallet</button>
+
+  <button onclick="simulateUPIPayment()">💸 Simulate UPI Payment</button>
+  <button onclick="connectFingerprint()">🔒 Enable Fingerprint</button>
+
+  <div id="output"></div>
 </div>
 
-<div id="import-wallet" class="hidden">
-  <textarea id="import-phrase" placeholder="Enter your 12-word phrase" rows="3"></textarea>
-  <button onclick="verifyAndOpen()">Submit</button>
-</div>
+<script>
+  let currentWallet = null;
 
-<div id="dashboard" class="hidden">
-  <h2>Welcome to your Dashboard</h2>
-  <p>Wallet Activated ✅</p>
-</div>
+  async function createWallet() {
+    const mnemonic = bip39.generateMnemonic();
+    const wallet = ethers.ethers.Wallet.fromMnemonic(mnemonic);
+    currentWallet = wallet;
 
-  </div>  <script>
-    const phrases = ["apple", "banana", "cat", "dog", "eagle", "fish", "giraffe", "hat", "ice", "juice", "kite", "lion"];
+    document.getElementById("output").innerText = `
+✅ Wallet Created
 
-    function showCreate() {
-      document.getElementById('main-options').classList.add('hidden');
-      document.getElementById('create-wallet').classList.remove('hidden');
-    }
+📜 Mnemonic: ${mnemonic}
 
-    function showImport() {
-      document.getElementById('main-options').classList.add('hidden');
-      document.getElementById('import-wallet').classList.remove('hidden');
-    }
+📮 Address: ${wallet.address}
+🔑 Private Key: ${wallet.privateKey}
 
-    function generatePhrase() {
-      const name = document.getElementById('wallet-name').value.trim();
-      if (!name) {
-        alert('Please enter your name');
-        return;
+⚠️ Please save your phrase and key securely!
+    `;
+  }
+
+  function loginWallet() {
+    const phrase = document.getElementById("phraseInput").value.trim();
+    try {
+      if (!bip39.validateMnemonic(phrase)) {
+        throw new Error("❌ Invalid passphrase");
       }
-      let phrase = [];
-      for (let i = 0; i < 12; i++) {
-        phrase.push(phrases[Math.floor(Math.random() * phrases.length)]);
-      }
-      document.getElementById('phrase').value = phrase.join(' ');
-      document.getElementById('phrase-box').classList.remove('hidden');
+      const wallet = ethers.ethers.Wallet.fromMnemonic(phrase);
+      currentWallet = wallet;
+
+      document.getElementById("output").innerText = `
+✅ Login Successful
+
+📮 Address: ${wallet.address}
+🔑 Private Key: ${wallet.privateKey}
+      `;
+    } catch (err) {
+      document.getElementById("output").innerText = err.message;
+    }
+  }
+
+  function simulateUPIPayment() {
+    if (!currentWallet) {
+      alert("❗Login or create wallet first");
+      return;
     }
 
-    function copyPhrase() {
-      const phrase = document.getElementById('phrase');
-      phrase.select();
-      document.execCommand('copy');
-      alert('Phrase copied!');
+    // Placeholder: Simulate UPI logic (connect to backend API)
+    const paymentRef = "TXN" + Math.floor(Math.random() * 100000);
+    document.getElementById("output").innerText += `\n\n💸 Payment Simulated\n🧾 Ref: ${paymentRef}`;
+  }
+
+  function connectFingerprint() {
+    if (!window.PublicKeyCredential) {
+      alert("❌ Fingerprint/WebAuthn not supported");
+      return;
     }
 
-    function enableFingerprint() {
-      // Simulate fingerprint authentication
-      const confirmed = confirm("Place your finger on the scanner to authenticate.");
-      if (confirmed) {
-        document.getElementById('create-wallet').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-      } else {
-        alert("Fingerprint verification failed.");
+    navigator.credentials.get({
+      publicKey: {
+        challenge: new Uint8Array(26),
+        timeout: 60000,
+        userVerification: "preferred",
+        allowCredentials: []
       }
-    }
+    }).then(res => {
+      document.getElementById("output").innerText += `\n\n🔓 Fingerprint Enabled ✅`;
+    }).catch(err => {
+      document.getElementById("output").innerText += `\n\n❌ Fingerprint Failed: ${err.message}`;
+    });
+  }
+</script>
 
-    function verifyAndOpen() {
-      const input = document.getElementById('import-phrase').value.trim();
-      if (input.split(' ').length === 12) {
-        alert("Verifying...");
-        document.getElementById('import-wallet').classList.add('hidden');
-        document.getElementById('dashboard').classList.remove('hidden');
-      } else {
-        alert("Invalid phrase. Must be 12 words.");
-      }
-    }
-  </script></body>
+</body>
 </html>
