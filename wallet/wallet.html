@@ -2,137 +2,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TubeEarn Wallet</title>
+  <title>TubeEarn Wallet Setup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
       margin: 0;
-      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0d1a3a;
+      color: #fff;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      min-height: 100vh;
-    }
-    .container {
-      background: white;
-      width: 90%;
-      max-width: 600px;
-      margin-top: 30px;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      text-align: center;
+      padding-top: 40px;
     }
     img.logo {
-      width: 160px;
+      width: 180px;
       margin-bottom: 20px;
     }
-    h1 {
-      color: #2c3e50;
-      margin-bottom: 10px;
+    .box {
+      width: 90%;
+      max-width: 400px;
+      background: #1a2d5a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      text-align: center;
     }
-    p {
-      color: #555;
-      font-size: 16px;
-      margin: 10px 0;
-    }
-    input[type="text"],
-    input[type="password"] {
+    input[type="text"] {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      margin: 20px 0;
+      border: none;
+      border-radius: 6px;
       font-size: 16px;
     }
     button {
-      background-color: #2ecc71;
+      background: #3d5afe;
       color: white;
       border: none;
       padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 10px;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 10px;
+      font-size: 16px;
     }
-    button:hover {
-      background-color: #27ae60;
+    .hidden { display: none; }
+    .phrase-box {
+      background: #283d75;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 15px;
+      line-height: 1.6;
     }
-    .hidden {
-      display: none;
-    }
-    .mnemonic-box {
-      background-color: #ecf0f1;
-      padding: 15px;
-      border-radius: 10px;
-      margin: 10px 0;
-      word-break: break-word;
+    .notice {
+      font-size: 14px;
+      color: #ccc;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://i.postimg.cc/N0V3PywR/Tube-Earn-logos.png" alt="TubeEarn Logo" class="logo">
-    <h1>Welcome to TubeEarn</h1>
-    <p>Create your TubeEarn Wallet</p><div id="step1">
-  <p>Please enter your name and click Next</p>
-  <input type="text" id="nameInput" placeholder="Enter your name">
-  <button onclick="goToStep2()">Next</button>
-</div>
-
-<div id="step2" class="hidden">
-  <p>Generate your password phrase</p>
-  <button onclick="generateMnemonic()">Generate</button>
-  <div id="mnemonicBox" class="mnemonic-box hidden"></div>
-  <p id="saveInstruction" class="hidden">Please save your 12-word passphrase for future logins.</p>
-  <button onclick="goToStep3()" class="hidden" id="nextToFingerprint">Next</button>
-</div>
-
-<div id="step3" class="hidden">
-  <p>Enable Fingerprint Verification</p>
-  <button onclick="fingerScan()">Enable Fingerprint</button>
-</div>
-
+  <img class="logo" src="https://i.postimg.cc/N0V3PywR/Tube-Earn-logos.png" alt="TubeEarn Logo">
+  <div class="box" id="nameBox">
+    <h2>Welcome to TubeEarn</h2>
+    <p>Create your Wallet</p>
+    <input type="text" id="userName" placeholder="Please enter your name">
+    <button onclick="goNext()">Next</button>
+    <p id="nameError" class="notice hidden">⚠️ Please enter your name to continue.</p>
+  </div>  <div class="box hidden" id="phraseBox">
+    <h3>🔒 Your Wallet Recovery Phrase</h3>
+    <div id="phrase" class="phrase-box"></div>
+    <button onclick="copyPhrase()">Copy</button>
+    <p class="notice">Please write down or copy these 12 words. They are the only way to recover your wallet in future.</p>
+    <button onclick="showFingerprint()">Next</button>
+  </div>  <div class="box hidden" id="fingerBox">
+    <h3>Enable Fingerprint</h3>
+    <button onclick="enableFingerprint()">✅ Enable</button>
+    <button onclick="skipFingerprint()">❌ Skip</button>
   </div>  <script>
-    function goToStep2() {
-      const name = document.getElementById('nameInput').value.trim();
-      if (name === '') {
-        alert("Please enter your name");
-        return;
+    function goNext() {
+      const name = document.getElementById('userName').value.trim();
+      if (!name) {
+        document.getElementById('nameError').classList.remove('hidden');
+      } else {
+        document.getElementById('nameBox').classList.add('hidden');
+        document.getElementById('phraseBox').classList.remove('hidden');
+        generatePhrase();
       }
-      document.getElementById('step1').classList.add('hidden');
-      document.getElementById('step2').classList.remove('hidden');
     }
 
-    function generateMnemonic() {
-      const words = [
-        'apple','robot','sun','tree','jungle','wallet','earn','tube','media','cloud','safe','crypto',
-        'coin','data','secure','voice','video','login','access','love','light','dream','power','click','connect'
-      ];
-      let mnemonic = [];
-      for (let i = 0; i < 12; i++) {
-        const index = Math.floor(Math.random() * words.length);
-        mnemonic.push(words[index]);
+    function generatePhrase() {
+      const words = ['artist', 'power', 'sunset', 'bubble', 'forest', 'rocket', 'wallet', 'finger', 'energy', 'dream', 'village', 'vision'];
+      document.getElementById('phrase').innerText = words.join(' ');
+    }
+
+    function copyPhrase() {
+      const phrase = document.getElementById('phrase').innerText;
+      navigator.clipboard.writeText(phrase).then(() => {
+        alert('✔️ Recovery phrase copied!');
+      });
+    }
+
+    function showFingerprint() {
+      document.getElementById('phraseBox').classList.add('hidden');
+      document.getElementById('fingerBox').classList.remove('hidden');
+    }
+
+    function enableFingerprint() {
+      if (window.PublicKeyCredential) {
+        navigator.credentials.get({
+          publicKey: {
+            challenge: new Uint8Array([1,2,3,4]),
+            allowCredentials: [],
+            timeout: 60000,
+            userVerification: 'required'
+          }
+        }).then(() => {
+          alert('👍 Fingerprint successfully verified!');
+          window.location.href = '/dashboard/index.html';
+        }).catch(() => {
+          alert('❌ Fingerprint verification failed.');
+        });
+      } else {
+        alert('❌ Fingerprint not supported on this device.');
       }
-      document.getElementById('mnemonicBox').textContent = mnemonic.join(' ');
-      document.getElementById('mnemonicBox').classList.remove('hidden');
-      document.getElementById('saveInstruction').classList.remove('hidden');
-      document.getElementById('nextToFingerprint').classList.remove('hidden');
     }
 
-    function goToStep3() {
-      document.getElementById('step2').classList.add('hidden');
-      document.getElementById('step3').classList.remove('hidden');
-    }
-
-    function fingerScan() {
-      // Simulation of fingerprint
-      setTimeout(() => {
-        alert("Fingerprint successfully connected to your wallet!");
-        window.location.href = "dashboard/index.html";
-      }, 1500);
+    function skipFingerprint() {
+      window.location.href = '/dashboard/index.html';
     }
   </script></body>
 </html>
