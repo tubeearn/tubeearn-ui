@@ -3,59 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <title>Login - TubeEarn</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body {
-      background: linear-gradient(to right, #2193b0, #6dd5ed);
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-    }
-    .login-container {
-      max-width: 400px;
-      background: white;
-      padding: 30px;
-      margin: 60px auto;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
-      border-radius: 10px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    input[type="email"], input[type="password"] {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #2193b0;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      margin-top: 10px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #176780;
-    }
-    .link {
-      text-align: center;
-      margin-top: 15px;
-    }
-    .link a {
-      color: #2193b0;
-      text-decoration: none;
-    }
-    .status {
-      margin-top: 10px;
-      text-align: center;
-      font-weight: bold;
-      min-height: 24px;
-    }
+    /* Same CSS as before */
+    body { background: linear-gradient(to right, #2193b0, #6dd5ed); font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    .login-container { max-width: 400px; background: white; padding: 30px; margin: 60px auto; box-shadow: 0 0 15px rgba(0,0,0,0.3); border-radius: 10px; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    input[type="email"], input[type="password"] { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; background-color: #2193b0; color: white; border: none; border-radius: 5px; margin-top: 10px; cursor: pointer; font-size: 16px; }
+    button:hover { background-color: #176780; }
+    .link { text-align: center; margin-top: 15px; }
+    .link a { color: #2193b0; text-decoration: none; }
+    .status { margin-top: 10px; text-align: center; font-weight: bold; min-height: 24px; }
   </style>
 </head>
 <body>
@@ -76,45 +35,45 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="secure/config/configure.js"></script>
+  <script type="module">
+    import { getConfig } from './secure/config/configure.js';
 
-  <script>
     const { SUPABASE_URL, SUPABASE_API_KEY } = getConfig();
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
-    document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    const loginForm = document.getElementById('loginForm');
+    const status = document.getElementById('loginStatus');
+
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const status = document.getElementById("loginStatus");
-
-      status.style.color = "black";
-      status.textContent = "Signing in...";
+      status.style.color = 'black';
+      status.textContent = 'Signing in...';
 
       try {
         const { data, error } = await client.auth.signInWithPassword({ email, password });
 
         if (error) {
-          status.style.color = "red";
-          status.textContent = "❌ " + error.message;
+          status.style.color = 'red';
+          status.textContent = '❌ ' + error.message;
           return;
         }
 
         if (data) {
-          status.style.color = "green";
-          status.textContent = "✅ Login successful! Redirecting...";
-
+          status.style.color = 'green';
+          status.textContent = '✅ Login successful! Redirecting...';
           setTimeout(() => {
-            window.location.href = "../index.html";
+            window.location.href = '../index.html';
           }, 1500);
         } else {
-          status.style.color = "red";
-          status.textContent = "❌ Unknown error occurred.";
+          status.style.color = 'red';
+          status.textContent = '❌ Unknown error occurred.';
         }
       } catch (err) {
-        status.style.color = "red";
-        status.textContent = "❌ Error: " + err.message;
+        status.style.color = 'red';
+        status.textContent = '❌ Error: ' + err.message;
       }
     });
   </script>
