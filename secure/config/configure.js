@@ -1,34 +1,21 @@
-// tubeearn-ui/secure/config/configure.js
-// AES decrypt helper using CryptoJS (expects CryptoJS loaded before this file)
-(function(){
-  // passphrase — change this to your own strong secret if you want
-  const PASSPHRASE = "TubeEarn@123";
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+// 🔒 Encryption Key (मत बदलना वरना डिक्रिप्ट नहीं होगा)
+const ENC_KEY = "TubeEarnSecureKey2025";
 
-  // ----- PUT THE AES-CIPHERTEXTS (Base64 strings from CryptoJS.AES.encrypt) BELOW -----
-  // Replace the placeholders with the ciphertext strings you generate locally.
-  const CIPHERTEXT_SUPABASE_URL = "PASTE_SUPABASE_URL_CIPHERTEXT_HERE";
-  const CIPHERTEXT_SUPABASE_KEY = "PASTE_SUPABASE_KEY_CIPHERTEXT_HERE";
+// 🔐 Encrypted Data (तुम्हारे real values encrypted form में)
+const encConfig = {
+  url: "U2FsdGVkX1/BX+yPrkvm7Ff3F/0OJ4R9NMM2rtOjmvDNH/jpttEK2h03qlO+rU/2",
+  key: "U2FsdGVkX1+2ERZiv+NNgG5R8XtJo3b8uZ+T5vH+ZfxjD/nDoxV1XspXx9W3Tvh2+foPshZhxeJ1neXoJXoQuQ==",
+  bucket: "U2FsdGVkX19zW9lQYxyg5gR6n6i5TZyXUOQ1A3EzY40="
+};
 
-  // decrypt function using CryptoJS
-  function decryptAES(ciphertext, passphrase) {
-    try {
-      const bytes  = CryptoJS.AES.decrypt(ciphertext, passphrase);
-      const plaintext = bytes.toString(CryptoJS.enc.Utf8);
-      return plaintext;
-    } catch (err) {
-      console.error("Decrypt error:", err);
-      return null;
-    }
-  }
-
-  // Decrypted values available as global constants for pages
-  window.SUPABASE_CONFIG = {
-    SUPABASE_URL: decryptAES(CIPHERTEXT_SUPABASE_URL, PASSPHRASE),
-    SUPABASE_API_KEY: decryptAES(CIPHERTEXT_SUPABASE_KEY, PASSPHRASE)
+// 🔓 Decrypt Function
+function getConfig() {
+  return {
+    SUPABASE_URL: CryptoJS.AES.decrypt(encConfig.url, ENC_KEY).toString(CryptoJS.enc.Utf8),
+    SUPABASE_KEY: CryptoJS.AES.decrypt(encConfig.key, ENC_KEY).toString(CryptoJS.enc.Utf8),
+    BUCKET_NAME: CryptoJS.AES.decrypt(encConfig.bucket, ENC_KEY).toString(CryptoJS.enc.Utf8)
   };
-
-  // quick sanity log (remove in production)
-  if (!window.SUPABASE_CONFIG.SUPABASE_URL || !window.SUPABASE_CONFIG.SUPABASE_API_KEY) {
-    console.warn("SUPABASE_CONFIG not decrypted. Make sure ciphertexts are placed and passphrase is correct.");
-  }
-})();
+}
+</script>
