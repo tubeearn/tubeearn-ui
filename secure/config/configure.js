@@ -1,21 +1,26 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-<script>
-// 🔒 Encryption Key (मत बदलना वरना डिक्रिप्ट नहीं होगा)
-const ENC_KEY = "TubeEarnSecureKey2025";
+// location: secure/config/configuration.js
 
-// 🔐 Encrypted Data (तुम्हारे real values encrypted form में)
-const encConfig = {
-  url: "U2FsdGVkX1/BX+yPrkvm7Ff3F/0OJ4R9NMM2rtOjmvDNH/jpttEK2h03qlO+rU/2",
-  key: "U2FsdGVkX1+2ERZiv+NNgG5R8XtJo3b8uZ+T5vH+ZfxjD/nDoxV1XspXx9W3Tvh2+foPshZhxeJ1neXoJXoQuQ==",
-  bucket: "U2FsdGVkX19zW9lQYxyg5gR6n6i5TZyXUOQ1A3EzY40="
+// AES Decryption function using CryptoJS
+function decrypt(text, secretKey) {
+  const CryptoJS = window.CryptoJS || null;
+  if (!CryptoJS) throw new Error("CryptoJS library is missing");
+
+  const bytes = CryptoJS.AES.decrypt(text, secretKey);
+  return bytes.toString(CryptoJS.enc.Utf8);
+}
+
+// Secret key - इसको मत बदलना, ये जरूरी है दोनों फाइल में एक जैसा होना चाहिए
+const SECRET_KEY = 'TubeEarnSecret1234';
+
+// एन्क्रिप्टेड API URL और API KEY
+const encryptedConfig = {
+  SUPABASE_URL: "U2FsdGVkX19kJsJ1kmJoDUGAGHRPN3N2KaQxw26DFyI=",
+  SUPABASE_API_KEY: "U2FsdGVkX18IF7yVu4qEtcDc/kPqCScvIUl+hHuJ3+IHLMLcnxMyEl1SWHVq30i0"
 };
 
-// 🔓 Decrypt Function
 function getConfig() {
   return {
-    SUPABASE_URL: CryptoJS.AES.decrypt(encConfig.url, ENC_KEY).toString(CryptoJS.enc.Utf8),
-    SUPABASE_KEY: CryptoJS.AES.decrypt(encConfig.key, ENC_KEY).toString(CryptoJS.enc.Utf8),
-    BUCKET_NAME: CryptoJS.AES.decrypt(encConfig.bucket, ENC_KEY).toString(CryptoJS.enc.Utf8)
+    SUPABASE_URL: decrypt(encryptedConfig.SUPABASE_URL, SECRET_KEY),
+    SUPABASE_API_KEY: decrypt(encryptedConfig.SUPABASE_API_KEY, SECRET_KEY)
   };
 }
-</script>
