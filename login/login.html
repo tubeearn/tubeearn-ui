@@ -5,7 +5,7 @@
   <title>Login - TubeEarn</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { background: linear-gradient(to right, #2193b0, #6dd5ed); font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    body { background: linear-gradient(to right, #2193b0, #6dd5ed); font-family: Arial; margin: 0; padding: 0; }
     .login-container { max-width: 400px; background: white; padding: 30px; margin: 60px auto; box-shadow: 0px 0px 15px rgba(0,0,0,0.3); border-radius: 10px; }
     h2 { text-align: center; margin-bottom: 20px; }
     input[type="email"], input[type="password"] { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; }
@@ -26,22 +26,19 @@
       <button type="submit">Sign In</button>
       <p class="status" id="loginStatus"></p>
     </form>
-
     <div class="link">
       <a href="forgot/forgot-password.html">Forgot Password?</a>
       <a href="signup/signup.html">Create Account?</a>
     </div>
   </div>
 
-  <!-- CryptoJS for AES -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-  <!-- Encrypted config -->
-  <script src="../secure/config/configure.js"></script>
-  <!-- Supabase -->
+  <!-- Supabase + CryptoJS + Config -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="tubeearn-ui/secure/config/configure.js"></script>
 
   <script>
-    const client = supabase.createClient(APP_CONFIG.SUPABASE_URL, APP_CONFIG.SUPABASE_API_KEY);
+    const { SUPABASE_URL, SUPABASE_KEY } = getConfig();
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -51,18 +48,15 @@
 
       status.innerText = "Signing in...";
 
-      const { data, error } = await client.auth.signInWithPassword({ email, password });
+      const { error } = await client.auth.signInWithPassword({ email, password });
 
       if (error) {
         status.innerText = "❌ " + error.message;
       } else {
         status.innerText = "✅ Login successful! Redirecting...";
-        setTimeout(() => {
-          window.location.href = "../index.html";
-        }, 1500);
+        setTimeout(() => { window.location.href = "../index.html"; }, 1500);
       }
     });
   </script>
-
 </body>
 </html>
