@@ -33,26 +33,37 @@
     </div>
   </div>
 
+  <!-- Supabase SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script type="module">
-    import { getConfig } from './secure/config/configure.js';
 
-    const { SUPABASE_URL, SUPABASE_API_KEY } = getConfig();
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
+  <!-- आपकी कॉन्फिग JS -->
+  <script src="./secure/config/configure.js"></script>
+
+  <!-- लॉगिन JS -->
+  <script>
+    // supabaseClient को appConfig से बनाएंगे
+    const supabaseClient = supabase.createClient(window.appConfig.SUPABASE_URL, window.appConfig.SUPABASE_API_KEY);
 
     const loginForm = document.getElementById('loginForm');
     const status = document.getElementById('loginStatus');
 
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
+
+      if (!window.appConfig.SUPABASE_URL || !window.appConfig.SUPABASE_API_KEY) {
+        status.style.color = 'red';
+        status.textContent = 'Configuration missing! Contact support.';
+        return;
+      }
 
       status.style.color = 'black';
       status.textContent = 'Signing in...';
 
       try {
-        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
         if (error) {
           status.style.color = 'red';
