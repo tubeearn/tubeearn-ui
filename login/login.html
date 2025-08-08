@@ -37,6 +37,7 @@
       border-radius: 5px;
       margin-top: 10px;
       cursor: pointer;
+      font-size: 16px;
     }
     button:hover {
       background-color: #176780;
@@ -52,7 +53,8 @@
     .status {
       margin-top: 10px;
       text-align: center;
-      color: red;
+      font-weight: bold;
+      min-height: 24px;
     }
   </style>
 </head>
@@ -74,38 +76,45 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <!-- यहाँ secure/config/configure.js को लिंक करें -->
   <script src="secure/config/configure.js"></script>
 
   <script>
-    // secure/config/configure.js में getConfig() से URL और KEY लें
     const { SUPABASE_URL, SUPABASE_API_KEY } = getConfig();
-
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
       const status = document.getElementById("loginStatus");
 
       status.style.color = "black";
-      status.innerText = "Signing in...";
+      status.textContent = "Signing in...";
 
-      const { data, error } = await client.auth.signInWithPassword({
-        email,
-        password
-      });
+      try {
+        const { data, error } = await client.auth.signInWithPassword({ email, password });
 
-      if (error) {
+        if (error) {
+          status.style.color = "red";
+          status.textContent = "❌ " + error.message;
+          return;
+        }
+
+        if (data) {
+          status.style.color = "green";
+          status.textContent = "✅ Login successful! Redirecting...";
+
+          setTimeout(() => {
+            window.location.href = "../index.html";
+          }, 1500);
+        } else {
+          status.style.color = "red";
+          status.textContent = "❌ Unknown error occurred.";
+        }
+      } catch (err) {
         status.style.color = "red";
-        status.innerText = "❌ " + error.message;
-      } else {
-        status.style.color = "green";
-        status.innerText = "✅ Login successful! Redirecting...";
-        setTimeout(() => {
-          window.location.href = "../index.html";
-        }, 1500);
+        status.textContent = "❌ Error: " + err.message;
       }
     });
   </script>
