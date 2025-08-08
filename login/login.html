@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Login - TubeEarn</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       background: linear-gradient(to right, #2193b0, #6dd5ed);
@@ -48,7 +48,6 @@
     .link a {
       color: #2193b0;
       text-decoration: none;
-      margin: 0 10px;
     }
     .status {
       margin-top: 10px;
@@ -75,15 +74,17 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- यहाँ secure/config/configure.js को लिंक करें -->
   <script src="secure/config/configure.js"></script>
 
   <script>
+    // secure/config/configure.js में getConfig() से URL और KEY लें
     const { SUPABASE_URL, SUPABASE_API_KEY } = getConfig();
+
     const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
       const status = document.getElementById("loginStatus");
@@ -91,7 +92,10 @@
       status.style.color = "black";
       status.innerText = "Signing in...";
 
-      const { data, error } = await client.auth.signInWithPassword({ email, password });
+      const { data, error } = await client.auth.signInWithPassword({
+        email,
+        password
+      });
 
       if (error) {
         status.style.color = "red";
@@ -105,5 +109,6 @@
       }
     });
   </script>
+
 </body>
 </html>
