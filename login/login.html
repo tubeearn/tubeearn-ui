@@ -18,22 +18,47 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.3);
       border-radius: 10px;
     }
-    h2 { text-align: center; margin-bottom: 20px; }
-    input[type=email], input[type=password] {
-      width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box;
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
     }
     button {
-      width: 100%; padding: 12px;
-      background-color: #2193b0; color: white; border: none;
-      border-radius: 5px; margin-top: 10px; cursor: pointer;
+      width: 100%;
+      padding: 12px;
+      background-color: #2193b0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
     }
-    button:hover { background-color: #176780; }
-    .link { text-align: center; margin-top: 15px; }
-    .link a { color: #2193b0; text-decoration: none; margin: 0 5px; }
-    .status { margin-top: 10px; text-align: center; color: red; }
+    button:hover {
+      background-color: #176780;
+    }
+    .link {
+      text-align: center;
+      margin-top: 15px;
+    }
+    .link a {
+      color: #2193b0;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    .status {
+      margin-top: 10px;
+      text-align: center;
+      color: red;
+    }
   </style>
 </head>
 <body>
+
   <div class="login-container">
     <h2>Welcome to TubeEarn</h2>
     <form id="loginForm">
@@ -42,58 +67,42 @@
       <button type="submit">Sign In</button>
       <p class="status" id="loginStatus"></p>
     </form>
+
     <div class="link">
-      <a href="forgot/forgot-password.html" class="link-item">Forgot Password?</a>
-      <a href="signup/signup.html" class="link-item">Create Account?</a>
+      <a href="forgot/forgot-password.html">Forgot Password?</a>
+      <a href="signup/signup.html">Create Account?</a>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script src="secure/config/configure.js"></script>
 
   <script>
-    const { SUPABASE_URL, SUPABASE_KEY } = getConfig();
-    const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    const loginStatus = document.getElementById("loginStatus");
+    const { SUPABASE_URL, SUPABASE_API_KEY } = getConfig();
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_API_KEY);
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
+      const status = document.getElementById("loginStatus");
 
-      loginStatus.style.color = "black";
-      loginStatus.textContent = "Signing in...";
+      status.style.color = "black";
+      status.innerText = "Signing in...";
 
-      const { error } = await client.auth.signInWithPassword({ email, password });
+      const { data, error } = await client.auth.signInWithPassword({ email, password });
 
       if (error) {
-        loginStatus.style.color = "red";
-        loginStatus.textContent = "❌ " + error.message;
+        status.style.color = "red";
+        status.innerText = "❌ " + error.message;
       } else {
-        loginStatus.style.color = "green";
-        loginStatus.textContent = "✅ Login successful! Redirecting...";
+        status.style.color = "green";
+        status.innerText = "✅ Login successful! Redirecting...";
         setTimeout(() => {
           window.location.href = "../index.html";
         }, 1500);
       }
-    });
-
-    // Links पर क्लिक होने पर अगर फाइल न मिले तो "Page Not Found" दिखाने के लिए
-    document.querySelectorAll(".link-item").forEach(link => {
-      link.addEventListener("click", function(event) {
-        fetch(this.href, { method: "HEAD" })
-          .then(res => {
-            if (!res.ok) {
-              event.preventDefault();
-              alert("Page Not Found!");
-            }
-          }).catch(() => {
-            event.preventDefault();
-            alert("Page Not Found!");
-          });
-      });
     });
   </script>
 </body>
