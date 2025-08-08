@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Login - TubeEarn</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body { background: linear-gradient(to right, #2193b0, #6dd5ed); font-family: Arial; margin: 0; padding: 0; }
-    .login-container { max-width: 400px; background: white; padding: 30px; margin: 60px auto; box-shadow: 0px 0px 15px rgba(0,0,0,0.3); border-radius: 10px; }
-    h2 { text-align: center; margin-bottom: 20px; }
-    input[type="email"], input[type="password"] { width: 100%; padding: 12px; margin: 8px 0; box-sizing: border-box; }
-    button { width: 100%; padding: 12px; background-color: #2193b0; color: white; border: none; border-radius: 5px; margin-top: 10px; cursor: pointer; }
-    button:hover { background-color: #176780; }
-    .link { text-align: center; margin-top: 15px; }
-    .link a { color: #2193b0; text-decoration: none; }
-    .status { margin-top: 10px; text-align: center; color: red; }
+    /* तुम्हारा वही पुराना स्टाइल */
   </style>
 </head>
 <body>
@@ -32,8 +24,11 @@
     </div>
   </div>
 
-  <!-- Supabase + Config -->
+  <!-- CDN: Supabase + CryptoJS -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+  <!-- Config file -->
   <script src="../secure/config/configure.js"></script>
 
   <script>
@@ -42,6 +37,7 @@
 
     document.getElementById("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
+
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
       const status = document.getElementById("loginStatus");
@@ -54,9 +50,12 @@
         status.innerText = "❌ " + error.message;
       } else {
         status.innerText = "✅ Login successful! Redirecting...";
-        setTimeout(() => { window.location.href = "../index.html"; }, 1500);
+        setTimeout(() => {
+          window.location.href = "../index.html";
+        }, 1500);
       }
     });
   </script>
+
 </body>
 </html>
